@@ -14,5 +14,6 @@ namespace CMISDAL.Common
         public static dalCompany Company { get => new dalCompany(); }
         public static dalConfig Config { get => new dalConfig(); }
         public static dalPermision Permision { get => new dalPermision(); }
+        public static dalServer Server { get => new dalServer(); }
     }
 }

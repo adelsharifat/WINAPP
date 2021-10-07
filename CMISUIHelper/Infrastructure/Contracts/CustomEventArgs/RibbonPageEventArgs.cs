@@ -37,9 +37,9 @@ namespace CMISUIHelper.Infrastructure.Contracts.CustomEventArgs
             set { rp = value; }
         }
 
-        private ViewBase view;
+        private ViewTab view;
 
-        public ViewBase View
+        public ViewTab View
         {
             get { return view; }
             set { view = value; }

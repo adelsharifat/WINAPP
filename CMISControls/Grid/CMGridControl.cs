@@ -15,7 +15,10 @@ using Timer = System.Windows.Forms.Timer;
 namespace CMISControls.Grid
 {
     public class CMGridControl:GridControl
-    {        
+    {
+        public event EventHandler DataLoaded;
+
+
         BackgroundWorker AnimationBW = new BackgroundWorker();
         BackgroundWorker DataThread = new BackgroundWorker();
         int currentAngle = 0;
@@ -55,16 +58,22 @@ namespace CMISControls.Grid
         private void DataThread_DoWork(object sender, DoWorkEventArgs e)
         {
             object[] argumants = (object[])e.Argument;
-            Func<DataTable> action = (Func<DataTable>)argumants[0];
+            Func<object> action = (Func<object>)argumants[0];
             var data = action.Invoke();
             Thread thread = new Thread(() => {               
                 if (this.InvokeRequired)
-                    this.Invoke(new Action(() => { this.DataSource = data; }));
+                    this.Invoke(new Action(() => { 
+                        this.DataSource = data;
+                        OnDataLoaded(this, EventArgs.Empty);
+                    }));
             });
             thread.Start();
         }
 
-
+        public void OnDataLoaded(object sender,EventArgs e)
+        {
+            this.DataLoaded?.Invoke(sender,e);
+        }
 
         private void PaintLoadingProgress()
         {
@@ -113,12 +122,13 @@ namespace CMISControls.Grid
             }
         }
 
-        public void SetDataSource(Func<DataTable> actionData)
+        public GridControl SetDataSource(Func<object> actionData)
         {
             ShowLoading = true;
             AnimationBW.RunWorkerAsync();
             object[] args = new object[] { actionData };
             DataThread.RunWorkerAsync(args);
+            return this;
         }
 
 

@@ -24,12 +24,87 @@ namespace SecurityManagement.Views
     [RibbonMenuItem("User Permision", 1)]
     [RibbonMenuGroup("Permision", 1)]
     [RibbonItemIcon(AppConst.ResourceName, "window_32x32")]
-    public partial class frmUserPermision : CMISView
+    public partial class frmUserPermision : ViewTab
     {
         public frmUserPermision()
         {
             InitializeComponent();
             ViewTitle = "User Permision";            
+        }
+
+        private void frmUserPermision_ViewLoaded(object sender, EventArgs e)
+        {
+            try
+            {
+                FillGrid();
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
+        }
+
+        private void FillGrid()
+        {
+            try
+            {
+                grcUserPermision.SetDataSource(() =>
+                {
+                    return DAL.New.GetUserList();
+                });
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
+        }
+
+        private void grcUserPermision_DataLoaded(object sender, EventArgs e)
+        {
+            grcUserPermision.HideColumns("Id,FirstName").AutoWidth(false).BestFit(); ;
+            grvUserPermision.TextCenter("Permision").TextUnderline("Permision").TextColor("Permision",Color.DarkBlue);
+        }
+
+        private void grvUserPermision_MouseMove(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                grvUserPermision.HandCursor(e, "Permision");
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
+        }
+
+        private void grvUserPermision_RowCellClick(object sender, RowCellClickEventArgs e)
+        {
+            try
+            {
+                if (e.Column.Name == "colPermision")
+                {
+                    var id = Convert.ToInt32(grvUserPermision.GetRowCellValue(e.RowHandle, "Id"));
+                    CMISUI.UIHandler.ViewInForm<frmACL>(new object[]{ id,false });
+                }
+            }
+            catch (Exception ex)
+            {
+
+                ex.ShowMessage();
+            }
+        }
+
+        private void frmUserPermision_RibbonPageAdded(object sender, CMISUIHelper.Infrastructure.Contracts.CustomEventArgs.RibbonPageEventArgs e)
+        {
+            try
+            {
+                e.RibbonPage.AddGridTools(this);
+                e.RibbonPage.AddExportTools(this);
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
         }
     }
 }

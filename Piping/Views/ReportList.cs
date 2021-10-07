@@ -17,7 +17,7 @@ namespace Piping.Views
     [RibbonMenuItem("Report List", 2)]
     [RibbonMenuGroup("Group2", 0)]
     [RibbonItemIcon(AppConst.ResourceName, "window_32x32")]
-    public partial class ReportList : ViewBase
+    public partial class ReportList : ViewTab
     {
         public ReportList()
         {

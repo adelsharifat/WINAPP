@@ -10,14 +10,14 @@ namespace Connection
 {
     public class ConnectionST
     {
-        public static string GetConnectionString(string envFilePath = @"\\APPSERVER29\cmisenv$\env.cfg")
+        public static string GetConnectionString(string envFilePath = @"")
         {
             try
             {
                 if (String.IsNullOrEmpty(envFilePath))
                     envFilePath = AppDomain.CurrentDomain.BaseDirectory.ToString() + ".env";
                 var env = CmisEnvFile.Env(envFilePath);
-                return Crypto.Decrypt(env["CONNECTION_STRING_SHARIFAT_ZAREI"], "Asharif3287");
+                return Crypto.Decrypt(env["CMIS_CONNECTION_STRING"], "cmis2020");
             }
             catch (Exception ex)
             {

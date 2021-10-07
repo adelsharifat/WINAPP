@@ -80,11 +80,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UIHelperResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\CMISView.cs">
+    <Compile Include="UserControls\ViewForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\CMISView.Designer.cs">
-      <DependentUpon>CMISView.cs</DependentUpon>
+    <Compile Include="UserControls\ViewForm.Designer.cs">
+      <DependentUpon>ViewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ViewTabWithCompany.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ViewTabWithCompany.Designer.cs">
+      <DependentUpon>ViewTabWithCompany.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\CMTabControl.cs">
       <SubType>Component</SubType>
@@ -95,11 +101,11 @@
     <Compile Include="UserControls\FormPreloading.Designer.cs">
       <DependentUpon>FormPreloading.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ViewBase.cs">
+    <Compile Include="UserControls\ViewTab.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\ViewBase.Designer.cs">
-      <DependentUpon>ViewBase.cs</DependentUpon>
+    <Compile Include="UserControls\ViewTab.Designer.cs">
+      <DependentUpon>ViewTab.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -111,14 +117,17 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>UIHelperResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\CMISView.resx">
-      <DependentUpon>CMISView.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\ViewForm.resx">
+      <DependentUpon>ViewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ViewTabWithCompany.resx">
+      <DependentUpon>ViewTabWithCompany.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\FormPreloading.resx">
       <DependentUpon>FormPreloading.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ViewBase.resx">
-      <DependentUpon>ViewBase.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\ViewTab.resx">
+      <DependentUpon>ViewTab.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -348,6 +357,18 @@
     <ProjectReference Include="..\CMISControls\CMISControls.csproj">
       <Project>{478C02A1-B1AD-400F-B568-C97F2591AA52}</Project>
       <Name>CMISControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CMISDAL\CMISDAL.csproj">
+      <Project>{c1649b10-abb2-4f58-b9f4-a26dac7dd289}</Project>
+      <Name>CMISDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CMISUtils\CMISUtils.csproj">
+      <Project>{387e37b8-5f16-4288-a322-9e684731f357}</Project>
+      <Name>CMISUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Security\Security.csproj">
+      <Project>{68241d09-523b-4b77-9926-8b30f66ddb17}</Project>
+      <Name>Security</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -9,7 +9,7 @@ namespace SecurityManagement
     public class Bundle:CommonClass.IBundle
     {
 
-        public const string SCHEMA = "ACLManager";
+        public const string SCHEMA = "GatePass";
 
         public const string VERSION = "1.0.0";
 

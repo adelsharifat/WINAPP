@@ -63,6 +63,7 @@
     <Compile Include="Infrastructure\ViewModel\DBUserACLViewModel.cs" />
     <Compile Include="Infrastructure\ViewModel\AclDBTableType.cs" />
     <Compile Include="Infrastructure\ViewModel\AclDBValueTableType.cs" />
+    <Compile Include="Permision.cs" />
     <Compile Include="resSecurityManagement.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

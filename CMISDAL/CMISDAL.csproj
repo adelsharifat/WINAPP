@@ -49,6 +49,7 @@
     <Compile Include="Common\dalConfig.cs" />
     <Compile Include="Common\dalPermision.cs" />
     <Compile Include="Common\dalProject.cs" />
+    <Compile Include="Common\dalServer.cs" />
     <Compile Include="Common\dalUser.cs" />
     <Compile Include="Common\CommonDals.cs" />
     <Compile Include="Interfaces\ICMISConnection.cs" />

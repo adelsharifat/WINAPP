@@ -19,7 +19,7 @@ namespace Piping.Views
     [RibbonMenuItem("Create",1)]
     [RibbonMenuGroup("Group1",1)]
     [RibbonItemIcon(AppConst.ResourceName, "window_32x32")]
-    public partial class CreateReport : ViewBase
+    public partial class CreateReport : ViewTab
     {
         public CreateReport()
         {

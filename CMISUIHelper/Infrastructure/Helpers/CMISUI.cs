@@ -7,6 +7,7 @@ using CMISUIHelper.UserControls;
 using DevExpress.Utils.VisualEffects;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
+using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using System;
@@ -64,7 +65,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
         }
 
         // General Tools
-        public static RibbonPage AddCloseItem(this RibbonPage rp, ViewBase view, string itemName = "Close", Bitmap bmp = null, string rpgText= "General")
+        public static RibbonPage AddCloseItem(this RibbonPage rp, ViewTab view, string itemName = "Close", Bitmap bmp = null, string rpgText= "General")
         {
             if (bmp == null) bmp = (Bitmap)view.OwnerForm.CloseIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
@@ -79,7 +80,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
             };
             return rp;
         }
-        public static RibbonPage AddRefreshItem(this RibbonPage rp, ViewBase view, string itemName = "Refresh", Bitmap bmp = null, string rpgText = "General")
+        public static RibbonPage AddRefreshItem(this RibbonPage rp, ViewTab view, string itemName = "Refresh", Bitmap bmp = null, string rpgText = "General")
         {
             if (rp.Text == view.OwnerForm.HomePage) return rp;
 
@@ -171,7 +172,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
         }
 
         //Extntion Method For GridTools
-        public static RibbonPage AddToggleSearchGridTool(this RibbonPage rp, ViewBase view, string itemName = "Search", Bitmap bmp = null, string rpgText = "Grid Tools")
+        public static RibbonPage AddToggleSearchGridTool(this RibbonPage rp, ViewTab view, string itemName = "Search", Bitmap bmp = null, string rpgText = "Grid Tools")
         {
             if (bmp == null) bmp = view.GridToolsSearchIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
@@ -212,7 +213,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
             };                       
             return rp;
         }
-        public static RibbonPage AddToggleAutoWidthGridTool(this RibbonPage rp, ViewBase view, string itemName = "Auto Width", Bitmap bmp = null, string rpgText = "Grid Tools")
+        public static RibbonPage AddToggleAutoWidthGridTool(this RibbonPage rp, ViewTab view, string itemName = "Auto Width", Bitmap bmp = null, string rpgText = "Grid Tools")
         {
             if (bmp == null) bmp = view.GridToolsAutoWidthIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
@@ -252,7 +253,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
             };
             return rp;
         }
-        public static RibbonPage AddToggleBestFitGridTool(this RibbonPage rp, ViewBase view, string itemName = "Best Fit", Bitmap bmp = null, string rpgText = "Grid Tools")
+        public static RibbonPage AddToggleBestFitGridTool(this RibbonPage rp, ViewTab view, string itemName = "Best Fit", Bitmap bmp = null, string rpgText = "Grid Tools")
         {
             if (bmp == null) bmp = view.GridToolsBestFitIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
@@ -292,7 +293,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
             };
             return rp;
         }
-        public static RibbonPage AddDateFormatGridTool(this RibbonPage rp, ViewBase view, string itemName = "Grid Date", Bitmap bmp = null, string rpgText = "Grid Tools")
+        public static RibbonPage AddDateFormatGridTool(this RibbonPage rp, ViewTab view, string itemName = "Grid Date", Bitmap bmp = null, string rpgText = "Grid Tools")
         {
             if (bmp == null) bmp = view.GridToolsDateFormatIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
@@ -330,7 +331,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
             };
             return rp;
         }
-        public static RibbonPage AddCellFormatColorGridTool(this RibbonPage rp, ViewBase view, string itemName = "Grid Color", Bitmap bmp = null, string rpgText = "Grid Tools")
+        public static RibbonPage AddCellFormatColorGridTool(this RibbonPage rp, ViewTab view, string itemName = "Grid Color", Bitmap bmp = null, string rpgText = "Grid Tools")
         {
             if (bmp == null) bmp = view.GridToolsColorFormatIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
@@ -368,7 +369,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
             };
             return rp;
         }
-        public static RibbonPage AddResetGridFormatTool(this RibbonPage rp, ViewBase view, string itemName = "Reset", Bitmap bmp = null, string rpgText = "Grid Tools")
+        public static RibbonPage AddResetGridFormatTool(this RibbonPage rp, ViewTab view, string itemName = "Reset", Bitmap bmp = null, string rpgText = "Grid Tools")
         {
             if (bmp == null) bmp = view.GridToolsResetGridFormatIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
@@ -406,7 +407,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
             };
             return rp;
         }
-        public static RibbonPage AddSettingsGridFormatTool(this RibbonPage rp, ViewBase view, string itemName = "Settings", Bitmap bmp = null, string rpgText = "Grid Tools")
+        public static RibbonPage AddSettingsGridFormatTool(this RibbonPage rp, ViewTab view, string itemName = "Settings", Bitmap bmp = null, string rpgText = "Grid Tools")
         {
             if (bmp == null) bmp = view.GridToolsSettingsGridFormatIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
@@ -444,7 +445,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
             };
             return rp;
         }
-        public static RibbonPage AddGridTools(this RibbonPage rp,ViewBase view)
+        public static RibbonPage AddGridTools(this RibbonPage rp,ViewTab view)
         {
                 rp.AddToggleSearchGridTool(view)
                   .AddToggleAutoWidthGridTool(view)
@@ -458,7 +459,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
 
 
         //Extntion Method For ExportTools
-        public static RibbonPage AddExcelExportTool(this RibbonPage rp, ViewBase view, string itemName = "Excel", Bitmap bmp = null, string rpgText = "Export Tools")
+        public static RibbonPage AddExcelExportTool(this RibbonPage rp, ViewTab view, string itemName = "Excel", Bitmap bmp = null, string rpgText = "Export Tools")
         {
             if (bmp == null) bmp = view.GridToolsExportToXlsxIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
@@ -523,7 +524,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
             };
             return rp;
         }
-        public static RibbonPage AddCsvExportTool(this RibbonPage rp, ViewBase view, string itemName = "CSV", Bitmap bmp = null, string rpgText = "Export Tools")
+        public static RibbonPage AddCsvExportTool(this RibbonPage rp, ViewTab view, string itemName = "CSV", Bitmap bmp = null, string rpgText = "Export Tools")
         {
             if (bmp == null) bmp = view.GridToolsExportToCsvIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
@@ -577,7 +578,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
             };
             return rp;
         }
-        public static RibbonPage AddPdfExportTool(this RibbonPage rp, ViewBase view, string itemName = "PDF", Bitmap bmp = null, string rpgText = "Export Tools")
+        public static RibbonPage AddPdfExportTool(this RibbonPage rp, ViewTab view, string itemName = "PDF", Bitmap bmp = null, string rpgText = "Export Tools")
         {
             if (bmp == null) bmp = view.GridToolsExportToPdfIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
@@ -631,7 +632,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
             };
             return rp;
         }
-        public static RibbonPage AddExportTools(this RibbonPage rp, ViewBase view)
+        public static RibbonPage AddExportTools(this RibbonPage rp, ViewTab view)
         {
             rp.AddExcelExportTool(view)
               .AddCsvExportTool(view)
@@ -648,9 +649,9 @@ namespace CMISUIHelper.Infrastructure.Helpers
 
         public static class UIHandler
         {
-            public static T ViewInTab<T>(CMISRibbonForm mdiForm,object[] args = null, Image icon = null, RibbonPageCategory rpc = null) where T : ViewBase
+            public static T ViewInTab<T>(CMISRibbonForm mdiForm,object[] args = null, Image icon = null, RibbonPageCategory rpc = null) where T : ViewTab
             {
-                var childForm = (ViewBase)Activator.CreateInstance(typeof(T),args);
+                var childForm = (ViewTab)Activator.CreateInstance(typeof(T),args);
 
                 childForm.Visible = false;
                 childForm.OwnerForm = mdiForm;
@@ -724,9 +725,9 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 return (T)childForm;
             }
 
-            internal static ViewBase ViewInTab(Type type, CMISRibbonForm mdiForm, Image icon = null, RibbonPageCategory rpc = null)
+            internal static ViewTab ViewInTab(Type type, CMISRibbonForm mdiForm, Image icon = null, RibbonPageCategory rpc = null)
             {
-                var childForm = (ViewBase)Activator.CreateInstance(type);
+                var childForm = (ViewTab)Activator.CreateInstance(type);
                 childForm.OwnerForm = mdiForm;
                 var tabControl = mdiForm.Controls.OfType<TabControl>().First();
                 TabPage tabPage = new TabPage();
@@ -779,14 +780,42 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 return childForm;
             }
 
-            public static T ViewInForm<T>(bool displayAsDialog = true) where T : Form
+            public static Form ViewInForm<T>(object[] args = null, bool maximize = false, bool displayAsDialog = true) where T : ViewForm
             {
-                var childForm = (Form)Activator.CreateInstance<T>();
+                XtraForm frm = new XtraForm();                
+                var childForm = (ViewForm)Activator.CreateInstance(typeof(T),args);
+                frm.Width = childForm.Width;
+                frm.Height = childForm.Height;
+                frm.Controls.Add(childForm);
+                frm.Text = childForm.ViewTitle;
+                if (maximize) frm.WindowState = FormWindowState.Maximized;
+                frm.StartPosition = FormStartPosition.CenterScreen;
+
+                frm.Load += (o, e) =>
+                {
+                    System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+                    timer.Interval = 1;
+                    int counter = 0;
+                    timer.Tick += (obj, ev) =>
+                    {
+                        counter++;
+                        if (counter >= 5)
+                        {
+                            timer.Stop();
+                            childForm.OnBeforeViewLoad(e);
+                            childForm.OnViewLoaded(e);
+                        }
+                    };
+                    timer.Start();
+                    
+                };
+
+                childForm.Dock = DockStyle.Fill;
                 if (displayAsDialog)
-                    childForm.ShowDialog();
+                    frm.ShowDialog();
                 else
-                    childForm.Show();
-                return (T)childForm;
+                    frm.Show();
+                return frm;
             }
              
         }
@@ -1022,7 +1051,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
 
             }
 
-            public static void GenerateHomeMenus(ViewBase childForm,RibbonPageCategory rpc = null,Image homeRibbonPageIcon = null)
+            public static void GenerateHomeMenus(ViewTab childForm,RibbonPageCategory rpc = null,Image homeRibbonPageIcon = null)
             {
                 var menus = GetMenuList(childForm.OwnerForm.Schema);
                 var r = childForm.OwnerForm.Ribbon;

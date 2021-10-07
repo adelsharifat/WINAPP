@@ -137,7 +137,7 @@ namespace Piping.Views
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CreateReport";
             this.Size = new System.Drawing.Size(1151, 762);
-            this.RibbonPageAdded += new CMISUIHelper.UserControls.ViewBase.RibbonPageEventHandler(this.CreateReport_RibbonPageAdded);
+            this.RibbonPageAdded += new CMISUIHelper.UserControls.ViewTab.RibbonPageEventHandler(this.CreateReport_RibbonPageAdded);
             this.BeforeViewLoad += new System.EventHandler(this.CreateReport_BeforeViewLoad);
             this.ViewLoaded += new System.EventHandler(this.CreateReport_ViewLoaded);
             this.panel1.ResumeLayout(false);

@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Piping.Views
 {
-    public partial class Home : ViewBase
+    public partial class Home : ViewTab
     {
         public Home()
         {

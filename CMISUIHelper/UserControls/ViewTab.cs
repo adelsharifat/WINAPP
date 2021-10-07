@@ -18,7 +18,7 @@ using static CMISUIHelper.Infrastructure.Helpers.CMISUI;
 
 namespace CMISUIHelper.UserControls
 {
-    public partial class ViewBase : UserControl
+    public partial class ViewTab : UserControl
     {
         public Timer ViewLoadTimer = null;
         internal GridControl LastFocucedGrid = null;
@@ -37,7 +37,7 @@ namespace CMISUIHelper.UserControls
         public event EventHandler BeforeViewLoad;
         public event EventHandler ViewLoaded;
         public event EventHandler ViewRefresh;
-        public ViewBase()
+        public ViewTab()
         {
             InitializeComponent();
         }
@@ -355,9 +355,9 @@ namespace CMISUIHelper.UserControls
             }
 
             var previeosTabPageIndex = (TabControl.TabPages.IndexOf(this.TabPage) - 1) < 0 ? 0 : TabControl.TabPages.IndexOf(this.TabPage) - 1;
+            this.TabControl.SelectedIndex = previeosTabPageIndex;
             this.TabPage.Dispose();
             this.RibbonPage.Dispose();
-            this.TabControl.SelectedIndex = previeosTabPageIndex;
         }
 
         public bool IsHomePage()

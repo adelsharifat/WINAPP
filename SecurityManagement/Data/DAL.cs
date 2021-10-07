@@ -25,6 +25,8 @@ namespace SecurityManagement.Data
             }
         }
 
+        
+
         public DataTable GetUserGroupList(int projectId)
         {
             try
@@ -64,6 +66,18 @@ namespace SecurityManagement.Data
             try
             {
                 return DoQuery("GetProjectList");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataTable FetchCompaniesData()
+        {
+            try
+            {
+                return DoQuery("SecAcl.FetchCompaniesData");
             }
             catch (Exception ex)
             {

@@ -149,5 +149,10 @@ namespace CMISUIHelper
             var tab = OpenTabs[Ribbon.SelectedPage.Name];
             MainTabControl.SelectedTab = tab;
         }
+
+        private void MainRibbon_SelectedPageChanging(object sender, RibbonPageChangingEventArgs e)
+        {
+            
+        }
     }
 }

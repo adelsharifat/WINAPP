@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CMISUtils;
+using Security;
 
 namespace CMISUIHelper.UserControls
 {
-    public partial class CMISView : ViewBase
+    public partial class ViewTabWithCompany : ViewTab
     {
-        public CMISView()
+        public ViewTabWithCompany()
         {
             InitializeComponent();
         }
@@ -36,8 +38,23 @@ namespace CMISUIHelper.UserControls
             }
         }
 
+        private string aclCompany;
+
+        public string AclCompanyCombo
+        {
+            get { return aclCompany; }
+            set { aclCompany = value; }
+        }
 
 
+
+        #endregion
+        #region Method
+        public void InitComboCompany()
+        {
+            var data = CMISDAL.Common.CommonDals.Company.FetchCompaniesCombo(LoginInfo.ProjectId, LoginInfo.Id, this.AclCompanyCombo);
+            this.cmbCompany.Fill(data,"FullName","Id");
+        }
         #endregion
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 namespace CMISUIHelper.UserControls
 {
-    partial class ViewBase
+    partial class ViewForm
     {
         /// <summary> 
         /// Required designer variable.
@@ -31,13 +31,12 @@ namespace CMISUIHelper.UserControls
         {
             this.SuspendLayout();
             // 
-            // ViewBase
+            // ViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.DoubleBuffered = true;
-            this.Name = "ViewBase";
-            this.Size = new System.Drawing.Size(1051, 729);
+            this.Name = "ViewForm";
+            this.Size = new System.Drawing.Size(1079, 744);
             this.ResumeLayout(false);
 
         }

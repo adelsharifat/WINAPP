@@ -23,35 +23,37 @@ using System.Windows.Forms;
 
 namespace SecurityManagement.Views
 {
-    public partial class frmACL : ViewBase
+    public partial class frmACL : ViewForm
     {
         public frmACL()
         {
             InitializeComponent();
-            ViewTitle = "User Permision";
-
         }
+
 
         private int _id;
         private bool _isGroup;
-        public frmACL(int id, bool isGroup)
+        private int? _projectId;
+        public frmACL(int id, bool isGroup,int? projectId = null)
         {
             InitializeComponent();
-            ViewTitle = "User Permision";
             try
             {
-                _isGroup = isGroup;
+                _isGroup = isGroup;                
                 if (!isGroup)
                 {
+                    ViewTitle = "User Permision";
                     _id = id;
                     var user = CommonDals.User.GetUserById("CM.FetchUserById", _id).Rows[0];
-                    this.Text += $" - {user.ToString("UserName")} - ( {user.ToString("FullName")} )";
+                    this.ViewTitle += $" - {user.ToString("UserName")} - [{user.ToString("FullName")}]";
                 }
                 else
                 {
+                    ViewTitle = "Group Permision";
                     _id = id;
-                    var group = CommonDals.User.GetGroupById(_id).Rows[0];
-                    this.Text += $" - {group.ToString("Name")}";
+                    _projectId = (int)projectId;
+                    var group = CommonDals.User.GetGroupById(_id).Rows[0];                 
+                    this.ViewTitle += $" - {group.ToString("Name")}";
                 }
             }
             catch (Exception ex)
@@ -62,9 +64,20 @@ namespace SecurityManagement.Views
 
         private void FillList()
         {
-            SetACLOnGridACL();
-            this.isExpanded = true;
+            SetACLOnGridACL();          
             grvACL.ExpandAllGroups();
+        }
+
+        private void FillCboProject()
+        {
+            try
+            {
+                cboProject.Fill(CMISDAL.Common.CommonDals.Project.GetProjectList(), "Name", "Id");                
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
         }
 
         private void SetACLOnGridACL()
@@ -134,7 +147,10 @@ namespace SecurityManagement.Views
                 }
             }
 
-            grcACL.DataSource = ACLViewModelBindingList.ToList();
+            grcACL.SetDataSource(() =>
+            {
+                return ACLViewModelBindingList.ToList();
+            });
         }
 
 
@@ -144,12 +160,6 @@ namespace SecurityManagement.Views
             var row = view.GetRow(view.FocusedRowHandle) as ACLViewModel;
             if (view.FocusedColumn.FieldName == "Value" && row.Repository == null)
                 e.Cancel = true;
-        }
-
-        private void simpleButton1_Click(object sender, EventArgs e)
-        {
-            if (Msg.Confirm("Are you sure to reset and restore acl list?") == DialogResult.Yes)
-                FillList();
         }
 
         private void BtnSaveAclData_Click(object sender, EventArgs e)
@@ -163,18 +173,21 @@ namespace SecurityManagement.Views
                     Name = $"{x.ToString("Schema")}.{x.ToString("Name")}",
                     Allow = CastAllow(x.ToInt("Allow")),
                     Value = x["Value"].ToString()
-                }).Where(x => !(x.Id == 0 && x.Allow == null)).ToList().ToDataTable<AclDBTableType>();
+                }).Where(x => x.Allow != null).ToList().ToDataTable<AclDBTableType>();
 
                 var NotValidAcls = gridData.Select(x => CastAllow(x.ToInt("Allow")) == null && !String.IsNullOrEmpty(x.ToString("Value")) ? $"{x.ToString("Schema")}.{x.ToString("Name")}" : null).Where(x => x != null);
+                if (NotValidAcls.Any()) throw new CMISException($"Can not set value items for inheritance acls!\nInvalid Acls:\n[ {string.Join(" - ", NotValidAcls)} ]");
 
-                if (NotValidAcls.Any()) throw new CMISException($"Can not set value items for inheritance acls!\nInvalid Acls:\n( {string.Join(" - ", NotValidAcls)} )");
+                var aclItemAllowWithNoItem = gridData.Select(x => CastAllow(x.ToInt("Allow")) != null && String.IsNullOrEmpty(x.ToString("Value")) && !String.IsNullOrEmpty(x.ToString("ItemsDataProvider")) ? $"{x.ToString("Schema")}.{x.ToString("Name")}" : null).Where(x => x != null);
+                if (aclItemAllowWithNoItem.Any()) throw new CMISException($"Can not set acl items allow without any items!\nInvalid Acls:\n[ {string.Join(" - ", aclItemAllowWithNoItem)} ]");
 
-                var result = DAL.New.SaveChangeACL(Convert.ToInt32(cboProject.GetColumnValue("Id")), _id, aclData, _isGroup);
+                var projectId = Convert.ToInt32(cboProject.EditValue);
+                var result = DAL.New.SaveChangeACL(projectId, _id, aclData, _isGroup);
 
                 if (result > 0)
                 {
                     FillList();
-                    Msg.Info("Save successfull!");
+                    Msg.Show("Save successfull!");
                 }
 
             }
@@ -219,19 +232,75 @@ namespace SecurityManagement.Views
                 isExpanded = false;
                 grvACL.CollapseAllGroups();
             }
+
         }
 
-        private void frmACL_RibbonPageAdded(object sender, CMISUIHelper.Infrastructure.Contracts.CustomEventArgs.RibbonPageEventArgs e)
+        private void frmACL_ViewLoaded(object sender, EventArgs e)
+        {
+            FillCboProject();            
+        }
+
+        private void cboProject_EditValueChanged(object sender, EventArgs e)
+        {
+            if (_isGroup && _projectId != null) cboProject.EditValue = _projectId;
+            FillList();
+        }
+
+        private void grvACL_CustomRowCellEdit(object sender, CustomRowCellEditEventArgs e)
+        {
+            var view = sender as GridView;
+            var row = view.GetRow(e.RowHandle) as ACLViewModel;
+
+            if (e.Column.Name == "colValue" && row?.Repository != null)
+            {                
+                e.RepositoryItem = row.Repository;
+            }
+        }
+
+        private void grvACL_ShowingEditor(object sender, CancelEventArgs e)
+        {
+            GridView view = sender as GridView;
+            var row = view.GetRow(view.FocusedRowHandle) as ACLViewModel;
+            if (view.FocusedColumn.Name == "colValue" && row.Repository == null)
+                e.Cancel = true;
+        }
+
+        private void grcACL_DataLoaded(object sender, EventArgs e)
         {
             try
             {
-                e.RibbonPage.AddGridTools(this);
-                e.RibbonPage.AddExportTools(this);
+                grvACL.Columns["Id"].OptionsColumn.AllowEdit = false;
+                grvACL.Columns["Schema"].OptionsColumn.AllowEdit = false;
+                grvACL.Columns["Name"].OptionsColumn.AllowEdit = false;
+                grvACL.Columns["Description"].OptionsColumn.AllowEdit = false;
+                grvACL.Columns["Allow"].OptionsColumn.AllowEdit = true;
+                grvACL.Columns["Value"].OptionsColumn.AllowEdit = true;
+                grvACL.Columns["ItemsDataProvider"].OptionsColumn.AllowEdit = false;
+                grvACL.Columns["Repository"].OptionsColumn.AllowEdit = false;
+
+                grvACL.Columns["Schema"].Group();
+                grcACL.HideColumns("Id,Schema,ItemsDataProvider,Repository");
             }
             catch (Exception ex)
             {
                 ex.ShowMessage();
             }
+        }
+
+        private void grvACL_GroupRowExpanded(object sender, DevExpress.XtraGrid.Views.Base.RowEventArgs e)
+        {
+            isExpanded = true;
+        }
+
+        private void grvACL_GroupRowCollapsed(object sender, DevExpress.XtraGrid.Views.Base.RowEventArgs e)
+        {
+            isExpanded = false;
+        }
+
+        private void BtnResetAclList_Click(object sender, EventArgs e)
+        {
+            if (Msg.Confirm("Are you sure to reset and restore acl list?") == DialogResult.No) return;
+            FillList();
         }
     }
 }

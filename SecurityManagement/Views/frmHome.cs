@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace SecurityManagement.Views
 {
-    public partial class frmHome : ViewBase
+    public partial class frmHome : ViewTab
     {
         public frmHome()
         {
@@ -28,7 +28,7 @@ namespace SecurityManagement.Views
 
         private void tileGroupPermision_ItemClick(object sender, DevExpress.XtraEditors.TileItemEventArgs e)
         {
-
+            CMISUI.UIHandler.ViewInTab<Views.frmPermisionGroup>(this.OwnerForm);
         }
     }
 }
