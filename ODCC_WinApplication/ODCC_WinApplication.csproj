@@ -104,6 +104,10 @@
       <Project>{249b7714-2fd4-4fbf-9add-39165d1dc6d6}</Project>
       <Name>Piping</Name>
     </ProjectReference>
+    <ProjectReference Include="..\QCElectrical\QCElectrical.csproj">
+      <Project>{317835d3-98c9-4fa3-a207-a3246ef9363a}</Project>
+      <Name>QCElectrical</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SecurityManagement\SecurityManagement.csproj">
       <Project>{5f42399d-ee0e-4547-ad1d-939720811a7d}</Project>
       <Name>SecurityManagement</Name>

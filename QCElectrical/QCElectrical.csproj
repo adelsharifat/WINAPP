@@ -1,0 +1,562 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{317835D3-98C9-4FA3-A207-A3246EF9363A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>QCElectrical</RootNamespace>
+    <AssemblyName>QCElectrical</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Utils.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraBars.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bundle.cs" />
+    <Compile Include="Data\DAL.cs" />
+    <Compile Include="Main\frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main\frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Permision.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\BaseInfo\frmCFItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\BaseInfo\frmCFItem.Designer.cs">
+      <DependentUpon>frmCFItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-800.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-800.Designer.cs">
+      <DependentUpon>CF-800.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-801-1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-801-1.Designer.cs">
+      <DependentUpon>CF-801-1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-801-3.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-801-3.Designer.cs">
+      <DependentUpon>CF-801-3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-803.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-803.Designer.cs">
+      <DependentUpon>CF-803.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-806.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-806.Designer.cs">
+      <DependentUpon>CF-806.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-808.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-808.Designer.cs">
+      <DependentUpon>CF-808.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-809.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-809.Designer.cs">
+      <DependentUpon>CF-809.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-810.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-810.Designer.cs">
+      <DependentUpon>CF-810.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-811.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-811.Designer.cs">
+      <DependentUpon>CF-811.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-814.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-814.Designer.cs">
+      <DependentUpon>CF-814.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-816.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-816.Designer.cs">
+      <DependentUpon>CF-816.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-817-1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-817-1.Designer.cs">
+      <DependentUpon>CF-817-1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-817-2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-817-2.Designer.cs">
+      <DependentUpon>CF-817-2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-818.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-818.Designer.cs">
+      <DependentUpon>CF-818.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-819-1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-819-1.Designer.cs">
+      <DependentUpon>CF-819-1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-819-2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-819-2.Designer.cs">
+      <DependentUpon>CF-819-2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-820-1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-820-1.Designer.cs">
+      <DependentUpon>CF-820-1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-820-2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-820-2.Designer.cs">
+      <DependentUpon>CF-820-2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-821-1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-821-1.Designer.cs">
+      <DependentUpon>CF-821-1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-821-2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-821-2.Designer.cs">
+      <DependentUpon>CF-821-2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-823-1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-823-1.Designer.cs">
+      <DependentUpon>CF-823-1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-823-2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-823-2.Designer.cs">
+      <DependentUpon>CF-823-2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-825-1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-825-1.Designer.cs">
+      <DependentUpon>CF-825-1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-837-1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-837-1.Designer.cs">
+      <DependentUpon>CF-837-1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-837-2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-837-2.Designer.cs">
+      <DependentUpon>CF-837-2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-838.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-838.Designer.cs">
+      <DependentUpon>CF-838.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-839.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-839.Designer.cs">
+      <DependentUpon>CF-839.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-840.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-840.Designer.cs">
+      <DependentUpon>CF-840.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-843.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-843.Designer.cs">
+      <DependentUpon>CF-843.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-844.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-844.Designer.cs">
+      <DependentUpon>CF-844.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-845.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-845.Designer.cs">
+      <DependentUpon>CF-845.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-846.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-846.Designer.cs">
+      <DependentUpon>CF-846.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-847.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-847.Designer.cs">
+      <DependentUpon>CF-847.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-849.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-849.Designer.cs">
+      <DependentUpon>CF-849.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-850.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-850.Designer.cs">
+      <DependentUpon>CF-850.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-851.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-851.Designer.cs">
+      <DependentUpon>CF-851.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-852.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-852.Designer.cs">
+      <DependentUpon>CF-852.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-853.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-853.Designer.cs">
+      <DependentUpon>CF-853.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-854.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-854.Designer.cs">
+      <DependentUpon>CF-854.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-855.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-855.Designer.cs">
+      <DependentUpon>CF-855.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-856.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-856.Designer.cs">
+      <DependentUpon>CF-856.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-857.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-857.Designer.cs">
+      <DependentUpon>CF-857.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-858.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-858.Designer.cs">
+      <DependentUpon>CF-858.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-860.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-860.Designer.cs">
+      <DependentUpon>CF-860.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-861.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-861.Designer.cs">
+      <DependentUpon>CF-861.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\frmCF.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\frmCF.Designer.cs">
+      <DependentUpon>frmCF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmHome.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\frmHome.Designer.cs">
+      <DependentUpon>frmHome.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Main\frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="View\BaseInfo\frmCFItem.resx">
+      <DependentUpon>frmCFItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-800.resx">
+      <DependentUpon>CF-800.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-801-1.resx">
+      <DependentUpon>CF-801-1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-801-3.resx">
+      <DependentUpon>CF-801-3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-803.resx">
+      <DependentUpon>CF-803.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-806.resx">
+      <DependentUpon>CF-806.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-808.resx">
+      <DependentUpon>CF-808.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-809.resx">
+      <DependentUpon>CF-809.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-810.resx">
+      <DependentUpon>CF-810.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-811.resx">
+      <DependentUpon>CF-811.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-814.resx">
+      <DependentUpon>CF-814.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-816.resx">
+      <DependentUpon>CF-816.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-817-1.resx">
+      <DependentUpon>CF-817-1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-817-2.resx">
+      <DependentUpon>CF-817-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-818.resx">
+      <DependentUpon>CF-818.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-819-1.resx">
+      <DependentUpon>CF-819-1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-819-2.resx">
+      <DependentUpon>CF-819-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-820-1.resx">
+      <DependentUpon>CF-820-1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-820-2.resx">
+      <DependentUpon>CF-820-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-821-1.resx">
+      <DependentUpon>CF-821-1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-821-2.resx">
+      <DependentUpon>CF-821-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-823-1.resx">
+      <DependentUpon>CF-823-1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-823-2.resx">
+      <DependentUpon>CF-823-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-825-1.resx">
+      <DependentUpon>CF-825-1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-837-1.resx">
+      <DependentUpon>CF-837-1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-837-2.resx">
+      <DependentUpon>CF-837-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-838.resx">
+      <DependentUpon>CF-838.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-839.resx">
+      <DependentUpon>CF-839.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-840.resx">
+      <DependentUpon>CF-840.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-843.resx">
+      <DependentUpon>CF-843.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-844.resx">
+      <DependentUpon>CF-844.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-845.resx">
+      <DependentUpon>CF-845.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-846.resx">
+      <DependentUpon>CF-846.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-847.resx">
+      <DependentUpon>CF-847.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-849.resx">
+      <DependentUpon>CF-849.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-850.resx">
+      <DependentUpon>CF-850.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-851.resx">
+      <DependentUpon>CF-851.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-852.resx">
+      <DependentUpon>CF-852.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-853.resx">
+      <DependentUpon>CF-853.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-854.resx">
+      <DependentUpon>CF-854.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-855.resx">
+      <DependentUpon>CF-855.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-856.resx">
+      <DependentUpon>CF-856.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-857.resx">
+      <DependentUpon>CF-857.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-858.resx">
+      <DependentUpon>CF-858.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-860.resx">
+      <DependentUpon>CF-860.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-861.resx">
+      <DependentUpon>CF-861.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\frmCF.resx">
+      <DependentUpon>frmCF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmHome.resx">
+      <DependentUpon>frmHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
+    <Folder Include="Logic\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CMISBEL\CMISBEL.csproj">
+      <Project>{d9290eef-8244-449d-a28b-e8035db517a6}</Project>
+      <Name>CMISBEL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CMISControls\CMISControls.csproj">
+      <Project>{478c02a1-b1ad-400f-b568-c97f2591aa52}</Project>
+      <Name>CMISControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CMISDAL\CMISDAL.csproj">
+      <Project>{c1649b10-abb2-4f58-b9f4-a26dac7dd289}</Project>
+      <Name>CMISDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CMISSecurity\CMISSecurity.csproj">
+      <Project>{60fecbb9-5c03-41bd-bf13-72595b4139a0}</Project>
+      <Name>CMISSecurity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CMISUIHelper\CMISUIHelper.csproj">
+      <Project>{94285279-dfd9-4ba6-8fc2-b057b80d87e9}</Project>
+      <Name>CMISUIHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CMISUtils\CMISUtils.csproj">
+      <Project>{387e37b8-5f16-4288-a322-9e684731f357}</Project>
+      <Name>CMISUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommonClass\CommonClass.csproj">
+      <Project>{6932a454-b641-4f87-a6cc-3265990786d5}</Project>
+      <Name>CommonClass</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Security\Security.csproj">
+      <Project>{68241d09-523b-4b77-9926-8b30f66ddb17}</Project>
+      <Name>Security</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

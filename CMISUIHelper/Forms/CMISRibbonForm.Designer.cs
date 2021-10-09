@@ -29,26 +29,25 @@ namespace CMISUIHelper
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CMISRibbonForm));
-            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem3 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem3 = new DevExpress.Utils.ToolTipItem();
             this.MainRibbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.AvatarPopup = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.AvatarPopup = new DevExpress.XtraBars.PopupMenu();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.BBICloseApp = new DevExpress.XtraBars.BarButtonItem();
             this.repositoryItemPictureEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.repositoryItemHypertextLabel1 = new DevExpress.XtraEditors.Repository.RepositoryItemHypertextLabel();
             this.MainStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.HelpPopup = new DevExpress.XtraBars.PopupMenu(this.components);
-            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+            this.HelpPopup = new DevExpress.XtraBars.PopupMenu();
+            this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel();
             this.MainTabControl = new CMISUIHelper.UserControls.CMTabControl();
-            this.BadgeManager = new DevExpress.Utils.VisualEffects.AdornerUIManager(this.components);
+            this.BadgeManager = new DevExpress.Utils.VisualEffects.AdornerUIManager();
             ((System.ComponentModel.ISupportInitialize)(this.MainRibbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AvatarPopup)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
@@ -59,6 +58,10 @@ namespace CMISUIHelper
             // 
             // MainRibbon
             // 
+            this.MainRibbon.AllowKeyTips = false;
+            this.MainRibbon.AllowMdiChildButtons = false;
+            this.MainRibbon.AllowMinimizeRibbon = false;
+            this.MainRibbon.AllowTrimPageText = false;
             this.MainRibbon.ApplicationButtonText = "APPNAME";
             this.MainRibbon.CaptionBarItemLinks.Add(this.barStaticItem1);
             this.MainRibbon.CaptionBarItemLinks.Add(this.barButtonItem4);
@@ -80,6 +83,8 @@ namespace CMISUIHelper
             this.repositoryItemPictureEdit1,
             this.repositoryItemHypertextLabel1});
             this.MainRibbon.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
+            this.MainRibbon.ShowDisplayOptionsMenuButton = DevExpress.Utils.DefaultBoolean.False;
+            this.MainRibbon.ShowExpandCollapseButton = DevExpress.Utils.DefaultBoolean.False;
             this.MainRibbon.ShowToolbarCustomizeItem = false;
             this.MainRibbon.Size = new System.Drawing.Size(1245, 54);
             this.MainRibbon.StatusBar = this.MainStatusBar;
@@ -148,12 +153,12 @@ namespace CMISUIHelper
             this.BBICloseApp.ImageOptions.Image = global::CMISUIHelper.UIHelperResources.Close_DarkBlue_32x32;
             this.BBICloseApp.Name = "BBICloseApp";
             this.BBICloseApp.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            toolTipTitleItem1.Text = "Close Application";
-            toolTipItem1.LeftIndent = 6;
-            toolTipItem1.Text = "Close all opened form and application";
-            superToolTip1.Items.Add(toolTipTitleItem1);
-            superToolTip1.Items.Add(toolTipItem1);
-            this.BBICloseApp.SuperTip = superToolTip1;
+            toolTipTitleItem3.Text = "Close Application";
+            toolTipItem3.LeftIndent = 6;
+            toolTipItem3.Text = "Close all opened form and application";
+            superToolTip3.Items.Add(toolTipTitleItem3);
+            superToolTip3.Items.Add(toolTipItem3);
+            this.BBICloseApp.SuperTip = superToolTip3;
             // 
             // repositoryItemPictureEdit1
             // 

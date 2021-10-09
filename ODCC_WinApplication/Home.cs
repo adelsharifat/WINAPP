@@ -25,8 +25,12 @@ namespace ODCC_WinApplication
 
         private void button2_Click(object sender, EventArgs e)
         {
-            SecurityManagement.Main.frmMain mainForm = new SecurityManagement.Main.frmMain();
-            mainForm.Show();
+            (new SecurityManagement.Main.frmMain()).Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            (new QCElectrical.Main.frmMain()).Show();            
         }
     }
 }

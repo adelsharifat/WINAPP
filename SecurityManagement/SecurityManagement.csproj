@@ -60,10 +60,10 @@
     <Compile Include="Bundle.cs" />
     <Compile Include="Infrastructure\Model\AclGridDataModel.cs" />
     <Compile Include="Infrastructure\Model\AclModel.cs" />
+    <Compile Include="Infrastructure\ViewModel\vm.cs" />
     <Compile Include="Infrastructure\ViewModel\DBUserACLViewModel.cs" />
     <Compile Include="Infrastructure\ViewModel\AclDBTableType.cs" />
     <Compile Include="Infrastructure\ViewModel\AclDBValueTableType.cs" />
-    <Compile Include="Permision.cs" />
     <Compile Include="resSecurityManagement.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -79,11 +79,29 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\CFForms\CF-800.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\CFForms\CF-800.Designer.cs">
+      <DependentUpon>CF-800.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CFForms\CF-801-1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\CFForms\CF-801-1.Designer.cs">
+      <DependentUpon>CF-801-1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\frmACL.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\frmACL.Designer.cs">
       <DependentUpon>frmACL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frmCF.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\frmCF.Designer.cs">
+      <DependentUpon>frmCF.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\frmHome.cs">
       <SubType>UserControl</SubType>
@@ -121,8 +139,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\CFForms\CF-800.resx">
+      <DependentUpon>CF-800.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CFForms\CF-801-1.resx">
+      <DependentUpon>CF-801-1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\frmACL.resx">
       <DependentUpon>frmACL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frmCF.resx">
+      <DependentUpon>frmCF.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frmHome.resx">
       <DependentUpon>frmHome.cs</DependentUpon>

@@ -54,6 +54,9 @@
     </Compile>
     <Compile Include="Grid\LoadingStyle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tab\PageViewer.cs">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />

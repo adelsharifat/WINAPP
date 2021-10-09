@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMISSecurity", "CMISSecurit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMISUtils", "CMISUtils\CMISUtils.csproj", "{387E37B8-5F16-4288-A322-9E684731F357}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QCElectrical", "QCElectrical\QCElectrical.csproj", "{317835D3-98C9-4FA3-A207-A3246EF9363A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,6 +91,10 @@ Global
 		{387E37B8-5F16-4288-A322-9E684731F357}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{387E37B8-5F16-4288-A322-9E684731F357}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{387E37B8-5F16-4288-A322-9E684731F357}.Release|Any CPU.Build.0 = Release|Any CPU
+		{317835D3-98C9-4FA3-A207-A3246EF9363A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{317835D3-98C9-4FA3-A207-A3246EF9363A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{317835D3-98C9-4FA3-A207-A3246EF9363A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{317835D3-98C9-4FA3-A207-A3246EF9363A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,6 +102,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{249B7714-2FD4-4FBF-9ADD-39165D1DC6D6} = {613E832A-E9FD-4B34-8C7B-BF7F8AF690E0}
 		{5F42399D-EE0E-4547-AD1D-939720811A7D} = {613E832A-E9FD-4B34-8C7B-BF7F8AF690E0}
+		{317835D3-98C9-4FA3-A207-A3246EF9363A} = {613E832A-E9FD-4B34-8C7B-BF7F8AF690E0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F10FA580-F62D-4D11-801C-AD7FF347DAF0}

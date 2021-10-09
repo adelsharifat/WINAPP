@@ -1,6 +1,6 @@
 ﻿using CMISSecurity;
 using CMISSecurity.Infrastructre.CustomAttribute;
-using SecurityManagement.Data;
+using QCElectrical.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SecurityManagement
+namespace QCElectrical
 {
     [Schema(Bundle.SCHEMA)]
     public class Permision : CMISPolicy
@@ -181,7 +181,8 @@ namespace SecurityManagement
 
         public DataTable Companies()
         {
-            return DAL.New.FetchCompaniesData();
+            //return DAL.New.FetchCompaniesData();
+            return null;
         }
 
     }

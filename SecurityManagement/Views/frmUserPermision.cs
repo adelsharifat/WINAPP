@@ -61,7 +61,7 @@ namespace SecurityManagement.Views
 
         private void grcUserPermision_DataLoaded(object sender, EventArgs e)
         {
-            grcUserPermision.HideColumns("Id,FirstName").AutoWidth(false).BestFit(); ;
+            grcUserPermision.HideColumns("Id,FirstName");
             grvUserPermision.TextCenter("Permision").TextUnderline("Permision").TextColor("Permision",Color.DarkBlue);
         }
 
@@ -84,7 +84,7 @@ namespace SecurityManagement.Views
                 if (e.Column.Name == "colPermision")
                 {
                     var id = Convert.ToInt32(grvUserPermision.GetRowCellValue(e.RowHandle, "Id"));
-                    CMISUI.UIHandler.ViewInForm<frmACL>(new object[]{ id,false });
+                    CMISUI.UIHandler.ViewInForm<frmACL>(new object[]{ id,false,null });
                 }
             }
             catch (Exception ex)

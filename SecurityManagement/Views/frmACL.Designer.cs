@@ -135,6 +135,7 @@ namespace SecurityManagement.Views
             this.grvACL.OptionsView.ShowFooter = true;
             this.grvACL.OptionsView.ShowGroupedColumns = true;
             this.grvACL.OptionsView.ShowGroupPanel = false;
+            this.grvACL.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Never;
             this.grvACL.CustomRowCellEdit += new DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventHandler(this.grvACL_CustomRowCellEdit);
             this.grvACL.GroupRowExpanded += new DevExpress.XtraGrid.Views.Base.RowEventHandler(this.grvACL_GroupRowExpanded);
             this.grvACL.GroupRowCollapsed += new DevExpress.XtraGrid.Views.Base.RowEventHandler(this.grvACL_GroupRowCollapsed);

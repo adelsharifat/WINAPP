@@ -13,8 +13,6 @@ namespace CMISSecurity
 {
     public class CMISPolicy
     {
-
-
         public List<ACLModel> PermissionList {
             get {
                 return GetPermissionList();
@@ -24,10 +22,10 @@ namespace CMISSecurity
         private List<ACLModel> GetPermissionList()
         {
             List<ACLModel> aCLModels = new List<ACLModel>();
-
-            var aclsFields = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x=>x.GetTypes())
+            LoadReferencedAssembly(Assembly.GetEntryAssembly());
+            var aclsFields = AppDomain.CurrentDomain.GetAssemblies().Where(x => x.FullName.Contains("PublicKeyToken=null")).SelectMany(x=>x.GetTypes())
                 .Where(x => x.IsClass)
-                .SelectMany(x => x.GetRuntimeFields())
+                .SelectMany(x => x.GetFields())
                 .Where(x => x.GetCustomAttributes(typeof(Permit), false).FirstOrDefault() != null );
 
             foreach (var item in aclsFields)
@@ -52,19 +50,6 @@ namespace CMISSecurity
             return aCLModels;
         }
 
-        private List<Assembly> GetListOfEntryAssemblyWithReferences()
-        {
-            List<Assembly> listOfAssemblies = new List<Assembly>();
-            var mainAsm = Assembly.GetEntryAssembly();
-            listOfAssemblies.Add(mainAsm);
-
-            foreach (var refAsmName in mainAsm.GetReferencedAssemblies())
-            {
-                listOfAssemblies.Add(Assembly.Load(refAsmName));
-            }
-            return listOfAssemblies;
-        }
-
         private DataTable GetDataItemProvider(Type type,string itemHandlerName)
         {
             List<ValueModel> valueModelList = new List<ValueModel>();
@@ -78,5 +63,15 @@ namespace CMISSecurity
             return items;
         }
 
+        private void LoadReferencedAssembly(Assembly assembly)
+        {
+            foreach (AssemblyName name in assembly.GetReferencedAssemblies())
+            {
+                if (!AppDomain.CurrentDomain.GetAssemblies().Any(a => a.FullName == name.FullName))
+                {
+                    this.LoadReferencedAssembly(Assembly.Load(name));
+                }
+            }
+        }
     }
 }
