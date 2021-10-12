@@ -445,15 +445,24 @@ namespace CMISUIHelper.Infrastructure.Helpers
             };
             return rp;
         }
-        public static RibbonPage AddGridTools(this RibbonPage rp,ViewTab view)
+        public static RibbonPage AddLiteGridTools(this RibbonPage rp,ViewTab view)
         {
-                rp.AddToggleSearchGridTool(view)
-                  .AddToggleAutoWidthGridTool(view)
-                  .AddToggleBestFitGridTool(view)
-                  .AddDateFormatGridTool(view)
-                  .AddCellFormatColorGridTool(view)
-                  .AddResetGridFormatTool(view)
-                  .AddSettingsGridFormatTool(view);
+            rp.AddToggleSearchGridTool(view)
+              .AddToggleAutoWidthGridTool(view)
+              .AddToggleBestFitGridTool(view)
+              .AddDateFormatGridTool(view);
+            return rp;
+        }
+
+        public static RibbonPage AddGridTools(this RibbonPage rp, ViewTab view)
+        {
+            rp.AddToggleSearchGridTool(view)
+              .AddToggleAutoWidthGridTool(view)
+              .AddToggleBestFitGridTool(view)
+              .AddDateFormatGridTool(view)
+              .AddCellFormatColorGridTool(view)
+              .AddResetGridFormatTool(view)
+              .AddSettingsGridFormatTool(view);
             return rp;
         }
 
@@ -779,6 +788,61 @@ namespace CMISUIHelper.Infrastructure.Helpers
 
                 return childForm;
             }
+
+            public static T ViewInView<T>(ViewContainerWithCompany ownerView, object[] args = null) where T : ViewTab
+            {
+                var childForm = (ViewTab)Activator.CreateInstance(typeof(T), args);
+
+                childForm.TabControl = ownerView.pgvMain;
+                childForm.TabPage = ownerView.TabPage;
+                childForm.RibbonPage = ownerView.RibbonPage;
+                childForm.OwnerForm = ownerView.OwnerForm;
+                childForm.OwnerView = ownerView;
+
+                TabPage tp = null;
+                var existTabPage = ownerView.OpenedViews.FirstOrDefault(x=>x.Value.Name == childForm.Name);
+                if (existTabPage.Value == null)
+                {
+                    TabPage tabPage = new TabPage();
+                    tp = tabPage;
+                    tp.Hide();
+                    tabPage.BackColor = Color.FromArgb(240, 240, 240);
+                    tabPage.UseVisualStyleBackColor = false;
+                    ownerView.OpenedViews.Add(childForm.ViewIdentity, tabPage);
+                    ownerView.pgvMain.TabPages.Add(tabPage);
+                    ownerView.pgvMain.SelectTab(tabPage);
+                    tabPage.Name = childForm.Name;
+                    tabPage.Controls.Add(childForm);
+                    childForm.Dock = System.Windows.Forms.DockStyle.Fill;
+
+                    System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+                    timer.Interval = 1;
+                    int counter = 0;
+                    timer.Tick += (o, ev) =>
+                    {
+                        counter++;
+                        if (counter >= 10)
+                        {
+                            timer.Stop();
+                            childForm.OnBeforeViewLoad(EventArgs.Empty);
+                            childForm.OnViewLoaded(EventArgs.Empty);
+                            tp.Show();
+                        }
+                    };
+                    timer.Start();
+                }
+                else
+                {
+                    tp = existTabPage.Value;
+                    ownerView.pgvMain.SelectTab(tp);
+                }
+
+                               
+                return (T)childForm;
+            }
+
+
+
 
             public static Form ViewInForm<T>(object[] args = null, bool maximize = false, bool displayAsDialog = true) where T : ViewForm
             {

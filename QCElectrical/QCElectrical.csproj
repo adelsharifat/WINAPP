@@ -36,10 +36,19 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Data.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Images.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v18.2.Core, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Sparkline.v18.2.Core, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraBars.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraEditors.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraNavBar.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -344,11 +353,24 @@
     <Compile Include="View\CF\frmCF.Designer.cs">
       <DependentUpon>frmCF.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\CF\UserControViewContainerWithCompanyl.cs" />
     <Compile Include="View\frmHome.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="View\frmHome.Designer.cs">
       <DependentUpon>frmHome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\List\frmCFList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\List\frmCFList.Designer.cs">
+      <DependentUpon>frmCFList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Report\frmCFReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Report\frmCFReport.Designer.cs">
+      <DependentUpon>frmCFReport.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Main\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
@@ -506,6 +528,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\frmHome.resx">
       <DependentUpon>frmHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\List\frmCFList.resx">
+      <DependentUpon>frmCFList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Report\frmCFReport.resx">
+      <DependentUpon>frmCFReport.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

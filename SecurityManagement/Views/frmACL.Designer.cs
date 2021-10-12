@@ -50,7 +50,7 @@ namespace SecurityManagement.Views
             this.cboProject.Properties.Appearance.Options.UseFont = true;
             this.cboProject.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboProject.Properties.NullText = "";
+            this.cboProject.Properties.NullText = "-";
             this.cboProject.Size = new System.Drawing.Size(217, 28);
             this.cboProject.TabIndex = 2;
             this.cboProject.EditValueChanged += new System.EventHandler(this.cboProject_EditValueChanged);

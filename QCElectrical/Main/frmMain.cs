@@ -24,11 +24,20 @@ namespace QCElectrical.Main
             try
             {
                 CMISUI.UIHandler.ViewInTab<View.frmHome>(this);
+                InitAvatar();
+                this.Ribbon.ApplicationButtonText = "QC ELECTRICAL";
+
             }
             catch (Exception ex)
             {
                 ex.ShowMessage();
             }
+        }
+
+        public override void OnChangePassword()
+        {
+            //base.OnChangePassword();
+            Msg.Show("In Progress...2");
         }
     }
 }

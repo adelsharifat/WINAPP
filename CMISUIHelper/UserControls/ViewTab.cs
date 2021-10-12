@@ -1,5 +1,6 @@
 ﻿using CMISUIHelper.Infrastructure.Contracts.CustomEventArgs;
 using CMISUIHelper.Infrastructure.Dtos;
+using CMISUIHelper.Infrastructure.Enums;
 using CMISUIHelper.Infrastructure.Extention;
 using CMISUIHelper.Infrastructure.Helpers;
 using DevExpress.XtraBars;
@@ -239,6 +240,7 @@ namespace CMISUIHelper.UserControls
 
         public string ViewTitle { get; set; }
         public CMISRibbonForm OwnerForm { get; set; }
+        public ViewTab OwnerView { get; set; }
         public RibbonPage RibbonPage { get; set; }
         public TabPage TabPage { get; set; }
         public TabControl TabControl { get; set; }
@@ -247,6 +249,13 @@ namespace CMISUIHelper.UserControls
         #region ExtraCMISCode
 
         #region Properties
+        private FormState formState = FormState.SaveMode;
+
+        public FormState FormMode
+        {
+            get { return formState; }
+            set { formState = value; }
+        }
 
         private bool showRefreshItem = false;
 
@@ -342,7 +351,27 @@ namespace CMISUIHelper.UserControls
         #endregion
 
         #region Methods
+        public virtual string GetFormModeText()
+        {
+            string result = "Save Mode";
+            switch (FormMode)
+            {
+                case FormState.SaveMode:
+                    result = "Save Mode";
+                    break;
+                case FormState.EditMode:
+                    result = "Edit Mode";
+                    break;
+                case FormState.ReadMode:
+                    result = "Read Mode";
+                    break;
+                default:
+                    result = "Save Mode";
+                    break;
+            }
 
+            return result;
+        }
 
         public void Close()
         {

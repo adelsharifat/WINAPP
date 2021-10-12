@@ -28,5 +28,23 @@ namespace CMISDAL.Core.Common
                 throw ex;
             }
         }
+        public DataTable FetchContractsCombo(int userId, int projectId, string acl)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@ProjectId",projectId),
+                    new SqlParameter("@UserId",userId),
+                    new SqlParameter("@Acl",acl),
+                };
+                return DoQuery("CM.[FetchContractsCombo]", parameters);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

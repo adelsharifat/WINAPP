@@ -34,11 +34,5 @@ namespace SecurityManagement.Views
 
 
         }
-
-        private void lookUpEdit1_EditValueChanged(object sender, EventArgs e)
-        {
-            this.label1.Text = this.lookUpEdit1.EditValue.ToString();
-            pageViewer1.Open(Convert.ToInt32(this.lookUpEdit1.EditValue), $"SecurityManagement.Views.CFForms.{lookUpEdit1.Text}");
-        }
     }
 }

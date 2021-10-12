@@ -95,6 +95,31 @@ namespace CMISUtils
             }
         }
 
+        public static Bitmap ResizeImage(this Image image, int width, int height)
+        {
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return destImage;
+        }
+
         public static DataTable ToDataTable<T>(this List<T> items)
         {
             DataTable dataTable = new DataTable(typeof(T).Name);
@@ -148,46 +173,58 @@ namespace CMISUtils
             //put a breakpoint here and check datatable
             return dataTable;
         }
-
-        public static Bitmap ResizeImage(this Image image, int width, int height)
-        {
-            var destRect = new Rectangle(0, 0, width, height);
-            var destImage = new Bitmap(width, height);
-
-            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
-
-            using (var graphics = Graphics.FromImage(destImage))
-            {
-                graphics.CompositingMode = CompositingMode.SourceCopy;
-                graphics.CompositingQuality = CompositingQuality.HighQuality;
-                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                graphics.SmoothingMode = SmoothingMode.HighQuality;
-                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
-
-                using (var wrapMode = new ImageAttributes())
-                {
-                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
-                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
-                }
-            }
-
-            return destImage;
-        }
+        
 
         //Combo
-        public static void Fill(this LookUpEdit lookUpEdit, DataTable dataTable, string displayMember = "Name", string valueMember = "Id")
+        public static LookUpEdit Fill(this LookUpEdit lookUpEdit, DataTable dataTable, string displayMember = "Name", string valueMember = "Id")
         {
             try
             {
                 lookUpEdit.Properties.DataSource = dataTable;
                 lookUpEdit.Properties.DisplayMember = displayMember;
                 lookUpEdit.Properties.ValueMember = valueMember;
-                lookUpEdit.Properties.KeyMember = valueMember;
-                lookUpEdit.ItemIndex = 0;
+                lookUpEdit.Properties.KeyMember = valueMember;                
+                return lookUpEdit;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return;
+                throw ex;
+            }
+        }
+
+
+        public static LookUpEdit HideColumns(this LookUpEdit lookUpEdit, string columns,char delimiter = ',')
+        {
+            try
+            {
+                var columnNames = columns.Split(delimiter);
+                lookUpEdit.Properties.PopulateColumns();
+                foreach (string column in columnNames)
+                {
+                    var lookupColumn = lookUpEdit.Properties.Columns.FirstOrDefault(x => x.FieldName == column);
+                    if (lookupColumn != null) lookupColumn.Visible = false;
+                }
+                return lookUpEdit;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+
+        public static LookUpEdit SelectItem(this LookUpEdit lookUpEdit,int itemIndex)
+        {
+            try
+            {
+                lookUpEdit.ItemIndex = itemIndex;
+                return lookUpEdit;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
 

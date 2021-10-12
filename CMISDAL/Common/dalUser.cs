@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CMISDAL.Core.Common
+namespace CMISDAL.Common
 {
     public class dalUser:APPDAL
     {
@@ -36,6 +36,32 @@ namespace CMISDAL.Core.Common
                     new SqlParameter("@GroupId",groupId)
                 };
                 return DoQuery("CM.FetchGroupById", parameters);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public byte[] FetchAvatarByUserId(int userId)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@Id",userId),
+                    new SqlParameter
+                    {
+                        ParameterName = "@Avatar",
+                        Direction = ParameterDirection.Output,
+                        SqlDbType = SqlDbType.VarBinary,
+                        Size = -1
+                    }
+                };
+                DoQuery("CM.FetchAvatarByUserId", parameters);
+                var val = parameters.FirstOrDefault(x => x.ParameterName == "@Avatar").Value;
+                var avatar = val == null ? null : (byte[])val;
+                return avatar;
             }
             catch (Exception ex)
             {

@@ -50,10 +50,9 @@ namespace CMISUIHelper.UserControls
 
         #endregion
         #region Method
-        public void InitComboCompany()
+        public virtual void InitComboCompany()
         {
-            var data = CMISDAL.Common.CommonDals.Company.FetchCompaniesCombo(LoginInfo.ProjectId, LoginInfo.Id, this.AclCompanyCombo);
-            this.cmbCompany.Fill(data,"FullName","Id");
+            
         }
         #endregion
     }

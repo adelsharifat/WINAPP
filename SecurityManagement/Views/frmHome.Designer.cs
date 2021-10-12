@@ -31,20 +31,16 @@ namespace SecurityManagement.Views
         {
             DevExpress.XtraEditors.TileItemElement tileItemElement1 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement2 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement3 = new DevExpress.XtraEditors.TileItemElement();
             this.tileControl1 = new DevExpress.XtraEditors.TileControl();
             this.tileGroup2 = new DevExpress.XtraEditors.TileGroup();
             this.tileUserPermision = new DevExpress.XtraEditors.TileItem();
             this.tileGroupPermision = new DevExpress.XtraEditors.TileItem();
-            this.tileGroup3 = new DevExpress.XtraEditors.TileGroup();
-            this.tileItem1 = new DevExpress.XtraEditors.TileItem();
             this.SuspendLayout();
             // 
             // tileControl1
             // 
             this.tileControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tileControl1.Groups.Add(this.tileGroup2);
-            this.tileControl1.Groups.Add(this.tileGroup3);
             this.tileControl1.Location = new System.Drawing.Point(20, 20);
             this.tileControl1.MaxId = 3;
             this.tileControl1.Name = "tileControl1";
@@ -92,21 +88,6 @@ namespace SecurityManagement.Views
             this.tileGroupPermision.Name = "tileGroupPermision";
             this.tileGroupPermision.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.tileGroupPermision_ItemClick);
             // 
-            // tileGroup3
-            // 
-            this.tileGroup3.Items.Add(this.tileItem1);
-            this.tileGroup3.Name = "tileGroup3";
-            this.tileGroup3.Text = "CF";
-            // 
-            // tileItem1
-            // 
-            tileItemElement3.Text = "tileItem1";
-            this.tileItem1.Elements.Add(tileItemElement3);
-            this.tileItem1.Id = 2;
-            this.tileItem1.ItemSize = DevExpress.XtraEditors.TileItemSize.Medium;
-            this.tileItem1.Name = "tileItem1";
-            this.tileItem1.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.tileItem1_ItemClick);
-            // 
             // frmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -126,7 +107,5 @@ namespace SecurityManagement.Views
         private DevExpress.XtraEditors.TileGroup tileGroup2;
         private DevExpress.XtraEditors.TileItem tileUserPermision;
         private DevExpress.XtraEditors.TileItem tileGroupPermision;
-        private DevExpress.XtraEditors.TileGroup tileGroup3;
-        private DevExpress.XtraEditors.TileItem tileItem1;
     }
 }

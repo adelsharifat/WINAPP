@@ -70,6 +70,7 @@
     <Compile Include="Infrastructure\Dtos\GroupedAndSortedMenuListModel.cs" />
     <Compile Include="Infrastructure\Dtos\MenuListModel.cs" />
     <Compile Include="Infrastructure\Enums\CloseItemAlignment.cs" />
+    <Compile Include="Infrastructure\Enums\FormState.cs" />
     <Compile Include="Infrastructure\Enums\PermisionValue.cs" />
     <Compile Include="Infrastructure\Enums\RPCColor.cs" />
     <Compile Include="Infrastructure\Extention\ExceptionExtentionMethod.cs" />
@@ -79,6 +80,15 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>UIHelperResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PageViewer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\ViewContainerWithCompany.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ViewContainerWithCompany.Designer.cs">
+      <DependentUpon>ViewContainerWithCompany.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ViewForm.cs">
       <SubType>UserControl</SubType>
@@ -116,6 +126,9 @@
     <EmbeddedResource Include="UIHelperResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>UIHelperResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ViewContainerWithCompany.resx">
+      <DependentUpon>ViewContainerWithCompany.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ViewForm.resx">
       <DependentUpon>ViewForm.cs</DependentUpon>
@@ -354,6 +367,10 @@
     <None Include="Resources\sendxlsx_32x32.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CMISBEL\CMISBEL.csproj">
+      <Project>{d9290eef-8244-449d-a28b-e8035db517a6}</Project>
+      <Name>CMISBEL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CMISControls\CMISControls.csproj">
       <Project>{478C02A1-B1AD-400F-B568-C97F2591AA52}</Project>
       <Name>CMISControls</Name>

@@ -117,4 +117,30 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="toolAttachmentGrid.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="toolStripButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEtSURBVDhPzVHBTsJAEF3/sLub8B2wAS5Q6tUT8aAoVhT9
+        H9ryB8ZEo1sPYm3xhPM2U+yGQDzykk12572ZfTMjjgupUlGm9SU/dwAOGn76yJQ6t93uVx5FaxLNNkKc
+        MCVwX2p9Bw4aaJn6QyZl/B6GZTUeb3JjvqnIFVMi1foaMXB2OCyJmzLlIwmC2IZh4YqMRmuyHC9brfs3
+        Y35cMnGkuWH5LmA1lfIx73QqTijJtnNl2+0qUWrO0v1AEfrlwbJll0x3is2bczkIGtKkboWdFIe244Fs
+        TnJO9lr4TxEMDb0igYqsyPYFDu6uCHHQsNwHDW9a942VYa1MiYWUt401Fs0Vb5FIefrS63089/uf+JXD
+        WyD2NBisXo3JoeWwj0UQnO2bdr0daDh0FBDiF4i97u59KqHTAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="toolStripButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEgSURBVDhPY6AZCN0Zuj90d+h/MAayocLEg6AdQf873nWA
+        MYgNFSYe+G3x+9/6uhWMQWyoMPHAc73n/8bnjWAMYkOFiQfOK53/1zyqAWMQGyqMHdgutN3vsMzhv9sa
+        t/8+m3z+B24P/B+2J+x/+d1yMAaxQWIgOZAakFqQHqh2BgazOWbwAIPh2se1/wuvF4IxiI0uD9ID1c7A
+        YDDN4H/OpRySMEgPVDsDg2av5n7dybr/jWYY/beYZ/Hffqn9f5dVLv/TzqSBMYgNEgPJgdSA1IL0QLVj
+        B8qdyv8TjyeCMYgNFSYeyDbL/o85FAPGIDZUmHggUSfxP2JfBBiD2FBh4oFIlQgkHwAxiA0VJh4Ilgru
+        FywX/A/GQDZUmNqAgQEAQPjhzc1p3y8AAAAASUVORK5CYII=
+</value>
+  </data>
 </root>

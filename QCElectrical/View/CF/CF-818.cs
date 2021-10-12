@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CMISUIHelper.UserControls;
 
 namespace QCElectrical.View.CF
 {
-    public partial class CF_818 : UserControl
+    public partial class CF_818 : ViewTab
     {
         public CF_818()
         {

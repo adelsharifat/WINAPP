@@ -16,6 +16,7 @@ namespace QCElectrical.View.BaseInfo
         public frmCFItem()
         {
             InitializeComponent();
+            ViewTitle = "CF Item";
         }
     }
 }

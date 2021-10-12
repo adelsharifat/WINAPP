@@ -1,8 +1,10 @@
 ﻿using CMISUIHelper.Infrastructure.Contracts;
 using CMISUIHelper.Infrastructure.Enums;
 using CMISUIHelper.Infrastructure.Helpers;
+using CMISUtils;
 using DevExpress.Utils;
 using DevExpress.XtraBars.Ribbon;
+using Security;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,8 +25,6 @@ namespace CMISUIHelper
         public CMISRibbonForm()
         {
             InitializeComponent();
-            if (!DesignMode)
-                GetUserPermisons(1, 2);
             ItemIcon = this.DefualtItemIcon;
         }
 
@@ -45,7 +45,6 @@ namespace CMISUIHelper
             get { return schema; }
             set { schema = value; }
         }
-
 
         private bool showHomeMenuItems = false;
         public bool ShowHomeMenuItems
@@ -136,11 +135,11 @@ namespace CMISUIHelper
             Permisions.Add("datetimepicker", PermisionValue.Deny);
         }
 
-
-
-
-
-
+        public void InitAvatar()
+        {
+            CMISBEL.Core.Common.belUser belUser = new CMISBEL.Core.Common.belUser();
+            barBtnAvatar.ImageOptions.Image = belUser.FetchAvatarByUserId(LoginInfo.Id).ResizeImage(16, 16);
+        }
 
         #endregion
 
@@ -153,6 +152,48 @@ namespace CMISUIHelper
         private void MainRibbon_SelectedPageChanging(object sender, RibbonPageChangingEventArgs e)
         {
             
+        }
+
+        private void btnChangePassword_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            OnChangePassword();
+        }
+
+        public virtual void OnChangePassword()
+        {
+            Msg.Show("In Progress...");
+        }
+
+
+        public virtual void OnChangeAvatar()
+        {
+            Msg.Show("In Progress...");
+        }
+
+        public virtual void OnAbout()
+        {
+            Msg.Show("In Progress...");
+        }
+
+        public virtual void OnHelp()
+        {
+            Msg.Show("In Progress...");
+        }
+
+
+        private void btnChangeAvatar_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            OnChangeAvatar();
+        }
+
+        private void btnAbout_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            OnAbout();
+        }
+
+        private void btnHelp_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            OnHelp();
         }
     }
 }

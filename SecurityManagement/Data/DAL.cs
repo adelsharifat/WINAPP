@@ -71,19 +71,7 @@ namespace SecurityManagement.Data
             {
                 throw ex;
             }
-        }
-
-        public DataTable FetchCompaniesData()
-        {
-            try
-            {
-                return DoQuery("SecAcl.FetchCompaniesData");
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        }        
 
         public int SaveChangeACL(int projectId, int id, DataTable acls, bool isGroup)
         {

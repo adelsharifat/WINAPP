@@ -30,29 +30,31 @@ namespace CMISUIHelper
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CMISRibbonForm));
-            DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem3 = new DevExpress.Utils.ToolTipTitleItem();
-            DevExpress.Utils.ToolTipItem toolTipItem3 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
             this.MainRibbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.HelpPopup = new DevExpress.XtraBars.PopupMenu();
+            this.btnHelp = new DevExpress.XtraBars.BarButtonItem();
+            this.btnAbout = new DevExpress.XtraBars.BarButtonItem();
+            this.barBtnAvatar = new DevExpress.XtraBars.BarButtonItem();
             this.AvatarPopup = new DevExpress.XtraBars.PopupMenu();
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnChangeAvatar = new DevExpress.XtraBars.BarButtonItem();
+            this.btnChangePassword = new DevExpress.XtraBars.BarButtonItem();
             this.BBICloseApp = new DevExpress.XtraBars.BarButtonItem();
             this.repositoryItemPictureEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.repositoryItemHypertextLabel1 = new DevExpress.XtraEditors.Repository.RepositoryItemHypertextLabel();
             this.MainStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.HelpPopup = new DevExpress.XtraBars.PopupMenu();
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel();
             this.MainTabControl = new CMISUIHelper.UserControls.CMTabControl();
             this.BadgeManager = new DevExpress.Utils.VisualEffects.AdornerUIManager();
             ((System.ComponentModel.ISupportInitialize)(this.MainRibbon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HelpPopup)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AvatarPopup)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHypertextLabel1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.HelpPopup)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BadgeManager)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,19 +67,21 @@ namespace CMISUIHelper
             this.MainRibbon.ApplicationButtonText = "APPNAME";
             this.MainRibbon.CaptionBarItemLinks.Add(this.barStaticItem1);
             this.MainRibbon.CaptionBarItemLinks.Add(this.barButtonItem4);
-            this.MainRibbon.CaptionBarItemLinks.Add(this.barButtonItem1);
+            this.MainRibbon.CaptionBarItemLinks.Add(this.barBtnAvatar);
             this.MainRibbon.ColorScheme = DevExpress.XtraBars.Ribbon.RibbonControlColorScheme.DarkBlue;
             this.MainRibbon.ExpandCollapseItem.Id = 0;
             this.MainRibbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.barStaticItem1,
             this.barButtonItem4,
-            this.barButtonItem1,
+            this.barBtnAvatar,
             this.MainRibbon.ExpandCollapseItem,
             this.BBICloseApp,
-            this.barButtonItem2,
-            this.barButtonItem3});
+            this.btnChangeAvatar,
+            this.btnChangePassword,
+            this.btnHelp,
+            this.btnAbout});
             this.MainRibbon.Location = new System.Drawing.Point(0, 0);
-            this.MainRibbon.MaxItemId = 11;
+            this.MainRibbon.MaxItemId = 13;
             this.MainRibbon.Name = "MainRibbon";
             this.MainRibbon.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1,
@@ -85,6 +89,7 @@ namespace CMISUIHelper
             this.MainRibbon.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
             this.MainRibbon.ShowDisplayOptionsMenuButton = DevExpress.Utils.DefaultBoolean.False;
             this.MainRibbon.ShowExpandCollapseButton = DevExpress.Utils.DefaultBoolean.False;
+            this.MainRibbon.ShowItemCaptionsInCaptionBar = true;
             this.MainRibbon.ShowToolbarCustomizeItem = false;
             this.MainRibbon.Size = new System.Drawing.Size(1245, 54);
             this.MainRibbon.StatusBar = this.MainStatusBar;
@@ -103,48 +108,84 @@ namespace CMISUIHelper
             // 
             // barButtonItem4
             // 
+            this.barButtonItem4.ActAsDropDown = true;
+            this.barButtonItem4.AllowDrawArrow = false;
+            this.barButtonItem4.AllowDrawArrowInMenu = false;
+            this.barButtonItem4.AllowHtmlText = DevExpress.Utils.DefaultBoolean.False;
+            this.barButtonItem4.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
+            this.barButtonItem4.DropDownControl = this.HelpPopup;
             this.barButtonItem4.Id = 6;
             this.barButtonItem4.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem4.ImageOptions.Image")));
             this.barButtonItem4.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem4.ImageOptions.LargeImage")));
             this.barButtonItem4.Name = "barButtonItem4";
             this.barButtonItem4.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
-            // barButtonItem1
+            // HelpPopup
             // 
-            this.barButtonItem1.ActAsDropDown = true;
-            this.barButtonItem1.AllowDrawArrow = false;
-            this.barButtonItem1.AllowDrawArrowInMenu = false;
-            this.barButtonItem1.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
-            this.barButtonItem1.DropDownControl = this.AvatarPopup;
-            this.barButtonItem1.Id = 3;
-            this.barButtonItem1.ImageOptions.Image = global::CMISUIHelper.UIHelperResources.CPTT8276;
-            this.barButtonItem1.ImageOptions.LargeImage = global::CMISUIHelper.UIHelperResources.CPTT8276;
-            this.barButtonItem1.ItemAppearance.Normal.Options.UseImage = true;
-            this.barButtonItem1.Name = "barButtonItem1";
-            this.barButtonItem1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.HelpPopup.ItemLinks.Add(this.btnHelp);
+            this.HelpPopup.ItemLinks.Add(this.btnAbout);
+            this.HelpPopup.Name = "HelpPopup";
+            this.HelpPopup.Ribbon = this.MainRibbon;
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.Caption = "Help";
+            this.btnHelp.Id = 11;
+            this.btnHelp.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.ImageOptions.Image")));
+            this.btnHelp.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnHelp.ImageOptions.LargeImage")));
+            this.btnHelp.ItemShortcut = new DevExpress.XtraBars.BarShortcut(System.Windows.Forms.Keys.F1);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.ShortcutKeyDisplayString = "F1";
+            this.btnHelp.ShowItemShortcut = DevExpress.Utils.DefaultBoolean.True;
+            this.btnHelp.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnHelp_ItemClick);
+            // 
+            // btnAbout
+            // 
+            this.btnAbout.Caption = "About";
+            this.btnAbout.Id = 12;
+            this.btnAbout.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAbout.ImageOptions.Image")));
+            this.btnAbout.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnAbout.ImageOptions.LargeImage")));
+            this.btnAbout.Name = "btnAbout";
+            this.btnAbout.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAbout_ItemClick);
+            // 
+            // barBtnAvatar
+            // 
+            this.barBtnAvatar.ActAsDropDown = true;
+            this.barBtnAvatar.AllowDrawArrow = false;
+            this.barBtnAvatar.AllowDrawArrowInMenu = false;
+            this.barBtnAvatar.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
+            this.barBtnAvatar.DropDownControl = this.AvatarPopup;
+            this.barBtnAvatar.Id = 3;
+            this.barBtnAvatar.ImageOptions.Image = global::CMISUIHelper.UIHelperResources.CPTT8276;
+            this.barBtnAvatar.ImageOptions.LargeImage = global::CMISUIHelper.UIHelperResources.CPTT8276;
+            this.barBtnAvatar.ItemAppearance.Normal.Options.UseImage = true;
+            this.barBtnAvatar.Name = "barBtnAvatar";
+            this.barBtnAvatar.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
             // AvatarPopup
             // 
-            this.AvatarPopup.ItemLinks.Add(this.barButtonItem2);
-            this.AvatarPopup.ItemLinks.Add(this.barButtonItem3);
+            this.AvatarPopup.ItemLinks.Add(this.btnChangeAvatar);
+            this.AvatarPopup.ItemLinks.Add(this.btnChangePassword);
             this.AvatarPopup.Name = "AvatarPopup";
             this.AvatarPopup.Ribbon = this.MainRibbon;
             // 
-            // barButtonItem2
+            // btnChangeAvatar
             // 
-            this.barButtonItem2.Caption = "Change Profile Photo";
-            this.barButtonItem2.Id = 4;
-            this.barButtonItem2.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.Image")));
-            this.barButtonItem2.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.LargeImage")));
-            this.barButtonItem2.Name = "barButtonItem2";
+            this.btnChangeAvatar.Caption = "Change Profile Photo";
+            this.btnChangeAvatar.Id = 4;
+            this.btnChangeAvatar.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnChangeAvatar.ImageOptions.Image")));
+            this.btnChangeAvatar.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnChangeAvatar.ImageOptions.LargeImage")));
+            this.btnChangeAvatar.Name = "btnChangeAvatar";
+            this.btnChangeAvatar.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnChangeAvatar_ItemClick);
             // 
-            // barButtonItem3
+            // btnChangePassword
             // 
-            this.barButtonItem3.Caption = "Change Passsword";
-            this.barButtonItem3.Id = 5;
-            this.barButtonItem3.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.Image")));
-            this.barButtonItem3.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.LargeImage")));
-            this.barButtonItem3.Name = "barButtonItem3";
+            this.btnChangePassword.Caption = "Change Passsword";
+            this.btnChangePassword.Id = 5;
+            this.btnChangePassword.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnChangePassword.ImageOptions.Image")));
+            this.btnChangePassword.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnChangePassword.ImageOptions.LargeImage")));
+            this.btnChangePassword.Name = "btnChangePassword";
+            this.btnChangePassword.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnChangePassword_ItemClick);
             // 
             // BBICloseApp
             // 
@@ -153,12 +194,12 @@ namespace CMISUIHelper
             this.BBICloseApp.ImageOptions.Image = global::CMISUIHelper.UIHelperResources.Close_DarkBlue_32x32;
             this.BBICloseApp.Name = "BBICloseApp";
             this.BBICloseApp.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            toolTipTitleItem3.Text = "Close Application";
-            toolTipItem3.LeftIndent = 6;
-            toolTipItem3.Text = "Close all opened form and application";
-            superToolTip3.Items.Add(toolTipTitleItem3);
-            superToolTip3.Items.Add(toolTipItem3);
-            this.BBICloseApp.SuperTip = superToolTip3;
+            toolTipTitleItem1.Text = "Close Application";
+            toolTipItem1.LeftIndent = 6;
+            toolTipItem1.Text = "Close all opened form and application";
+            superToolTip1.Items.Add(toolTipTitleItem1);
+            superToolTip1.Items.Add(toolTipItem1);
+            this.BBICloseApp.SuperTip = superToolTip1;
             // 
             // repositoryItemPictureEdit1
             // 
@@ -183,11 +224,6 @@ namespace CMISUIHelper
             this.MainStatusBar.Name = "MainStatusBar";
             this.MainStatusBar.Ribbon = this.MainRibbon;
             this.MainStatusBar.Size = new System.Drawing.Size(1245, 21);
-            // 
-            // HelpPopup
-            // 
-            this.HelpPopup.Name = "HelpPopup";
-            this.HelpPopup.Ribbon = this.MainRibbon;
             // 
             // defaultLookAndFeel1
             // 
@@ -219,15 +255,16 @@ namespace CMISUIHelper
             this.Controls.Add(this.MainTabControl);
             this.Controls.Add(this.MainStatusBar);
             this.Controls.Add(this.MainRibbon);
+            this.MinimumSize = new System.Drawing.Size(1247, 749);
             this.Name = "CMISRibbonForm";
             this.Ribbon = this.MainRibbon;
             this.StatusBar = this.MainStatusBar;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.MainRibbon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HelpPopup)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AvatarPopup)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemHypertextLabel1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.HelpPopup)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BadgeManager)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -240,9 +277,9 @@ namespace CMISUIHelper
         private DevExpress.XtraBars.BarButtonItem BBICloseApp;
         private DevExpress.XtraBars.Ribbon.RibbonStatusBar MainStatusBar;
         private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEdit1;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.BarButtonItem barBtnAvatar;
+        private DevExpress.XtraBars.BarButtonItem btnChangeAvatar;
+        private DevExpress.XtraBars.BarButtonItem btnChangePassword;
         private DevExpress.XtraBars.PopupMenu AvatarPopup;
         private DevExpress.XtraBars.BarButtonItem barButtonItem4;
         private DevExpress.XtraBars.PopupMenu HelpPopup;
@@ -251,5 +288,7 @@ namespace CMISUIHelper
         private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;
         private UserControls.CMTabControl MainTabControl;
         public DevExpress.Utils.VisualEffects.AdornerUIManager BadgeManager;
+        private DevExpress.XtraBars.BarButtonItem btnHelp;
+        private DevExpress.XtraBars.BarButtonItem btnAbout;
     }
 }

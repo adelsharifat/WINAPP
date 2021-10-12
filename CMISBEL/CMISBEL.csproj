@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Common\belUser.cs" />
     <Compile Include="Core\Document\DMS.cs" />
     <Compile Include="Core\Document\Enum\DocumentActionType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -50,9 +52,11 @@
       <Project>{C1649B10-ABB2-4F58-B9F4-A26DAC7DD289}</Project>
       <Name>CMISDAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CMISUtils\CMISUtils.csproj">
+      <Project>{387e37b8-5f16-4288-a322-9e684731f357}</Project>
+      <Name>CMISUtils</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\Common\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
