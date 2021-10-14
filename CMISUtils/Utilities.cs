@@ -1,4 +1,5 @@
-﻿using CMISUtils.Infrastructure.ViewModel;
+﻿using CMISDAL.Common;
+using CMISUtils.Infrastructure.ViewModel;
 using DevExpress.Utils;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
@@ -47,13 +48,19 @@ namespace CMISUtils
         //    return;
         //}
 
+        //Forms
+       
+
+
+
+
 
         //Server
         public static DateTime ServerDateTime(bool dateWithTime = false)
         {
             try
             {
-                return CMISDAL.Common.CommonDals.Server.ServerDateTime();
+                return CommonDals.Do.Server.ServerDateTime();
             }
             catch (Exception ex)
             {
@@ -229,6 +236,34 @@ namespace CMISUtils
         }
 
         //Grid
+        public static object GetCellValue(this GridControl gc,string column)
+        {
+            try
+            {
+                var gv = gc.MainView as GridView;
+                if (!gv.Columns.Any(x => x.FieldName == column)) throw new Exception("CMIS Error => Column not found");
+                return gv.GetFocusedRowCellValue(column);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static object GetCellValue(this GridView gv, string column)
+        {
+            try
+            {
+                if (!gv.Columns.Any(x => x.FieldName == column)) throw new Exception("CMIS Error => Column not found");
+                var cellValue = gv.GetFocusedRowCellValue(column);
+                return cellValue;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static DataTable GetDataTable(this GridView view)
         {
             DataTable dt = new DataTable();
@@ -645,6 +680,9 @@ namespace CMISUtils
         }
 
     }
+
+
+
 
 
     //public static class ReportHelper

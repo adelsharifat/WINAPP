@@ -41,7 +41,28 @@ namespace CMISUIHelper.Infrastructure.Helpers
 
 
     public static class CMISUI
-    {        
+    {
+        public static OpenFileDialog OpenFDG(params string[] extFilters)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            var count = extFilters.Count();
+            string filterText = String.Empty;
+            foreach (string extFilter in extFilters)
+            {
+                count--;
+                filterText += extFilter + (count != 0 ? "|" : "");
+            }
+
+            ofd.Filter = filterText;
+            ofd.FilterIndex = 10;
+            var dialogResult = ofd.ShowDialog();
+            if (dialogResult == DialogResult.OK)
+            {
+                return ofd;
+            }
+            return null;
+        }
+
         public static void AddGroups(this RibbonPage rp, params RibbonPageGroup[] groups)
         {
             rp.Groups.AddRange(groups);

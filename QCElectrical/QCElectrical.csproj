@@ -581,6 +581,10 @@
       <Project>{6932a454-b641-4f87-a6cc-3265990786d5}</Project>
       <Name>CommonClass</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DMS\DMS.csproj">
+      <Project>{2e19a99b-74dd-499b-8916-ac1bd89be69e}</Project>
+      <Name>DMS</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Security\Security.csproj">
       <Project>{68241d09-523b-4b77-9926-8b30f66ddb17}</Project>
       <Name>Security</Name>

@@ -14,6 +14,7 @@ using Security;
 using QCElectrical.Data;
 using CMISUIHelper.Infrastructure.Enums;
 using DevExpress.XtraEditors;
+using CMISDAL.Common;
 
 namespace QCElectrical.View.CF
 {
@@ -41,7 +42,7 @@ namespace QCElectrical.View.CF
 
         public override void InitComboCompany()
         {
-            var data = CMISDAL.Common.CommonDals.Company.FetchContractsCombo(LoginInfo.ProjectId, LoginInfo.Id, $"{Bundle.SCHEMA}.Contract");
+            var data = CommonDals.Do.Contract.FetchContractsCombo(LoginInfo.ProjectId, LoginInfo.Id, $"{Bundle.SCHEMA}.Contract");
             this.cmbCompany.Fill(data, "Name", "Id").SelectItem(0).HideColumns("EmployerId,ContractorId");
         }
 

@@ -1,4 +1,5 @@
-﻿using CMISUIHelper.Infrastructure.Helpers;
+﻿using CMISDAL.Common;
+using CMISUIHelper.Infrastructure.Helpers;
 using CMISUIHelper.UserControls;
 using CMISUtils;
 using DevExpress.XtraGrid.Views.Grid;
@@ -67,7 +68,7 @@ namespace SecurityManagement.Views
         {
             try
             {
-                cboProject.Fill(CMISDAL.Common.CommonDals.Project.GetProjectList(), "Name", "Id");
+                cboProject.Fill(CommonDals.Do.Project.GetProjectList(), "Name", "Id");
             }
             catch (Exception ex)
             {

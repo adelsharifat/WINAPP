@@ -45,8 +45,10 @@
     <Compile Include="Base\APPDAL.cs" />
     <Compile Include="Base\CMISConnection.cs" />
     <Compile Include="Base\CMISDbContext.cs" />
+    <Compile Include="Common\dalAreaUnit.cs" />
     <Compile Include="Common\dalCompany.cs" />
     <Compile Include="Common\dalConfig.cs" />
+    <Compile Include="Common\dalContract.cs" />
     <Compile Include="Common\dalPermision.cs" />
     <Compile Include="Common\dalProject.cs" />
     <Compile Include="Common\dalServer.cs" />

@@ -121,18 +121,18 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="toolStripButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnDeleteAttachment.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEtSURBVDhPzVHBTsJAEF3/sLub8B2wAS5Q6tUT8aAoVhT9
-        H9ryB8ZEo1sPYm3xhPM2U+yGQDzykk12572ZfTMjjgupUlGm9SU/dwAOGn76yJQ6t93uVx5FaxLNNkKc
-        MCVwX2p9Bw4aaJn6QyZl/B6GZTUeb3JjvqnIFVMi1foaMXB2OCyJmzLlIwmC2IZh4YqMRmuyHC9brfs3
-        Y35cMnGkuWH5LmA1lfIx73QqTijJtnNl2+0qUWrO0v1AEfrlwbJll0x3is2bczkIGtKkboWdFIe244Fs
-        TnJO9lr4TxEMDb0igYqsyPYFDu6uCHHQsNwHDW9a942VYa1MiYWUt401Fs0Vb5FIefrS63089/uf+JXD
-        WyD2NBisXo3JoeWwj0UQnO2bdr0daDh0FBDiF4i97u59KqHTAAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEuSURBVDhPzVHBTgIxEK1/uG0TfoIDyQa4wLJePREPiuKK
+        Iv/D7vIHxkSjrQdxXfCE85pZ3IZAOPKSJu28N9M3M+K0kCkV51pf83MH4KDhp49cqUvTbn/bOF6TaLIR
+        4owpgftC6wdw0EDL1D9yKZOPKCpXw+HGhuEPFblhSmRa3yIGzvT7JXFjpnykQZCYKCpckcFgTZaTRaPx
+        +N5s/rpk4khzx/JdwGom5cy2WitOKMm2c2Uolio1Zel+oAj98mTYskumO8Wm9bkcBA1pVLXCTopD2/FA
+        NkeWk70WjimCoaFXJFCRJdm+wsHdFSEOGpb7oOGNq76xMqyVKTGX8r62xqK+4i1SKc9fO53Pl273C79y
+        eAvEnnu95VsYWmg57GMeBBf7pl1tBxoOnQSE+ANPm+7W+X5xTQAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="toolStripButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnAddAttachment.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEgSURBVDhPY6AZCN0Zuj90d+h/MAayocLEg6AdQf873nWA

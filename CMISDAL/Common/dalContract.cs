@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CMISDAL.Core.Common
+namespace CMISDAL.Common
 {
-    public class dalCompany:APPDAL
+    public class dalContract:APPDAL
     {
-        public DataTable FetchCompaniesCombo(int userId,int projectId,string acl)
+        public DataTable FetchContractsCombo(int userId, int projectId, string acl)
         {
             try
             {
@@ -21,12 +21,13 @@ namespace CMISDAL.Core.Common
                     new SqlParameter("@UserId",userId),
                     new SqlParameter("@Acl",acl),
                 };
-                return DoQuery("CM.[FetchCompaniesCombo]", parameters);
+                return DoQuery("CM.[FetchContractsCombo]", parameters);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
     }
 }

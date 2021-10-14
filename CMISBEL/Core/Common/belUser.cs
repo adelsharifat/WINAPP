@@ -1,4 +1,5 @@
-﻿using CMISUtils;
+﻿using CMISDAL.Common;
+using CMISUtils;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -14,7 +15,7 @@ namespace CMISBEL.Core.Common
         {
             try
             {
-                var avatarByteArray = CMISDAL.Common.CommonDals.User.FetchAvatarByUserId(userId);
+                var avatarByteArray = CommonDals.Do.User.FetchAvatarByUserId(userId);
                 if (avatarByteArray == null) return null;
 
                 var imageAvatar = CMISUtils.Utilities.ToImage(avatarByteArray);

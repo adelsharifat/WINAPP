@@ -10,12 +10,7 @@ namespace QCElectrical
     {
 
         public const string SCHEMA = "QCElectrical";
-
         public const string VERSION = "1.0.0";
-
-
-
-
         public override string GetCode()
         {
             return SCHEMA;

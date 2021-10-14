@@ -9,11 +9,15 @@ namespace CMISDAL.Common
 {
     public class CommonDals
     {
-        public static dalUser User { get=>new dalUser();  }
-        public static dalProject Project { get => new dalProject(); }
-        public static dalCompany Company { get => new dalCompany(); }
-        public static dalConfig Config { get => new dalConfig(); }
-        public static dalPermision Permision { get => new dalPermision(); }
-        public static dalServer Server { get => new dalServer(); }
+        public static CommonDals Do { get; private set; } = new CommonDals();
+
+        public dalUser User { get=>new dalUser();  }
+        public dalProject Project { get => new dalProject(); }
+        public dalCompany Company { get => new dalCompany(); }
+        public dalContract Contract { get => new dalContract(); }
+        public dalAreaUnit AreaUnit { get => new dalAreaUnit(); }
+        public dalConfig Config { get => new dalConfig(); }
+        public dalPermision Permision { get => new dalPermision(); }
+        public dalServer Server { get => new dalServer(); }
     }
 }

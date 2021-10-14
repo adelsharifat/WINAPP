@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D9290EEF-8244-449D-A28B-E8035DB517A6}</ProjectGuid>
+    <ProjectGuid>{2E19A99B-74DD-499B-8916-AC1BD89BE69E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CMISBEL</RootNamespace>
-    <AssemblyName>CMISBEL</AssemblyName>
+    <RootNamespace>DMS</RootNamespace>
+    <AssemblyName>DMS</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,9 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Utils.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraEditors.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,20 +45,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Common\belUser.cs" />
-    <Compile Include="Core\Document\Enum\DocumentActionType.cs" />
+    <Compile Include="Attachment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportNumber.cs" />
+    <Compile Include="ViewModel\Attachment.cs" />
+    <Compile Include="ViewModel\DbFileAttachment.cs" />
+    <Compile Include="ViewModel\FileAttachment.cs" />
+    <Compile Include="ViewModel\FileAttachmentViewModel.cs" />
+    <Compile Include="ViewModel\ReportNumberViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CMISDAL\CMISDAL.csproj">
       <Project>{C1649B10-ABB2-4F58-B9F4-A26DAC7DD289}</Project>
       <Name>CMISDAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CMISUIHelper\CMISUIHelper.csproj">
+      <Project>{94285279-DFD9-4BA6-8FC2-B057B80D87E9}</Project>
+      <Name>CMISUIHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CMISUtils\CMISUtils.csproj">
       <Project>{387e37b8-5f16-4288-a322-9e684731f357}</Project>
       <Name>CMISUtils</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

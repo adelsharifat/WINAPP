@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMISUtils", "CMISUtils\CMIS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QCElectrical", "QCElectrical\QCElectrical.csproj", "{317835D3-98C9-4FA3-A207-A3246EF9363A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMS", "DMS\DMS.csproj", "{2E19A99B-74DD-499B-8916-AC1BD89BE69E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,10 @@ Global
 		{317835D3-98C9-4FA3-A207-A3246EF9363A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{317835D3-98C9-4FA3-A207-A3246EF9363A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{317835D3-98C9-4FA3-A207-A3246EF9363A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E19A99B-74DD-499B-8916-AC1BD89BE69E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E19A99B-74DD-499B-8916-AC1BD89BE69E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E19A99B-74DD-499B-8916-AC1BD89BE69E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E19A99B-74DD-499B-8916-AC1BD89BE69E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

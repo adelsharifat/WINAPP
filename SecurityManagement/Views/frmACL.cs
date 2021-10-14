@@ -44,7 +44,7 @@ namespace SecurityManagement.Views
                 {
                     ViewTitle = "User Permision";
                     _id = id;
-                    var user = CommonDals.User.GetUserById("CM.FetchUserById", _id).Rows[0];
+                    var user = CommonDals.Do.User.GetUserById("CM.FetchUserById", _id).Rows[0];
                     this.ViewTitle += $" - {user.ToString("UserName")} - [{user.ToString("FullName")}]";
                 }
                 else
@@ -52,7 +52,7 @@ namespace SecurityManagement.Views
                     ViewTitle = "Group Permision";
                     _id = id;
                     _projectId = (int)projectId;
-                    var group = CommonDals.User.GetGroupById(_id).Rows[0];                 
+                    var group = CommonDals.Do.User.GetGroupById(_id).Rows[0];                 
                     this.ViewTitle += $" - {group.ToString("Name")}";
                 }
             }
@@ -72,7 +72,7 @@ namespace SecurityManagement.Views
         {
             try
             {
-                cboProject.Fill(CMISDAL.Common.CommonDals.Project.GetProjectList(), "Name", "Id");                
+                cboProject.Fill(CommonDals.Do.Project.GetProjectList(), "Name", "Id");                
             }
             catch (Exception ex)
             {
