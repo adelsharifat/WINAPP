@@ -64,10 +64,10 @@
             this.pnlCompanyCombo.Controls.Add(this.cmbCF);
             this.pnlCompanyCombo.Controls.Add(this.label6);
             this.pnlCompanyCombo.Size = new System.Drawing.Size(1234, 51);
-            this.pnlCompanyCombo.Controls.SetChildIndex(this.panel1, 0);
             this.pnlCompanyCombo.Controls.SetChildIndex(this.label6, 0);
             this.pnlCompanyCombo.Controls.SetChildIndex(this.cmbCF, 0);
             this.pnlCompanyCombo.Controls.SetChildIndex(this.flowLayoutPanel1, 0);
+            this.pnlCompanyCombo.Controls.SetChildIndex(this.panel1, 0);
             this.pnlCompanyCombo.Controls.SetChildIndex(this.BorderBotttom, 0);
             // 
             // label1
@@ -76,7 +76,7 @@
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(648, 3);
+            this.panel1.Location = new System.Drawing.Point(637, 3);
             // 
             // label5
             // 
@@ -120,10 +120,11 @@
             this.lblCFFullName.Location = new System.Drawing.Point(3, 0);
             this.lblCFFullName.Margin = new System.Windows.Forms.Padding(3, 0, 10, 0);
             this.lblCFFullName.Name = "lblCFFullName";
-            this.lblCFFullName.Padding = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            this.lblCFFullName.Size = new System.Drawing.Size(21, 21);
+            this.lblCFFullName.Padding = new System.Windows.Forms.Padding(5, 3, 5, 4);
+            this.lblCFFullName.Size = new System.Drawing.Size(21, 22);
             this.lblCFFullName.TabIndex = 12;
             this.lblCFFullName.Text = "-";
+            this.lblCFFullName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblFormState
             // 
@@ -133,10 +134,11 @@
             this.lblFormState.ForeColor = System.Drawing.Color.White;
             this.lblFormState.Location = new System.Drawing.Point(37, 0);
             this.lblFormState.Name = "lblFormState";
-            this.lblFormState.Padding = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            this.lblFormState.Size = new System.Drawing.Size(21, 21);
+            this.lblFormState.Padding = new System.Windows.Forms.Padding(15, 3, 15, 4);
+            this.lblFormState.Size = new System.Drawing.Size(41, 22);
             this.lblFormState.TabIndex = 13;
             this.lblFormState.Text = "-";
+            this.lblFormState.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // flowLayoutPanel1
             // 
@@ -144,7 +146,7 @@
             this.flowLayoutPanel1.Controls.Add(this.lblFormState);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(265, 15);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(239, 23);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(239, 24);
             this.flowLayoutPanel1.TabIndex = 14;
             // 
             // frmCF
@@ -173,7 +175,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblCFFullName;
         private System.Windows.Forms.Label lblFormState;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         public CMISControls.Combo.CMLookupEdit cmbCF;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

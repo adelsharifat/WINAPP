@@ -466,6 +466,432 @@ namespace CMISUIHelper.Infrastructure.Helpers
             };
             return rp;
         }
+
+        // Add Sign Acion Items
+        public static RibbonPage AddSignPostActionTool(this RibbonPage rp, ViewTab view, string itemName = "Post", Bitmap bmp = null, string rpgText = "Sign")
+        {
+            if (bmp == null) bmp = view.SignpostActionIcon;
+            var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
+            group.AddItems(item);
+            rp.AddGroups(group);
+
+            item.ItemClick += (o, e) =>
+            {
+                GridControl grid = view.LastFocucedGrid;
+                var controls = from c in view.ViewObjects.Values
+                               let cc = c.Control as Control
+                               where c.Control is Control
+                               select cc;
+                var focusedControl = controls.FirstOrDefault(x => x.Focused);
+                var focucedGrid = focusedControl is GridControl;
+
+                if (focucedGrid)
+                {
+                    if (grid == null || grid?.Name != focusedControl.Name)
+                    {
+                        view.LastFocucedGrid = focusedControl as GridControl;
+                        grid = view.LastFocucedGrid;
+                    }
+                }
+
+
+                if (grid != null)
+                {
+                    GridView gv = grid.MainView as GridView;
+                    gv.BestFitColumns();
+                    grid.Focus();
+                }
+
+            };
+            return rp;
+        }
+        public static RibbonPage AddSignAcceptActionTool(this RibbonPage rp, ViewTab view, string itemName = "Accept", Bitmap bmp = null, string rpgText = "Sign")
+        {
+            if (bmp == null) bmp = view.SignAcceptActionIcon;
+            var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
+            group.AddItems(item);
+            rp.AddGroups(group);
+
+            item.ItemClick += (o, e) =>
+            {
+                GridControl grid = view.LastFocucedGrid;
+                var controls = from c in view.ViewObjects.Values
+                               let cc = c.Control as Control
+                               where c.Control is Control
+                               select cc;
+                var focusedControl = controls.FirstOrDefault(x => x.Focused);
+                var focucedGrid = focusedControl is GridControl;
+
+                if (focucedGrid)
+                {
+                    if (grid == null || grid?.Name != focusedControl.Name)
+                    {
+                        view.LastFocucedGrid = focusedControl as GridControl;
+                        grid = view.LastFocucedGrid;
+                    }
+                }
+
+
+                if (grid != null)
+                {
+                    GridView gv = grid.MainView as GridView;
+                    gv.BestFitColumns();
+                    grid.Focus();
+                }
+
+            };
+            return rp;
+        }
+        public static RibbonPage AddSignSendBackActionTool(this RibbonPage rp, ViewTab view, string itemName = "SendBack", Bitmap bmp = null, string rpgText = "Sign")
+        {
+            if (bmp == null) bmp = view.SignSendBackActionIcon;
+            var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
+            group.AddItems(item);
+            rp.AddGroups(group);
+
+            item.ItemClick += (o, e) =>
+            {
+                GridControl grid = view.LastFocucedGrid;
+                var controls = from c in view.ViewObjects.Values
+                               let cc = c.Control as Control
+                               where c.Control is Control
+                               select cc;
+                var focusedControl = controls.FirstOrDefault(x => x.Focused);
+                var focucedGrid = focusedControl is GridControl;
+
+                if (focucedGrid)
+                {
+                    if (grid == null || grid?.Name != focusedControl.Name)
+                    {
+                        view.LastFocucedGrid = focusedControl as GridControl;
+                        grid = view.LastFocucedGrid;
+                    }
+                }
+
+
+                if (grid != null)
+                {
+                    GridView gv = grid.MainView as GridView;
+                    gv.BestFitColumns();
+                    grid.Focus();
+                }
+
+            };
+            return rp;
+        }
+        public static RibbonPage AddSignRejectActionTool(this RibbonPage rp, ViewTab view, string itemName = "Reject", Bitmap bmp = null, string rpgText = "Sign")
+        {
+            if (bmp == null) bmp = view.SignRejectActionIcon;
+            var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
+            group.AddItems(item);
+            rp.AddGroups(group);
+
+            item.ItemClick += (o, e) =>
+            {
+                GridControl grid = view.LastFocucedGrid;
+                var controls = from c in view.ViewObjects.Values
+                               let cc = c.Control as Control
+                               where c.Control is Control
+                               select cc;
+                var focusedControl = controls.FirstOrDefault(x => x.Focused);
+                var focucedGrid = focusedControl is GridControl;
+
+                if (focucedGrid)
+                {
+                    if (grid == null || grid?.Name != focusedControl.Name)
+                    {
+                        view.LastFocucedGrid = focusedControl as GridControl;
+                        grid = view.LastFocucedGrid;
+                    }
+                }
+
+
+                if (grid != null)
+                {
+                    GridView gv = grid.MainView as GridView;
+                    gv.BestFitColumns();
+                    grid.Focus();
+                }
+
+            };
+            return rp;
+        }
+        public static RibbonPage AddSignUndoActionTool(this RibbonPage rp, ViewTab view, string itemName = "Undo", Bitmap bmp = null, string rpgText = "Sign")
+        {
+            if (bmp == null) bmp = view.SignUndoActionIcon;
+            var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
+            group.AddItems(item);
+            rp.AddGroups(group);
+
+            item.ItemClick += (o, e) =>
+            {
+                GridControl grid = view.LastFocucedGrid;
+                var controls = from c in view.ViewObjects.Values
+                               let cc = c.Control as Control
+                               where c.Control is Control
+                               select cc;
+                var focusedControl = controls.FirstOrDefault(x => x.Focused);
+                var focucedGrid = focusedControl is GridControl;
+
+                if (focucedGrid)
+                {
+                    if (grid == null || grid?.Name != focusedControl.Name)
+                    {
+                        view.LastFocucedGrid = focusedControl as GridControl;
+                        grid = view.LastFocucedGrid;
+                    }
+                }
+
+
+                if (grid != null)
+                {
+                    GridView gv = grid.MainView as GridView;
+                    gv.BestFitColumns();
+                    grid.Focus();
+                }
+
+            };
+            return rp;
+        }
+        public static RibbonPage AddSignReopenActionTool(this RibbonPage rp, ViewTab view, string itemName = "Reopen", Bitmap bmp = null, string rpgText = "Sign")
+        {
+            if (bmp == null) bmp = view.SignReopenActionIcon;
+            var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
+            group.AddItems(item);
+            rp.AddGroups(group);
+
+            item.ItemClick += (o, e) =>
+            {
+                GridControl grid = view.LastFocucedGrid;
+                var controls = from c in view.ViewObjects.Values
+                               let cc = c.Control as Control
+                               where c.Control is Control
+                               select cc;
+                var focusedControl = controls.FirstOrDefault(x => x.Focused);
+                var focucedGrid = focusedControl is GridControl;
+
+                if (focucedGrid)
+                {
+                    if (grid == null || grid?.Name != focusedControl.Name)
+                    {
+                        view.LastFocucedGrid = focusedControl as GridControl;
+                        grid = view.LastFocucedGrid;
+                    }
+                }
+
+
+                if (grid != null)
+                {
+                    GridView gv = grid.MainView as GridView;
+                    gv.BestFitColumns();
+                    grid.Focus();
+                }
+
+            };
+            return rp;
+        }
+
+        public static RibbonPage AddLiteSignTools(this RibbonPage rp, ViewTab view)
+        {
+            rp.AddSignPostActionTool(view)
+              .AddSignAcceptActionTool(view)
+              .AddSignRejectActionTool(view);
+            return rp;
+        }
+
+        public static RibbonPage AddSignTools(this RibbonPage rp, ViewTab view)
+        {
+            rp.AddSignPostActionTool(view)
+              .AddSignAcceptActionTool(view)
+              .AddSignRejectActionTool(view)
+              .AddSignSendBackActionTool(view)
+              .AddSignReopenActionTool(view)
+              .AddSignUndoActionTool(view);
+            return rp;
+        }
+
+        // Add Form Acion Items
+        public static RibbonPage AddSaveFormActionTool(this RibbonPage rp, ViewTab view,out BarItem newItem, string itemName = "Save", Bitmap bmp = null, string rpgText = "Form")
+        {
+            if (bmp == null) bmp = view.SaveFormActionIcon;
+            var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
+            group.AddItems(item);
+            rp.AddGroups(group);
+
+            item.ItemClick += (o, e) =>
+            {
+                GridControl grid = view.LastFocucedGrid;
+                var controls = from c in view.ViewObjects.Values
+                               let cc = c.Control as Control
+                               where c.Control is Control
+                               select cc;
+                var focusedControl = controls.FirstOrDefault(x => x.Focused);
+                var focucedGrid = focusedControl is GridControl;
+
+                if (focucedGrid)
+                {
+                    if (grid == null || grid?.Name != focusedControl.Name)
+                    {
+                        view.LastFocucedGrid = focusedControl as GridControl;
+                        grid = view.LastFocucedGrid;
+                    }
+                }
+
+
+                if (grid != null)
+                {
+                    GridView gv = grid.MainView as GridView;
+                    gv.BestFitColumns();
+                    grid.Focus();
+                }
+
+            };
+            newItem = item;
+            return rp;
+        }
+        public static RibbonPage AddEditFormActionTool(this RibbonPage rp, ViewTab view, out BarItem newItem, string itemName = "Edit", Bitmap bmp = null, string rpgText = "Form")
+        {
+            if (bmp == null) bmp = view.EditFormActionIcon;
+            var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
+            group.AddItems(item);
+            rp.AddGroups(group);
+
+            item.ItemClick += (o, e) =>
+            {
+                GridControl grid = view.LastFocucedGrid;
+                var controls = from c in view.ViewObjects.Values
+                               let cc = c.Control as Control
+                               where c.Control is Control
+                               select cc;
+                var focusedControl = controls.FirstOrDefault(x => x.Focused);
+                var focucedGrid = focusedControl is GridControl;
+
+                if (focucedGrid)
+                {
+                    if (grid == null || grid?.Name != focusedControl.Name)
+                    {
+                        view.LastFocucedGrid = focusedControl as GridControl;
+                        grid = view.LastFocucedGrid;
+                    }
+                }
+
+
+                if (grid != null)
+                {
+                    GridView gv = grid.MainView as GridView;
+                    gv.BestFitColumns();
+                    grid.Focus();
+                }
+
+            };
+            newItem = item;
+            return rp;
+        }
+        public static RibbonPage AddDeleteFormActionTool(this RibbonPage rp, ViewTab view,out BarItem newItem, string itemName = "Delete", Bitmap bmp = null, string rpgText = "Form")
+        {
+            if (bmp == null) bmp = view.DeleteFormActionIcon;
+            var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
+            group.AddItems(item);
+            rp.AddGroups(group);
+
+            item.ItemClick += (o, e) =>
+            {
+                GridControl grid = view.LastFocucedGrid;
+                var controls = from c in view.ViewObjects.Values
+                               let cc = c.Control as Control
+                               where c.Control is Control
+                               select cc;
+                var focusedControl = controls.FirstOrDefault(x => x.Focused);
+                var focucedGrid = focusedControl is GridControl;
+
+                if (focucedGrid)
+                {
+                    if (grid == null || grid?.Name != focusedControl.Name)
+                    {
+                        view.LastFocucedGrid = focusedControl as GridControl;
+                        grid = view.LastFocucedGrid;
+                    }
+                }
+
+
+                if (grid != null)
+                {
+                    GridView gv = grid.MainView as GridView;
+                    gv.BestFitColumns();
+                    grid.Focus();
+                }
+
+            };
+            newItem = item;
+            return rp;
+        }
+        public static RibbonPage AddViewFormActionTool(this RibbonPage rp, ViewTab view, out BarItem newItem, string itemName = "View", Bitmap bmp = null, string rpgText = "Form")
+        {
+            if (bmp == null) bmp = view.ViewFormActionIcon;
+            var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
+            group.AddItems(item);
+            rp.AddGroups(group);
+
+            item.ItemClick += (o, e) =>
+            {
+                GridControl grid = view.LastFocucedGrid;
+                var controls = from c in view.ViewObjects.Values
+                               let cc = c.Control as Control
+                               where c.Control is Control
+                               select cc;
+                var focusedControl = controls.FirstOrDefault(x => x.Focused);
+                var focucedGrid = focusedControl is GridControl;
+
+                if (focucedGrid)
+                {
+                    if (grid == null || grid?.Name != focusedControl.Name)
+                    {
+                        view.LastFocucedGrid = focusedControl as GridControl;
+                        grid = view.LastFocucedGrid;
+                    }
+                }
+
+
+                if (grid != null)
+                {
+                    GridView gv = grid.MainView as GridView;
+                    gv.BestFitColumns();
+                    grid.Focus();
+                }
+
+            };
+            newItem = item;
+            return rp;
+        }
+
+        public static RibbonPage AddFormTools(this RibbonPage rp, ViewTab view,out Dictionary<string,BarItem> items)
+        {
+            BarItem save;
+            BarItem edit;
+            BarItem delete;
+            BarItem open;
+            rp.AddSaveFormActionTool(view,out save)
+              .AddEditFormActionTool(view, out edit)
+              .AddDeleteFormActionTool(view, out delete)
+              .AddViewFormActionTool(view, out open);
+            items = new Dictionary<string, BarItem>();
+            items.Add(save.Caption.ToLower(), save);
+            items.Add(edit.Caption.ToLower(), edit);
+            items.Add(delete.Caption.ToLower(), delete);
+            items.Add(open.Caption.ToLower(), open);
+            return rp;
+        }
+
         public static RibbonPage AddLiteGridTools(this RibbonPage rp,ViewTab view)
         {
             rp.AddToggleSearchGridTool(view)

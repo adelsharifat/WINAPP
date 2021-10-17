@@ -23,12 +23,12 @@ namespace QCElectrical
 
         public DataTable Companies()
         {
-            return DAL.New.FetchCompaniesData();
+            return DAL.Do.FetchCompaniesData();
         }
 
         public DataTable Contracts()
         {
-            return DAL.New.FetchContractsData();
+            return DAL.Do.FetchContractsData();
         }
 
     }

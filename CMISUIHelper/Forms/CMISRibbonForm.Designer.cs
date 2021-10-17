@@ -156,8 +156,6 @@ namespace CMISUIHelper
             this.barBtnAvatar.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
             this.barBtnAvatar.DropDownControl = this.AvatarPopup;
             this.barBtnAvatar.Id = 3;
-            this.barBtnAvatar.ImageOptions.Image = global::CMISUIHelper.UIHelperResources.CPTT8276;
-            this.barBtnAvatar.ImageOptions.LargeImage = global::CMISUIHelper.UIHelperResources.CPTT8276;
             this.barBtnAvatar.ItemAppearance.Normal.Options.UseImage = true;
             this.barBtnAvatar.Name = "barBtnAvatar";
             this.barBtnAvatar.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
@@ -191,7 +189,6 @@ namespace CMISUIHelper
             // 
             this.BBICloseApp.Caption = "Close";
             this.BBICloseApp.Id = 1;
-            this.BBICloseApp.ImageOptions.Image = global::CMISUIHelper.UIHelperResources.Close_DarkBlue_32x32;
             this.BBICloseApp.Name = "BBICloseApp";
             this.BBICloseApp.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             toolTipTitleItem1.Text = "Close Application";

@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppConst.cs" />
     <Compile Include="Bundle.cs" />
     <Compile Include="Data\DAL.cs" />
     <Compile Include="Main\frmMain.cs">
@@ -353,7 +354,6 @@
     <Compile Include="View\CF\frmCF.Designer.cs">
       <DependentUpon>frmCF.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\CF\UserControViewContainerWithCompanyl.cs" />
     <Compile Include="View\frmHome.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -384,6 +384,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="View\BaseInfo\frmCFItem.resx">
       <DependentUpon>frmCFItem.cs</DependentUpon>
@@ -589,6 +590,27 @@
       <Project>{68241d09-523b-4b77-9926-8b30f66ddb17}</Project>
       <Name>Security</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\export_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trash_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\show_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Invalid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Plus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

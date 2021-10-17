@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Common\belConfig.cs" />
     <Compile Include="Core\Common\belUser.cs" />
     <Compile Include="Core\Document\Enum\DocumentActionType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

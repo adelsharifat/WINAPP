@@ -13,7 +13,7 @@ namespace DMS
     public class ReportNumber:APPDAL
     {
         public static ReportNumber Do { get; private set; } = new ReportNumber();
-        public ReportNumberViewModel Generate(string objectName, int projectId, int? disciplineId, int? employerId, int? companyId, string reportparameters)
+        public ReportNumberViewModel Generate(string objectName, int projectId, int? disciplineId = null, int? employerId = null, int? companyId = null, string reportparameters = null)
         {
             try
             {
@@ -33,6 +33,7 @@ namespace DMS
                      new SqlParameter{
                        ParameterName = "@ReportNumber",
                        SqlDbType = SqlDbType.VarChar,
+                       Size = -1,
                        Direction = ParameterDirection.Output
                     }
                 };

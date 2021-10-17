@@ -19,7 +19,7 @@ namespace CMISUIHelper {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class UIHelperResources {
@@ -116,6 +116,16 @@ namespace CMISUIHelper {
         internal static System.Drawing.Bitmap autofittogrid_32x32 {
             get {
                 object obj = ResourceManager.GetObject("autofittogrid_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap avatar {
+            get {
+                object obj = ResourceManager.GetObject("avatar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -243,29 +253,9 @@ namespace CMISUIHelper {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Close_24x24 {
-            get {
-                object obj = ResourceManager.GetObject("Close_24x24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap close_32x32 {
             get {
                 object obj = ResourceManager.GetObject("close_32x32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Close_DarkBlue_32x32 {
-            get {
-                object obj = ResourceManager.GetObject("Close_DarkBlue_32x32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -303,9 +293,9 @@ namespace CMISUIHelper {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap CPTT8276 {
+        internal static System.Drawing.Bitmap DefulatItemIcon {
             get {
-                object obj = ResourceManager.GetObject("CPTT8276", resourceCulture);
+                object obj = ResourceManager.GetObject("DefulatItemIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -313,9 +303,9 @@ namespace CMISUIHelper {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap DefulatItemIcon {
+        internal static System.Drawing.Bitmap edit_32x32 {
             get {
-                object obj = ResourceManager.GetObject("DefulatItemIcon", resourceCulture);
+                object obj = ResourceManager.GetObject("edit_32x32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -333,9 +323,9 @@ namespace CMISUIHelper {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap export {
+        internal static System.Drawing.Bitmap export_32x32 {
             get {
-                object obj = ResourceManager.GetObject("export", resourceCulture);
+                object obj = ResourceManager.GetObject("export_32x32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -403,6 +393,16 @@ namespace CMISUIHelper {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap FinGerScan {
+            get {
+                object obj = ResourceManager.GetObject("FinGerScan", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap format_32x32 {
             get {
                 object obj = ResourceManager.GetObject("format_32x32", resourceCulture);
@@ -463,6 +463,26 @@ namespace CMISUIHelper {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Invalid {
+            get {
+                object obj = ResourceManager.GetObject("Invalid", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IranFlags {
+            get {
+                object obj = ResourceManager.GetObject("IranFlags", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap knowledgebasearticle_32x32 {
             get {
                 object obj = ResourceManager.GetObject("knowledgebasearticle_32x32", resourceCulture);
@@ -503,6 +523,16 @@ namespace CMISUIHelper {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Message {
+            get {
+                object obj = ResourceManager.GetObject("Message", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap newtablestyle_32x32 {
             get {
                 object obj = ResourceManager.GetObject("newtablestyle_32x32", resourceCulture);
@@ -516,6 +546,76 @@ namespace CMISUIHelper {
         internal static System.Drawing.Bitmap palette_32x32 {
             get {
                 object obj = ResourceManager.GetObject("palette_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Pick {
+            get {
+                object obj = ResourceManager.GetObject("Pick", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Plus {
+            get {
+                object obj = ResourceManager.GetObject("Plus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Post {
+            get {
+                object obj = ResourceManager.GetObject("Post", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PostAccept {
+            get {
+                object obj = ResourceManager.GetObject("PostAccept", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PostalInbox {
+            get {
+                object obj = ResourceManager.GetObject("PostalInbox", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PostBack {
+            get {
+                object obj = ResourceManager.GetObject("PostBack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PostSendBack {
+            get {
+                object obj = ResourceManager.GetObject("PostSendBack", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -553,9 +653,69 @@ namespace CMISUIHelper {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap RedFlag {
+            get {
+                object obj = ResourceManager.GetObject("RedFlag", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap refresh_32x32 {
             get {
                 object obj = ResourceManager.GetObject("refresh_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Reject {
+            get {
+                object obj = ResourceManager.GetObject("Reject", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Reopen {
+            get {
+                object obj = ResourceManager.GetObject("Reopen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Save {
+            get {
+                object obj = ResourceManager.GetObject("Save", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap save_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("save_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SendBack {
+            get {
+                object obj = ResourceManager.GetObject("SendBack", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -593,9 +753,49 @@ namespace CMISUIHelper {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap show_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("show_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap showworktimeonly_32x32 {
             get {
                 object obj = ResourceManager.GetObject("showworktimeonly_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SignHistory {
+            get {
+                object obj = ResourceManager.GetObject("SignHistory", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SignUdoReset {
+            get {
+                object obj = ResourceManager.GetObject("SignUdoReset", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SignUndo {
+            get {
+                object obj = ResourceManager.GetObject("SignUndo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -636,6 +836,16 @@ namespace CMISUIHelper {
         internal static System.Drawing.Bitmap today_32x32 {
             get {
                 object obj = ResourceManager.GetObject("today_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap trash_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("trash_32x32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -348,6 +348,92 @@ namespace CMISUIHelper.UserControls
             set { gridToolsExportToPdfIcon = value; }
         }
 
+
+        // Sign Tools ICon
+        private Bitmap signpostActionIcon = UIHelperResources.Post;
+
+        public Bitmap SignpostActionIcon
+        {
+            get { return signpostActionIcon; }
+            set { signpostActionIcon = value; }
+        }
+
+        private Bitmap signAcceptActionIcon = UIHelperResources.PostAccept;
+
+        public Bitmap SignAcceptActionIcon
+        {
+            get { return signAcceptActionIcon; }
+            set { signAcceptActionIcon = value; }
+        }
+
+        private Bitmap signRejectActionIcon = UIHelperResources.Reject;
+
+        public Bitmap SignRejectActionIcon
+        {
+            get { return signRejectActionIcon; }
+            set { signRejectActionIcon = value; }
+        }
+
+
+        private Bitmap signSendBackActionIcon = UIHelperResources.SendBack;
+
+        public Bitmap SignSendBackActionIcon
+        {
+            get { return signSendBackActionIcon; }
+            set { signSendBackActionIcon = value; }
+        }
+
+        private Bitmap signUndoActionIcon = UIHelperResources.SignUndo;
+
+        public Bitmap SignUndoActionIcon
+        {
+            get { return signUndoActionIcon; }
+            set { signUndoActionIcon = value; }
+        }
+
+        private Bitmap signReopenActionIcon = UIHelperResources.Reopen;
+
+        public Bitmap SignReopenActionIcon
+        {
+            get { return signReopenActionIcon; }
+            set { signReopenActionIcon = value; }
+        }
+
+
+        // Form Action Item Icon
+        private Bitmap saveFormActionIcon = UIHelperResources.save_32x32;
+
+        public Bitmap SaveFormActionIcon
+        {
+            get { return saveFormActionIcon; }
+            set { saveFormActionIcon = value; }
+        }
+
+        private Bitmap editFormActionIcon = UIHelperResources.edit_32x32;
+
+        public Bitmap EditFormActionIcon
+        {
+            get { return editFormActionIcon; }
+            set { editFormActionIcon = value; }
+        }
+
+        private Bitmap deleteFormActionIcon = UIHelperResources.trash_32x32;
+
+        public Bitmap DeleteFormActionIcon
+        {
+            get { return deleteFormActionIcon; }
+            set { deleteFormActionIcon = value; }
+        }
+
+        private Bitmap viewFormActionIcon = UIHelperResources.show_32x32;
+
+        public Bitmap ViewFormActionIcon
+        {
+            get { return viewFormActionIcon; }
+            set { viewFormActionIcon = value; }
+        }
+
+
         #endregion
 
         #region Methods

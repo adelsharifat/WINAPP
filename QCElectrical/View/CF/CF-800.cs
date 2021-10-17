@@ -14,6 +14,7 @@ using DMS.ViewModel;
 using CMISUtils;
 using CMISUIHelper.Infrastructure.Enums;
 using CMISDAL.Common;
+using CMISBEL.Core.Common;
 
 namespace QCElectrical.View.CF
 {
@@ -30,15 +31,26 @@ namespace QCElectrical.View.CF
         {
             try
             {
-                this.RibbonPage.AddExportTools(this.OwnerView);
                 var frmCF = (View.CF.frmCF)this.OwnerView;
                 lblCFDescription.Text = frmCF.cmbCF.GetColumnValue("Description").ToString();
                 FillAreaUnitCombo();
+                FillDWGNo();
+                Fill_txtReportNumber();
+                var documentStatus = "OnCreating";
+                GenerateBarCode(documentStatus);
             }
             catch (Exception ex)
             {
                 ex.ShowMessage();
             }
+        }
+
+        private void GenerateBarCode(string documentStatus)
+        {
+            brcReportNumber.Text = String.Empty;
+            brcReportNumber.Visible = false;
+            brcReportNumber.Text = txtReportNo.Text + $"[{documentStatus}]";
+            brcReportNumber.Visible = true;
         }
 
         private void FillAreaUnitCombo()
@@ -54,11 +66,60 @@ namespace QCElectrical.View.CF
             }
         }
 
+        private void FillDWGNo()
+        {
+            try
+            {
+                var data = CommonDals.Do.DWGNo.FetchDWGNo();
+                cmbDwgNo.Fill(data, "DWG No.", "RevisionId").HideColumns("");
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
+        }
+
+        private void Fill_txtReportNumber()
+        {
+            try
+            {
+                txtReportNo.Text = Report().ReportNumber;                
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
+        }
+
+        private ReportNumberViewModel Report()
+        {
+            try
+            {
+                var disciplineId = Convert.ToInt32(belConfig.Do.Config(LoginInfo.ProjectId, AppConst.ScopeInConfig)["DisciplineId"]);
+                var employerId = Convert.ToInt32((this.OwnerView as frmCF).cmbCompany.GetColumnValue("EmployerId"));
+                var companyId = Convert.ToInt32((this.OwnerView as frmCF).cmbCompany.GetColumnValue("ContractorId"));
+                var cmbCFText = (this.OwnerView as frmCF).cmbCF.Text;
+                var cfType = belConfig.Do.Config(LoginInfo.ProjectId, AppConst.ScopeInConfig)[cmbCFText].ToString();
+                var report = DMS.ReportNumber.Do.Generate("QCElectrical", LoginInfo.ProjectId, 1051, employerId, companyId, "{[CFType]}," + cfType);
+                ReportNumberViewModel rnvm = new ReportNumberViewModel
+                {
+                    ReportNumber = report.ReportNumber,
+                    CounterId = report.CounterId
+                };
+                return rnvm;
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+                return null;
+            }
+        }
+
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             try
             {
-                DMS.Attachment.Do.OpenFileDialog(txtFileAttachPath);
+                DMS.Attachment.Do.OpenFileDialog(txtFileAttachPath,txtRemarkAttachment);
             }
             catch (Exception ex)
             {
@@ -106,6 +167,20 @@ namespace QCElectrical.View.CF
             catch (Exception ex)
             {
 
+                ex.ShowMessage();
+            }
+        }
+
+        private void cmbDwgNo_EditValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                lblREVNo.Text = cmbDwgNo.GetColumnValue("RevNo")?.ToString();
+                lblTAGNo.Text = cmbDwgNo.GetColumnValue("TagNo")?.ToString();
+                txtCustomTagNo.Text = cmbDwgNo.GetColumnValue("TagNo")?.ToString();
+            }
+            catch (Exception ex)
+            {
                 ex.ShowMessage();
             }
         }

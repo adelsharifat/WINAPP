@@ -199,6 +199,18 @@ namespace CMISUtils
             }
         }
 
+        public static int GetValue(this LookUpEdit lookUpEdit)
+        {
+            try
+            {                
+                return Convert.ToInt32(lookUpEdit.EditValue); ;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
         public static LookUpEdit HideColumns(this LookUpEdit lookUpEdit, string columns,char delimiter = ',')
         {
@@ -236,6 +248,35 @@ namespace CMISUtils
         }
 
         //Grid
+        public  static int GetLastVisibleRowHandle(this GridControl grc)
+        {
+            try
+            {
+                var view = grc.MainView as GridView;
+                GridViewInfo viewInfo = view.GetViewInfo() as GridViewInfo;
+                if (viewInfo.RowsInfo.Count == 0) return -1;
+                return viewInfo.RowsInfo.Last().RowHandle;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static int GetLastVisibleRowHandle(this GridView view)
+        {
+            try
+            {
+                GridViewInfo viewInfo = view.GetViewInfo() as GridViewInfo;
+                if (viewInfo.RowsInfo.Count == 0) return -1;
+                return viewInfo.RowsInfo.Last().RowHandle;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static object GetCellValue(this GridControl gc,string column)
         {
             try
@@ -447,40 +488,43 @@ namespace CMISUtils
 
         public static GridControl HideColumns(this GridControl gc, string columns, char delimiter = ',')
         {
-            var gView = gc.MainView as GridView;
-            var columnNames = columns.Split(delimiter);
-
-            foreach (GridColumn column in gView.Columns)
+            try
             {
-                if (columnNames.FirstOrDefault(x => x == column.FieldName) != null)
+                var gView = gc.MainView as GridView;
+                var columnNames = columns.Split(delimiter);
+
+                foreach (GridColumn column in gView.Columns)
                 {
-                    gView.Columns[column.FieldName].Visible = false;
+                    if (columnNames.FirstOrDefault(x => x == column.FieldName) != null)
+                    {
+                        gView.Columns[column.FieldName].Visible = false;
+                    }
                 }
+                return gc;
             }
-            return gc;
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public static void EditableColumns(this GridControl grid, params string[] columns)
+        public static GridControl EditableColumns(this GridControl gc,string columns = null,char delimiter = ',')
         {
             try
             {
-                var gView = grid.MainView as GridView;
-                gView.OptionsBehavior.Editable = true;
+                var gView = gc.MainView as GridView;
+                var columnNames = columns.Split(delimiter);
                 foreach (GridColumn column in gView.Columns)
                 {
-                    if (columns.FirstOrDefault(x => x == column.FieldName) != null)
-                    {
+                    if (columnNames.FirstOrDefault(x => x == column.FieldName) != null)
                         gView.Columns[column.FieldName].OptionsColumn.AllowEdit = true;
-                    }
-                    else
-                    {
-                        gView.Columns[column.FieldName].OptionsColumn.AllowEdit = false;
-                    }
+                    else gView.Columns[column.FieldName].OptionsColumn.AllowEdit = false;
                 }
+                return gc;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return;
+                throw ex;
             }
         }
 
@@ -526,7 +570,42 @@ namespace CMISUtils
             return Ids;
         }
 
+        public static void SetConditionCellFormat(this GridView gv, string columnName, object value, DevExpress.Utils.AppearanceDefault appearance, bool enabled = true)
+        {
 
+            if (enabled)
+            {
+                var acceptedColumn = gv.Columns.FirstOrDefault(c => c.FieldName == columnName);
+                gv.FormatRules.AddValueRule(acceptedColumn, appearance, FormatCondition.Equal, value);
+            }
+        }
+
+        public static void SetConditionCellFormat(this GridView gv, string columnName, string expression, DevExpress.Utils.AppearanceDefault appearance, bool enabled = true)
+        {
+
+            if (enabled)
+            {
+                var column = gv.Columns.FirstOrDefault(c => c.FieldName == columnName);
+                gv.FormatRules.AddExpressionRule(column, appearance, expression);
+            }
+        }
+
+        public static void SetConditionRowFormat(this GridView gv, string columnName, string expresion, string predifinedExpression, bool enabled = true)
+        {
+
+            if (enabled)
+            {
+                var column = gv.Columns.FirstOrDefault(c => c.FieldName == columnName);
+                GridFormatRule gridFormatRule = new GridFormatRule();
+                FormatConditionRuleExpression formatConditionRuleExpression = new FormatConditionRuleExpression();
+                gridFormatRule.Column = column;
+                gridFormatRule.ApplyToRow = true;
+                formatConditionRuleExpression.PredefinedName = predifinedExpression;
+                formatConditionRuleExpression.Expression = expresion;
+                gridFormatRule.Rule = formatConditionRuleExpression;
+                gv.FormatRules.Add(gridFormatRule);
+            }
+        }
 
 
 

@@ -388,5 +388,80 @@
       <Name>Security</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SignHistory.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_checkmark_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Reject.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Message.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FinGerScan.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Post.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Invalid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedFlag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PostalInbox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IranFlas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PostSendBack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UndoSignHistory.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PostBack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UndoSign.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_male_user_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Reopen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SignUdoReset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trash_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\export_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\show_32x32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

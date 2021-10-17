@@ -16,6 +16,7 @@ namespace CMISDAL.Common
         public dalCompany Company { get => new dalCompany(); }
         public dalContract Contract { get => new dalContract(); }
         public dalAreaUnit AreaUnit { get => new dalAreaUnit(); }
+        public dalDWGNo DWGNo { get => new dalDWGNo(); }
         public dalConfig Config { get => new dalConfig(); }
         public dalPermision Permision { get => new dalPermision(); }
         public dalServer Server { get => new dalServer(); }

@@ -96,7 +96,6 @@ namespace CMISDAL.Base
                 throw ex;
             }
         }
-
         protected override int DoMutation(string command, SqlParameter[] sqlParameters = null, bool withTransaction = false, CommandType commandType = CommandType.StoredProcedure)
         {
             CMISConnection connection = null;
@@ -151,7 +150,6 @@ namespace CMISDAL.Base
                 connection?.Close();
             }
         }
-
         public void DoTransaction(Action transActionFunc)
         {
             TransactionScope trans = null;

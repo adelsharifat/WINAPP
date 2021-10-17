@@ -124,12 +124,12 @@
   <data name="btnDeleteAttachment.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEuSURBVDhPzVHBTgIxEK1/uG0TfoIDyQa4wLJePREPiuKK
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEuSURBVDhPzVHBTgIxEK1/uG0TPoILyQa4wLJePREPiuKK
         Iv/D7vIHxkSjrQdxXfCE85pZ3IZAOPKSJu28N9M3M+K0kCkV51pf83MH4KDhp49cqUvTbn/bOF6TaLIR
         4owpgftC6wdw0EDL1D9yKZOPKCpXw+HGhuEPFblhSmRa3yIGzvT7JXFjpnykQZCYKCpckcFgTZaTRaPx
         +N5s/rpk4khzx/JdwGom5cy2WitOKMm2c2Uolio1Zel+oAj98mTYskumO8Wm9bkcBA1pVLXCTopD2/FA
         NkeWk70WjimCoaFXJFCRJdm+wsHdFSEOGpb7oOGNq76xMqyVKTGX8r62xqK+4i1SKc9fO53Pl273C79y
-        eAvEnnu95VsYWmg57GMeBBf7pl1tBxoOnQSE+ANPm+7W+X5xTQAAAABJRU5ErkJggg==
+        eAvEnnu95VsYWmg57GMeBBf7pl1tBxoOnQSE+ANKUu7ULNZ+SQAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="btnAddAttachment.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

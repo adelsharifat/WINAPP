@@ -366,7 +366,7 @@ namespace DMS
                     item.Text = String.Empty;
             }
         }
-        public void OpenFileDialog(Control filePathTextBox)
+        public void OpenFileDialog(Control filePathTextBox,Control txtRemark = null)
         {
             try
             {
@@ -374,6 +374,13 @@ namespace DMS
                 if (ofd != null)
                 {
                     filePathTextBox.Text = ofd?.FileName;
+                    if(txtRemark != null)
+                    {
+                        txtRemark.Text = Path.GetFileName(ofd?.FileName);
+                        txtRemark.Select();
+                        txtRemark.Focus();
+                    }
+                        
                 }
             }
             catch (Exception ex)

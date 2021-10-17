@@ -48,7 +48,7 @@ namespace QCElectrical.View.CF
 
         public void FillComboCF()
         {
-            var data = DAL.New.FetchCFCombo();
+            var data = DAL.Do.FetchCFCombo();
             this.cmbCF.Fill(data, "Name", "Id").HideColumns("FullName,Description");
         }
 
@@ -208,6 +208,7 @@ namespace QCElectrical.View.CF
         {
             try
             {
+                e.RibbonPage.AddSignTools(this);
                 e.RibbonPage.AddLiteGridTools(this);
             }
             catch (Exception ex)
