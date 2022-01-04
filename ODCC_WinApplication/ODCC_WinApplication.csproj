@@ -35,9 +35,13 @@
   <ItemGroup>
     <Reference Include="DevExpress.BonusSkins.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Data.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v18.2.Core, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Utils.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraBars.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraEditors.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGrid.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPrinting.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -98,10 +102,6 @@
     <ProjectReference Include="..\CMISUIHelper\CMISUIHelper.csproj">
       <Project>{94285279-DFD9-4BA6-8FC2-B057B80D87E9}</Project>
       <Name>CMISUIHelper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Piping\Piping.csproj">
-      <Project>{249b7714-2fd4-4fbf-9add-39165d1dc6d6}</Project>
-      <Name>Piping</Name>
     </ProjectReference>
     <ProjectReference Include="..\QCElectrical\QCElectrical.csproj">
       <Project>{317835d3-98c9-4fa3-a207-a3246ef9363a}</Project>

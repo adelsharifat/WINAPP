@@ -24,13 +24,15 @@ namespace CMISUIHelper.UserControls
         public Timer ViewLoadTimer = null;
         internal GridControl LastFocucedGrid = null;
 
+        public Dictionary<string, BarItem> MenuItems = new Dictionary<string, BarItem>();
+
+
         public Dictionary<string,ControlModel> ViewObjects = new Dictionary<string, ControlModel>();
         public Dictionary<string,ControlModel> PermisionViewObjects = new Dictionary<string, ControlModel>();
 
+
         public delegate void RibbonPageEventHandler(object sender,RibbonPageEventArgs e = null);
         
-
-
         public delegate void ClosingViewEventHandler(object sender, CloseEventArgs e = null);
 
         public event RibbonPageEventHandler RibbonPageAdded;
@@ -208,6 +210,15 @@ namespace CMISUIHelper.UserControls
         public void OnViewClose(EventArgs e)
         {
             if (closeCancel) return;
+            var openTabsCount = this.OwnerForm.OpenTabs.Count;
+            if (openTabsCount > 1 && IsHomePage())
+            {
+                var dialogResult = Msg.Confirm($"You have {openTabsCount} open forms, Are you sure to close application");
+                if (dialogResult == DialogResult.Yes)
+                    this.OwnerForm.Close();
+                return;
+            }
+                
             this.Close();
         }
 
@@ -471,13 +482,14 @@ namespace CMISUIHelper.UserControls
 
             var previeosTabPageIndex = (TabControl.TabPages.IndexOf(this.TabPage) - 1) < 0 ? 0 : TabControl.TabPages.IndexOf(this.TabPage) - 1;
             this.TabControl.SelectedIndex = previeosTabPageIndex;
+            this.OwnerForm.OpenTabs.Remove(this.TabPage.Name);
             this.TabPage.Dispose();
             this.RibbonPage.Dispose();
         }
 
         public bool IsHomePage()
         {
-            if (this.Name == this.OwnerForm.HomePage) return true;
+            if (this.Name == this.OwnerForm.HomePage || this.ViewTitle == this.OwnerForm.HomePage ) return true;
             return false;
         }
         #endregion

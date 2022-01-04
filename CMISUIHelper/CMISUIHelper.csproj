@@ -81,15 +81,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UIHelperResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\PageViewer.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="UserControls\ViewContainerWithCompany.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\ViewContainerWithCompany.Designer.cs">
-      <DependentUpon>ViewContainerWithCompany.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\ViewForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -126,9 +117,6 @@
     <EmbeddedResource Include="UIHelperResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>UIHelperResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ViewContainerWithCompany.resx">
-      <DependentUpon>ViewContainerWithCompany.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ViewForm.resx">
       <DependentUpon>ViewForm.cs</DependentUpon>

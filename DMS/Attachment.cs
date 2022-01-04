@@ -4,6 +4,7 @@ using CMISUtils;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DMS.ViewModel;
 using System;
@@ -11,6 +12,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -23,7 +25,7 @@ namespace DMS
     {
         public static Attachment Do { get; private set; } = new Attachment();
 
-        private const string OFD_FILTER_EXTENTION = "Ms Word 2007 (*.docx)|*.docx,Ms Word 2003 (*.doc)|*.doc,Rich Text Format (RTF)|*.rtf,All File (*.*)|*.*";
+        private const string OFD_FILTER_EXTENTION = "Ms Word 2007 (*.docx)|*.docx,Ms Word 2003 (*.doc)|*.doc,Rich Text Format (RTF)|*.rtf";
         private const string FILE_ATTACHMENT_LABEL_DESCRIPTION = "[No files attached]";
         #region FileHandler
         public DataRow GetFileContentFromDb(string procedure, string fileTableName, int attachmentId)
@@ -36,7 +38,7 @@ namespace DMS
                     new SqlParameter("@AttachmentId",attachmentId),
                 };
 
-                var dt = DoQuery(procedure, parameters);
+                var dt = DoQueryReader(procedure, parameters);
 
                 if (dt != null)
                     return dt.Rows[0];
@@ -124,7 +126,7 @@ namespace DMS
                     new SqlParameter("@ObjectId",objectId),
                     new SqlParameter("@FileTableName",fileTableName)
                 };
-                return DoQuery(procedureName, parameters);
+                return DoQueryReader(procedureName, parameters);
             }
             catch (Exception ex)
             {
@@ -143,7 +145,7 @@ namespace DMS
                     new SqlParameter("@ObjectId",objectId),
                     new SqlParameter("@FileTableName",fileTableName)
                 };
-                return DoQuery("CM.NewFetchAttachments", parameters);
+                return DoQueryReader("CM.NewFetchAttachments", parameters);
             }
             catch (Exception ex)
             {
@@ -151,70 +153,53 @@ namespace DMS
             }
         }
         #endregion
-        #region Attachment Handler
-        public void AddToAttachmentGrid(
-            List<FileAttachment> fileAttachmentList,
-            GridControl attachmentGrid,
-            string filePath,
-            string userFullName,
-            string remark,
-            string customType
-            )
-        {
-            try
-            {
-                var fileExtention = Path.GetExtension(filePath);
-                var _stream_id = Guid.NewGuid();
-                var fileName = _stream_id.ToString("N") + fileExtention;
-                FileAttachment fileAttachment = new FileAttachment
-                {
-                    Id = 0,
-                    FileName = fileName,
-                    Remark = remark,
-                    CustomType = customType,
-                    CreatedDate = DateTime.Now,
-                    User = userFullName,
-                    FilePath = filePath
-                };
-                fileAttachmentList.Add(fileAttachment);
-                FillAttachmentGrid(fileAttachmentList, attachmentGrid);
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        #region Attachment Handler    
         public GridControl AddAttachmentToGrid(
             List<FileAttachmentViewModel> fileAttachmentList,
             GridControl attachmentGrid,
             string filePath,
             string userFullName,
+            string fileName,
             string remark,
-            string customType
+            string customType,
+            string type,
+            string showLable = "Show"
             )
         {
             try
             {
                 var fileExtention = Path.GetExtension(filePath);
-                var _stream_id = Guid.NewGuid();
-                var fileName = _stream_id.ToString("N") + fileExtention;
+                fileName = fileName + fileExtention;
                 FileAttachmentViewModel fileAttachment = new FileAttachmentViewModel
                 {
                     Id = 0,
+                    stream_id = Guid.NewGuid().ToString(),
+                    FileStream = GetByteFromFile(filePath),
                     FileName = fileName,
                     Remark = remark,
+                    Type = type,
                     CustomType = customType,
                     CreatedDate = DateTime.Now,
                     User = userFullName,
                     FilePath = filePath,
-                    File = "Show"
+                    File = showLable
                 };
 
 
 
                 fileAttachmentList.Add(fileAttachment);
                 FillAttachmentGrid(fileAttachmentList, attachmentGrid);
+
+
+                var grv = attachmentGrid.MainView as GridView;
+                var showColumn = grv.Columns["File"] as GridColumn;
+                showColumn.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+
+
+
+
+
+
 
                 return attachmentGrid;
 
@@ -315,7 +300,7 @@ namespace DMS
                 throw ex;
             }
         }
-        public void ShowAttachment(string procedureName, RowCellClickEventArgs e, GridControl gridControl, string dumpFilesPath)
+        public void ShowAttachment(RowCellClickEventArgs e, GridControl gridControl, string dumpFilesPath)
         {
             try
             {
@@ -331,7 +316,7 @@ namespace DMS
                     else
                     {
                         string fileTableName = GV.GetCellValue("FileTableName").ToString();
-                        var fileStreamFromDb = GetFileContentFromDb(procedureName, fileTableName, fileId);
+                        var fileStreamFromDb = GetFileContentFromDb("CM.FetchFileStream", fileTableName, fileId);
                         if (fileStreamFromDb != null)
                         {
                             string fileName = GV.GetCellValue("FileName").ToString();
@@ -366,11 +351,18 @@ namespace DMS
                     item.Text = String.Empty;
             }
         }
-        public void OpenFileDialog(Control filePathTextBox,Control txtRemark = null)
+        public void OpenFileDialog(Control filePathTextBox,Control txtRemark = null,string additinalOpenFileDialogFilter = null)
         {
             try
             {
-                var ofd = CMISUI.OpenFDG(OFD_FILTER_EXTENTION.Split(','));
+                string openFileDialogFilter = OFD_FILTER_EXTENTION;
+                if (!String.IsNullOrEmpty(additinalOpenFileDialogFilter))
+                {
+                    openFileDialogFilter = $"{openFileDialogFilter},{additinalOpenFileDialogFilter}";
+                }
+
+                openFileDialogFilter = $"{openFileDialogFilter},{"All File(*.*)| *.*"}"; 
+               var ofd = CMISUI.OpenFDG(openFileDialogFilter.Split(','));
                 if (ofd != null)
                 {
                     filePathTextBox.Text = ofd?.FileName;
@@ -379,8 +371,7 @@ namespace DMS
                         txtRemark.Text = Path.GetFileName(ofd?.FileName);
                         txtRemark.Select();
                         txtRemark.Focus();
-                    }
-                        
+                    }                        
                 }
             }
             catch (Exception ex)

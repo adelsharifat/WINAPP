@@ -31,10 +31,10 @@ namespace CMISUIHelper.UserControls
         public Color CompanyComboBackColor
         {
             get {
-                return this.pnlCompanyCombo.BackColor;
+                return this.pnlHeader.BackColor;
             }
             set {
-                this.pnlCompanyCombo.BackColor = value;
+                this.pnlHeader.BackColor = value;
             }
         }
 

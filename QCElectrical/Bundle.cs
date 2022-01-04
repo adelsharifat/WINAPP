@@ -9,7 +9,7 @@ namespace QCElectrical
     public class Bundle:CommonClass.IBundle
     {
 
-        public const string SCHEMA = "QCElectrical";
+        public const string SCHEMA = "QCEL";
         public const string VERSION = "1.0.0";
         public override string GetCode()
         {
@@ -18,7 +18,7 @@ namespace QCElectrical
 
         public override string GetName()
         {
-            return "QCElectrical";
+            return "QC Electrical";
         }
 
         //public override Version GetVersion()

@@ -1,13 +1,13 @@
-﻿namespace QCElectrical.Main
+﻿namespace QCElectrical.View.Attachment
 {
-    partial class frmMain
+    partial class Attachment
     {
-        /// <summary>
+        /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
+        /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -20,31 +20,23 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Component Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            ((System.ComponentModel.ISupportInitialize)(this.BadgeManager)).BeginInit();
             this.SuspendLayout();
             // 
-            // frmMain
+            // Attachment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1245, 761);
-            this.CloseItemLocation = CMISUIHelper.Infrastructure.Enums.CloseItemAlignment.End;
-            this.HomePage = "Home";
-            this.Name = "frmMain";
-            this.Schema = "QCElectrical";
-            this.Text = "frmMain";
-            this.Load += new System.EventHandler(this.frmMain_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.BadgeManager)).EndInit();
+            this.Name = "Attachment";
+            this.Size = new System.Drawing.Size(991, 521);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

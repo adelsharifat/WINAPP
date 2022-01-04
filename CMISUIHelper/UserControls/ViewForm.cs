@@ -31,5 +31,7 @@ namespace CMISUIHelper.UserControls
         }
 
         public string ViewTitle { get; set; }
+
+        public Form OwnerForm { get; set; }
     }
 }

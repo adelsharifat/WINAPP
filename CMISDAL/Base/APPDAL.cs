@@ -12,7 +12,7 @@ namespace CMISDAL.Base
 {
     public class APPDAL:CMISDbContext
     {
-        protected override DataTable DoQuery(string command, SqlParameter[] sqlParameters = null, CommandType commandType = CommandType.StoredProcedure)
+        protected override DataTable DoQueryReader(string command, SqlParameter[] sqlParameters = null, CommandType commandType = CommandType.StoredProcedure)
         {
             try
             {
@@ -24,6 +24,28 @@ namespace CMISDAL.Base
                         var reader = cmd.ExecuteReader();
                         DataTable dt = new DataTable();
                         dt.Load(reader);
+                        connection.Close();
+                        return dt;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        protected override DataTable DoQueryAdapter(string command, SqlParameter[] sqlParameters = null, CommandType commandType = CommandType.StoredProcedure)
+        {
+            try
+            {
+                using (ICMISConnection connection = new CMISConnection())
+                {
+                    using (var cmd = connection.CreateCommand(command, commandType, sqlParameters))
+                    {
+                        connection.Open();
+                        SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();       
+                        sda.Fill(dt);
                         connection.Close();
                         return dt;
                     }

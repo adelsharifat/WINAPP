@@ -12,7 +12,8 @@ namespace CMISDAL.Base
     public abstract class CMISDbContext 
     {
 
-        protected abstract DataTable DoQuery(string command, SqlParameter[] sqlParameters = null, CommandType commandType = CommandType.StoredProcedure);
+        protected abstract DataTable DoQueryReader(string command, SqlParameter[] sqlParameters = null, CommandType commandType = CommandType.StoredProcedure);
+        protected abstract DataTable DoQueryAdapter(string command, SqlParameter[] sqlParameters = null, CommandType commandType = CommandType.StoredProcedure);
         protected abstract object DoScalar(string command, SqlParameter[] sqlParameters = null, CommandType commandType = CommandType.StoredProcedure);
         protected abstract Task<DataTable> DoQueryAsync(string command, SqlParameter[] sqlParameters = null, CommandType commandType = CommandType.StoredProcedure);
         protected abstract Task<object> DoScalarAsync(string command, SqlParameter[] sqlParameters = null, CommandType commandType = CommandType.StoredProcedure);

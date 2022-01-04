@@ -19,7 +19,7 @@ namespace CMISDAL.Common
                 {
                     new SqlParameter("@UserId",userId)
                 };
-                return DoQuery("CM.FetchUserById", parameters);                
+                return DoQueryReader("CM.FetchUserById", parameters);                
             }
             catch (Exception ex)
             {
@@ -35,7 +35,7 @@ namespace CMISDAL.Common
                 {
                     new SqlParameter("@GroupId",groupId)
                 };
-                return DoQuery("CM.FetchGroupById", parameters);
+                return DoQueryReader("CM.FetchGroupById", parameters);
             }
             catch (Exception ex)
             {
@@ -58,7 +58,7 @@ namespace CMISDAL.Common
                         Size = -1
                     }
                 };
-                DoQuery("CM.FetchAvatarByUserId", parameters);
+                DoQueryReader("CM.FetchAvatarByUserId", parameters);
                 var val = parameters.FirstOrDefault(x => x.ParameterName == "@Avatar").Value;
                 var avatar = val == null ? null : (byte[])val;
                 return avatar;

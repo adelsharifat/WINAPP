@@ -38,8 +38,6 @@ namespace CMISUIHelper.Infrastructure.Helpers
 
         public static void Stop(string text, string title = "CMIS Message") => MessageBox.Show(text, title, MessageBoxButtons.OK, MessageBoxIcon.Stop);
     }
-
-
     public static class CMISUI
     {
         public static OpenFileDialog OpenFDG(params string[] extFilters)
@@ -99,6 +97,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 view.OnViewClosing(new CloseEventArgs());
                 view.OnViewClose(CloseEventArgs.Empty);
             };
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
         public static RibbonPage AddRefreshItem(this RibbonPage rp, ViewTab view, string itemName = "Refresh", Bitmap bmp = null, string rpgText = "General")
@@ -115,6 +114,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
             {
                 view.OnViewRefresh(EventArgs.Empty);
             };
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
 
@@ -231,7 +231,8 @@ namespace CMISUIHelper.Infrastructure.Helpers
                     grid.Focus();
                 }
                 
-            };                       
+            };
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
         public static RibbonPage AddToggleAutoWidthGridTool(this RibbonPage rp, ViewTab view, string itemName = "Auto Width", Bitmap bmp = null, string rpgText = "Grid Tools")
@@ -241,8 +242,6 @@ namespace CMISUIHelper.Infrastructure.Helpers
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
-
-            
 
             item.ItemClick += (o, e) =>
             {
@@ -272,6 +271,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
 
             };
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
         public static RibbonPage AddToggleBestFitGridTool(this RibbonPage rp, ViewTab view, string itemName = "Best Fit", Bitmap bmp = null, string rpgText = "Grid Tools")
@@ -312,6 +312,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
 
             };
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
         public static RibbonPage AddDateFormatGridTool(this RibbonPage rp, ViewTab view, string itemName = "Grid Date", Bitmap bmp = null, string rpgText = "Grid Tools")
@@ -350,6 +351,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
 
             };
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
         public static RibbonPage AddCellFormatColorGridTool(this RibbonPage rp, ViewTab view, string itemName = "Grid Color", Bitmap bmp = null, string rpgText = "Grid Tools")
@@ -388,6 +390,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
 
             };
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
         public static RibbonPage AddResetGridFormatTool(this RibbonPage rp, ViewTab view, string itemName = "Reset", Bitmap bmp = null, string rpgText = "Grid Tools")
@@ -424,8 +427,8 @@ namespace CMISUIHelper.Infrastructure.Helpers
                     gv.BestFitColumns();
                     grid.Focus();
                 }
-
             };
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
         public static RibbonPage AddSettingsGridFormatTool(this RibbonPage rp, ViewTab view, string itemName = "Settings", Bitmap bmp = null, string rpgText = "Grid Tools")
@@ -464,6 +467,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
 
             };
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
 
@@ -504,6 +508,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
 
             };
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
         public static RibbonPage AddSignAcceptActionTool(this RibbonPage rp, ViewTab view, string itemName = "Accept", Bitmap bmp = null, string rpgText = "Sign")
@@ -542,6 +547,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
 
             };
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
         public static RibbonPage AddSignSendBackActionTool(this RibbonPage rp, ViewTab view, string itemName = "SendBack", Bitmap bmp = null, string rpgText = "Sign")
@@ -580,6 +586,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
 
             };
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
         public static RibbonPage AddSignRejectActionTool(this RibbonPage rp, ViewTab view, string itemName = "Reject", Bitmap bmp = null, string rpgText = "Sign")
@@ -618,6 +625,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
 
             };
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
         public static RibbonPage AddSignUndoActionTool(this RibbonPage rp, ViewTab view, string itemName = "Undo", Bitmap bmp = null, string rpgText = "Sign")
@@ -656,6 +664,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
 
             };
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
         public static RibbonPage AddSignReopenActionTool(this RibbonPage rp, ViewTab view, string itemName = "Reopen", Bitmap bmp = null, string rpgText = "Sign")
@@ -694,6 +703,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
 
             };
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
 
@@ -717,7 +727,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
         }
 
         // Add Form Acion Items
-        public static RibbonPage AddSaveFormActionTool(this RibbonPage rp, ViewTab view,out BarItem newItem, string itemName = "Save", Bitmap bmp = null, string rpgText = "Form")
+        public static RibbonPage AddSaveFormActionTool(this RibbonPage rp, ViewTab view, string itemName = "Save", Bitmap bmp = null, string rpgText = "Form")
         {
             if (bmp == null) bmp = view.SaveFormActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
@@ -753,10 +763,10 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
 
             };
-            newItem = item;
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
-        public static RibbonPage AddEditFormActionTool(this RibbonPage rp, ViewTab view, out BarItem newItem, string itemName = "Edit", Bitmap bmp = null, string rpgText = "Form")
+        public static RibbonPage AddEditFormActionTool(this RibbonPage rp, ViewTab view, string itemName = "Edit", Bitmap bmp = null, string rpgText = "Form")
         {
             if (bmp == null) bmp = view.EditFormActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
@@ -792,10 +802,10 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
 
             };
-            newItem = item;
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
-        public static RibbonPage AddDeleteFormActionTool(this RibbonPage rp, ViewTab view,out BarItem newItem, string itemName = "Delete", Bitmap bmp = null, string rpgText = "Form")
+        public static RibbonPage AddDeleteFormActionTool(this RibbonPage rp, ViewTab view, string itemName = "Delete", Bitmap bmp = null, string rpgText = "Form")
         {
             if (bmp == null) bmp = view.DeleteFormActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
@@ -831,10 +841,10 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
 
             };
-            newItem = item;
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
-        public static RibbonPage AddViewFormActionTool(this RibbonPage rp, ViewTab view, out BarItem newItem, string itemName = "View", Bitmap bmp = null, string rpgText = "Form")
+        public static RibbonPage AddViewFormActionTool(this RibbonPage rp, ViewTab view, string itemName = "View", Bitmap bmp = null, string rpgText = "Form")
         {
             if (bmp == null) bmp = view.ViewFormActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
@@ -870,28 +880,17 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
 
             };
-            newItem = item;
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
-
-        public static RibbonPage AddFormTools(this RibbonPage rp, ViewTab view,out Dictionary<string,BarItem> items)
+        public static RibbonPage AddFormTools(this RibbonPage rp, ViewTab view)
         {
-            BarItem save;
-            BarItem edit;
-            BarItem delete;
-            BarItem open;
-            rp.AddSaveFormActionTool(view,out save)
-              .AddEditFormActionTool(view, out edit)
-              .AddDeleteFormActionTool(view, out delete)
-              .AddViewFormActionTool(view, out open);
-            items = new Dictionary<string, BarItem>();
-            items.Add(save.Caption.ToLower(), save);
-            items.Add(edit.Caption.ToLower(), edit);
-            items.Add(delete.Caption.ToLower(), delete);
-            items.Add(open.Caption.ToLower(), open);
+            rp.AddSaveFormActionTool(view)
+              .AddEditFormActionTool(view)
+              .AddDeleteFormActionTool(view)
+              .AddViewFormActionTool(view);
             return rp;
         }
-
         public static RibbonPage AddLiteGridTools(this RibbonPage rp,ViewTab view)
         {
             rp.AddToggleSearchGridTool(view)
@@ -900,7 +899,6 @@ namespace CMISUIHelper.Infrastructure.Helpers
               .AddDateFormatGridTool(view);
             return rp;
         }
-
         public static RibbonPage AddGridTools(this RibbonPage rp, ViewTab view)
         {
             rp.AddToggleSearchGridTool(view)
@@ -912,7 +910,6 @@ namespace CMISUIHelper.Infrastructure.Helpers
               .AddSettingsGridFormatTool(view);
             return rp;
         }
-
 
         //Extntion Method For ExportTools
         public static RibbonPage AddExcelExportTool(this RibbonPage rp, ViewTab view, string itemName = "Excel", Bitmap bmp = null, string rpgText = "Export Tools")
@@ -978,6 +975,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
                     }
                 }
             };
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
         public static RibbonPage AddCsvExportTool(this RibbonPage rp, ViewTab view, string itemName = "CSV", Bitmap bmp = null, string rpgText = "Export Tools")
@@ -1032,6 +1030,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
 
             };
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
         public static RibbonPage AddPdfExportTool(this RibbonPage rp, ViewTab view, string itemName = "PDF", Bitmap bmp = null, string rpgText = "Export Tools")
@@ -1086,6 +1085,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
 
             };
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return rp;
         }
         public static RibbonPage AddExportTools(this RibbonPage rp, ViewTab view)
@@ -1234,71 +1234,18 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 childForm.Dock = System.Windows.Forms.DockStyle.Fill;
 
                 return childForm;
-            }
+            }           
 
-            public static T ViewInView<T>(ViewContainerWithCompany ownerView, object[] args = null) where T : ViewTab
+            public static T ViewInForm<T>(object[] args = null, FormBorderStyle formBorderStyle = FormBorderStyle.Sizable, bool maximize = false, bool displayAsDialog = true) where T : ViewForm
             {
-                var childForm = (ViewTab)Activator.CreateInstance(typeof(T), args);
-
-                childForm.TabControl = ownerView.pgvMain;
-                childForm.TabPage = ownerView.TabPage;
-                childForm.RibbonPage = ownerView.RibbonPage;
-                childForm.OwnerForm = ownerView.OwnerForm;
-                childForm.OwnerView = ownerView;
-
-                TabPage tp = null;
-                var existTabPage = ownerView.OpenedViews.FirstOrDefault(x=>x.Value.Name == childForm.Name);
-                if (existTabPage.Value == null)
-                {
-                    TabPage tabPage = new TabPage();
-                    tp = tabPage;
-                    tp.Hide();
-                    tabPage.BackColor = Color.FromArgb(240, 240, 240);
-                    tabPage.UseVisualStyleBackColor = false;
-                    ownerView.OpenedViews.Add(childForm.ViewIdentity, tabPage);
-                    ownerView.pgvMain.TabPages.Add(tabPage);
-                    ownerView.pgvMain.SelectTab(tabPage);
-                    tabPage.Name = childForm.Name;
-                    tabPage.Controls.Add(childForm);
-                    childForm.Dock = System.Windows.Forms.DockStyle.Fill;
-
-                    System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
-                    timer.Interval = 1;
-                    int counter = 0;
-                    timer.Tick += (o, ev) =>
-                    {
-                        counter++;
-                        if (counter >= 10)
-                        {
-                            timer.Stop();
-                            childForm.OnBeforeViewLoad(EventArgs.Empty);
-                            childForm.OnViewLoaded(EventArgs.Empty);
-                            tp.Show();
-                        }
-                    };
-                    timer.Start();
-                }
-                else
-                {
-                    tp = existTabPage.Value;
-                    ownerView.pgvMain.SelectTab(tp);
-                }
-
-                               
-                return (T)childForm;
-            }
-
-
-
-
-            public static Form ViewInForm<T>(object[] args = null, bool maximize = false, bool displayAsDialog = true) where T : ViewForm
-            {
-                XtraForm frm = new XtraForm();                
-                var childForm = (ViewForm)Activator.CreateInstance(typeof(T),args);
+                XtraForm frm = new XtraForm();
+                frm.FormBorderStyle = formBorderStyle;
+                ViewForm childForm = (ViewForm)Activator.CreateInstance(typeof(T),args);
                 frm.Width = childForm.Width;
-                frm.Height = childForm.Height;
+                frm.Height = childForm.Height + 28;
                 frm.Controls.Add(childForm);
                 frm.Text = childForm.ViewTitle;
+                childForm.OwnerForm = frm;
                 if (maximize) frm.WindowState = FormWindowState.Maximized;
                 frm.StartPosition = FormStartPosition.CenterScreen;
 
@@ -1326,7 +1273,8 @@ namespace CMISUIHelper.Infrastructure.Helpers
                     frm.ShowDialog();
                 else
                     frm.Show();
-                return frm;
+
+                return (T)childForm;
             }
              
         }

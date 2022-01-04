@@ -21,7 +21,7 @@ namespace CMISDAL.Core.Common
                     new SqlParameter("@UserId",userId),
                     new SqlParameter("@Acl",acl),
                 };
-                return DoQuery("CM.[FetchCompaniesCombo]", parameters);
+                return DoQueryReader("CM.[FetchCompaniesCombo]", parameters);
             }
             catch (Exception ex)
             {

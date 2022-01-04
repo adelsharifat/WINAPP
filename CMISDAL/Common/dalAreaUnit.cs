@@ -11,7 +11,7 @@ namespace CMISDAL.Common
 {
     public class dalAreaUnit:APPDAL
     {
-        public DataTable FetchContractsCombo(int projectId)
+        public DataTable FetchAreaUnitCombo(int projectId)
         {
             try
             {
@@ -19,7 +19,7 @@ namespace CMISDAL.Common
                 {
                     new SqlParameter("@ProjectId",projectId),
                 };
-                return DoQuery("CM.[FetchAreaUnitCombo]", parameters);
+                return DoQueryAdapter("CM.[FetchAreaUnitCombo]", parameters);
             }
             catch (Exception ex)
             {

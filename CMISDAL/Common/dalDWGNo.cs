@@ -18,7 +18,7 @@ namespace CMISDAL.Common
                 SqlParameter[] parameters =
                 {
                 };
-                return DoQuery("CM.[FetchDWGNo]", parameters);
+                return DoQueryReader("CM.[FetchDWGNo]", parameters);
             }
             catch (Exception ex)
             {

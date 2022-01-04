@@ -18,7 +18,7 @@ namespace QCElectrical.Data
         {
             try
             {
-                return DoQuery("SecAcl.FetchCompaniesData");
+                return DoQueryReader("SecAcl.FetchCompaniesData");
             }
             catch (Exception ex)
             {
@@ -30,7 +30,7 @@ namespace QCElectrical.Data
         {
             try
             {
-                return DoQuery("SecAcl.FetchContractsData");
+                return DoQueryReader("SecAcl.FetchContractsData");
             }
             catch (Exception ex)
             {
@@ -42,7 +42,7 @@ namespace QCElectrical.Data
         {
             try
             {
-                return DoQuery("QCElectrical.FetchCFCombo");
+                return DoQueryReader("QCElectrical.FetchCFCombo");
             }
             catch (Exception ex)
             {
@@ -52,39 +52,72 @@ namespace QCElectrical.Data
         #endregion
 
 
-        #region CFItems
-        public DataTable FetchCFItems(int cfTypeId)
+        #region CF-819-1
+        public DataTable FetchCFItems(string cfType)
         {
             try
             {
                 var parameters = new[]
                 {
-                    new SqlParameter("CFTypeId",cfTypeId),
+                    new SqlParameter("CfType",cfType),
                 };
-                return DoQuery("QCElectrical.FetchCFItems", parameters);
+                return DoQueryAdapter("QCEL.FetchCFItems", parameters);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-        public int SaveCFItems(int projectId,int userId,DataTable data)
+
+        public int SaveCF_WithFixedItems(int id,int projectId,int employerId,int contractId,int contractorId,int userId,string objectName,string type2, string dwgNo,int unitId,string remark = null,string revNo = null,string location = null,int? voltageCableType = null,string reportNoParameters = null,DataTable attachments = null,DataTable itemsResult = null)
+        {
+            try
+            {
+                var parameters = new[]
+                {
+                    new SqlParameter("Id",id),
+                    new SqlParameter("ProjectId",projectId),
+                    new SqlParameter("EmployerId",employerId),
+                    new SqlParameter("ContractId",contractId),
+                    new SqlParameter("ContractorId",contractorId),
+                    new SqlParameter("UserId",userId),
+                    new SqlParameter("ObjectName",objectName),
+                    new SqlParameter("Type2",type2),
+                    new SqlParameter("DwgNo",dwgNo),
+                    new SqlParameter("UnitId",unitId),
+                    new SqlParameter("Remark",remark),
+                    new SqlParameter("RevNo",revNo),
+                    new SqlParameter("Location",location),
+                    new SqlParameter("VoltageCableType",voltageCableType),
+                    new SqlParameter("ReportNoParameters",reportNoParameters),
+                    new SqlParameter("Attachments",attachments),
+                    new SqlParameter("ItemsResult",itemsResult)
+                };
+                return DoMutation("QCEL.SaveCF_WithFixedItems", parameters);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+       
+        public DataTable FETCH_CF_801_19_1_LIST(int projectId)
         {
             try
             {
                 var parameters = new[]
                 {
                     new SqlParameter("ProjectId",projectId),
-                    new SqlParameter("UserId",userId),
-                    new SqlParameter("CFItems",data)
                 };
-                return DoMutation("QCElectrical.SaveCFItems", parameters);
+                return DoQueryReader("QCEL.FETCH_CF_801_19_1_LIST", parameters);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
+
         #endregion
 
     }

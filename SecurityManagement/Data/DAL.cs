@@ -17,7 +17,7 @@ namespace SecurityManagement.Data
         {
             try
             {           
-                return DoQuery("SecAcl.GetUserList");                
+                return DoQueryReader("SecAcl.GetUserList");                
             }
             catch (Exception ex)
             {
@@ -35,7 +35,7 @@ namespace SecurityManagement.Data
                 {
                     new SqlParameter("@ProjectId",projectId)
                 };
-                return DoQuery("SecAcl.GetUserGroupList", parameters);                
+                return DoQueryReader("SecAcl.GetUserGroupList", parameters);                
             }
             catch (Exception ex)
             {
@@ -53,7 +53,7 @@ namespace SecurityManagement.Data
                         new SqlParameter("@ProjectId",projectId),
                         new SqlParameter("@IsGroup",isGroup),
                     };
-                    return DoQuery("SecAcl.FetchACL", parameters);
+                    return DoQueryReader("SecAcl.FetchACL", parameters);
             }
             catch (Exception ex)
             {
@@ -65,7 +65,7 @@ namespace SecurityManagement.Data
         {
             try
             {
-                return DoQuery("GetProjectList");
+                return DoQueryReader("GetProjectList");
             }
             catch (Exception ex)
             {

@@ -21,7 +21,7 @@ namespace CMISDAL.Core.Common
                     new SqlParameter("@ProjectId",projectId),
                     new SqlParameter("@Scope",scope)
                 };
-                return DoQuery("CM.[FetchConfig]", parameters);
+                return DoQueryReader("CM.[FetchConfig]", parameters);
             }
             catch (Exception ex)
             {

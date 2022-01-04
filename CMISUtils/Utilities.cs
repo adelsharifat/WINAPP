@@ -49,11 +49,6 @@ namespace CMISUtils
         //}
 
         //Forms
-       
-
-
-
-
 
         //Server
         public static DateTime ServerDateTime(bool dateWithTime = false)
@@ -513,6 +508,7 @@ namespace CMISUtils
             try
             {
                 var gView = gc.MainView as GridView;
+                if(!gView.Editable) gView.OptionsBehavior.Editable = true;
                 var columnNames = columns.Split(delimiter);
                 foreach (GridColumn column in gView.Columns)
                 {
@@ -520,6 +516,21 @@ namespace CMISUtils
                         gView.Columns[column.FieldName].OptionsColumn.AllowEdit = true;
                     else gView.Columns[column.FieldName].OptionsColumn.AllowEdit = false;
                 }
+                return gc;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static GridControl UnEditableColumns(this GridControl gc)
+        {
+            try
+            {
+                var gView = gc.MainView as GridView;
+                foreach (GridColumn column in gView.Columns)
+                    gView.Columns[column.FieldName].OptionsColumn.AllowEdit = false;
                 return gc;
             }
             catch (Exception ex)
@@ -683,7 +694,7 @@ namespace CMISUtils
                 foreach (PropertyInfo pro in temp.GetProperties())
                 {
                     if (pro.Name == column.ColumnName)
-                        pro.SetValue(obj, dr[column.ColumnName], null);
+                        pro.SetValue(obj, (dr[column.ColumnName] == DBNull.Value?null:dr[column.ColumnName]), null);
                     else
                         continue;
                 }

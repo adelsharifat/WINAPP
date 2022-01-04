@@ -16,7 +16,7 @@ namespace CMISDAL.Core.Common
             try
             {
                 SqlParameter[] parameters = { };
-                return DoQuery("SecAcl.GetProjectList", parameters);
+                return DoQueryReader("SecAcl.GetProjectList", parameters);
             }
             catch (Exception ex)
             {

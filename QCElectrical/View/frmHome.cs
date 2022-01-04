@@ -22,7 +22,7 @@ namespace QCElectrical.View
 
         private void tileCFItem_ItemClick(object sender, DevExpress.XtraEditors.TileItemEventArgs e)
         {
-            CMISUI.UIHandler.ViewInTab<View.BaseInfo.frmCFItem>(this.OwnerForm);
+
         }
 
         private void tileNewCF_ItemClick(object sender, DevExpress.XtraEditors.TileItemEventArgs e)
@@ -32,7 +32,7 @@ namespace QCElectrical.View
 
         private void tileCFList_ItemClick(object sender, DevExpress.XtraEditors.TileItemEventArgs e)
         {
-            CMISUI.UIHandler.ViewInTab<View.List.frmCFList>(this.OwnerForm);
+            CMISUI.UIHandler.ViewInTab<View.List.CF_819_1_List>(this.OwnerForm);
         }
 
         private void tileCFReport_ItemClick(object sender, DevExpress.XtraEditors.TileItemEventArgs e)

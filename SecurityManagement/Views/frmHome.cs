@@ -30,10 +30,5 @@ namespace SecurityManagement.Views
         {
             CMISUI.UIHandler.ViewInTab<Views.frmPermisionGroup>(this.OwnerForm);
         }
-
-        private void tileItem1_ItemClick(object sender, DevExpress.XtraEditors.TileItemEventArgs e)
-        {
-            CMISUI.UIHandler.ViewInTab<Views.frmCF>(this.OwnerForm);
-        }
     }
 }
