@@ -52,6 +52,8 @@
             this.grv_819_1.GridControl = this.grcCF_819_1;
             this.grv_819_1.Name = "grv_819_1";
             this.grv_819_1.OptionsBehavior.Editable = false;
+            this.grv_819_1.OptionsView.ShowAutoFilterRow = true;
+            this.grv_819_1.OptionsView.ShowFooter = true;
             // 
             // CF_819_1_List
             // 

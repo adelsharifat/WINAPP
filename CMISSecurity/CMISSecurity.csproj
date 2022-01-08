@@ -50,7 +50,14 @@
     <Compile Include="Model\ACLModel.cs" />
     <Compile Include="Model\ACLViewModel.cs" />
     <Compile Include="Model\ValueModel.cs" />
+    <Compile Include="PermissionHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CMISUIHelper\CMISUIHelper.csproj">
+      <Project>{94285279-DFD9-4BA6-8FC2-B057B80D87E9}</Project>
+      <Name>CMISUIHelper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

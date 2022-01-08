@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblFormStateLabel = new System.Windows.Forms.Label();
-            this.lblFormState = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CF_819_1));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.pnlMain = new System.Windows.Forms.Panel();
+            this.formStateControl = new CMISControl.FormMode();
             this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
             this.grcAttachment = new CMISControls.Grid.CMGridControl();
             this.grvAttachment = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnAddAttachment = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnDeleteAttachment = new System.Windows.Forms.ToolStripButton();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.txtRemark = new DevExpress.XtraEditors.MemoEdit();
@@ -44,7 +45,12 @@
             this.grcItems = new CMISControls.Grid.CMGridControl();
             this.grvItems = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.repositoryInspectionResult = new DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tsGrvItem = new System.Windows.Forms.ToolStrip();
+            this.btnAcceptAll = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnRejectAll = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnNoAnswerAll = new System.Windows.Forms.ToolStripButton();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.rdgVoltageType = new DevExpress.XtraEditors.RadioGroup();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
@@ -60,16 +66,16 @@
             this.cmbDwgNo = new CMISControls.Combo.CMLookupEdit();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbUnit = new CMISControls.Combo.CMLookupEdit();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbCompany.Properties)).BeginInit();
-            this.pnlHeaderContainer.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
             this.groupControl5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grcAttachment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvAttachment)).BeginInit();
-            this.toolStrip2.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
             this.groupControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).BeginInit();
@@ -78,6 +84,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.grcItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryInspectionResult)).BeginInit();
+            this.tsGrvItem.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rdgVoltageType.Properties)).BeginInit();
@@ -108,31 +115,7 @@
             // 
             // pnlHeaderContainer
             // 
-            this.pnlHeaderContainer.Controls.Add(this.lblFormState);
-            this.pnlHeaderContainer.Controls.Add(this.lblFormStateLabel);
             this.pnlHeaderContainer.Size = new System.Drawing.Size(1399, 43);
-            this.pnlHeaderContainer.Controls.SetChildIndex(this.lblFormStateLabel, 0);
-            this.pnlHeaderContainer.Controls.SetChildIndex(this.lblFormState, 0);
-            // 
-            // lblFormStateLabel
-            // 
-            this.lblFormStateLabel.AutoSize = true;
-            this.lblFormStateLabel.Location = new System.Drawing.Point(16, 15);
-            this.lblFormStateLabel.Name = "lblFormStateLabel";
-            this.lblFormStateLabel.Size = new System.Drawing.Size(64, 13);
-            this.lblFormStateLabel.TabIndex = 1;
-            this.lblFormStateLabel.Text = "FormState ::";
-            // 
-            // lblFormState
-            // 
-            this.lblFormState.BackColor = System.Drawing.Color.Gold;
-            this.lblFormState.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblFormState.Location = new System.Drawing.Point(86, 7);
-            this.lblFormState.Name = "lblFormState";
-            this.lblFormState.Size = new System.Drawing.Size(147, 29);
-            this.lblFormState.TabIndex = 2;
-            this.lblFormState.Text = "Saving State";
-            this.lblFormState.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel1
             // 
@@ -140,7 +123,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 998F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pnlMain, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 44);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -149,28 +133,36 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1399, 803);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
-            // panel2
+            // pnlMain
             // 
-            this.panel2.AutoScroll = true;
-            this.panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.panel2.Controls.Add(this.groupControl5);
-            this.panel2.Controls.Add(this.groupControl4);
-            this.panel2.Controls.Add(this.groupControl3);
-            this.panel2.Controls.Add(this.groupControl2);
-            this.panel2.Controls.Add(this.groupControl1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(200, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(0);
-            this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 50);
-            this.panel2.Size = new System.Drawing.Size(998, 803);
-            this.panel2.TabIndex = 0;
+            this.pnlMain.AutoScroll = true;
+            this.pnlMain.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlMain.Controls.Add(this.formStateControl);
+            this.pnlMain.Controls.Add(this.groupControl5);
+            this.pnlMain.Controls.Add(this.groupControl4);
+            this.pnlMain.Controls.Add(this.groupControl3);
+            this.pnlMain.Controls.Add(this.groupControl2);
+            this.pnlMain.Controls.Add(this.groupControl1);
+            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMain.Location = new System.Drawing.Point(200, 0);
+            this.pnlMain.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Padding = new System.Windows.Forms.Padding(0, 0, 0, 50);
+            this.pnlMain.Size = new System.Drawing.Size(998, 803);
+            this.pnlMain.TabIndex = 0;
+            // 
+            // formStateControl
+            // 
+            this.formStateControl.Location = new System.Drawing.Point(12, 6);
+            this.formStateControl.Name = "formStateControl";
+            this.formStateControl.Size = new System.Drawing.Size(954, 35);
+            this.formStateControl.TabIndex = 4;
             // 
             // groupControl5
             // 
             this.groupControl5.Controls.Add(this.grcAttachment);
-            this.groupControl5.Controls.Add(this.toolStrip2);
-            this.groupControl5.Location = new System.Drawing.Point(14, 199);
+            this.groupControl5.Controls.Add(this.toolStrip1);
+            this.groupControl5.Location = new System.Drawing.Point(14, 230);
             this.groupControl5.Name = "groupControl5";
             this.groupControl5.Size = new System.Drawing.Size(952, 168);
             this.groupControl5.TabIndex = 3;
@@ -199,43 +191,45 @@
             this.grvAttachment.OptionsView.ShowGroupPanel = false;
             this.grvAttachment.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.grvAttachment_RowCellClick);
             // 
-            // toolStrip2
+            // toolStrip1
             // 
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnAddAttachment,
+            this.toolStripSeparator3,
             this.btnDeleteAttachment});
-            this.toolStrip2.Location = new System.Drawing.Point(2, 20);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(948, 25);
-            this.toolStrip2.TabIndex = 0;
-            this.toolStrip2.Text = "toolStrip2";
+            this.toolStrip1.Location = new System.Drawing.Point(2, 20);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(948, 25);
+            this.toolStrip1.TabIndex = 3;
+            this.toolStrip1.Text = "toolStrip1";
             // 
             // btnAddAttachment
             // 
-            this.btnAddAttachment.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnAddAttachment.Image = global::QCElectrical.Properties.Resources.Plus;
             this.btnAddAttachment.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAddAttachment.Name = "btnAddAttachment";
-            this.btnAddAttachment.Size = new System.Drawing.Size(23, 22);
-            this.btnAddAttachment.Text = "toolStripButton1";
-            this.btnAddAttachment.ToolTipText = "Add Attachment";
+            this.btnAddAttachment.Size = new System.Drawing.Size(49, 22);
+            this.btnAddAttachment.Text = "Add";
             this.btnAddAttachment.Click += new System.EventHandler(this.btnAddAttachment_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
             // btnDeleteAttachment
             // 
-            this.btnDeleteAttachment.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnDeleteAttachment.Image = global::QCElectrical.Properties.Resources.Invalid;
             this.btnDeleteAttachment.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnDeleteAttachment.Name = "btnDeleteAttachment";
-            this.btnDeleteAttachment.Size = new System.Drawing.Size(23, 22);
-            this.btnDeleteAttachment.Text = "toolStripButton2";
-            this.btnDeleteAttachment.ToolTipText = "Delete Attachment";
+            this.btnDeleteAttachment.Size = new System.Drawing.Size(60, 22);
+            this.btnDeleteAttachment.Text = "Delete";
             this.btnDeleteAttachment.Click += new System.EventHandler(this.btnDeleteAttachment_Click);
             // 
             // groupControl4
             // 
             this.groupControl4.Controls.Add(this.txtRemark);
-            this.groupControl4.Location = new System.Drawing.Point(12, 678);
+            this.groupControl4.Location = new System.Drawing.Point(12, 709);
             this.groupControl4.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
             this.groupControl4.Name = "groupControl4";
             this.groupControl4.Size = new System.Drawing.Size(954, 105);
@@ -257,8 +251,8 @@
             // groupControl3
             // 
             this.groupControl3.Controls.Add(this.grcItems);
-            this.groupControl3.Controls.Add(this.toolStrip1);
-            this.groupControl3.Location = new System.Drawing.Point(12, 373);
+            this.groupControl3.Controls.Add(this.tsGrvItem);
+            this.groupControl3.Location = new System.Drawing.Point(12, 404);
             this.groupControl3.Name = "groupControl3";
             this.groupControl3.Size = new System.Drawing.Size(954, 299);
             this.groupControl3.TabIndex = 2;
@@ -287,12 +281,13 @@
             this.grvItems.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
             this.grvItems.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
             this.grvItems.OptionsCustomization.AllowSort = false;
+            this.grvItems.OptionsSelection.CheckBoxSelectorField = "ACC";
             this.grvItems.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.grvItems.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
             this.grvItems.OptionsSelection.UseIndicatorForSelection = false;
             this.grvItems.OptionsView.ShowAutoFilterRow = true;
             this.grvItems.OptionsView.ShowFooter = true;
             this.grvItems.OptionsView.ShowGroupPanel = false;
-            this.grvItems.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.grvItems_RowCellClick);
             this.grvItems.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvItems_CellValueChanged);
             this.grvItems.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvItems_CellValueChanging);
             // 
@@ -304,18 +299,67 @@
             new DevExpress.XtraEditors.Controls.RadioGroupItem(0, "NA", true, "NA")});
             this.repositoryInspectionResult.Name = "repositoryInspectionResult";
             // 
-            // toolStrip1
+            // tsGrvItem
             // 
-            this.toolStrip1.Location = new System.Drawing.Point(2, 20);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(950, 25);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
+            this.tsGrvItem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnAcceptAll,
+            this.toolStripSeparator1,
+            this.btnRejectAll,
+            this.toolStripSeparator2,
+            this.btnNoAnswerAll});
+            this.tsGrvItem.Location = new System.Drawing.Point(2, 20);
+            this.tsGrvItem.Name = "tsGrvItem";
+            this.tsGrvItem.Size = new System.Drawing.Size(950, 25);
+            this.tsGrvItem.TabIndex = 2;
+            this.tsGrvItem.Text = "toolStrip1";
+            // 
+            // btnAcceptAll
+            // 
+            this.btnAcceptAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnAcceptAll.Enabled = false;
+            this.btnAcceptAll.Image = global::QCElectrical.Properties.Resources.Valid;
+            this.btnAcceptAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAcceptAll.Name = "btnAcceptAll";
+            this.btnAcceptAll.Size = new System.Drawing.Size(58, 22);
+            this.btnAcceptAll.Text = "ACC ALL";
+            this.btnAcceptAll.Click += new System.EventHandler(this.btnAcceptAll_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btnRejectAll
+            // 
+            this.btnRejectAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnRejectAll.Enabled = false;
+            this.btnRejectAll.Image = global::QCElectrical.Properties.Resources.Invalid;
+            this.btnRejectAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRejectAll.Name = "btnRejectAll";
+            this.btnRejectAll.Size = new System.Drawing.Size(51, 22);
+            this.btnRejectAll.Text = "REJ ALL";
+            this.btnRejectAll.Click += new System.EventHandler(this.btnRejectAll_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btnNoAnswerAll
+            // 
+            this.btnNoAnswerAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnNoAnswerAll.Enabled = false;
+            this.btnNoAnswerAll.Image = ((System.Drawing.Image)(resources.GetObject("btnNoAnswerAll.Image")));
+            this.btnNoAnswerAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNoAnswerAll.Name = "btnNoAnswerAll";
+            this.btnNoAnswerAll.Size = new System.Drawing.Size(51, 22);
+            this.btnNoAnswerAll.Text = "NA ALL";
+            this.btnNoAnswerAll.Click += new System.EventHandler(this.btnNoAnswerAll_Click);
             // 
             // groupControl2
             // 
             this.groupControl2.Controls.Add(this.rdgVoltageType);
-            this.groupControl2.Location = new System.Drawing.Point(12, 122);
+            this.groupControl2.Location = new System.Drawing.Point(12, 153);
             this.groupControl2.Name = "groupControl2";
             this.groupControl2.Size = new System.Drawing.Size(954, 71);
             this.groupControl2.TabIndex = 1;
@@ -350,7 +394,7 @@
             this.groupControl1.Controls.Add(this.cmbDwgNo);
             this.groupControl1.Controls.Add(this.label2);
             this.groupControl1.Controls.Add(this.cmbUnit);
-            this.groupControl1.Location = new System.Drawing.Point(12, 13);
+            this.groupControl1.Location = new System.Drawing.Point(12, 44);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(954, 103);
             this.groupControl1.TabIndex = 0;
@@ -510,6 +554,15 @@
             this.cmbUnit.TabIndex = 0;
             this.cmbUnit.EditValueChanged += new System.EventHandler(this.cmbUnit_EditValueChanged);
             // 
+            // panel2
+            // 
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(200, 803);
+            this.panel2.TabIndex = 1;
+            // 
             // CF_819_1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -524,17 +577,15 @@
             this.Controls.SetChildIndex(this.tableLayoutPanel1, 0);
             this.pnlHeader.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cmbCompany.Properties)).EndInit();
-            this.pnlHeaderContainer.ResumeLayout(false);
-            this.pnlHeaderContainer.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
+            this.pnlMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
             this.groupControl5.ResumeLayout(false);
             this.groupControl5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grcAttachment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvAttachment)).EndInit();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
             this.groupControl4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtRemark.Properties)).EndInit();
@@ -544,6 +595,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.grcItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryInspectionResult)).EndInit();
+            this.tsGrvItem.ResumeLayout(false);
+            this.tsGrvItem.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.rdgVoltageType.Properties)).EndInit();
@@ -561,11 +614,8 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lblFormStateLabel;
-        private System.Windows.Forms.Label lblFormState;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel pnlMain;
         private DevExpress.XtraEditors.GroupControl groupControl4;
         private DevExpress.XtraEditors.GroupControl groupControl3;
         private DevExpress.XtraEditors.GroupControl groupControl2;
@@ -585,14 +635,22 @@
         private System.Windows.Forms.Label label7;
         private DevExpress.XtraEditors.TextEdit txtLocation;
         private DevExpress.XtraEditors.RadioGroup rdgVoltageType;
-        private System.Windows.Forms.ToolStrip toolStrip1;
         private DevExpress.XtraEditors.MemoEdit txtRemark;
         private DevExpress.XtraEditors.Repository.RepositoryItemRadioGroup repositoryInspectionResult;
         private DevExpress.XtraEditors.GroupControl groupControl5;
         private CMISControls.Grid.CMGridControl grcAttachment;
         private DevExpress.XtraGrid.Views.Grid.GridView grvAttachment;
-        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStrip tsGrvItem;
+        private System.Windows.Forms.ToolStripButton btnAcceptAll;
+        private System.Windows.Forms.ToolStripButton btnRejectAll;
+        private System.Windows.Forms.ToolStripButton btnNoAnswerAll;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnAddAttachment;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton btnDeleteAttachment;
+        private System.Windows.Forms.Panel panel2;
+        private CMISControl.FormMode formStateControl;
     }
 }

@@ -73,6 +73,101 @@ namespace CMISUtils
             return val;
         }
 
+        public static bool Posted(this DataRow dr, string columnName = "Posted")
+        {
+            return dr.ToBoolean(columnName);
+        }
+
+        public static bool Complete(this DataRow dr, string columnName = "Complete")
+        {
+            return dr.ToBoolean(columnName);
+        }
+
+        public static bool Accepted(this DataRow dr, string columnName = "Accepted")
+        {
+            return dr.ToBoolean(columnName);
+        }
+
+        public static bool IsDelete(this DataRow dr, string columnName = "IsDelete")
+        {
+            return dr.ToBoolean(columnName);
+        }
+
+        public static bool IsVoid(this DataRow dr, string columnName = "IsVoid")
+        {
+            return dr.ToBoolean(columnName);
+        }
+
+        public static bool IsUsed(this DataRow dr, string columnName = "IsUsed")
+        {
+            return dr.ToBoolean(columnName);
+        }
+
+        public static string ReportNo(this DataRow dr, string columnName = "ReportNo")
+        {
+            return dr.ToString(columnName);
+        }
+
+        public static string ObjectName(this DataRow dr, string columnName = "ObjectName")
+        {
+            return dr.ToString(columnName);
+        }
+
+        public static int ProjectId(this DataRow dr,string columnName = "ProjectId")
+        {
+            return dr.ToInt(columnName);
+        }
+
+        public static int ObjectId(this DataRow dr, string columnName = "ObjectId")
+        {
+            return dr.ToInt(columnName);
+        }
+
+        public static int DocumentId(this DataRow dr, string columnName = "DocumentId")
+        {
+            return dr.ToInt(columnName);
+        }
+
+        public static int ContractId(this DataRow dr, string columnName = "ContractId")
+        {
+            return dr.ToInt(columnName);
+        }
+
+        public static int ContractorId(this DataRow dr, string columnName = "ContractorId")
+        {
+            return dr.ToInt(columnName);
+        }
+
+        public static int EmployerId(this DataRow dr, string columnName = "EmployerId")
+        {
+            return dr.ToInt(columnName);
+        }
+
+        public static int CompanyId(this DataRow dr, string columnName = "CompanyId")
+        {
+            return dr.ToInt(columnName);
+        }
+
+        public static int RevisionId(this DataRow dr, string columnName = "RevisionId")
+        {
+            return dr.ToInt(columnName);
+        }
+    
+        public static int AreaId(this DataRow dr, string columnName = "AreaId")
+        {
+            return dr.ToInt(columnName);
+        }
+
+        public static int UnitId(this DataRow dr, string columnName = "UnitId")
+        {
+            return dr.ToInt(columnName);
+        }
+
+        public static int DisciplineId(this DataRow dr, string columnName = "DisciplineId")
+        {
+            return dr.ToInt(columnName);
+        }
+
         public static string ToString(this DataRow dr, string columnName)
             => dr[columnName].ToString();
 

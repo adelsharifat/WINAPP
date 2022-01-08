@@ -33,7 +33,6 @@ namespace QCElectrical.View.Attachment
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -44,6 +43,7 @@ namespace QCElectrical.View.Attachment
             {
                 FilePath = txtFilePath.Text;
                 Remark = txtRemark.Text;
+                this.OwnerForm.DialogResult = DialogResult.OK;
                 this.OwnerForm.Close();
             }
             catch (Exception ex)

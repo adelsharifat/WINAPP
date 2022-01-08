@@ -9,9 +9,11 @@ namespace QCElectrical.Model
     public class CFItem
     {
         public int Id { get; set; }
-        public int ResultId { get; set; }
+        public int ItemId { get; set; }
         public int RowNo { get; set; }
-        public string ItemName { get; set; }
-        public int InspectionResult { get; set; }
+        public string Name { get; set; }
+        public bool? ACC { get; set; }
+        public bool? REJ { get; set; }
+        public bool? NA { get; set; }
     }
 }

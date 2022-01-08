@@ -727,6 +727,45 @@ namespace CMISUIHelper.Infrastructure.Helpers
         }
 
         // Add Form Acion Items
+        public static RibbonPage AddNewFormActionTool(this RibbonPage rp, ViewTab view, string itemName = "New", Bitmap bmp = null, string rpgText = "Form")
+        {
+            if (bmp == null) bmp = view.NewFormActionIcon;
+            var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
+            group.AddItems(item);
+            rp.AddGroups(group);
+
+            item.ItemClick += (o, e) =>
+            {
+                GridControl grid = view.LastFocucedGrid;
+                var controls = from c in view.ViewObjects.Values
+                               let cc = c.Control as Control
+                               where c.Control is Control
+                               select cc;
+                var focusedControl = controls.FirstOrDefault(x => x.Focused);
+                var focucedGrid = focusedControl is GridControl;
+
+                if (focucedGrid)
+                {
+                    if (grid == null || grid?.Name != focusedControl.Name)
+                    {
+                        view.LastFocucedGrid = focusedControl as GridControl;
+                        grid = view.LastFocucedGrid;
+                    }
+                }
+
+
+                if (grid != null)
+                {
+                    GridView gv = grid.MainView as GridView;
+                    gv.BestFitColumns();
+                    grid.Focus();
+                }
+
+            };
+            view.MenuItems.Add(item.Caption.ToLower(), item);
+            return rp;
+        }
         public static RibbonPage AddSaveFormActionTool(this RibbonPage rp, ViewTab view, string itemName = "Save", Bitmap bmp = null, string rpgText = "Form")
         {
             if (bmp == null) bmp = view.SaveFormActionIcon;
@@ -1108,8 +1147,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
             public static T ViewInTab<T>(CMISRibbonForm mdiForm,object[] args = null, Image icon = null, RibbonPageCategory rpc = null) where T : ViewTab
             {
                 var childForm = (ViewTab)Activator.CreateInstance(typeof(T),args);
-
-                childForm.Visible = false;
+                
                 childForm.OwnerForm = mdiForm;
                 var tabControl = mdiForm.Controls.OfType<TabControl>().First();
                 TabPage tabPage = new TabPage();
@@ -1153,7 +1191,20 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 if (mdiForm.ShowHomeMenuItems && mdiForm.HomePage == ribbonPage.Text && mdiForm.CloseItemLocation == CloseItemAlignment.End)
                     RibbonHandler.GenerateHomeMenus(childForm);
 
-                childForm.OnRibbonPageAdded(rpea);                
+                childForm.OnRibbonPageAdded(rpea);
+
+                if (mdiForm.ShowHomeMenuItems && mdiForm.HomePage == ribbonPage.Text && mdiForm.CloseItemLocation == CloseItemAlignment.Start)
+                    RibbonHandler.GenerateHomeMenus(childForm);
+
+                tabPage.Controls.Add(childForm);
+                childForm.Dock = System.Windows.Forms.DockStyle.Fill;
+
+
+                if (mdiForm.ShowHomeMenuItems && mdiForm.HomePage == ribbonPage.Text && mdiForm.CloseItemLocation == CloseItemAlignment.Start)
+                    RibbonHandler.GenerateHomeMenus(childForm);
+
+                tabPage.Controls.Add(childForm);
+                childForm.Dock = System.Windows.Forms.DockStyle.Fill;
 
                 System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
                 timer.Interval = 1;
@@ -1171,13 +1222,8 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 timer.Start();
 
 
-                if (mdiForm.ShowHomeMenuItems && mdiForm.HomePage == ribbonPage.Text && mdiForm.CloseItemLocation == CloseItemAlignment.Start)
-                    RibbonHandler.GenerateHomeMenus(childForm);
+              
 
-                tabPage.Controls.Add(childForm);
-                childForm.Dock = System.Windows.Forms.DockStyle.Fill;
-
-                childForm.Visible = true;
                 return (T)childForm;
             }
 
@@ -1236,9 +1282,10 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 return childForm;
             }           
 
-            public static T ViewInForm<T>(object[] args = null, FormBorderStyle formBorderStyle = FormBorderStyle.Sizable, bool maximize = false, bool displayAsDialog = true) where T : ViewForm
+            public static T ViewInForm<T>(object[] args = null, FormBorderStyle formBorderStyle = FormBorderStyle.Sizable, bool maximize = false,bool showAsDialog = true) where T : ViewForm
             {
                 XtraForm frm = new XtraForm();
+                frm.DialogResult = DialogResult.Cancel;
                 frm.FormBorderStyle = formBorderStyle;
                 ViewForm childForm = (ViewForm)Activator.CreateInstance(typeof(T),args);
                 frm.Width = childForm.Width;
@@ -1269,7 +1316,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 };
 
                 childForm.Dock = DockStyle.Fill;
-                if (displayAsDialog)
+                if (showAsDialog)
                     frm.ShowDialog();
                 else
                     frm.Show();

@@ -20,6 +20,8 @@ namespace QCElectrical
         [Permit("Allow access to specific contracts", "Contracts")]
         public const string Contract = nameof(Contract);
 
+        [Permit("Allow access to Role SubContractor")]
+        public const string SubContractor = nameof(SubContractor);
 
         public DataTable Companies()
         {

@@ -260,7 +260,7 @@ namespace CMISUIHelper.UserControls
         #region ExtraCMISCode
 
         #region Properties
-        private FormState formState = FormState.SaveMode;
+        private FormState formState = FormState.Save;
 
         public FormState FormMode
         {
@@ -412,6 +412,14 @@ namespace CMISUIHelper.UserControls
 
 
         // Form Action Item Icon
+        private Bitmap newFormActionIcon = UIHelperResources.addfile_32x32;
+
+        public Bitmap NewFormActionIcon
+        {
+            get { return newFormActionIcon; }
+            set { newFormActionIcon = value; }
+        }
+
         private Bitmap saveFormActionIcon = UIHelperResources.save_32x32;
 
         public Bitmap SaveFormActionIcon
@@ -453,14 +461,14 @@ namespace CMISUIHelper.UserControls
             string result = "Save Mode";
             switch (FormMode)
             {
-                case FormState.SaveMode:
+                case FormState.Save:
                     result = "Save Mode";
                     break;
-                case FormState.EditMode:
+                case FormState.Edit:
                     result = "Edit Mode";
                     break;
-                case FormState.ReadMode:
-                    result = "Read Mode";
+                case FormState.View:
+                    result = "View Mode";
                     break;
                 default:
                     result = "Save Mode";

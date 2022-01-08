@@ -53,13 +53,14 @@ namespace QCElectrical.Data
 
 
         #region CF-819-1
-        public DataTable FetchCFItems(string cfType)
+        public DataTable FetchCFItems(string cfType,int? cfId = null)
         {
             try
             {
                 var parameters = new[]
                 {
                     new SqlParameter("CfType",cfType),
+                    new SqlParameter("CfId",cfId),
                 };
                 return DoQueryAdapter("QCEL.FetchCFItems", parameters);
             }
@@ -68,8 +69,27 @@ namespace QCElectrical.Data
                 throw ex;
             }
         }
+        public DataRow FetchCF_801_19_1(int documentId)
+        {
+            try
+            {
+                var parameters = new[]
+                {
+                    new SqlParameter("DocumentId",documentId),
+                };
+                var dt = DoQueryReader("QCEL.FetchCF_801_19_1", parameters);
+                if (dt.Rows.Count > 0) return dt.Rows[0] as DataRow;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
-        public int SaveCF_WithFixedItems(int id,int projectId,int employerId,int contractId,int contractorId,int userId,string objectName,string type2, string dwgNo,int unitId,string remark = null,string revNo = null,string location = null,int? voltageCableType = null,string reportNoParameters = null,DataTable attachments = null,DataTable itemsResult = null)
+
+
+        public int SaveCF_WithFixedItems(int id,int projectId,int employerId,int contractId,int contractorId,int userId,string objectName,string type2, int revisionId,int unitId,string remark = null,string revNo = null,string location = null,int? voltageCableType = null,string reportNoParameters = null,DataTable attachments = null,DataTable itemsResult = null)
         {
             try
             {
@@ -83,7 +103,7 @@ namespace QCElectrical.Data
                     new SqlParameter("UserId",userId),
                     new SqlParameter("ObjectName",objectName),
                     new SqlParameter("Type2",type2),
-                    new SqlParameter("DwgNo",dwgNo),
+                    new SqlParameter("RevisionId",revisionId),
                     new SqlParameter("UnitId",unitId),
                     new SqlParameter("Remark",remark),
                     new SqlParameter("RevNo",revNo),

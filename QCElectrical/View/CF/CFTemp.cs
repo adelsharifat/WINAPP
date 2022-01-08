@@ -171,7 +171,7 @@ namespace QCElectrical.View.CF
         {
             try
             {
-                if (FormMode == FormState.ReadMode) return;
+                if (FormMode == FormState.View) return;
                 DMS.Attachment.Do.ClearAttachmentFromGrid(grcAttaochment, fileAttachmentList);
             }
             catch (Exception ex)

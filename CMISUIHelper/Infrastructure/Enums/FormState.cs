@@ -9,11 +9,11 @@ namespace CMISUIHelper.Infrastructure.Enums
 {
     public enum FormState
     {
-        [Description("Save Mode")]
-        SaveMode,
-        [Description("Edit Mode")]
-        EditMode,
-        [Description("Read Mode")]
-        ReadMode
+        [Description("Save")]
+        Save,
+        [Description("Edit")]
+        Edit,
+        [Description("Read")]
+        View
     }
 }
