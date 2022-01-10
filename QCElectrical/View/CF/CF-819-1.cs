@@ -264,11 +264,7 @@ namespace QCElectrical.View.CF
             //Call Fill Area Unit Combo
             FillAreaUnitCombo();
             //Call Fill DWG No Combo
-            FillDWGNo();
-            //Fill Grid Cf Items
-            FillGrid();
-            // set form to OnSaveState
-            OnSaveState();                       
+            FillDWGNo();                    
             //Generate ReportNumber
             if (FormMode == FormState.Save)
                 txtReportNo.Text = GenerateReportNumber();
@@ -286,10 +282,16 @@ namespace QCElectrical.View.CF
             //SetReadOnly
             grcAttachment.UnEditableColumns();
             btnAddAttachment.Enabled = false;
-            btnDeleteAttachment.Enabled = false;
+            btnDeleteAttachment.Enabled = false;      
 
             //Get cf selected row from the database by documentId
             var cfRow = DAL.Do.FetchCF_801_19_1(documentId);
+
+            //Get some data from cfRow
+            var cfId = cfRow.ToInt("CfId");
+            var data = DAL.Do.FetchCFItems("CF819-1", cfId);
+            //fill Cf Grid items
+            FillGrid(cfId);
 
             //Get some data from cfRow
             var projectId = cfRow.ProjectId();
@@ -332,21 +334,39 @@ namespace QCElectrical.View.CF
             // Set form to view mode ui
             formStateControl.SetSaveMode();
             formStateControl.ShowDraft();
-
-
-
-
-
-
-
-
+       
+            var data = DAL.Do.FetchCFItems("CF819-1");
+            FillGrid(data);
         }
         #endregion
 
         #region EditState
         private void OnEditState(int documentId)
         {
+            try
+            {
+                //Set Data
+                OnViewState(documentId);
 
+                // Set form to view mode ui
+                formStateControl.SetEditMode();
+                formStateControl.ShowDraft();
+
+
+                //Get cf selected row from the database by documentId
+                var cfRow = DAL.Do.FetchCF_801_19_1(documentId);
+                //Get some data from cfRow
+                var cfId = cfRow.ToInt("CfId");
+                var data = DAL.Do.FetchCFItems("CF819-1", cfId);
+
+                FillGrid(data);
+
+
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
         }
         #endregion
 
@@ -379,32 +399,12 @@ namespace QCElectrical.View.CF
             }
         }
         // Fill CF Items Grid Helper
-        private void FillGrid()
+        private void FillGrid(object data)
         {
             try
-            {
-                DataTable data = null;
-                if(FormMode == FormState.View || FormMode == FormState.Edit)
-                {
-                    //Get cf selected row from the database by documentId
-                    var cfRow = DAL.Do.FetchCF_801_19_1(documentId);
-                    //Get some data from cfRow
-                    var cfId = cfRow.ToInt("CfId");
-                    data = DAL.Do.FetchCFItems("CF819-1", cfId);
-                }
-                else
-                {
-                    data = DAL.Do.FetchCFItems("CF819-1");
-                }
-
-
+            {               
                 grcItems.DataSource = data;
                 grcItems.HideColumns("Id,ItemId").UnEditableColumns();
-
-                //Editable Column if Form is in View or Edit Mode
-                if(FormMode== FormState.Save || FormMode == FormState.Edit)
-                    grcItems.EditableColumns("ACC,REJ,NA");
-
 
                 //get columns need set to editable
                 var columnRowNumber = grvItems.Columns["RowNo"] as GridColumn;
@@ -417,6 +417,13 @@ namespace QCElectrical.View.CF
                 columnRowNumber.Width = colACC.Width = colREJ.Width = colNA.Width = 50;
                 columnRowNumber.MaxWidth = colACC.MaxWidth = colREJ.MaxWidth = colNA.MaxWidth = 50;
                 columnRowNumber.MinWidth = colACC.MinWidth = colREJ.MinWidth = colNA.MinWidth = 50;
+
+                //set btnAcc and Rej and Na
+                .3.3btnAcceptAll.Enabled = FormMode != FormState.View;
+                btnRejectAll.Enabled = FormMode != FormState.View;
+                btnNoAnswerAll.Enabled = FormMode != FormState.View;
+
+
             }
             catch (Exception ex)
             {
@@ -470,8 +477,7 @@ namespace QCElectrical.View.CF
         {
             try
             {
-                // Update cf items where grid is null
-                FillGrid();
+
             }
             catch (Exception ex)
             {
