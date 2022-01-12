@@ -238,8 +238,10 @@
             // 
             // txtRemark
             // 
+            this.txtRemark.Enabled = false;
             this.txtRemark.Location = new System.Drawing.Point(14, 24);
             this.txtRemark.Name = "txtRemark";
+            this.txtRemark.Properties.AccessibleName = "QCEL.Consertium";
             this.txtRemark.Properties.Appearance.BackColor = System.Drawing.Color.MintCream;
             this.txtRemark.Properties.Appearance.Options.UseBackColor = true;
             this.txtRemark.Properties.NullValuePrompt = "Consertium Comment";
@@ -288,7 +290,6 @@
             this.grvItems.OptionsView.ShowAutoFilterRow = true;
             this.grvItems.OptionsView.ShowFooter = true;
             this.grvItems.OptionsView.ShowGroupPanel = false;
-            this.grvItems.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvItems_CellValueChanged);
             this.grvItems.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvItems_CellValueChanging);
             // 
             // repositoryInspectionResult
@@ -572,6 +573,7 @@
             this.Name = "CF_819_1";
             this.Size = new System.Drawing.Size(1399, 847);
             this.RibbonPageAdded += new CMISUIHelper.UserControls.ViewTab.RibbonPageEventHandler(this.CF_819_1_RibbonPageAdded);
+            this.BeforeViewLoad += new System.EventHandler(this.CF_819_1_BeforeViewLoad);
             this.ViewLoaded += new System.EventHandler(this.CF_819_1_ViewLoaded);
             this.Controls.SetChildIndex(this.pnlHeader, 0);
             this.Controls.SetChildIndex(this.tableLayoutPanel1, 0);
@@ -621,7 +623,6 @@
         private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private CMISControls.Grid.CMGridControl grcItems;
-        private DevExpress.XtraGrid.Views.Grid.GridView grvItems;
         private System.Windows.Forms.Label label2;
         private CMISControls.Combo.CMLookupEdit cmbUnit;
         private System.Windows.Forms.Label label3;
@@ -652,5 +653,6 @@
         private System.Windows.Forms.ToolStripButton btnDeleteAttachment;
         private System.Windows.Forms.Panel panel2;
         private CMISControl.FormMode formStateControl;
+        private DevExpress.XtraGrid.Views.Grid.GridView grvItems;
     }
 }

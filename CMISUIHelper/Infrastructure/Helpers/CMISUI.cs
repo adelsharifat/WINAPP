@@ -1203,9 +1203,6 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 if (mdiForm.ShowHomeMenuItems && mdiForm.HomePage == ribbonPage.Text && mdiForm.CloseItemLocation == CloseItemAlignment.Start)
                     RibbonHandler.GenerateHomeMenus(childForm);
 
-                tabPage.Controls.Add(childForm);
-                childForm.Dock = System.Windows.Forms.DockStyle.Fill;
-
                 System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
                 timer.Interval = 1;
                 int counter = 0;

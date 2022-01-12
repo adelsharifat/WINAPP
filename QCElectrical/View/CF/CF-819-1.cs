@@ -46,18 +46,21 @@ namespace QCElectrical.View.CF
             ViewTitle = "CF_819_1";
 
             FormMode = formState;
-            this.documentId = documentId;
-         
+            this.documentId = documentId;            
         }
 
-
-
-        private void CF_819_1_ViewLoaded(object sender, EventArgs e)
+        private void CF_819_1_BeforeViewLoad(object sender, EventArgs e)
         {
             OnInit();//Set form as OnInitState
+        }
 
+        private void CF_819_1_ViewLoaded(object sender, EventArgs e)
+        {           
             if (FormMode == FormState.View)
                 OnViewState(this.documentId);
+
+            if (FormMode == FormState.Save)
+                OnSaveState();
 
             if (FormMode == FormState.Edit)
                 OnEditState(this.documentId);
@@ -94,7 +97,6 @@ namespace QCElectrical.View.CF
             }
         }
 
-  
         // Handle form ribbon menu items
         private void CF_819_1_RibbonPageAdded(object sender, CMISUIHelper.Infrastructure.Contracts.CustomEventArgs.RibbonPageEventArgs e)
         {
@@ -115,7 +117,6 @@ namespace QCElectrical.View.CF
 
                 newMenu.ItemClick += NewMenu_ItemClick; ;//Event for handle new menu item clicking
                 saveMenu.ItemClick += SaveMenu_ItemClick;//Event for handle save menu item clicking
-
             }
             catch (Exception ex)
             {
@@ -123,6 +124,7 @@ namespace QCElectrical.View.CF
             }
         }
 
+        // set for to new save state
         private void NewMenu_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             try
@@ -134,8 +136,6 @@ namespace QCElectrical.View.CF
                 ex.ShowMessage();
             }
         }
-
-
 
         //Event add attchment to grcAttachment grid
         private void btnAddAttachment_Click(object sender, EventArgs e)
@@ -158,6 +158,7 @@ namespace QCElectrical.View.CF
                 ex.ShowMessage();
             }
         }
+        
         //Event show attachment from grcAttachment grid
         private void grvAttachment_RowCellClick(object sender, DevExpress.XtraGrid.Views.Grid.RowCellClickEventArgs e)
         {
@@ -171,6 +172,7 @@ namespace QCElectrical.View.CF
                 ex.ShowMessage();
             }
         }
+        
         //Delete attachment from grcAttachment grid
         private void btnDeleteAttachment_Click(object sender, EventArgs e)
         {
@@ -249,11 +251,7 @@ namespace QCElectrical.View.CF
             {
                 ex.ShowMessage();
             }
-        }
-        
-
-
-
+        }        
         #endregion
 
 
@@ -266,8 +264,7 @@ namespace QCElectrical.View.CF
             //Call Fill DWG No Combo
             FillDWGNo();                    
             //Generate ReportNumber
-            if (FormMode == FormState.Save)
-                txtReportNo.Text = GenerateReportNumber();
+            if (FormMode == FormState.Save) txtReportNo.Text = GenerateReportNumber();
         }
         #endregion
 
@@ -277,7 +274,6 @@ namespace QCElectrical.View.CF
         {
             // Set form to view mode ui
             formStateControl.SetViewMode();
-
 
             //SetReadOnly
             grcAttachment.UnEditableColumns();
@@ -291,7 +287,7 @@ namespace QCElectrical.View.CF
             var cfId = cfRow.ToInt("CfId");
             var data = DAL.Do.FetchCFItems("CF819-1", cfId);
             //fill Cf Grid items
-            FillGrid(cfId);
+            FillCFItemsGrid(data);
 
             //Get some data from cfRow
             var projectId = cfRow.ProjectId();
@@ -301,7 +297,6 @@ namespace QCElectrical.View.CF
             // Load attachments and fill to grid
             grcAttachment.DataSource = DMS.Attachment.Do.GetAttchmentwithFileColumn(projectId, objectName, objectId, "QCEL.ftAttachment");
             grcAttachment.HideColumns("Id,IsUsed,FileTableName").UnEditableColumns();
-
 
             if (!cfRow.Posted())
             {
@@ -314,7 +309,6 @@ namespace QCElectrical.View.CF
             cmbCompany.EditValue = cfRow.ContractId();
             txtReportNo.Text = cfRow.ReportNo();            
             cmbUnit.EditValue = cfRow.UnitId();
-           
             cmbDwgNo.EditValue = cfRow.RevisionId();
             txtLocation.Text = cfRow.ToString("Location");
             rdgVoltageType.EditValue = cfRow.ToInt("VoltageCableType");
@@ -334,9 +328,12 @@ namespace QCElectrical.View.CF
             // Set form to view mode ui
             formStateControl.SetSaveMode();
             formStateControl.ShowDraft();
-       
+
+            formStateControl.ShowDraft();
+            this.RibbonPage.Text = this.ViewTitle += " ::: DRAFT";        
+
             var data = DAL.Do.FetchCFItems("CF819-1");
-            FillGrid(data);
+            FillCFItemsGrid(data);
         }
         #endregion
 
@@ -349,19 +346,25 @@ namespace QCElectrical.View.CF
                 OnViewState(documentId);
 
                 // Set form to view mode ui
-                formStateControl.SetEditMode();
-                formStateControl.ShowDraft();
-
+                formStateControl.SetEditMode();            
 
                 //Get cf selected row from the database by documentId
                 var cfRow = DAL.Do.FetchCF_801_19_1(documentId);
+
+                if (!cfRow.Posted())
+                {
+                    formStateControl.ShowDraft();
+                    this.RibbonPage.Text = this.ViewTitle += " ::: DRAFT";
+                }
+                else formStateControl.HideDraft();
+
+
+
                 //Get some data from cfRow
                 var cfId = cfRow.ToInt("CfId");
                 var data = DAL.Do.FetchCFItems("CF819-1", cfId);
-
-                FillGrid(data);
-
-
+               
+                FillCFItemsGrid(data);
             }
             catch (Exception ex)
             {
@@ -391,7 +394,7 @@ namespace QCElectrical.View.CF
             try
             {
                 var data = CommonDals.Do.DWGNo.FetchDWGNo();
-                cmbDwgNo.Fill(data, "DWGNo", "RevisionId");
+                cmbDwgNo.Fill(data, "DWGNo", "Id").HideColumns("RevisionId");
             }
             catch (Exception ex)
             {
@@ -399,31 +402,32 @@ namespace QCElectrical.View.CF
             }
         }
         // Fill CF Items Grid Helper
-        private void FillGrid(object data)
+        private void FillCFItemsGrid(object data)
         {
             try
             {               
                 grcItems.DataSource = data;
-                grcItems.HideColumns("Id,ItemId").UnEditableColumns();
+                grcItems.HideColumns("Id,ItemId").UnEditableColumns();                           
 
+                if (FormMode != FormState.View)
+                    grcItems.EditableColumns("ACC,REJ,NA");
                 //get columns need set to editable
                 var columnRowNumber = grvItems.Columns["RowNo"] as GridColumn;
                 var columnName = grvItems.Columns["Name"] as GridColumn;
                 var colACC = grvItems.Columns["ACC"] as GridColumn;
                 var colREJ = grvItems.Columns["REJ"] as GridColumn;
-                var colNA = grvItems.Columns["NA"] as GridColumn;           
-               
+                var colNA = grvItems.Columns["NA"] as GridColumn;                                         
+
+
                 // Set custom size for columns
                 columnRowNumber.Width = colACC.Width = colREJ.Width = colNA.Width = 50;
                 columnRowNumber.MaxWidth = colACC.MaxWidth = colREJ.MaxWidth = colNA.MaxWidth = 50;
                 columnRowNumber.MinWidth = colACC.MinWidth = colREJ.MinWidth = colNA.MinWidth = 50;
 
                 //set btnAcc and Rej and Na
-                .3.3btnAcceptAll.Enabled = FormMode != FormState.View;
+                btnAcceptAll.Enabled = FormMode != FormState.View;
                 btnRejectAll.Enabled = FormMode != FormState.View;
                 btnNoAnswerAll.Enabled = FormMode != FormState.View;
-
-
             }
             catch (Exception ex)
             {
@@ -490,7 +494,7 @@ namespace QCElectrical.View.CF
         {
             try
             {
-                //DataTables.Init3ColumnItemAnsResult(sender as GridView, e);
+                DataTables.Init3ColumnItemAnsResult(sender as GridView, e.Column.FieldName, e.RowHandle);
             }
             catch (Exception ex)
             {
@@ -570,7 +574,5 @@ namespace QCElectrical.View.CF
                 ex.ShowMessage();
             }
         }
-
-       
     }
 }

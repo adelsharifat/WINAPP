@@ -1,4 +1,5 @@
-﻿using CMISUIHelper.Infrastructure.Contracts;
+﻿using CMISDAL.Common;
+using CMISUIHelper.Infrastructure.Contracts;
 using CMISUIHelper.Infrastructure.Enums;
 using CMISUIHelper.Infrastructure.Helpers;
 using CMISUtils;
@@ -26,6 +27,7 @@ namespace CMISUIHelper
         {
             InitializeComponent();
             ItemIcon = this.DefualtItemIcon;
+            GetUserPermissions(LoginInfo.ProjectId,LoginInfo.Id);
         }
 
         private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
@@ -122,17 +124,36 @@ namespace CMISUIHelper
             set { defualtItemIcon = value; }
         }
 
-
-
         #endregion
 
         #region Method
-        private void GetUserPermisons(int projectId,int userId)
+        private void GetUserPermissions(int projectId,int userId)
         {
-            Permisions.Add("ShowAll", PermisionValue.Deny);
-            Permisions.Add("CloseForm", PermisionValue.Allow);
-            Permisions.Add("Test", PermisionValue.Allow);
-            Permisions.Add("datetimepicker", PermisionValue.Deny);
+            var data = CommonDals.Do.Permision.FetchUserPermission(projectId, userId);
+            foreach (DataRow acl in data.Rows)
+            {
+                PermisionValue Allow = PermisionValue.Deny;
+                switch ((int?)Convert.ToInt32(acl["Allow"]))
+                {
+                    case 0:
+                        Allow = PermisionValue.Deny;
+                        break;
+                    case 1:
+                        Allow = PermisionValue.Allow;
+                        break;
+                    case -1:
+                        Allow = PermisionValue.Hide;
+                        break;
+                    case null:
+                        Allow = PermisionValue.Inherit;
+                        break;
+
+                    default:
+                        break;
+                }
+
+                Permisions.Add(acl["Name"].ToString(), Allow);
+            }
         }
 
         public void InitAvatar()
