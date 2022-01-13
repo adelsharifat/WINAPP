@@ -11,6 +11,6 @@ namespace QCElectrical.Model
         public int? Id { get; set; }
         public int ItemId { get; set; }
         public int RoleOrder { get; set; }
-        public bool? ItemValue { get; set; }
+        public int? ItemValue { get; set; }
     }
 }

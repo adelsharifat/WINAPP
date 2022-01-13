@@ -55,6 +55,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "frmCFReport";
             this.Size = new System.Drawing.Size(1354, 810);
+            this.ViewLoaded += new System.EventHandler(this.frmCFReport_ViewLoaded);
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).EndInit();
             this.ResumeLayout(false);
 

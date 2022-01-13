@@ -69,6 +69,24 @@ namespace QCElectrical.Data
                 throw ex;
             }
         }
+
+        public DataTable FetchAttachments(int objectId)
+        {
+            try
+            {
+                var parameters = new[]
+                {
+                    new SqlParameter("ObjectId",objectId),
+                };
+                return DoQueryAdapter("QCEL.FetchAttachments", parameters);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
         public DataRow FetchCF_801_19_1(int documentId)
         {
             try

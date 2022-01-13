@@ -148,9 +148,9 @@ namespace CMISUtils
             return dr.ToInt(columnName);
         }
 
-        public static int RevisionId(this DataRow dr, string columnName = "RevisionId")
+        public static Int64 RevisionId(this DataRow dr, string columnName = "RevisionId")
         {
-            return dr.ToInt(columnName);
+            return Convert.ToInt64(dr[columnName]);
         }
     
         public static int AreaId(this DataRow dr, string columnName = "AreaId")

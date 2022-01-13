@@ -40,13 +40,14 @@ namespace QCElectrical.View.CF
             FormMode = FormState.Save;
         }
 
-        public CF_819_1(int documentId, FormState formState)
+        public CF_819_1(int documentId,int cfId, FormState formState)
         {
             InitializeComponent();
             ViewTitle = "CF_819_1";
 
             FormMode = formState;
-            this.documentId = documentId;            
+            this.documentId = documentId;
+            this.cfId = cfId;
         }
 
         private void CF_819_1_BeforeViewLoad(object sender, EventArgs e)
@@ -229,15 +230,14 @@ namespace QCElectrical.View.CF
                 // Appear tvp attachments
                 var attachments = fileAttachments.MapToTvpAttachment();
                 var list = grvItems.GetDataTable().ToList<CFItem>();
-                var itemsResult = list
+                var itemsResult = list.Where(x=>!(x.ACC == false && x.REJ == false && x.NA == false))
                     .Select(x => new ItemResult
                     {
                         Id = x.Id,
                         ItemId = x.ItemId,
                         RoleOrder = roleOrder,
-                        ItemValue = x.ACC==true ? (bool?)true : x.REJ==true ? (bool?)false : null
+                        ItemValue = x.ItemValue
                     }).ToDataTable();
-
 
                 var result = DAL.Do.SaveCF_WithFixedItems(cfId, LoginInfo.ProjectId, employerId, contractId, contractorId, LoginInfo.Id, Bundle.SCHEMA,
                     "CF-801-19", revisionId, unitId, remark, revisionNo, location, voltageCableType, reportParameters, attachments, itemsResult);
@@ -269,7 +269,7 @@ namespace QCElectrical.View.CF
         #endregion
 
 
-        #region ViewState 
+        #region Form States 
         private void OnViewState(int documentId)
         {
             // Set form to view mode ui
@@ -314,12 +314,65 @@ namespace QCElectrical.View.CF
             rdgVoltageType.EditValue = cfRow.ToInt("VoltageCableType");
 
             cmbCompany.ReadOnly = true;
-            //cmbDwgNo.ReadOnly = true;
+            cmbDwgNo.ReadOnly = true;
             txtLocation.ReadOnly = true;
             cmbUnit.ReadOnly = true;
             rdgVoltageType.ReadOnly = true;
 
         }
+        private void OnEditState(int documentId)
+        {
+            // Set form to view mode ui
+            formStateControl.SetEditMode();
+
+            //SetReadOnly
+            grcAttachment.UnEditableColumns();
+            btnAddAttachment.Enabled = true;
+            btnDeleteAttachment.Enabled = true;
+
+            //Get cf selected row from the database by documentId
+            var cfRow = DAL.Do.FetchCF_801_19_1(documentId);
+       
+            //Get some data from cfRow
+            var cfId = cfRow.ToInt("CfId");
+            var data = DAL.Do.FetchCFItems("CF819-1", cfId);
+            //fill Cf Grid items
+            FillCFItemsGrid(data);
+
+            //Get some data from cfRow
+            var projectId = cfRow.ProjectId();
+            var objectId = cfRow.DocumentId();
+            var objectName = cfRow.ObjectName();
+
+            // Load attachments and fill to grid
+            var attachments = DAL.Do.FetchAttachments(objectId);
+            grcAttachment.DataSource = attachments;
+            fileAttachments = attachments.ToList<FileAttachmentViewModel>();
+            grcAttachment.HideColumns("Id,IsUsed,FileTableName").UnEditableColumns();
+
+            if (!cfRow.Posted())
+            {
+                formStateControl.ShowDraft();
+                this.RibbonPage.Text = this.ViewTitle += " ::: DRAFT";
+            }
+            else formStateControl.HideDraft();
+
+            //Set fields data
+            cmbCompany.EditValue = cfRow.ContractId();
+            txtReportNo.Text = cfRow.ReportNo();
+            cmbUnit.EditValue = cfRow.UnitId();
+            cmbDwgNo.EditValue = cfRow.RevisionId();
+            txtLocation.Text = cfRow.ToString("Location");
+            rdgVoltageType.EditValue = cfRow.ToInt("VoltageCableType");
+
+            cmbCompany.ReadOnly = true;
+            cmbDwgNo.ReadOnly = true;
+            txtLocation.ReadOnly = false;
+            cmbUnit.ReadOnly = true;
+            rdgVoltageType.ReadOnly = false;
+
+        }
+
         #endregion
 
         #region SaveState
@@ -334,42 +387,6 @@ namespace QCElectrical.View.CF
 
             var data = DAL.Do.FetchCFItems("CF819-1");
             FillCFItemsGrid(data);
-        }
-        #endregion
-
-        #region EditState
-        private void OnEditState(int documentId)
-        {
-            try
-            {
-                //Set Data
-                OnViewState(documentId);
-
-                // Set form to view mode ui
-                formStateControl.SetEditMode();            
-
-                //Get cf selected row from the database by documentId
-                var cfRow = DAL.Do.FetchCF_801_19_1(documentId);
-
-                if (!cfRow.Posted())
-                {
-                    formStateControl.ShowDraft();
-                    this.RibbonPage.Text = this.ViewTitle += " ::: DRAFT";
-                }
-                else formStateControl.HideDraft();
-
-
-
-                //Get some data from cfRow
-                var cfId = cfRow.ToInt("CfId");
-                var data = DAL.Do.FetchCFItems("CF819-1", cfId);
-               
-                FillCFItemsGrid(data);
-            }
-            catch (Exception ex)
-            {
-                ex.ShowMessage();
-            }
         }
         #endregion
 
@@ -394,7 +411,7 @@ namespace QCElectrical.View.CF
             try
             {
                 var data = CommonDals.Do.DWGNo.FetchDWGNo();
-                cmbDwgNo.Fill(data, "DWGNo", "Id").HideColumns("RevisionId");
+                cmbDwgNo.Fill(data, "DWGNo", "RevisionId");
             }
             catch (Exception ex)
             {
@@ -477,30 +494,6 @@ namespace QCElectrical.View.CF
         }
         #endregion
 
-        private void txtReportNo_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                ex.ShowMessage();
-            }
-        }
-
-
-        private void grvItems_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
-        {
-            try
-            {
-                DataTables.Init3ColumnItemAnsResult(sender as GridView, e.Column.FieldName, e.RowHandle);
-            }
-            catch (Exception ex)
-            {
-                ex.ShowMessage();
-            }
-        }
 
 
         private void grvItems_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)

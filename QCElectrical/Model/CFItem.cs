@@ -15,5 +15,6 @@ namespace QCElectrical.Model
         public bool? ACC { get; set; }
         public bool? REJ { get; set; }
         public bool? NA { get; set; }
+        public int? ItemValue { get; set; }
     }
 }

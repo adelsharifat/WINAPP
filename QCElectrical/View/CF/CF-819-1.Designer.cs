@@ -453,7 +453,6 @@
             this.txtReportNo.Properties.ReadOnly = true;
             this.txtReportNo.Size = new System.Drawing.Size(311, 22);
             this.txtReportNo.TabIndex = 8;
-            this.txtReportNo.TextChanged += new System.EventHandler(this.txtReportNo_TextChanged);
             // 
             // label5
             // 

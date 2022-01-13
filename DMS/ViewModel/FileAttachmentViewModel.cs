@@ -11,7 +11,7 @@ namespace DMS.ViewModel
     {
         public string File { get; set; }
         public int Id { get; set; }
-        public string stream_id { get; set; }
+        public Guid stream_id { get; set; }
         public byte[] FileStream { get; set; }
         public string FileName { get; set; }
         public string Type { get; set; }

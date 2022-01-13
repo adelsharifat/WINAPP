@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CMISUIHelper.UserControls;
+using CMISDAL.Common;
+using CMISUtils;
 
 namespace QCElectrical.View.Report
 {
@@ -17,6 +19,11 @@ namespace QCElectrical.View.Report
         {
             InitializeComponent();
             ViewTitle = "CF Report";
+        }
+
+        private void frmCFReport_ViewLoaded(object sender, EventArgs e)
+        {
+
         }
     }
 }

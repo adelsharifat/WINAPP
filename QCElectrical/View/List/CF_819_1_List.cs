@@ -76,8 +76,9 @@ namespace QCElectrical.View.List
                 var currentRow = grv_819_1.GetFocusedDataRow();
                 if (currentRow == null) throw new CMISException("CurrentRow null expetion!");
 
-                int documentId = currentRow.ToInt("DocumentId");
-                CMISUI.UIHandler.ViewInTab<View.CF.CF_819_1>(this.OwnerForm, new object[] { documentId,FormState.View });
+                int documentId = currentRow.DocumentId();
+                int cfId = currentRow.ToInt("CfId");
+                CMISUI.UIHandler.ViewInTab<View.CF.CF_819_1>(this.OwnerForm, new object[] { documentId,cfId,FormState.View });
             }
             catch (Exception ex)
             {
@@ -93,7 +94,8 @@ namespace QCElectrical.View.List
                 if (currentRow == null) throw new CMISException("CurrentRow null expetion!");
 
                 int documentId = currentRow.ToInt("DocumentId");
-                CMISUI.UIHandler.ViewInTab<View.CF.CF_819_1>(this.OwnerForm,new object[]{ documentId,FormState.Edit });
+                int cfId = currentRow.ToInt("Id");
+                CMISUI.UIHandler.ViewInTab<View.CF.CF_819_1>(this.OwnerForm,new object[]{ documentId,cfId,FormState.Edit });
             }
             catch (Exception ex)
             {
