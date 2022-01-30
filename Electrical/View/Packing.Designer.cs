@@ -30,21 +30,21 @@
         {
             this.pnlPLHeader = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
-            this.lookUpEdit4 = new DevExpress.XtraEditors.LookUpEdit();
+            this.cboQtyUnit = new DevExpress.XtraEditors.LookUpEdit();
             this.label8 = new System.Windows.Forms.Label();
-            this.textEdit4 = new DevExpress.XtraEditors.TextEdit();
+            this.txtPlQty = new DevExpress.XtraEditors.TextEdit();
             this.label7 = new System.Windows.Forms.Label();
-            this.lookUpEdit3 = new DevExpress.XtraEditors.LookUpEdit();
+            this.cboVendor = new DevExpress.XtraEditors.LookUpEdit();
             this.label6 = new System.Windows.Forms.Label();
-            this.textEdit3 = new DevExpress.XtraEditors.TextEdit();
+            this.txtDescription = new DevExpress.XtraEditors.TextEdit();
             this.label5 = new System.Windows.Forms.Label();
-            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
+            this.txtPackingNo = new DevExpress.XtraEditors.TextEdit();
             this.label4 = new System.Windows.Forms.Label();
-            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
+            this.txtSize = new DevExpress.XtraEditors.TextEdit();
             this.label3 = new System.Windows.Forms.Label();
-            this.lookUpEdit2 = new DevExpress.XtraEditors.LookUpEdit();
+            this.cboSubCategory = new DevExpress.XtraEditors.LookUpEdit();
             this.label2 = new System.Windows.Forms.Label();
-            this.lookUpEdit1 = new DevExpress.XtraEditors.LookUpEdit();
+            this.cboCategory = new DevExpress.XtraEditors.LookUpEdit();
             this.lblTag = new System.Windows.Forms.Label();
             this.txtTag = new DevExpress.XtraEditors.TextEdit();
             this.lblUnit = new System.Windows.Forms.Label();
@@ -54,14 +54,14 @@
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbCompany.Properties)).BeginInit();
             this.pnlPLHeader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit4.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit3.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboQtyUnit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPlQty.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboVendor.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPackingNo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSize.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboSubCategory.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboCategory.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTag.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboUnit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grcPackingList)).BeginInit();
@@ -92,21 +92,21 @@
             // pnlPLHeader
             // 
             this.pnlPLHeader.Controls.Add(this.label9);
-            this.pnlPLHeader.Controls.Add(this.lookUpEdit4);
+            this.pnlPLHeader.Controls.Add(this.cboQtyUnit);
             this.pnlPLHeader.Controls.Add(this.label8);
-            this.pnlPLHeader.Controls.Add(this.textEdit4);
+            this.pnlPLHeader.Controls.Add(this.txtPlQty);
             this.pnlPLHeader.Controls.Add(this.label7);
-            this.pnlPLHeader.Controls.Add(this.lookUpEdit3);
+            this.pnlPLHeader.Controls.Add(this.cboVendor);
             this.pnlPLHeader.Controls.Add(this.label6);
-            this.pnlPLHeader.Controls.Add(this.textEdit3);
+            this.pnlPLHeader.Controls.Add(this.txtDescription);
             this.pnlPLHeader.Controls.Add(this.label5);
-            this.pnlPLHeader.Controls.Add(this.textEdit2);
+            this.pnlPLHeader.Controls.Add(this.txtPackingNo);
             this.pnlPLHeader.Controls.Add(this.label4);
-            this.pnlPLHeader.Controls.Add(this.textEdit1);
+            this.pnlPLHeader.Controls.Add(this.txtSize);
             this.pnlPLHeader.Controls.Add(this.label3);
-            this.pnlPLHeader.Controls.Add(this.lookUpEdit2);
+            this.pnlPLHeader.Controls.Add(this.cboSubCategory);
             this.pnlPLHeader.Controls.Add(this.label2);
-            this.pnlPLHeader.Controls.Add(this.lookUpEdit1);
+            this.pnlPLHeader.Controls.Add(this.cboCategory);
             this.pnlPLHeader.Controls.Add(this.lblTag);
             this.pnlPLHeader.Controls.Add(this.txtTag);
             this.pnlPLHeader.Controls.Add(this.lblUnit);
@@ -127,16 +127,16 @@
             this.label9.TabIndex = 19;
             this.label9.Text = "QTY Unit";
             // 
-            // lookUpEdit4
+            // cboQtyUnit
             // 
-            this.lookUpEdit4.Location = new System.Drawing.Point(724, 114);
-            this.lookUpEdit4.Name = "lookUpEdit4";
-            this.lookUpEdit4.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lookUpEdit4.Properties.Appearance.Options.UseFont = true;
-            this.lookUpEdit4.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.cboQtyUnit.Location = new System.Drawing.Point(724, 114);
+            this.cboQtyUnit.Name = "cboQtyUnit";
+            this.cboQtyUnit.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboQtyUnit.Properties.Appearance.Options.UseFont = true;
+            this.cboQtyUnit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEdit4.Size = new System.Drawing.Size(133, 24);
-            this.lookUpEdit4.TabIndex = 18;
+            this.cboQtyUnit.Size = new System.Drawing.Size(133, 24);
+            this.cboQtyUnit.TabIndex = 18;
             // 
             // label8
             // 
@@ -148,14 +148,14 @@
             this.label8.TabIndex = 17;
             this.label8.Text = "P/L QTY";
             // 
-            // textEdit4
+            // txtPlQty
             // 
-            this.textEdit4.Location = new System.Drawing.Point(535, 114);
-            this.textEdit4.Name = "textEdit4";
-            this.textEdit4.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textEdit4.Properties.Appearance.Options.UseFont = true;
-            this.textEdit4.Size = new System.Drawing.Size(90, 24);
-            this.textEdit4.TabIndex = 16;
+            this.txtPlQty.Location = new System.Drawing.Point(535, 114);
+            this.txtPlQty.Name = "txtPlQty";
+            this.txtPlQty.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPlQty.Properties.Appearance.Options.UseFont = true;
+            this.txtPlQty.Size = new System.Drawing.Size(90, 24);
+            this.txtPlQty.TabIndex = 16;
             // 
             // label7
             // 
@@ -167,16 +167,16 @@
             this.label7.TabIndex = 15;
             this.label7.Text = "Vendor";
             // 
-            // lookUpEdit3
+            // cboVendor
             // 
-            this.lookUpEdit3.Location = new System.Drawing.Point(82, 114);
-            this.lookUpEdit3.Name = "lookUpEdit3";
-            this.lookUpEdit3.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lookUpEdit3.Properties.Appearance.Options.UseFont = true;
-            this.lookUpEdit3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.cboVendor.Location = new System.Drawing.Point(82, 114);
+            this.cboVendor.Name = "cboVendor";
+            this.cboVendor.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboVendor.Properties.Appearance.Options.UseFont = true;
+            this.cboVendor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEdit3.Size = new System.Drawing.Size(356, 24);
-            this.lookUpEdit3.TabIndex = 14;
+            this.cboVendor.Size = new System.Drawing.Size(356, 24);
+            this.cboVendor.TabIndex = 14;
             // 
             // label6
             // 
@@ -188,14 +188,14 @@
             this.label6.TabIndex = 13;
             this.label6.Text = "Descriptions";
             // 
-            // textEdit3
+            // txtDescription
             // 
-            this.textEdit3.Location = new System.Drawing.Point(724, 66);
-            this.textEdit3.Name = "textEdit3";
-            this.textEdit3.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textEdit3.Properties.Appearance.Options.UseFont = true;
-            this.textEdit3.Size = new System.Drawing.Size(359, 24);
-            this.textEdit3.TabIndex = 12;
+            this.txtDescription.Location = new System.Drawing.Point(724, 66);
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDescription.Properties.Appearance.Options.UseFont = true;
+            this.txtDescription.Size = new System.Drawing.Size(359, 24);
+            this.txtDescription.TabIndex = 12;
             // 
             // label5
             // 
@@ -207,14 +207,14 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "Packing No.";
             // 
-            // textEdit2
+            // txtPackingNo
             // 
-            this.textEdit2.Location = new System.Drawing.Point(309, 66);
-            this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textEdit2.Properties.Appearance.Options.UseFont = true;
-            this.textEdit2.Size = new System.Drawing.Size(316, 24);
-            this.textEdit2.TabIndex = 10;
+            this.txtPackingNo.Location = new System.Drawing.Point(309, 66);
+            this.txtPackingNo.Name = "txtPackingNo";
+            this.txtPackingNo.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPackingNo.Properties.Appearance.Options.UseFont = true;
+            this.txtPackingNo.Size = new System.Drawing.Size(316, 24);
+            this.txtPackingNo.TabIndex = 10;
             // 
             // label4
             // 
@@ -226,14 +226,14 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "Size";
             // 
-            // textEdit1
+            // txtSize
             // 
-            this.textEdit1.Location = new System.Drawing.Point(65, 66);
-            this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textEdit1.Properties.Appearance.Options.UseFont = true;
-            this.textEdit1.Size = new System.Drawing.Size(145, 24);
-            this.textEdit1.TabIndex = 8;
+            this.txtSize.Location = new System.Drawing.Point(65, 66);
+            this.txtSize.Name = "txtSize";
+            this.txtSize.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSize.Properties.Appearance.Options.UseFont = true;
+            this.txtSize.Size = new System.Drawing.Size(145, 24);
+            this.txtSize.TabIndex = 8;
             // 
             // label3
             // 
@@ -245,16 +245,16 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "SubCategory";
             // 
-            // lookUpEdit2
+            // cboSubCategory
             // 
-            this.lookUpEdit2.Location = new System.Drawing.Point(905, 22);
-            this.lookUpEdit2.Name = "lookUpEdit2";
-            this.lookUpEdit2.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lookUpEdit2.Properties.Appearance.Options.UseFont = true;
-            this.lookUpEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.cboSubCategory.Location = new System.Drawing.Point(905, 22);
+            this.cboSubCategory.Name = "cboSubCategory";
+            this.cboSubCategory.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboSubCategory.Properties.Appearance.Options.UseFont = true;
+            this.cboSubCategory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEdit2.Size = new System.Drawing.Size(178, 24);
-            this.lookUpEdit2.TabIndex = 6;
+            this.cboSubCategory.Size = new System.Drawing.Size(178, 24);
+            this.cboSubCategory.TabIndex = 6;
             // 
             // label2
             // 
@@ -266,16 +266,16 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Category";
             // 
-            // lookUpEdit1
+            // cboCategory
             // 
-            this.lookUpEdit1.Location = new System.Drawing.Point(623, 22);
-            this.lookUpEdit1.Name = "lookUpEdit1";
-            this.lookUpEdit1.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lookUpEdit1.Properties.Appearance.Options.UseFont = true;
-            this.lookUpEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.cboCategory.Location = new System.Drawing.Point(623, 22);
+            this.cboCategory.Name = "cboCategory";
+            this.cboCategory.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboCategory.Properties.Appearance.Options.UseFont = true;
+            this.cboCategory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEdit1.Size = new System.Drawing.Size(178, 24);
-            this.lookUpEdit1.TabIndex = 4;
+            this.cboCategory.Size = new System.Drawing.Size(178, 24);
+            this.cboCategory.TabIndex = 4;
             // 
             // lblTag
             // 
@@ -357,14 +357,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.cmbCompany.Properties)).EndInit();
             this.pnlPLHeader.ResumeLayout(false);
             this.pnlPLHeader.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit4.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit3.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit3.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboQtyUnit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPlQty.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboVendor.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPackingNo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSize.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboSubCategory.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboCategory.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTag.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboUnit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grcPackingList)).EndInit();
@@ -383,20 +383,20 @@
         private System.Windows.Forms.Label lblTag;
         private DevExpress.XtraEditors.TextEdit txtTag;
         private System.Windows.Forms.Label label5;
-        private DevExpress.XtraEditors.TextEdit textEdit2;
+        private DevExpress.XtraEditors.TextEdit txtPackingNo;
         private System.Windows.Forms.Label label4;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
+        private DevExpress.XtraEditors.TextEdit txtSize;
         private System.Windows.Forms.Label label3;
-        private DevExpress.XtraEditors.LookUpEdit lookUpEdit2;
+        private DevExpress.XtraEditors.LookUpEdit cboSubCategory;
         private System.Windows.Forms.Label label2;
-        private DevExpress.XtraEditors.LookUpEdit lookUpEdit1;
+        private DevExpress.XtraEditors.LookUpEdit cboCategory;
         private System.Windows.Forms.Label label9;
-        private DevExpress.XtraEditors.LookUpEdit lookUpEdit4;
+        private DevExpress.XtraEditors.LookUpEdit cboQtyUnit;
         private System.Windows.Forms.Label label8;
-        private DevExpress.XtraEditors.TextEdit textEdit4;
+        private DevExpress.XtraEditors.TextEdit txtPlQty;
         private System.Windows.Forms.Label label7;
-        private DevExpress.XtraEditors.LookUpEdit lookUpEdit3;
+        private DevExpress.XtraEditors.LookUpEdit cboVendor;
         private System.Windows.Forms.Label label6;
-        private DevExpress.XtraEditors.TextEdit textEdit3;
+        private DevExpress.XtraEditors.TextEdit txtDescription;
     }
 }

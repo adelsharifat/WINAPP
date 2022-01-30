@@ -26,7 +26,8 @@ namespace Electrical.View
         {
             try
             {
-                InitComboCompany();
+                InitialLoadData();
+                
             }
             catch (Exception ex)
             {
@@ -72,17 +73,36 @@ namespace Electrical.View
         #endregion
 
 
-
         //Form helper functions
+        private void InitialLoadData()
+        {
+            InitComboCompany();
+            FillAreaUnitCombo();
+        }
+
         private void LoadData()
         {
-
+            FillAreaUnitCombo();
         }
 
         //Fill packing list grid
         private void FillPackingListGrid()
         {
 
+        }
+
+        //Fill AreaUnit Combo
+        private void FillAreaUnitCombo()
+        {
+            try
+            {
+                var data = CommonDals.Do.AreaUnit.FetchAreaUnitCombo(LoginInfo.ProjectId);
+                cboUnit.Fill(data, "FullName", "Id").SelectItem(0);
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
         }
 
     }
