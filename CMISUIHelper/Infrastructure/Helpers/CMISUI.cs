@@ -37,7 +37,21 @@ namespace CMISUIHelper.Infrastructure.Helpers
         public static void Error(string text, string title = "CMIS Message") => MessageBox.Show(text, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         public static void Stop(string text, string title = "CMIS Message") => MessageBox.Show(text, title, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
+        public static Action ConfirmOperation(string txt,string title = "CMIS Message")
+        {
+            return () =>
+            {
+                if (Confirm(txt, title) == DialogResult.No) return;
+            };
+        }
+
+
     }
+
+
+
+
     public static class CMISUI
     {
         public static OpenFileDialog OpenFDG(params string[] extFilters)
@@ -84,7 +98,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
         }
 
         // General Tools
-        public static RibbonPage AddCloseItem(this RibbonPage rp, ViewTab view, string itemName = "Close", Bitmap bmp = null, string rpgText= "General")
+        public static BarItem AddCloseItem(this RibbonPage rp, ViewTab view, string itemName = "Close", Bitmap bmp = null, string rpgText= "General")
         {
             if (bmp == null) bmp = (Bitmap)view.OwnerForm.CloseIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
@@ -97,13 +111,10 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 view.OnViewClosing(new CloseEventArgs());
                 view.OnViewClose(CloseEventArgs.Empty);
             };
-            view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
+            return item;
         }
-        public static RibbonPage AddRefreshItem(this RibbonPage rp, ViewTab view, string itemName = "Refresh", Bitmap bmp = null, string rpgText = "General")
+        public static BarItem AddRefreshItem(this RibbonPage rp, ViewTab view, string itemName = "Refresh", Bitmap bmp = null, string rpgText = "General")
         {
-            if (rp.Text == view.OwnerForm.HomePage) return rp;
-
             if (bmp == null) bmp = (Bitmap)view.OwnerForm.RefreshIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
@@ -114,8 +125,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
             {
                 view.OnViewRefresh(EventArgs.Empty);
             };
-            view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
+            return item;
         }
 
 
@@ -192,8 +202,20 @@ namespace CMISUIHelper.Infrastructure.Helpers
             return badge;
         }
 
+
+        public static BarItem AddItem(this RibbonPage rp,ViewTab view,string caption,string groupCaption,Bitmap bmp)
+        {
+            var group = rp.Groups.GetGroupByText(groupCaption);
+            if (group == null) group = RibbonHandler.NewRPG(groupCaption);
+            var item = RibbonHandler.NewItem.ButtonItem(caption, null, bmp);
+            group.AddItems(item);
+            rp.AddGroups(group);
+            return item;
+        }
+
+
         //Extntion Method For GridTools
-        public static RibbonPage AddToggleSearchGridTool(this RibbonPage rp, ViewTab view, string itemName = "Search", Bitmap bmp = null, string rpgText = "Grid Tools")
+        public static BarItem AddToggleSearchGridTool(this RibbonPage rp, ViewTab view, string itemName = "Search", Bitmap bmp = null, string rpgText = "Grid Tools")
         {
             if (bmp == null) bmp = view.GridToolsSearchIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
@@ -232,17 +254,15 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
                 
             };
-            view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
+            return item;
         }
-        public static RibbonPage AddToggleAutoWidthGridTool(this RibbonPage rp, ViewTab view, string itemName = "Auto Width", Bitmap bmp = null, string rpgText = "Grid Tools")
+        public static BarItem AddToggleAutoWidthGridTool(this RibbonPage rp, ViewTab view, string itemName = "Auto Width", Bitmap bmp = null, string rpgText = "Grid Tools")
         {
             if (bmp == null) bmp = view.GridToolsAutoWidthIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
-
             item.ItemClick += (o, e) =>
             {
                 GridControl grid = view.LastFocucedGrid;
@@ -271,19 +291,15 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
 
             };
-            view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
+            return item;
         }
-        public static RibbonPage AddToggleBestFitGridTool(this RibbonPage rp, ViewTab view, string itemName = "Best Fit", Bitmap bmp = null, string rpgText = "Grid Tools")
+        public static BarItem AddToggleBestFitGridTool(this RibbonPage rp, ViewTab view, string itemName = "Best Fit", Bitmap bmp = null, string rpgText = "Grid Tools")
         {
             if (bmp == null) bmp = view.GridToolsBestFitIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
-
-            
-
             item.ItemClick += (o, e) =>
             {
                 GridControl grid = view.LastFocucedGrid;
@@ -312,10 +328,9 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
 
             };
-            view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
+            return item;
         }
-        public static RibbonPage AddDateFormatGridTool(this RibbonPage rp, ViewTab view, string itemName = "Grid Date", Bitmap bmp = null, string rpgText = "Grid Tools")
+        public static BarItem AddDateFormatGridTool(this RibbonPage rp, ViewTab view, string itemName = "Grid Date", Bitmap bmp = null, string rpgText = "Grid Tools")
         {
             if (bmp == null) bmp = view.GridToolsDateFormatIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
@@ -352,606 +367,168 @@ namespace CMISUIHelper.Infrastructure.Helpers
 
             };
             view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
+            return item;
         }
-        public static RibbonPage AddCellFormatColorGridTool(this RibbonPage rp, ViewTab view, string itemName = "Grid Color", Bitmap bmp = null, string rpgText = "Grid Tools")
-        {
-            if (bmp == null) bmp = view.GridToolsColorFormatIcon;
-            var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
-            var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
-            group.AddItems(item);
-            rp.AddGroups(group);
-
-            item.ItemClick += (o, e) =>
-            {
-                GridControl grid = view.LastFocucedGrid;
-                var controls = from c in view.ViewObjects.Values
-                               let cc = c.Control as Control
-                               where c.Control is Control
-                               select cc;
-                var focusedControl = controls.FirstOrDefault(x => x.Focused);
-                var focucedGrid = focusedControl is GridControl;
-
-                if (focucedGrid)
-                {
-                    if (grid == null || grid?.Name != focusedControl.Name)
-                    {
-                        view.LastFocucedGrid = focusedControl as GridControl;
-                        grid = view.LastFocucedGrid;
-                    }
-                }
-
-
-                if (grid != null)
-                {
-                    GridView gv = grid.MainView as GridView;
-                    gv.BestFitColumns();
-                    grid.Focus();
-                }
-
-            };
-            view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
-        }
-        public static RibbonPage AddResetGridFormatTool(this RibbonPage rp, ViewTab view, string itemName = "Reset", Bitmap bmp = null, string rpgText = "Grid Tools")
+     
+        public static BarItem AddResetGridFormatTool(this RibbonPage rp, ViewTab view, string itemName = "Reset", Bitmap bmp = null, string rpgText = "Grid Tools")
         {
             if (bmp == null) bmp = view.GridToolsResetGridFormatIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
-
-            item.ItemClick += (o, e) =>
-            {
-                GridControl grid = view.LastFocucedGrid;
-                var controls = from c in view.ViewObjects.Values
-                               let cc = c.Control as Control
-                               where c.Control is Control
-                               select cc;
-                var focusedControl = controls.FirstOrDefault(x => x.Focused);
-                var focucedGrid = focusedControl is GridControl;
-
-                if (focucedGrid)
-                {
-                    if (grid == null || grid?.Name != focusedControl.Name)
-                    {
-                        view.LastFocucedGrid = focusedControl as GridControl;
-                        grid = view.LastFocucedGrid;
-                    }
-                }
-
-
-                if (grid != null)
-                {
-                    GridView gv = grid.MainView as GridView;
-                    gv.BestFitColumns();
-                    grid.Focus();
-                }
-            };
-            view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
+            return item;
         }
-        public static RibbonPage AddSettingsGridFormatTool(this RibbonPage rp, ViewTab view, string itemName = "Settings", Bitmap bmp = null, string rpgText = "Grid Tools")
+        public static RibbonPage AddGridTools(this RibbonPage rp,ViewTab view)
         {
-            if (bmp == null) bmp = view.GridToolsSettingsGridFormatIcon;
-            var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
-            var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
-            group.AddItems(item);
-            rp.AddGroups(group);
-
-            item.ItemClick += (o, e) =>
-            {
-                GridControl grid = view.LastFocucedGrid;
-                var controls = from c in view.ViewObjects.Values
-                               let cc = c.Control as Control
-                               where c.Control is Control
-                               select cc;
-                var focusedControl = controls.FirstOrDefault(x => x.Focused);
-                var focucedGrid = focusedControl is GridControl;
-
-                if (focucedGrid)
-                {
-                    if (grid == null || grid?.Name != focusedControl.Name)
-                    {
-                        view.LastFocucedGrid = focusedControl as GridControl;
-                        grid = view.LastFocucedGrid;
-                    }
-                }
-
-
-                if (grid != null)
-                {
-                    GridView gv = grid.MainView as GridView;
-                    gv.BestFitColumns();
-                    grid.Focus();
-                }
-
-            };
-            view.MenuItems.Add(item.Caption.ToLower(), item);
+            rp.AddToggleSearchGridTool(view);
+            rp.AddToggleAutoWidthGridTool(view);
+            rp.AddToggleBestFitGridTool(view);
             return rp;
         }
+
+
+
+
+
+
+
 
         // Add Sign Acion Items
-        public static RibbonPage AddSignPostActionTool(this RibbonPage rp, ViewTab view, string itemName = "Post", Bitmap bmp = null, string rpgText = "Sign")
+        public static BarItem AddSignPostActionTool(this RibbonPage rp, ViewTab view, string itemName = "Post", Bitmap bmp = null, string rpgText = "Sign")
         {
             if (bmp == null) bmp = view.SignpostActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
-
-            item.ItemClick += (o, e) =>
-            {
-                GridControl grid = view.LastFocucedGrid;
-                var controls = from c in view.ViewObjects.Values
-                               let cc = c.Control as Control
-                               where c.Control is Control
-                               select cc;
-                var focusedControl = controls.FirstOrDefault(x => x.Focused);
-                var focucedGrid = focusedControl is GridControl;
-
-                if (focucedGrid)
-                {
-                    if (grid == null || grid?.Name != focusedControl.Name)
-                    {
-                        view.LastFocucedGrid = focusedControl as GridControl;
-                        grid = view.LastFocucedGrid;
-                    }
-                }
-
-
-                if (grid != null)
-                {
-                    GridView gv = grid.MainView as GridView;
-                    gv.BestFitColumns();
-                    grid.Focus();
-                }
-
-            };
             view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
+            return item;
         }
-        public static RibbonPage AddSignAcceptActionTool(this RibbonPage rp, ViewTab view, string itemName = "Accept", Bitmap bmp = null, string rpgText = "Sign")
+        public static BarItem AddSignAcceptActionTool(this RibbonPage rp, ViewTab view, string itemName = "Accept", Bitmap bmp = null, string rpgText = "Sign")
         {
             if (bmp == null) bmp = view.SignAcceptActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
-
-            item.ItemClick += (o, e) =>
-            {
-                GridControl grid = view.LastFocucedGrid;
-                var controls = from c in view.ViewObjects.Values
-                               let cc = c.Control as Control
-                               where c.Control is Control
-                               select cc;
-                var focusedControl = controls.FirstOrDefault(x => x.Focused);
-                var focucedGrid = focusedControl is GridControl;
-
-                if (focucedGrid)
-                {
-                    if (grid == null || grid?.Name != focusedControl.Name)
-                    {
-                        view.LastFocucedGrid = focusedControl as GridControl;
-                        grid = view.LastFocucedGrid;
-                    }
-                }
-
-
-                if (grid != null)
-                {
-                    GridView gv = grid.MainView as GridView;
-                    gv.BestFitColumns();
-                    grid.Focus();
-                }
-
-            };
             view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
+            return item;
         }
-        public static RibbonPage AddSignSendBackActionTool(this RibbonPage rp, ViewTab view, string itemName = "SendBack", Bitmap bmp = null, string rpgText = "Sign")
+        public static BarItem AddSignSendBackActionTool(this RibbonPage rp, ViewTab view, string itemName = "SendBack", Bitmap bmp = null, string rpgText = "Sign")
         {
             if (bmp == null) bmp = view.SignSendBackActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
-
-            item.ItemClick += (o, e) =>
-            {
-                GridControl grid = view.LastFocucedGrid;
-                var controls = from c in view.ViewObjects.Values
-                               let cc = c.Control as Control
-                               where c.Control is Control
-                               select cc;
-                var focusedControl = controls.FirstOrDefault(x => x.Focused);
-                var focucedGrid = focusedControl is GridControl;
-
-                if (focucedGrid)
-                {
-                    if (grid == null || grid?.Name != focusedControl.Name)
-                    {
-                        view.LastFocucedGrid = focusedControl as GridControl;
-                        grid = view.LastFocucedGrid;
-                    }
-                }
-
-
-                if (grid != null)
-                {
-                    GridView gv = grid.MainView as GridView;
-                    gv.BestFitColumns();
-                    grid.Focus();
-                }
-
-            };
             view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
+            return item;
         }
-        public static RibbonPage AddSignRejectActionTool(this RibbonPage rp, ViewTab view, string itemName = "Reject", Bitmap bmp = null, string rpgText = "Sign")
+        public static BarItem AddSignRejectActionTool(this RibbonPage rp, ViewTab view, string itemName = "Reject", Bitmap bmp = null, string rpgText = "Sign")
         {
             if (bmp == null) bmp = view.SignRejectActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
-
-            item.ItemClick += (o, e) =>
-            {
-                GridControl grid = view.LastFocucedGrid;
-                var controls = from c in view.ViewObjects.Values
-                               let cc = c.Control as Control
-                               where c.Control is Control
-                               select cc;
-                var focusedControl = controls.FirstOrDefault(x => x.Focused);
-                var focucedGrid = focusedControl is GridControl;
-
-                if (focucedGrid)
-                {
-                    if (grid == null || grid?.Name != focusedControl.Name)
-                    {
-                        view.LastFocucedGrid = focusedControl as GridControl;
-                        grid = view.LastFocucedGrid;
-                    }
-                }
-
-
-                if (grid != null)
-                {
-                    GridView gv = grid.MainView as GridView;
-                    gv.BestFitColumns();
-                    grid.Focus();
-                }
-
-            };
             view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
+            return item;
         }
-        public static RibbonPage AddSignUndoActionTool(this RibbonPage rp, ViewTab view, string itemName = "Undo", Bitmap bmp = null, string rpgText = "Sign")
+        public static BarItem AddSignUndoActionTool(this RibbonPage rp, ViewTab view, string itemName = "Undo", Bitmap bmp = null, string rpgText = "Sign")
         {
             if (bmp == null) bmp = view.SignUndoActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
-
-            item.ItemClick += (o, e) =>
-            {
-                GridControl grid = view.LastFocucedGrid;
-                var controls = from c in view.ViewObjects.Values
-                               let cc = c.Control as Control
-                               where c.Control is Control
-                               select cc;
-                var focusedControl = controls.FirstOrDefault(x => x.Focused);
-                var focucedGrid = focusedControl is GridControl;
-
-                if (focucedGrid)
-                {
-                    if (grid == null || grid?.Name != focusedControl.Name)
-                    {
-                        view.LastFocucedGrid = focusedControl as GridControl;
-                        grid = view.LastFocucedGrid;
-                    }
-                }
-
-
-                if (grid != null)
-                {
-                    GridView gv = grid.MainView as GridView;
-                    gv.BestFitColumns();
-                    grid.Focus();
-                }
-
-            };
             view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
+            return item;
         }
-        public static RibbonPage AddSignReopenActionTool(this RibbonPage rp, ViewTab view, string itemName = "Reopen", Bitmap bmp = null, string rpgText = "Sign")
+        public static BarItem AddSignReopenActionTool(this RibbonPage rp, ViewTab view, string itemName = "Reopen", Bitmap bmp = null, string rpgText = "Sign")
         {
             if (bmp == null) bmp = view.SignReopenActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
-
-            item.ItemClick += (o, e) =>
-            {
-                GridControl grid = view.LastFocucedGrid;
-                var controls = from c in view.ViewObjects.Values
-                               let cc = c.Control as Control
-                               where c.Control is Control
-                               select cc;
-                var focusedControl = controls.FirstOrDefault(x => x.Focused);
-                var focucedGrid = focusedControl is GridControl;
-
-                if (focucedGrid)
-                {
-                    if (grid == null || grid?.Name != focusedControl.Name)
-                    {
-                        view.LastFocucedGrid = focusedControl as GridControl;
-                        grid = view.LastFocucedGrid;
-                    }
-                }
-
-
-                if (grid != null)
-                {
-                    GridView gv = grid.MainView as GridView;
-                    gv.BestFitColumns();
-                    grid.Focus();
-                }
-
-            };
             view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
+            return item;
         }
-
-        public static RibbonPage AddLiteSignTools(this RibbonPage rp, ViewTab view)
+        public static BarItem AddSignHistoryActionTool(this RibbonPage rp, ViewTab view, string itemName = "History", Bitmap bmp = null, string rpgText = "Sign Tools")
         {
-            rp.AddSignPostActionTool(view)
-              .AddSignAcceptActionTool(view)
-              .AddSignRejectActionTool(view);
-            return rp;
+            if (bmp == null) bmp = UIHelperResources.SignHistory;
+            var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
+            group.AddItems(item);
+            rp.AddGroups(group);
+            view.MenuItems.Add(item.Caption.ToLower(), item);
+            return item;
         }
-
-        public static RibbonPage AddSignTools(this RibbonPage rp, ViewTab view)
+        public static BarItem AddAttachmentActionTool(this RibbonPage rp, ViewTab view, string itemName = "Attachment", Bitmap bmp = null, string rpgText = "Sign Tools")
         {
-            rp.AddSignPostActionTool(view)
-              .AddSignAcceptActionTool(view)
-              .AddSignRejectActionTool(view)
-              .AddSignSendBackActionTool(view)
-              .AddSignReopenActionTool(view)
-              .AddSignUndoActionTool(view);
-            return rp;
+            if (bmp == null) bmp = UIHelperResources.Attachment_Thin_32x32;
+            var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
+            group.AddItems(item);
+            rp.AddGroups(group);            
+            view.MenuItems.Add(item.Caption.ToLower(), item);
+            return item;
         }
 
         // Add Form Acion Items
-        public static RibbonPage AddNewFormActionTool(this RibbonPage rp, ViewTab view, string itemName = "New", Bitmap bmp = null, string rpgText = "Form")
+        public static BarItem AddNewFormActionTool(this RibbonPage rp, ViewTab view, string itemName = "New", Bitmap bmp = null, string rpgText = "Form")
         {
             if (bmp == null) bmp = view.NewFormActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
-
-            item.ItemClick += (o, e) =>
-            {
-                GridControl grid = view.LastFocucedGrid;
-                var controls = from c in view.ViewObjects.Values
-                               let cc = c.Control as Control
-                               where c.Control is Control
-                               select cc;
-                var focusedControl = controls.FirstOrDefault(x => x.Focused);
-                var focucedGrid = focusedControl is GridControl;
-
-                if (focucedGrid)
-                {
-                    if (grid == null || grid?.Name != focusedControl.Name)
-                    {
-                        view.LastFocucedGrid = focusedControl as GridControl;
-                        grid = view.LastFocucedGrid;
-                    }
-                }
-
-
-                if (grid != null)
-                {
-                    GridView gv = grid.MainView as GridView;
-                    gv.BestFitColumns();
-                    grid.Focus();
-                }
-
-            };
-            view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
+            return item;
         }
-        public static RibbonPage AddSaveFormActionTool(this RibbonPage rp, ViewTab view, string itemName = "Save", Bitmap bmp = null, string rpgText = "Form")
-        {
+        public static BarItem AddSaveFormActionTool(this RibbonPage rp, ViewTab view, string itemName = "Save", Bitmap bmp = null, string rpgText = "Form")
+        {            
             if (bmp == null) bmp = view.SaveFormActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
-
-            item.ItemClick += (o, e) =>
-            {
-                GridControl grid = view.LastFocucedGrid;
-                var controls = from c in view.ViewObjects.Values
-                               let cc = c.Control as Control
-                               where c.Control is Control
-                               select cc;
-                var focusedControl = controls.FirstOrDefault(x => x.Focused);
-                var focucedGrid = focusedControl is GridControl;
-
-                if (focucedGrid)
-                {
-                    if (grid == null || grid?.Name != focusedControl.Name)
-                    {
-                        view.LastFocucedGrid = focusedControl as GridControl;
-                        grid = view.LastFocucedGrid;
-                    }
-                }
-
-
-                if (grid != null)
-                {
-                    GridView gv = grid.MainView as GridView;
-                    gv.BestFitColumns();
-                    grid.Focus();
-                }
-
-            };
             view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
+            return item;
         }
-        public static RibbonPage AddEditFormActionTool(this RibbonPage rp, ViewTab view, string itemName = "Edit", Bitmap bmp = null, string rpgText = "Form")
+        public static BarItem AddEditFormActionTool(this RibbonPage rp, ViewTab view, string itemName = "Edit", Bitmap bmp = null, string rpgText = "Form")
         {
             if (bmp == null) bmp = view.EditFormActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
-
-            item.ItemClick += (o, e) =>
-            {
-                GridControl grid = view.LastFocucedGrid;
-                var controls = from c in view.ViewObjects.Values
-                               let cc = c.Control as Control
-                               where c.Control is Control
-                               select cc;
-                var focusedControl = controls.FirstOrDefault(x => x.Focused);
-                var focucedGrid = focusedControl is GridControl;
-
-                if (focucedGrid)
-                {
-                    if (grid == null || grid?.Name != focusedControl.Name)
-                    {
-                        view.LastFocucedGrid = focusedControl as GridControl;
-                        grid = view.LastFocucedGrid;
-                    }
-                }
-
-
-                if (grid != null)
-                {
-                    GridView gv = grid.MainView as GridView;
-                    gv.BestFitColumns();
-                    grid.Focus();
-                }
-
-            };
             view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
+            return item;
         }
-        public static RibbonPage AddDeleteFormActionTool(this RibbonPage rp, ViewTab view, string itemName = "Delete", Bitmap bmp = null, string rpgText = "Form")
+        public static BarItem AddDeleteFormActionTool(this RibbonPage rp, ViewTab view, string itemName = "Delete", Bitmap bmp = null, string rpgText = "Form")
         {
             if (bmp == null) bmp = view.DeleteFormActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
-
-            item.ItemClick += (o, e) =>
-            {
-                GridControl grid = view.LastFocucedGrid;
-                var controls = from c in view.ViewObjects.Values
-                               let cc = c.Control as Control
-                               where c.Control is Control
-                               select cc;
-                var focusedControl = controls.FirstOrDefault(x => x.Focused);
-                var focucedGrid = focusedControl is GridControl;
-
-                if (focucedGrid)
-                {
-                    if (grid == null || grid?.Name != focusedControl.Name)
-                    {
-                        view.LastFocucedGrid = focusedControl as GridControl;
-                        grid = view.LastFocucedGrid;
-                    }
-                }
-
-
-                if (grid != null)
-                {
-                    GridView gv = grid.MainView as GridView;
-                    gv.BestFitColumns();
-                    grid.Focus();
-                }
-
-            };
             view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
+            return item;
         }
-        public static RibbonPage AddViewFormActionTool(this RibbonPage rp, ViewTab view, string itemName = "View", Bitmap bmp = null, string rpgText = "Form")
+        public static BarItem AddViewFormActionTool(this RibbonPage rp, ViewTab view, string itemName = "View", Bitmap bmp = null, string rpgText = "Form")
         {
             if (bmp == null) bmp = view.ViewFormActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
-
-            item.ItemClick += (o, e) =>
-            {
-                GridControl grid = view.LastFocucedGrid;
-                var controls = from c in view.ViewObjects.Values
-                               let cc = c.Control as Control
-                               where c.Control is Control
-                               select cc;
-                var focusedControl = controls.FirstOrDefault(x => x.Focused);
-                var focucedGrid = focusedControl is GridControl;
-
-                if (focucedGrid)
-                {
-                    if (grid == null || grid?.Name != focusedControl.Name)
-                    {
-                        view.LastFocucedGrid = focusedControl as GridControl;
-                        grid = view.LastFocucedGrid;
-                    }
-                }
-
-
-                if (grid != null)
-                {
-                    GridView gv = grid.MainView as GridView;
-                    gv.BestFitColumns();
-                    grid.Focus();
-                }
-
-            };
             view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
-        }
-        public static RibbonPage AddFormTools(this RibbonPage rp, ViewTab view)
-        {
-            rp.AddSaveFormActionTool(view)
-              .AddEditFormActionTool(view)
-              .AddDeleteFormActionTool(view)
-              .AddViewFormActionTool(view);
-            return rp;
-        }
-        public static RibbonPage AddLiteGridTools(this RibbonPage rp,ViewTab view)
-        {
-            rp.AddToggleSearchGridTool(view)
-              .AddToggleAutoWidthGridTool(view)
-              .AddToggleBestFitGridTool(view)
-              .AddDateFormatGridTool(view);
-            return rp;
-        }
-        public static RibbonPage AddGridTools(this RibbonPage rp, ViewTab view)
-        {
-            rp.AddToggleSearchGridTool(view)
-              .AddToggleAutoWidthGridTool(view)
-              .AddToggleBestFitGridTool(view)
-              .AddDateFormatGridTool(view)
-              .AddCellFormatColorGridTool(view)
-              .AddResetGridFormatTool(view)
-              .AddSettingsGridFormatTool(view);
-            return rp;
+            return item;
         }
 
         //Extntion Method For ExportTools
-        public static RibbonPage AddExcelExportTool(this RibbonPage rp, ViewTab view, string itemName = "Excel", Bitmap bmp = null, string rpgText = "Export Tools")
+        public static BarItem AddExcelExportTool(this RibbonPage rp, ViewTab view, string itemName = "Excel", Bitmap bmp = null, string rpgText = "Export Tools")
         {
             if (bmp == null) bmp = view.GridToolsExportToXlsxIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
@@ -1014,10 +591,9 @@ namespace CMISUIHelper.Infrastructure.Helpers
                     }
                 }
             };
-            view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
+            return item;
         }
-        public static RibbonPage AddCsvExportTool(this RibbonPage rp, ViewTab view, string itemName = "CSV", Bitmap bmp = null, string rpgText = "Export Tools")
+        public static BarItem AddCsvExportTool(this RibbonPage rp, ViewTab view, string itemName = "CSV", Bitmap bmp = null, string rpgText = "Export Tools")
         {
             if (bmp == null) bmp = view.GridToolsExportToCsvIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
@@ -1069,10 +645,9 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
 
             };
-            view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
+            return item;
         }
-        public static RibbonPage AddPdfExportTool(this RibbonPage rp, ViewTab view, string itemName = "PDF", Bitmap bmp = null, string rpgText = "Export Tools")
+        public static BarItem AddPdfExportTool(this RibbonPage rp, ViewTab view, string itemName = "PDF", Bitmap bmp = null, string rpgText = "Export Tools")
         {
             if (bmp == null) bmp = view.GridToolsExportToPdfIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
@@ -1124,16 +699,18 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 }
 
             };
-            view.MenuItems.Add(item.Caption.ToLower(), item);
-            return rp;
+            return item;
         }
-        public static RibbonPage AddExportTools(this RibbonPage rp, ViewTab view)
+        public static RibbonPage AddExportTools(this RibbonPage rp,ViewTab view)
         {
-            rp.AddExcelExportTool(view)
-              .AddCsvExportTool(view)
-              .AddPdfExportTool(view);
+            rp.AddExcelExportTool(view);
+            rp.AddCsvExportTool(view);
+            rp.AddPdfExportTool(view);
             return rp;
         }
+
+
+
 
         //Error Handler extention method
         public static void ShowMessage(this Exception ex,string title = "Message")
@@ -1279,18 +856,17 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 return childForm;
             }           
 
-            public static T ViewInForm<T>(object[] args = null, FormBorderStyle formBorderStyle = FormBorderStyle.Sizable, bool maximize = false,bool showAsDialog = true) where T : ViewForm
+            private static T ViewInForm<T>(ViewTab view,object[] args = null) where T : ViewForm
             {
                 XtraForm frm = new XtraForm();
                 frm.DialogResult = DialogResult.Cancel;
-                frm.FormBorderStyle = formBorderStyle;
                 ViewForm childForm = (ViewForm)Activator.CreateInstance(typeof(T),args);
                 frm.Width = childForm.Width;
                 frm.Height = childForm.Height + 28;
                 frm.Controls.Add(childForm);
                 frm.Text = childForm.ViewTitle;
+                frm.Icon = view.OwnerForm.Icon;
                 childForm.OwnerForm = frm;
-                if (maximize) frm.WindowState = FormWindowState.Maximized;
                 frm.StartPosition = FormStartPosition.CenterScreen;
 
                 frm.Load += (o, e) =>
@@ -1313,14 +889,41 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 };
 
                 childForm.Dock = DockStyle.Fill;
-                if (showAsDialog)
-                    frm.ShowDialog();
-                else
-                    frm.Show();
-
                 return (T)childForm;
             }
-             
+
+            public static T ViewInNormalForm<T>(ViewTab view,object[] args = null) where T : ViewForm
+            {
+                var viewForm = ViewInForm<T>(view,args);
+                viewForm.OwnerForm.Show();
+                return viewForm;
+            }
+
+            public static T ViewInDialogForm<T>(ViewTab view ,object[] args = null) where T : ViewForm
+            {
+                var viewForm = ViewInForm<T>(view,args);
+                viewForm.OwnerForm.ShowDialog();
+                return viewForm;
+            }
+
+            public static T ViewInNoControlBoxDialogForm<T>(ViewTab view,object[] args = null) where T : ViewForm
+            {
+                var viewForm = ViewInForm<T>(view,args);
+                viewForm.OwnerForm.MaximizeBox = false;
+                viewForm.OwnerForm.MinimizeBox = false;
+                viewForm.OwnerForm.ShowDialog();
+                return viewForm;
+            }
+
+            public static T ViewInNoControlBoxNoSizableDialogForm<T>(ViewTab view,object[] args = null) where T : ViewForm
+            {
+                var viewForm = ViewInForm<T>(view,args);
+                viewForm.OwnerForm.FormBorderStyle = FormBorderStyle.Fixed3D;
+                viewForm.OwnerForm.MaximizeBox = false;
+                viewForm.OwnerForm.MinimizeBox = false;
+                viewForm.OwnerForm.ShowDialog();
+                return viewForm;
+            }
         }
 
         public static class RibbonHandler

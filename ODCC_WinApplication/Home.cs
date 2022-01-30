@@ -26,5 +26,10 @@ namespace ODCC_WinApplication
         {
             (new QCElectrical.Main.frmMain()).Show();            
         }
+
+        private void btnElectrical_Click(object sender, EventArgs e)
+        {
+            (new Electrical.MainForm()).Show();
+        }
     }
 }

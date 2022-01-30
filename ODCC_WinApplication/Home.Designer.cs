@@ -31,6 +31,8 @@ namespace ODCC_WinApplication
         {
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnElectrical = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button2
@@ -53,11 +55,32 @@ namespace ODCC_WinApplication
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(232, 376);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // btnElectrical
+            // 
+            this.btnElectrical.Location = new System.Drawing.Point(347, 136);
+            this.btnElectrical.Name = "btnElectrical";
+            this.btnElectrical.Size = new System.Drawing.Size(109, 83);
+            this.btnElectrical.TabIndex = 3;
+            this.btnElectrical.Text = "ELECTRICAL";
+            this.btnElectrical.UseVisualStyleBackColor = true;
+            this.btnElectrical.Click += new System.EventHandler(this.btnElectrical_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1235, 753);
+            this.ClientSize = new System.Drawing.Size(1276, 753);
+            this.Controls.Add(this.btnElectrical);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Name = "Home";
@@ -72,5 +95,7 @@ namespace ODCC_WinApplication
         #endregion
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnElectrical;
     }
 }

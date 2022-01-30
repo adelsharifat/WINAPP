@@ -173,7 +173,7 @@ namespace DMS
                 FileAttachmentViewModel fileAttachment = new FileAttachmentViewModel
                 {
                     Id = 0,
-                    stream_id = Guid.NewGuid().ToString(),
+                    stream_id = Guid.NewGuid(),
                     FileStream = GetByteFromFile(filePath),
                     FileName = fileName,
                     Remark = remark,
@@ -185,21 +185,12 @@ namespace DMS
                     File = showLable
                 };
 
-
-
                 fileAttachmentList.Add(fileAttachment);
                 FillAttachmentGrid(fileAttachmentList, attachmentGrid);
-
 
                 var grv = attachmentGrid.MainView as GridView;
                 var showColumn = grv.Columns["File"] as GridColumn;
                 showColumn.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-
-
-
-
-
-
 
                 return attachmentGrid;
 

@@ -451,5 +451,20 @@
   <ItemGroup>
     <None Include="Resources\show_32x32.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_attach_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_attach_32px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32x32.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

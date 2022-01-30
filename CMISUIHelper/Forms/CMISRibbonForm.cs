@@ -27,6 +27,7 @@ namespace CMISUIHelper
         {
             InitializeComponent();
             ItemIcon = this.DefualtItemIcon;
+            Icon = UIHelperResources._32x32;
             GetUserPermissions(LoginInfo.ProjectId,LoginInfo.Id);
         }
 

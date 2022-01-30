@@ -84,7 +84,7 @@ namespace SecurityManagement.Views
                 if (e.Column.Name == "colPermision")
                 {
                     var id = Convert.ToInt32(grvUserPermision.GetRowCellValue(e.RowHandle, "Id"));
-                    CMISUI.UIHandler.ViewInForm<frmACL>(new object[]{ id,false,null });
+                    CMISUI.UIHandler.ViewInNormalForm<frmACL>(this,new object[]{ id,false,null });
                 }
             }
             catch (Exception ex)
@@ -99,6 +99,7 @@ namespace SecurityManagement.Views
             try
             {
                 e.RibbonPage.AddGridTools(this);
+                e.RibbonPage.AddCloseItem(this);
                 e.RibbonPage.AddExportTools(this);
             }
             catch (Exception ex)

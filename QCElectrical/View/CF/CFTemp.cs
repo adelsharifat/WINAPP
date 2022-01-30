@@ -203,7 +203,6 @@ namespace QCElectrical.View.CF
                 e.RibbonPage.AddSignAcceptActionTool(this);
                 e.RibbonPage.AddSignRejectActionTool(this);
                 e.RibbonPage.AddSignSendBackActionTool(this);
-                e.RibbonPage.AddLiteGridTools(this);
             }
             catch (Exception ex)
             {

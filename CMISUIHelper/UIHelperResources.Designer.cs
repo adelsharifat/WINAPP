@@ -61,6 +61,36 @@ namespace CMISUIHelper {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon _16x16 {
+            get {
+                object obj = ResourceManager.GetObject("_16x16", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon _24x24 {
+            get {
+                object obj = ResourceManager.GetObject("_24x24", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon _32x32 {
+            get {
+                object obj = ResourceManager.GetObject("_32x32", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap adateoccurring_32x32 {
@@ -106,6 +136,26 @@ namespace CMISUIHelper {
         internal static System.Drawing.Bitmap article_32x32 {
             get {
                 object obj = ResourceManager.GetObject("article_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Attachment_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("Attachment_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Attachment_Thin_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("Attachment_Thin_32x32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

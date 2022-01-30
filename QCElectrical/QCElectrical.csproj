@@ -65,6 +65,7 @@
     <Compile Include="AppConst.cs" />
     <Compile Include="Bundle.cs" />
     <Compile Include="Data\DAL.cs" />
+    <Compile Include="Infrastructure\CFType.cs" />
     <Compile Include="Main\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +88,12 @@
     </Compile>
     <Compile Include="View\Attachment\AttachmentUploader.Designer.cs">
       <DependentUpon>AttachmentUploader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\CF\CF-819-2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\CF\CF-819-2.Designer.cs">
+      <DependentUpon>CF-819-2.cs</DependentUpon>
     </Compile>
     <Compile Include="View\CF\CF-819-1.cs">
       <SubType>UserControl</SubType>
@@ -112,11 +119,11 @@
     <Compile Include="View\frmHome.Designer.cs">
       <DependentUpon>frmHome.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\List\CF_819_1_List.cs">
+    <Compile Include="View\List\CF_List.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\List\CF_819_1_List.Designer.cs">
-      <DependentUpon>CF_819_1_List.cs</DependentUpon>
+    <Compile Include="View\List\CF_List.Designer.cs">
+      <DependentUpon>CF_List.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Report\frmCFReport.cs">
       <SubType>UserControl</SubType>
@@ -144,6 +151,9 @@
     <EmbeddedResource Include="View\Attachment\AttachmentUploader.resx">
       <DependentUpon>AttachmentUploader.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\CF\CF-819-2.resx">
+      <DependentUpon>CF-819-2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\CF\CF-819-1.resx">
       <DependentUpon>CF-819-1.cs</DependentUpon>
     </EmbeddedResource>
@@ -156,8 +166,8 @@
     <EmbeddedResource Include="View\frmHome.resx">
       <DependentUpon>frmHome.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\List\CF_819_1_List.resx">
-      <DependentUpon>CF_819_1_List.cs</DependentUpon>
+    <EmbeddedResource Include="View\List\CF_List.resx">
+      <DependentUpon>CF_List.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Report\frmCFReport.resx">
       <DependentUpon>frmCFReport.cs</DependentUpon>
@@ -175,9 +185,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Infrastructure\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CMISBEL\CMISBEL.csproj">
       <Project>{d9290eef-8244-449d-a28b-e8035db517a6}</Project>

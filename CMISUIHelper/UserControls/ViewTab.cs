@@ -43,12 +43,11 @@ namespace CMISUIHelper.UserControls
         public ViewTab()
         {
             InitializeComponent();
+            FormMode = FormState.View;
         }
 
         public void OnRibbonPageAdded(RibbonPageEventArgs e)
         {
-            //CMISRibbonForm.ItemIcon = OwnerForm.DefualtItemIcon;
-
             if (OwnerForm.CloseItemLocation == Infrastructure.Enums.CloseItemAlignment.Start)
             {
                 e.RibbonPage.AddCloseItem(this);
@@ -260,6 +259,9 @@ namespace CMISUIHelper.UserControls
         #region ExtraCMISCode
 
         #region Properties
+        public bool Posted { get; set; } = false;
+
+
         private FormState formState = FormState.Save;
 
         public FormState FormMode

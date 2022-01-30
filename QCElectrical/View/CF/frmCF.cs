@@ -42,5 +42,10 @@ namespace QCElectrical.View.CF
         {
             CMISUI.UIHandler.ViewInTab<View.CF.CF_819_1>(this.OwnerForm);
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            CMISUI.UIHandler.ViewInTab<View.CF.CF_819_2>(this.OwnerForm);
+        }
     }
 }

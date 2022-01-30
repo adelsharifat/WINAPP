@@ -69,8 +69,13 @@ namespace CMISUtils
         // Convert datarow to another type
         public static T? To<T>(this DataRow dr, string columnName) where T : struct
         {
-            var val = dr[columnName] == DBNull.Value ? null : ((T?)Convert.ChangeType(dr[columnName], typeof(T)));
+            var val = dr?[columnName] == DBNull.Value ? null : ((T?)Convert.ChangeType(dr[columnName], typeof(T)));
             return val;
+        }
+
+        public static int Id(this DataRow dr, string columnName = "Id")
+        {
+            return dr.ToInt(columnName);
         }
 
         public static bool Posted(this DataRow dr, string columnName = "Posted")
@@ -150,7 +155,7 @@ namespace CMISUtils
 
         public static Int64 RevisionId(this DataRow dr, string columnName = "RevisionId")
         {
-            return Convert.ToInt64(dr[columnName]);
+            return Convert.ToInt64(dr?[columnName]);
         }
     
         public static int AreaId(this DataRow dr, string columnName = "AreaId")
@@ -169,19 +174,19 @@ namespace CMISUtils
         }
 
         public static string ToString(this DataRow dr, string columnName)
-            => dr[columnName].ToString();
+            => dr?[columnName].ToString();
 
         public static int ToInt(this DataRow dr, string columnName)
-            => Convert.ToInt32(dr[columnName]);
+            =>Convert.ToInt32(dr?[columnName]);
 
         public static bool ToBoolean(this DataRow dr, string columnName)
-          => Convert.ToBoolean(dr[columnName]);
+          => Convert.ToBoolean(dr?[columnName]);
 
         public static byte[] ToByteArray(this DataRow dr, string columnName)
-            => (byte[])dr[columnName];
+            => (byte[])dr?[columnName];
 
         public static DateTime ToDateTime(this DataRow dr, string columnName)
-            => Convert.ToDateTime(dr[columnName]);
+            => Convert.ToDateTime(dr?[columnName]);
 
         public static Image ToImage(this byte[] bytesArr)
         {
@@ -676,40 +681,21 @@ namespace CMISUtils
             return Ids;
         }
 
-        public static void SetConditionCellFormat(this GridView gv, string columnName, object value, DevExpress.Utils.AppearanceDefault appearance, bool enabled = true)
-        {
-
-            if (enabled)
-            {
-                var acceptedColumn = gv.Columns.FirstOrDefault(c => c.FieldName == columnName);
-                gv.FormatRules.AddValueRule(acceptedColumn, appearance, FormatCondition.Equal, value);
-            }
-        }
-
         public static void SetConditionCellFormat(this GridView gv, string columnName, string expression, DevExpress.Utils.AppearanceDefault appearance, bool enabled = true)
         {
-
             if (enabled)
             {
-                var column = gv.Columns.FirstOrDefault(c => c.FieldName == columnName);
+                var column = gv.Columns.FirstOrDefault(c => c.Name == columnName || c.FieldName == columnName || c.Caption == columnName);
                 gv.FormatRules.AddExpressionRule(column, appearance, expression);
             }
         }
 
-        public static void SetConditionRowFormat(this GridView gv, string columnName, string expresion, string predifinedExpression, bool enabled = true)
+        public static void SetConditionRowFormat(this GridView gv, string columnName, string expression, DevExpress.Utils.AppearanceDefault appearance, bool enabled = true)
         {
-
             if (enabled)
             {
-                var column = gv.Columns.FirstOrDefault(c => c.FieldName == columnName);
-                GridFormatRule gridFormatRule = new GridFormatRule();
-                FormatConditionRuleExpression formatConditionRuleExpression = new FormatConditionRuleExpression();
-                gridFormatRule.Column = column;
-                gridFormatRule.ApplyToRow = true;
-                formatConditionRuleExpression.PredefinedName = predifinedExpression;
-                formatConditionRuleExpression.Expression = expresion;
-                gridFormatRule.Rule = formatConditionRuleExpression;
-                gv.FormatRules.Add(gridFormatRule);
+                var column = gv.Columns.FirstOrDefault(c => c.Name == columnName || c.FieldName == columnName || c.Caption == columnName);
+                gv.FormatRules.AddExpressionRule(column, appearance, expression).ApplyToRow = true;
             }
         }
 

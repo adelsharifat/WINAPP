@@ -1,4 +1,5 @@
 ﻿using CMISDAL.Base;
+using QCElectrical.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -53,13 +54,13 @@ namespace QCElectrical.Data
 
 
         #region CF-819-1
-        public DataTable FetchCFItems(string cfType,int? cfId = null)
+        public DataTable FetchCFItems(CFType cfType,int? cfId = null)
         {
             try
             {
                 var parameters = new[]
                 {
-                    new SqlParameter("CfType",cfType),
+                    new SqlParameter("CfTypeId",(int)cfType),
                     new SqlParameter("CfId",cfId),
                 };
                 return DoQueryAdapter("QCEL.FetchCFItems", parameters);
@@ -87,15 +88,16 @@ namespace QCElectrical.Data
         }
 
 
-        public DataRow FetchCF_801_19_1(int documentId)
+        public DataRow FetchCF_819(int documentId, CFType cfType)
         {
             try
             {
                 var parameters = new[]
                 {
                     new SqlParameter("DocumentId",documentId),
+                    new SqlParameter("CfTypeId",(int)cfType),
                 };
-                var dt = DoQueryReader("QCEL.FetchCF_801_19_1", parameters);
+                var dt = DoQueryReader("QCEL.FetchCF_819", parameters);
                 if (dt.Rows.Count > 0) return dt.Rows[0] as DataRow;
                 return null;
             }
@@ -107,20 +109,21 @@ namespace QCElectrical.Data
 
 
 
-        public int SaveCF_WithFixedItems(int id,int projectId,int employerId,int contractId,int contractorId,int userId,string objectName,string type2, int revisionId,int unitId,string remark = null,string revNo = null,string location = null,int? voltageCableType = null,string reportNoParameters = null,DataTable attachments = null,DataTable itemsResult = null)
+        public int SaveCF_WithFixedItems(int id,int projectId,int employerId,int contractId,int contractorId,int userId,string objectName,CFType cfType, int revisionId,int unitId,string remark = null,string revNo = null,string location = null,int? voltageCableType = null,string reportNoParameters = null,DataTable attachments = null,DataTable itemsResult = null)
         {
             try
             {
                 var parameters = new[]
                 {
                     new SqlParameter("Id",id),
+                    new SqlParameter("CFTypeId",(int)cfType),
                     new SqlParameter("ProjectId",projectId),
                     new SqlParameter("EmployerId",employerId),
                     new SqlParameter("ContractId",contractId),
                     new SqlParameter("ContractorId",contractorId),
                     new SqlParameter("UserId",userId),
                     new SqlParameter("ObjectName",objectName),
-                    new SqlParameter("Type2",type2),
+                    new SqlParameter("Type2",cfType.ToString()),
                     new SqlParameter("RevisionId",revisionId),
                     new SqlParameter("UnitId",unitId),
                     new SqlParameter("Remark",remark),
@@ -138,8 +141,25 @@ namespace QCElectrical.Data
                 throw ex;
             }
         }
-       
-        public DataTable FETCH_CF_801_19_1_LIST(int projectId)
+
+        public int DeleteCFDocument(int documentId, int userId)
+        {
+            try
+            {
+                var parameters = new[]
+                {
+                    new SqlParameter("DocumentId",documentId),
+                    new SqlParameter("UserId",userId),
+                };
+                return DoMutation("QCEL.DeleteCFDocument", parameters);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataTable FETCH_CF_LIST(int projectId)
         {
             try
             {
@@ -147,7 +167,7 @@ namespace QCElectrical.Data
                 {
                     new SqlParameter("ProjectId",projectId),
                 };
-                return DoQueryReader("QCEL.FETCH_CF_801_19_1_LIST", parameters);
+                return DoQueryReader("QCEL.FETCH_CF_LIST", parameters);
             }
             catch (Exception ex)
             {

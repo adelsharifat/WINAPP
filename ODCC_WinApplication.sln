@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QCElectrical", "QCElectrica
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMS", "DMS\DMS.csproj", "{2E19A99B-74DD-499B-8916-AC1BD89BE69E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Electrical", "Electrical\Electrical.csproj", "{17F970A9-4913-4B5E-A91E-60294BEB5398}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,10 @@ Global
 		{2E19A99B-74DD-499B-8916-AC1BD89BE69E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E19A99B-74DD-499B-8916-AC1BD89BE69E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E19A99B-74DD-499B-8916-AC1BD89BE69E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17F970A9-4913-4B5E-A91E-60294BEB5398}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17F970A9-4913-4B5E-A91E-60294BEB5398}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17F970A9-4913-4B5E-A91E-60294BEB5398}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17F970A9-4913-4B5E-A91E-60294BEB5398}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,6 +108,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5F42399D-EE0E-4547-AD1D-939720811A7D} = {613E832A-E9FD-4B34-8C7B-BF7F8AF690E0}
 		{317835D3-98C9-4FA3-A207-A3246EF9363A} = {613E832A-E9FD-4B34-8C7B-BF7F8AF690E0}
+		{17F970A9-4913-4B5E-A91E-60294BEB5398} = {613E832A-E9FD-4B34-8C7B-BF7F8AF690E0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F10FA580-F62D-4D11-801C-AD7FF347DAF0}

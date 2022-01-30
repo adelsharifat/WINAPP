@@ -23,11 +23,19 @@ using QCElectrical.Model;
 using DevExpress.XtraGrid.Views.Grid;
 using CMISUIHelper.Infrastructure.Contracts.CustomException;
 using CMISSecurity;
+using QCElectrical.Infrastructure;
+using DevExpress.XtraBars;
 
 namespace QCElectrical.View.CF
 {
     public partial class CF_819_1 : ViewTabWithCompany
     {
+
+        BarItem newMenu;
+        BarItem saveMenu;
+        BarItem editMenu;
+        BarItem deleteMenu;
+
         private int cfId = 0;
         private int documentId = 0;
 
@@ -36,14 +44,14 @@ namespace QCElectrical.View.CF
         public CF_819_1()
         {
             InitializeComponent();
-            ViewTitle = "CF_819_1";
+            ViewTitle = "CF-819-1 TRENCH PREP.";
             FormMode = FormState.Save;
         }
 
         public CF_819_1(int documentId,int cfId, FormState formState)
         {
             InitializeComponent();
-            ViewTitle = "CF_819_1";
+            ViewTitle = "CF-819-1 TRENCH PREP.";
 
             FormMode = formState;
             this.documentId = documentId;
@@ -103,21 +111,81 @@ namespace QCElectrical.View.CF
         {
             try
             {
-                e.RibbonPage
-                    .AddNewFormActionTool(this)// New
-                    .AddSaveFormActionTool(this)//Save menu in ribbon
-                    .AddEditFormActionTool(this)//Edit menu in ribbon
-                    .AddDeleteFormActionTool(this);//Delete menu in ribbon
+                //e.RibbonPage
+                //    .AddNewFormActionTool(this)// New
+                //    .AddSaveFormActionTool(this)//Save menu in ribbon
+                //    .AddEditFormActionTool(this)//Edit menu in ribbon
+                //    .AddDeleteFormActionTool(this)//Delete menu in ribbon
+                //    .AddSignPostActionTool(this)//Post 
+                //    .AddSignAcceptActionTool(this)
+                //    .AddSignRejectActionTool(this)
+                //    .AddSignSendBackActionTool(this)
+                //    .AddSignReopenActionTool(this)
+                //    .AddSignHistoryActionTool(this)
+                //    .AddAttachmentActionTool(this);
+                    
 
                 var items = MenuItems;
 
-                var newMenu = MenuItems["new"];//Get new menu object
-                var saveMenu = MenuItems["save"];//Get save menu object
-                var editMenu = MenuItems["edit"];//Get edit menu object
-                var deleteMenu = MenuItems["delete"];//get delete menu object
+                newMenu = MenuItems["new"];//Get new menu object
+                saveMenu = MenuItems["save"];//Get save menu object
+                editMenu = MenuItems["edit"];//Get edit menu object
+                deleteMenu = MenuItems["delete"];//get delete menu object
 
                 newMenu.ItemClick += NewMenu_ItemClick; ;//Event for handle new menu item clicking
                 saveMenu.ItemClick += SaveMenu_ItemClick;//Event for handle save menu item clicking
+                editMenu.ItemClick += EditMenu_ItemClick;
+                deleteMenu.ItemClick += DeleteMenu_ItemClick;//Event for handle delete menu item clicking;
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
+        }
+
+        private void EditMenu_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            try
+            {
+                OnEditState(this.documentId);
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
+        }
+
+        private void DeleteMenu_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            try
+            {
+                if (FormMode == FormState.Save) return;
+
+                //Get cf selected row from the database by documentId
+                var cfRow = DAL.Do.FetchCF_819(this.documentId,CFType.CF_819_1);
+
+                //Get some data from cfRow
+                var cfId = cfRow.ToInt("CfId");
+                var data = DAL.Do.FetchCFItems(CFType.CF_819_1, cfId);
+
+                //get document status
+                var posted = cfRow.Posted();
+                var isDelete = cfRow.IsDelete();
+                var isVoid = cfRow.IsVoid();
+                var reportNo = cfRow.ReportNo();
+
+                //Check document status before delete
+                if (isDelete) throw new CMISException("Document already deleted!");
+                if (isVoid) throw new CMISException("Document is voided!");
+                if (posted) throw new CMISException("Document is posted!");
+
+                // if abov condition is pass then exceute bellow code and delete document
+                var dialogResult = Msg.Confirm($"Are you sure to delete the {reportNo} cf document");
+                if (dialogResult == DialogResult.No) return;
+                // Delete start
+                var result = DAL.Do.DeleteCFDocument(this.documentId,LoginInfo.Id);
+                if (result > 0) Msg.Show("Operation delete successfull!");
+                else Msg.Error("Operation delete faild!");
             }
             catch (Exception ex)
             {
@@ -143,12 +211,12 @@ namespace QCElectrical.View.CF
         {
             try
             {
-                var attachmentDialogForm= CMISUI.UIHandler.ViewInForm<Attachment.AttachmentUploader>(null,FormBorderStyle.FixedToolWindow);
+                var attachmentDialogForm= CMISUI.UIHandler.ViewInNormalForm<Attachment.AttachmentUploader>(this);
                 if(attachmentDialogForm.OwnerForm.DialogResult == DialogResult.OK)
                 {
                     var filePath = attachmentDialogForm.FilePath;
                     var remark = attachmentDialogForm.Remark;
-                    var customType = "CF-819-1";
+                    var customType = CFType.CF_819_1.ToString();
                     var fileName = Guid.NewGuid().ToString();
                     // get attachments for selected cf  
                     DMS.Attachment.Do.AddAttachmentToGrid(fileAttachments, grcAttachment, filePath, LoginInfo.FullName, fileName, remark, customType, Bundle.SCHEMA, "View").UnEditableColumns().HideColumns("");
@@ -169,7 +237,6 @@ namespace QCElectrical.View.CF
             }
             catch (Exception ex)
             {
-
                 ex.ShowMessage();
             }
         }
@@ -207,6 +274,8 @@ namespace QCElectrical.View.CF
         {
             try
             {
+                if (Msg.Confirm("Are you sure to save cf document?") == DialogResult.No) return;
+
                 //Validation Form
                 ValidationForm();
 
@@ -240,7 +309,7 @@ namespace QCElectrical.View.CF
                     }).ToDataTable();
 
                 var result = DAL.Do.SaveCF_WithFixedItems(cfId, LoginInfo.ProjectId, employerId, contractId, contractorId, LoginInfo.Id, Bundle.SCHEMA,
-                    "CF-801-19", revisionId, unitId, remark, revisionNo, location, voltageCableType, reportParameters, attachments, itemsResult);
+                    CFType.CF_819_1, revisionId, unitId, remark, revisionNo, location, voltageCableType, reportParameters, attachments, itemsResult);
 
                 if (result > 0)
                     Msg.Show("Operation Sucess!");
@@ -262,9 +331,9 @@ namespace QCElectrical.View.CF
             //Call Fill Area Unit Combo
             FillAreaUnitCombo();
             //Call Fill DWG No Combo
-            FillDWGNo();                    
+            FillDWGNo();
             //Generate ReportNumber
-            if (FormMode == FormState.Save) txtReportNo.Text = GenerateReportNumber();
+            if(FormMode == FormState.Save) txtReportNo.Text = GenerateReportNumber();
         }
         #endregion
 
@@ -273,21 +342,21 @@ namespace QCElectrical.View.CF
         private void OnViewState(int documentId)
         {
             // Set form to view mode ui
+            FormMode = FormState.View;
             formStateControl.SetViewMode();
 
             //SetReadOnly
             grcAttachment.UnEditableColumns();
             btnAddAttachment.Enabled = false;
-            btnDeleteAttachment.Enabled = false;      
-
+            btnDeleteAttachment.Enabled = false;
             //Get cf selected row from the database by documentId
-            var cfRow = DAL.Do.FetchCF_801_19_1(documentId);
+            var cfRow = DAL.Do.FetchCF_819(documentId,CFType.CF_819_1);
 
             //Get some data from cfRow
             var cfId = cfRow.ToInt("CfId");
-            var data = DAL.Do.FetchCFItems("CF819-1", cfId);
+            var data = DAL.Do.FetchCFItems(CFType.CF_819_1, cfId);
             //fill Cf Grid items
-            FillCFItemsGrid(data);
+            FillCFItemsGrid(data,false);
 
             //Get some data from cfRow
             var projectId = cfRow.ProjectId();
@@ -295,7 +364,7 @@ namespace QCElectrical.View.CF
             var objectName = cfRow.ObjectName();
 
             // Load attachments and fill to grid
-            grcAttachment.DataSource = DMS.Attachment.Do.GetAttchmentwithFileColumn(projectId, objectName, objectId, "QCEL.ftAttachment");
+            grcAttachment.DataSource = DAL.Do.FetchAttachments(objectId);
             grcAttachment.HideColumns("Id,IsUsed,FileTableName").UnEditableColumns();
 
             if (!cfRow.Posted())
@@ -323,6 +392,7 @@ namespace QCElectrical.View.CF
         private void OnEditState(int documentId)
         {
             // Set form to view mode ui
+            FormMode = FormState.Edit;
             formStateControl.SetEditMode();
 
             //SetReadOnly
@@ -331,13 +401,13 @@ namespace QCElectrical.View.CF
             btnDeleteAttachment.Enabled = true;
 
             //Get cf selected row from the database by documentId
-            var cfRow = DAL.Do.FetchCF_801_19_1(documentId);
+            var cfRow = DAL.Do.FetchCF_819(documentId,CFType.CF_819_1);
        
             //Get some data from cfRow
             var cfId = cfRow.ToInt("CfId");
-            var data = DAL.Do.FetchCFItems("CF819-1", cfId);
+            var data = DAL.Do.FetchCFItems(CFType.CF_819_1, cfId);
             //fill Cf Grid items
-            FillCFItemsGrid(data);
+            FillCFItemsGrid(data,true);
 
             //Get some data from cfRow
             var projectId = cfRow.ProjectId();
@@ -348,7 +418,7 @@ namespace QCElectrical.View.CF
             var attachments = DAL.Do.FetchAttachments(objectId);
             grcAttachment.DataSource = attachments;
             fileAttachments = attachments.ToList<FileAttachmentViewModel>();
-            grcAttachment.HideColumns("Id,IsUsed,FileTableName").UnEditableColumns();
+            grcAttachment.HideColumns("").UnEditableColumns();
 
             if (!cfRow.Posted())
             {
@@ -371,6 +441,13 @@ namespace QCElectrical.View.CF
             cmbUnit.ReadOnly = true;
             rdgVoltageType.ReadOnly = false;
 
+            btnAcceptAll.Enabled = true;
+            btnRejectAll.Enabled = true;
+            btnNoAnswerAll.Enabled = true;
+
+            saveMenu.Enabled = true;
+
+
         }
 
         #endregion
@@ -379,14 +456,15 @@ namespace QCElectrical.View.CF
         private void OnSaveState()
         {
             // Set form to view mode ui
+            FormMode = FormState.Save;
             formStateControl.SetSaveMode();
             formStateControl.ShowDraft();
 
             formStateControl.ShowDraft();
             this.RibbonPage.Text = this.ViewTitle += " ::: DRAFT";        
 
-            var data = DAL.Do.FetchCFItems("CF819-1");
-            FillCFItemsGrid(data);
+            var data = DAL.Do.FetchCFItems(CFType.CF_819_1);
+            FillCFItemsGrid(data,true);
         }
         #endregion
 
@@ -419,15 +497,16 @@ namespace QCElectrical.View.CF
             }
         }
         // Fill CF Items Grid Helper
-        private void FillCFItemsGrid(object data)
+        private void FillCFItemsGrid(object data,bool editable)
         {
             try
             {               
                 grcItems.DataSource = data;
-                grcItems.HideColumns("Id,ItemId").UnEditableColumns();                           
+                grcItems.HideColumns("Id,ItemId,ItemValue").UnEditableColumns();                           
 
-                if (FormMode != FormState.View)
+                if (editable)
                     grcItems.EditableColumns("ACC,REJ,NA");
+
                 //get columns need set to editable
                 var columnRowNumber = grvItems.Columns["RowNo"] as GridColumn;
                 var columnName = grvItems.Columns["Name"] as GridColumn;

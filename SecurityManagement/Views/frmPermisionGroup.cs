@@ -109,7 +109,7 @@ namespace SecurityManagement.Views
                 {
                     var id = Convert.ToInt32(grvPermisionGroup.GetRowCellValue(e.RowHandle, "Id"));
                     var projectId = Convert.ToInt32(cboProject.EditValue);
-                    CMISUI.UIHandler.ViewInForm<frmACL>(new object[] { id, true,projectId });
+                    CMISUI.UIHandler.ViewInNormalForm<frmACL>(this,new object[] { id, true,projectId });
                 }
             }
             catch (Exception ex)

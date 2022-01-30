@@ -67,6 +67,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cmbUnit = new CMISControls.Combo.CMLookupEdit();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbCompany.Properties)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -143,6 +144,7 @@
             this.pnlMain.Controls.Add(this.groupControl3);
             this.pnlMain.Controls.Add(this.groupControl2);
             this.pnlMain.Controls.Add(this.groupControl1);
+            this.pnlMain.Controls.Add(this.label8);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(200, 0);
             this.pnlMain.Margin = new System.Windows.Forms.Padding(0);
@@ -153,9 +155,9 @@
             // 
             // formStateControl
             // 
-            this.formStateControl.Location = new System.Drawing.Point(12, 6);
+            this.formStateControl.Location = new System.Drawing.Point(658, 6);
             this.formStateControl.Name = "formStateControl";
-            this.formStateControl.Size = new System.Drawing.Size(954, 35);
+            this.formStateControl.Size = new System.Drawing.Size(308, 35);
             this.formStateControl.TabIndex = 4;
             // 
             // groupControl5
@@ -563,6 +565,18 @@
             this.panel2.Size = new System.Drawing.Size(200, 803);
             this.panel2.TabIndex = 1;
             // 
+            // label8
+            // 
+            this.label8.BackColor = System.Drawing.Color.LightGoldenrodYellow;
+            this.label8.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(12, 6);
+            this.label8.Name = "label8";
+            this.label8.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.label8.Size = new System.Drawing.Size(954, 35);
+            this.label8.TabIndex = 6;
+            this.label8.Text = "CF-819-1 TRENCH PREP.";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // CF_819_1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -653,5 +667,6 @@
         private System.Windows.Forms.Panel panel2;
         private CMISControl.FormMode formStateControl;
         private DevExpress.XtraGrid.Views.Grid.GridView grvItems;
+        private System.Windows.Forms.Label label8;
     }
 }
