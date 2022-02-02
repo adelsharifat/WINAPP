@@ -131,11 +131,30 @@ namespace Electrical.Data
         #endregion
 
         #region Category
-        public DataTable GetCategoriesCombo()
+        public DataTable GetCategoriesCombo(bool all = true)
         {
             try
             {
-                return DoQueryReader("EL.GetCategoriesCombo");
+                var sqlParams = new SqlParameter[]
+                {
+                    new SqlParameter("All",all)
+                };
+                return DoQueryReader("EL.GetCategoriesCombo",sqlParams);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public DataTable GetSubCategoriesCombo(int categoryId)
+        {
+            try
+            {
+                var sqlParams = new SqlParameter[]
+                {
+                    new SqlParameter("CategoryId",categoryId)
+                };
+                return DoQueryReader("EL.GetSubCategoriesCombo",sqlParams);
             }
             catch (Exception)
             {
@@ -210,10 +229,57 @@ namespace Electrical.Data
                 throw;
             }
         }
-
-
-
-
         #endregion
+
+        #region Packing
+        public DataTable GetPLQtyUnit()
+        {
+            try
+            {
+                return DoQueryReader("EL.GetPLQtyUnit");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataTable GetItemCodesCombo(int? categoryId = null)
+        {
+            try
+            {
+                var sqlParams = new SqlParameter[]
+                {
+                    new SqlParameter("CategoryId",categoryId)
+                };
+                return DoQueryReader("EL.GetItemCodesCombo", sqlParams);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public int SavePacking(int projectId,int companyId, int? documentId, int unitId, int userId,string reportNo, DataTable packingItems)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("ProjectId",projectId),
+                new SqlParameter("CompanyId",companyId),
+                new SqlParameter("DocumentId",documentId),
+                new SqlParameter("UnitId",unitId),
+                new SqlParameter("UserId",userId),
+                new SqlParameter("ReportNo",reportNo),
+                new SqlParameter("PackingItems",packingItems),
+            };
+            return DoMutation("EL.SavePacking", sqlParams);
+        }
+                        
+        #endregion
+
+
+
+
+
     }
 }

@@ -21,6 +21,9 @@ namespace QCElectrical
         [Permit("Allow access to specific contracts", "Contracts")]
         public const string Contract = nameof(Contract);
 
+        [Permit("Allow access to specific vendros", "Companies")]
+        public const string Vendor = nameof(Vendor);
+
         [Permit("Allow access to Save itemcode")]
         public const string ButtonSaveItemCode = nameof(ButtonSaveItemCode);
 
@@ -38,6 +41,11 @@ namespace QCElectrical
 
         [Permit("Allow access to delete category")]
         public const string ButtonDeleteCategory = nameof(ButtonDeleteCategory);
+
+
+        [Permit("Allow access to Save Packing")]
+        public const string ButtonSavePacking = nameof(ButtonSavePacking);
+
 
 
 

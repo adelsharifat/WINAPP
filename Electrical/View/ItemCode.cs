@@ -56,8 +56,6 @@ namespace Electrical.View
             var btnDeleteItem = e.RibbonPage.AddDeleteFormActionTool(this);
             var btnSaveItem = e.RibbonPage.AddSaveFormActionTool(this);
 
-            var btnMapItemCode = e.RibbonPage.AddItem(this, "MapItemCode", "Item Code Ations", ElectricalResource.move_stock_32px);
-
             //Added ribbon grid tools
             e.RibbonPage.AddToggleSearchGridTool(this);
             e.RibbonPage.AddToggleAutoWidthGridTool(this);
@@ -113,8 +111,8 @@ namespace Electrical.View
             {
                 this.id = dr.Id();
                 txtItemCode.Text = dr.ToString("ItemCode");
-                cboCategory.EditValue = dr.ToInt("ParentId");
-                cboWarehouseItemCode.EditValue = dr.ToInt("WarehouseItemCodeId");
+                cboCategory.EditValue =dr["CategoryId"] == DBNull.Value?0:dr.ToInt("CategoryId");
+                cboWarehouseItemCode.EditValue = dr["WarehouseItemCodeId"] == DBNull.Value ? 0 : dr.ToInt("WarehouseItemCodeId");
             }
         }
         private void BtnDeleteItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -190,7 +188,7 @@ namespace Electrical.View
         {
             try
             {
-                var data = DAL.Do.GetCategoriesCombo();
+                var data = DAL.Do.GetCategoriesCombo(true);
                 cboCategory.Fill(data, "Category", "Id").SelectItem(0);
             }
             catch (Exception)
