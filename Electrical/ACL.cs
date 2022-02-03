@@ -46,7 +46,11 @@ namespace QCElectrical
         [Permit("Allow access to Save Packing")]
         public const string ButtonSavePacking = nameof(ButtonSavePacking);
 
+        [Permit("Allow access to Post PL Document")]
+        public const string ButtonPostPLDocument = nameof(ButtonPostPLDocument);
 
+        [Permit("Allow access to Sign Role PLCreator")]
+        public const string PLCreator = nameof(PLCreator);
 
 
 

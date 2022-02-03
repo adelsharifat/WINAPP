@@ -8,8 +8,9 @@ namespace Electrical.Model
 {
     public class TvpPackingItem
     {
-        public int Id { get; set; } = 0;
+        public int Id { get; set; }        
         public int ItemCodeId { get; set; }
+        public string ItemCode { get; set; }
         public int UnitId { get; set; }
         public int VendorId { get; set; }
         public string TagNo { get; set; }

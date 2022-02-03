@@ -18,6 +18,7 @@ using CMISControls.Combo;
 using CMISUIHelper.Infrastructure.Enums;
 using CMISUIHelper.Infrastructure.Contracts.CustomException;
 using DevExpress.XtraGrid.Views.Grid;
+using DMS.Enums;
 
 namespace Electrical.View
 {
@@ -25,18 +26,27 @@ namespace Electrical.View
     {
         private Dictionary<string, Model.TvpPackingItem> tvpPackingItems = new Dictionary<string, Model.TvpPackingItem>();
         private int? documentId = null;
+        private DataRow packingDataRow = null;
 
+        //Constructor fo view and editing packing mode
         public Packing()
         {
             InitializeComponent();
+        }
+
+        public Packing(int? documentId,DataRow dr)
+        {
+            InitializeComponent();
+            this.documentId = documentId;
+            this.packingDataRow = dr;
         }
 
         private void Packing_BeforeViewLoad(object sender, EventArgs e)
         {
             try
             {
-                InitialLoadData();
-                
+                ShowRefreshItem = false;
+                InitialLoadData();                
             }
             catch (Exception ex)
             {
@@ -46,7 +56,13 @@ namespace Electrical.View
 
         private void Packing_ViewLoaded(object sender, EventArgs e)
         {
+            //Get document row in edit or view mode here
+            if(this.documentId != null)
+            {
+                //Load data here
+                LoadData();
 
+            }
         }
 
         private void Packing_ViewRefresh(object sender, EventArgs e)
@@ -58,26 +74,56 @@ namespace Electrical.View
         {
             var btnNewItem = e.RibbonPage.AddNewFormActionTool(this);
             var btnSaveItem = e.RibbonPage.AddSaveFormActionTool(this);
-            var btnEditItem = e.RibbonPage.AddEditFormActionTool(this);
-            var btnDeleteItem = e.RibbonPage.AddDeleteFormActionTool(this);
 
             var btnPostItem = e.RibbonPage.AddSignPostActionTool(this);
 
-
             btnNewItem.ItemClick += BtnNewItem_ItemClick;
             btnSaveItem.ItemClick += BtnSaveItem_ItemClick;
-            btnEditItem.ItemClick += BtnEditItem_ItemClick;
-            btnDeleteItem.ItemClick += BtnDeleteItem_ItemClick;
+
+            btnPostItem.ItemClick += BtnPostItem_ItemClick;
 
         }
+
+        // Sign "PL" document action method
+        private void BtnPostItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            try
+            {
+                //check user only document is open or in edit mode documentId is nt null
+                if (this.documentId == null) throw new CMISException("Document not found!");
+
+                var signType = SignType.Post.ToString();
+                var projectId = LoginInfo.ProjectId;
+                var userId = LoginInfo.Id;
+                var objectId = this.documentId;
+                var nextRole = String.Empty;
+                var machineName = CMISUtils.SecurityHelper.MachineName;
+                var activeDirectoryName = CMISUtils.SecurityHelper.ActiveDirecotryName;
+                var companyId = Convert.ToInt32(cmbCompany.EditValue);
+                var result = DAL.Do.SignPLDocument(signType, projectId, userId, (int)objectId, nextRole, machineName, activeDirectoryName, companyId);
+
+                if (result <= 0) throw new CMISException("Operation sign \"PL\" faild!");
+
+                Msg.Show("Operationm sign \"PL\" succeded!");
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
+        }
+
+
 
         // Helper for reset form
         private void ResetForm()
         {
             try
             {
+                this.packingDataRow = null;
+                this.documentId = null;
                 cboUnit.SelectItem(0);
                 cboItemCode.SelectItem(0);
+                txtReport.Text = String.Empty;
                 txtTag.Text = String.Empty;
                 cboCategory.SelectItem(0);
                 cboSubCategory.SelectItem(0);
@@ -97,9 +143,7 @@ namespace Electrical.View
 
         // Helper for check validation form before save or update
         private void CheckValidationForm()
-        {
-            try
-            {
+        {           
                 if (cboUnit.EditValue == null) throw new CMISException("Unit field is required!");
                 if (cboItemCode.EditValue == null) throw new CMISException("ItemCode field is required");
                 if (String.IsNullOrEmpty(txtTag.Text)) throw new CMISException("TagNo field is required");
@@ -112,19 +156,17 @@ namespace Electrical.View
                 if (cboVendor.EditValue == null) throw new CMISException("Vendor field is required");
                 if (String.IsNullOrEmpty(txtPlQty.Text)) throw new CMISException("P/L QTY field is required");
                 if (cboQtyUnit.EditValue == null) throw new CMISException("QtyUnit field is required");
-            }
-            catch (Exception ex)
-            {
-                ex.ShowMessage();
-            }
         }
-        // Handle new for edit item
+        // Handle new for new and reset form item
         private void BtnNewItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             try
             {
                 FormMode = FormState.Save;
                 ResetForm();
+                grpItemData.Enabled = true;
+                grcPacking.DataSource = null;
+                tvpPackingItems.Clear();
             }
             catch (Exception)
             {
@@ -138,9 +180,15 @@ namespace Electrical.View
         {
             try
             {
+                // Check form mode
+                if (FormMode == FormState.View) return;
+
+                //Check Grid in empty
+                if (grvPaking.RowCount <= 0) throw new CMISException("The grid is empty!");
+
                 //Prompt for save or updating data
                 var formOperationMode = this.documentId == null ? "save" : "update";
-                Msg.ConfirmOperation($"Are you sure for {formOperationMode} data?").Invoke();
+                if (Msg.Confirm($"Are you sure for {formOperationMode} data?") == DialogResult.No) return;
 
                 //Mutation packing list
                 // get form data for mutation db
@@ -152,7 +200,7 @@ namespace Electrical.View
                 var packingItems = tvpPackingItems.ToDataTable<string, Model.TvpPackingItem>();
 
                 //Save data
-                var result = DAL.Do.SavePacking(projectId, companyId, documentId, unitId, userId, reportNo, packingItems);
+                var result = DAL.Do.SavePacking(projectId, companyId, documentId, userId, reportNo, packingItems);
                 if (result <= 0) throw new CMISException($"Operation {formOperationMode} faild!");
                 Msg.Show($"Operation {formOperationMode} succeded!");
             }
@@ -162,17 +210,6 @@ namespace Electrical.View
             }
         }
 
-        // Handle edit packing before posted it
-        private void BtnEditItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        // Handle delete a packing before posted it
-        private void BtnDeleteItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
 
         #region Overrided
         public override void InitComboCompany()
@@ -205,7 +242,42 @@ namespace Electrical.View
 
         private void LoadData()
         {
-            
+            try
+            {
+                if(this.documentId != null)
+                {
+                    tvpPackingItems.Clear();
+                    grcPacking.DataSource = null;
+                    grpItemData.Enabled = false;
+                    FormMode = FormState.View;
+                    // Get Packing Document
+                    var projectId = Convert.ToInt32(this.packingDataRow["ProjectId"]);
+                    var companyId = Convert.ToInt32(this.packingDataRow["CompanyId"]);
+                    var packingDocument = DAL.Do.GetPackingDocuments(projectId, companyId, documentId) as DataRow;
+
+                    if (packingDocument == null) throw new CMISException("Document not found");
+                    txtReport.Text = packingDocument["ReportNo"].ToString();
+                    cmbCompany.EditValue = Convert.ToInt32(packingDocument["CompanyId"]);
+
+                    var packingItems = DAL.Do.GetPackingItemsByDocumentId(this.documentId);
+                    if (packingItems.Rows.Count <= 0) throw new CMISException("Empty packing items");
+
+                    
+                    foreach (var item in packingItems.ToList<Model.TvpPackingItem>())
+                    {
+                        tvpPackingItems.Add(item.ItemCode, item);
+                    }
+                     
+                    grcPacking.SetDataSource(() =>
+                    {
+                        return packingItems;
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
         }
 
         //Fill category combo
@@ -337,26 +409,46 @@ namespace Electrical.View
                 CheckValidationForm();
 
                 // Create Model for making tvp
-                Model.TvpPackingItem tvpPackingItem = new Model.TvpPackingItem
-                {
-                    ItemCodeId = Convert.ToInt32(cboItemCode.EditValue),
-                    UnitId = Convert.ToInt32(cboUnit.EditValue),
-                    VendorId = Convert.ToInt32(cboVendor.EditValue),
-                    TagNo = txtTag.Text.Trim(),
-                    CategoryId = Convert.ToInt32(cboCategory.EditValue),
-                    SubCategoryId = Convert.ToInt32(cboSubCategory.EditValue),
-                    Description = txtDescription.Text.Trim(),
-                    Size = txtSize.Text.Trim(),
-                    PackingNo = txtPackingNo.Text.Trim(),
-                    PLQty = Convert.ToDecimal(txtPlQty.Text.Trim()),
-                    QtyUnitId = Convert.ToInt32(cboQtyUnit.EditValue)
-                };
+                Model.TvpPackingItem tvpPackingItem;
 
                 var itemKey = cboItemCode.GetColumnValue("ItemCode").ToString();
 
-                if (tvpPackingItems.ContainsKey(itemKey)) throw new CMISException("This item code already exist in the list!");
+                // Data will be update
+                if (tvpPackingItems.ContainsKey(itemKey))
+                {
+                    var item = tvpPackingItems[itemKey];                    
+                    item.ItemCodeId = Convert.ToInt32(cboItemCode.EditValue);
+                    item.ItemCode = cboItemCode.Text;
+                    item.UnitId = Convert.ToInt32(cboUnit.EditValue);
+                    item.VendorId = Convert.ToInt32(cboVendor.EditValue);
+                    item.TagNo = txtTag.Text.Trim();
+                    item.CategoryId = Convert.ToInt32(cboCategory.EditValue);
+                    item.SubCategoryId = Convert.ToInt32(cboSubCategory.EditValue);
+                    item.Description = txtDescription.Text.Trim();
+                    item.Size = txtSize.Text.Trim();
+                    item.PackingNo = txtPackingNo.Text.Trim();
+                    item.PLQty = Convert.ToDecimal(txtPlQty.Text.Trim());
+                    item.QtyUnitId = Convert.ToInt32(cboQtyUnit.EditValue);
 
-                tvpPackingItems.Add(itemKey, tvpPackingItem);
+                }else//data will be insert
+                {
+                    tvpPackingItem = new Model.TvpPackingItem
+                    {
+                        ItemCodeId = Convert.ToInt32(cboItemCode.EditValue),
+                        ItemCode = cboItemCode.Text,
+                        UnitId = Convert.ToInt32(cboUnit.EditValue),
+                        VendorId = Convert.ToInt32(cboVendor.EditValue),
+                        TagNo = txtTag.Text.Trim(),
+                        CategoryId = Convert.ToInt32(cboCategory.EditValue),
+                        SubCategoryId = Convert.ToInt32(cboSubCategory.EditValue),
+                        Description = txtDescription.Text.Trim(),
+                        Size = txtSize.Text.Trim(),
+                        PackingNo = txtPackingNo.Text.Trim(),
+                        PLQty = Convert.ToDecimal(txtPlQty.Text.Trim()),
+                        QtyUnitId = Convert.ToInt32(cboQtyUnit.EditValue)
+                    };
+                    tvpPackingItems.Add(itemKey, tvpPackingItem);
+                }
 
                 FillPackingListGrid();
             }
@@ -378,28 +470,79 @@ namespace Electrical.View
             }
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void btnDeleteItem_Click(object sender, EventArgs e)
         {
             try
             {
-                
+                if (Msg.Confirm("Are you sure to remove selected item") == DialogResult.No) return;
+                if(grvPaking.GetFocusedDataRow() is DataRow dr)
+                {
+                    tvpPackingItems.Remove(dr["ItemCode"].ToString());
+                    FillPackingListGrid();
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                ex.ShowMessage();
             }
         }
 
-        private void grvPaking_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
+        private void grcPacking_DataSourceChanged(object sender, EventArgs e)
         {
             try
             {
-                var gv = sender as GridView;
-                for (int i = 0; i < gv.RowCount; i++)
+                if(grvPaking.RowCount>0)
                 {
-                    gv.SetRowCellValue(i,"Id", - i+2);
+                    cmbCompany.Enabled = false;
+                    txtReport.ReadOnly = true;
+                    //cboUnit.Enabled = false;
                 }
+                else
+                {
+                    cmbCompany.Enabled = true;
+                    txtReport.ReadOnly = false;
+                    //cboUnit.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
+        }
+
+        private void btnEditItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (grvPaking.GetFocusedDataRow() is DataRow dr)
+                {
+                    if (Msg.Confirm("Are you sure to edit selected item") == DialogResult.No) return;
+                    grpItemData.Enabled = true;
+                    cboUnit.EditValue = Convert.ToInt32(dr["UnitId"]);
+                    cboCategory.EditValue = dr["CategoryId"] == DBNull.Value ? 0 : Convert.ToInt32(dr["CategoryId"]);
+                    cboSubCategory.EditValue = dr["SubCategoryId"] == DBNull.Value ? 0 : Convert.ToInt32(dr["SubCategoryId"]);
+                    cboItemCode.EditValue = Convert.ToInt32(dr["ItemCodeId"]);
+                    txtTag.Text = dr["TagNo"].ToString();
+                    txtPackingNo.Text = dr["PackingNo"].ToString();
+                    cboVendor.EditValue = Convert.ToInt32(dr["VendorId"]);
+                    txtSize.Text = dr["Size"].ToString();
+                    txtPlQty.Text = dr["PLQty"].ToString();
+                    cboQtyUnit.EditValue = Convert.ToInt32(dr["QTYUnitId"]);
+                    txtDescription.Text = dr["Description"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ResetForm();
+                grpItemData.Enabled = true;
             }
             catch (Exception ex)
             {

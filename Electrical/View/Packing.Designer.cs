@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.grpItemData = new DevExpress.XtraEditors.GroupControl();
+            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddItem = new DevExpress.XtraEditors.SimpleButton();
+            this.cboUnit = new DevExpress.XtraEditors.LookUpEdit();
+            this.lblUnit = new System.Windows.Forms.Label();
             this.txtDescription = new DevExpress.XtraEditors.MemoEdit();
             this.lblTag = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -53,17 +56,17 @@
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.txtReport = new DevExpress.XtraEditors.TextEdit();
             this.lblreportNo = new System.Windows.Forms.Label();
-            this.cboUnit = new DevExpress.XtraEditors.LookUpEdit();
-            this.lblUnit = new System.Windows.Forms.Label();
             this.grcPacking = new CMISControls.Grid.CMGridControl();
             this.grvPaking = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tsGrcPacking = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.btnDeleteItem = new System.Windows.Forms.ToolStripButton();
+            this.btnEditItem = new System.Windows.Forms.ToolStripButton();
             this.spliteContainer = new System.Windows.Forms.SplitContainer();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbCompany.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
-            this.groupControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grpItemData)).BeginInit();
+            this.grpItemData.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cboUnit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTag.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboQtyUnit.Properties)).BeginInit();
@@ -77,7 +80,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtReport.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboUnit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grcPacking)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvPaking)).BeginInit();
             this.tsGrcPacking.SuspendLayout();
@@ -104,52 +106,93 @@
             // 
             this.pnlHeaderContainer.Size = new System.Drawing.Size(1425, 51);
             // 
-            // groupControl2
+            // grpItemData
             // 
-            this.groupControl2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.grpItemData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupControl2.Controls.Add(this.btnAddItem);
-            this.groupControl2.Controls.Add(this.txtDescription);
-            this.groupControl2.Controls.Add(this.lblTag);
-            this.groupControl2.Controls.Add(this.label10);
-            this.groupControl2.Controls.Add(this.txtTag);
-            this.groupControl2.Controls.Add(this.label6);
-            this.groupControl2.Controls.Add(this.cboQtyUnit);
-            this.groupControl2.Controls.Add(this.cboItemCode);
-            this.groupControl2.Controls.Add(this.label9);
-            this.groupControl2.Controls.Add(this.cboCategory);
-            this.groupControl2.Controls.Add(this.label2);
-            this.groupControl2.Controls.Add(this.label8);
-            this.groupControl2.Controls.Add(this.txtPlQty);
-            this.groupControl2.Controls.Add(this.label7);
-            this.groupControl2.Controls.Add(this.cboVendor);
-            this.groupControl2.Controls.Add(this.label3);
-            this.groupControl2.Controls.Add(this.cboSubCategory);
-            this.groupControl2.Controls.Add(this.label4);
-            this.groupControl2.Controls.Add(this.txtSize);
-            this.groupControl2.Controls.Add(this.txtPackingNo);
-            this.groupControl2.Controls.Add(this.label5);
-            this.groupControl2.Location = new System.Drawing.Point(12, 116);
-            this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(428, 424);
-            this.groupControl2.TabIndex = 25;
-            this.groupControl2.Text = "Item Data";
+            this.grpItemData.Controls.Add(this.btnCancel);
+            this.grpItemData.Controls.Add(this.btnAddItem);
+            this.grpItemData.Controls.Add(this.cboUnit);
+            this.grpItemData.Controls.Add(this.lblUnit);
+            this.grpItemData.Controls.Add(this.txtDescription);
+            this.grpItemData.Controls.Add(this.lblTag);
+            this.grpItemData.Controls.Add(this.label10);
+            this.grpItemData.Controls.Add(this.txtTag);
+            this.grpItemData.Controls.Add(this.label6);
+            this.grpItemData.Controls.Add(this.cboQtyUnit);
+            this.grpItemData.Controls.Add(this.cboItemCode);
+            this.grpItemData.Controls.Add(this.label9);
+            this.grpItemData.Controls.Add(this.cboCategory);
+            this.grpItemData.Controls.Add(this.label2);
+            this.grpItemData.Controls.Add(this.label8);
+            this.grpItemData.Controls.Add(this.txtPlQty);
+            this.grpItemData.Controls.Add(this.label7);
+            this.grpItemData.Controls.Add(this.cboVendor);
+            this.grpItemData.Controls.Add(this.label3);
+            this.grpItemData.Controls.Add(this.cboSubCategory);
+            this.grpItemData.Controls.Add(this.label4);
+            this.grpItemData.Controls.Add(this.txtSize);
+            this.grpItemData.Controls.Add(this.txtPackingNo);
+            this.grpItemData.Controls.Add(this.label5);
+            this.grpItemData.Location = new System.Drawing.Point(12, 88);
+            this.grpItemData.Name = "grpItemData";
+            this.grpItemData.Size = new System.Drawing.Size(428, 627);
+            this.grpItemData.TabIndex = 25;
+            this.grpItemData.Text = "Item Data";
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.ImageOptions.Image = global::Electrical.ElectricalResource.Invalid;
+            this.btnCancel.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnCancel.ImageOptions.ImageToTextIndent = 8;
+            this.btnCancel.Location = new System.Drawing.Point(250, 438);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(99, 31);
+            this.btnCancel.TabIndex = 27;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnAddItem
             // 
             this.btnAddItem.ImageOptions.Image = global::Electrical.ElectricalResource.Plus;
             this.btnAddItem.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnAddItem.ImageOptions.ImageToTextIndent = 8;
-            this.btnAddItem.Location = new System.Drawing.Point(101, 371);
+            this.btnAddItem.Location = new System.Drawing.Point(101, 438);
             this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(114, 31);
+            this.btnAddItem.Size = new System.Drawing.Size(143, 31);
             this.btnAddItem.TabIndex = 26;
-            this.btnAddItem.Text = "Add Item";
+            this.btnAddItem.Text = "Add/Update Item";
             this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
+            // 
+            // cboUnit
+            // 
+            this.cboUnit.Location = new System.Drawing.Point(101, 30);
+            this.cboUnit.Name = "cboUnit";
+            this.cboUnit.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.cboUnit.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboUnit.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cboUnit.Properties.Appearance.Options.UseFont = true;
+            this.cboUnit.Properties.Appearance.Options.UseForeColor = true;
+            this.cboUnit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboUnit.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
+            this.cboUnit.Size = new System.Drawing.Size(131, 24);
+            this.cboUnit.TabIndex = 0;
+            // 
+            // lblUnit
+            // 
+            this.lblUnit.AutoSize = true;
+            this.lblUnit.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUnit.ForeColor = System.Drawing.Color.Black;
+            this.lblUnit.Location = new System.Drawing.Point(14, 33);
+            this.lblUnit.Name = "lblUnit";
+            this.lblUnit.Size = new System.Drawing.Size(33, 17);
+            this.lblUnit.TabIndex = 1;
+            this.lblUnit.Text = "Unit";
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(101, 269);
+            this.txtDescription.Location = new System.Drawing.Point(101, 336);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(314, 96);
             this.txtDescription.TabIndex = 22;
@@ -159,7 +202,7 @@
             this.lblTag.AutoSize = true;
             this.lblTag.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTag.ForeColor = System.Drawing.Color.Black;
-            this.lblTag.Location = new System.Drawing.Point(14, 122);
+            this.lblTag.Location = new System.Drawing.Point(14, 169);
             this.lblTag.Name = "lblTag";
             this.lblTag.Size = new System.Drawing.Size(71, 17);
             this.lblTag.TabIndex = 3;
@@ -170,7 +213,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(14, 92);
+            this.label10.Location = new System.Drawing.Point(14, 135);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(66, 17);
             this.label10.TabIndex = 21;
@@ -178,7 +221,7 @@
             // 
             // txtTag
             // 
-            this.txtTag.Location = new System.Drawing.Point(101, 119);
+            this.txtTag.Location = new System.Drawing.Point(101, 166);
             this.txtTag.Name = "txtTag";
             this.txtTag.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTag.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -192,7 +235,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(14, 269);
+            this.label6.Location = new System.Drawing.Point(14, 300);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(81, 17);
             this.label6.TabIndex = 13;
@@ -200,7 +243,7 @@
             // 
             // cboQtyUnit
             // 
-            this.cboQtyUnit.Location = new System.Drawing.Point(101, 239);
+            this.cboQtyUnit.Location = new System.Drawing.Point(101, 302);
             this.cboQtyUnit.Name = "cboQtyUnit";
             this.cboQtyUnit.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.cboQtyUnit.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -215,7 +258,7 @@
             // 
             // cboItemCode
             // 
-            this.cboItemCode.Location = new System.Drawing.Point(101, 89);
+            this.cboItemCode.Location = new System.Drawing.Point(101, 132);
             this.cboItemCode.Name = "cboItemCode";
             this.cboItemCode.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboItemCode.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -232,7 +275,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Black;
-            this.label9.Location = new System.Drawing.Point(14, 242);
+            this.label9.Location = new System.Drawing.Point(14, 341);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(67, 17);
             this.label9.TabIndex = 19;
@@ -240,7 +283,7 @@
             // 
             // cboCategory
             // 
-            this.cboCategory.Location = new System.Drawing.Point(101, 29);
+            this.cboCategory.Location = new System.Drawing.Point(101, 64);
             this.cboCategory.Name = "cboCategory";
             this.cboCategory.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.cboCategory.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -259,7 +302,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(14, 32);
+            this.label2.Location = new System.Drawing.Point(14, 67);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 17);
             this.label2.TabIndex = 5;
@@ -270,7 +313,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(234, 212);
+            this.label8.Location = new System.Drawing.Point(234, 271);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(64, 17);
             this.label8.TabIndex = 17;
@@ -278,12 +321,15 @@
             // 
             // txtPlQty
             // 
-            this.txtPlQty.Location = new System.Drawing.Point(304, 209);
+            this.txtPlQty.Location = new System.Drawing.Point(304, 268);
             this.txtPlQty.Name = "txtPlQty";
             this.txtPlQty.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPlQty.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txtPlQty.Properties.Appearance.Options.UseFont = true;
             this.txtPlQty.Properties.Appearance.Options.UseForeColor = true;
+            this.txtPlQty.Properties.Mask.EditMask = "n2";
+            this.txtPlQty.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtPlQty.Properties.Mask.ShowPlaceHolders = false;
             this.txtPlQty.Size = new System.Drawing.Size(113, 24);
             this.txtPlQty.TabIndex = 9;
             // 
@@ -292,7 +338,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(14, 182);
+            this.label7.Location = new System.Drawing.Point(14, 237);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(50, 17);
             this.label7.TabIndex = 15;
@@ -300,7 +346,7 @@
             // 
             // cboVendor
             // 
-            this.cboVendor.Location = new System.Drawing.Point(101, 179);
+            this.cboVendor.Location = new System.Drawing.Point(101, 234);
             this.cboVendor.Name = "cboVendor";
             this.cboVendor.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.cboVendor.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -316,7 +362,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(14, 62);
+            this.label3.Location = new System.Drawing.Point(14, 101);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(84, 17);
             this.label3.TabIndex = 7;
@@ -324,7 +370,7 @@
             // 
             // cboSubCategory
             // 
-            this.cboSubCategory.Location = new System.Drawing.Point(101, 59);
+            this.cboSubCategory.Location = new System.Drawing.Point(101, 98);
             this.cboSubCategory.Name = "cboSubCategory";
             this.cboSubCategory.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.cboSubCategory.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -343,7 +389,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(15, 212);
+            this.label4.Location = new System.Drawing.Point(15, 271);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(32, 17);
             this.label4.TabIndex = 9;
@@ -351,7 +397,7 @@
             // 
             // txtSize
             // 
-            this.txtSize.Location = new System.Drawing.Point(101, 209);
+            this.txtSize.Location = new System.Drawing.Point(101, 268);
             this.txtSize.Name = "txtSize";
             this.txtSize.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSize.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -362,7 +408,7 @@
             // 
             // txtPackingNo
             // 
-            this.txtPackingNo.Location = new System.Drawing.Point(101, 149);
+            this.txtPackingNo.Location = new System.Drawing.Point(101, 200);
             this.txtPackingNo.Name = "txtPackingNo";
             this.txtPackingNo.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPackingNo.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -376,7 +422,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(14, 152);
+            this.label5.Location = new System.Drawing.Point(14, 203);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(81, 17);
             this.label5.TabIndex = 11;
@@ -386,11 +432,9 @@
             // 
             this.groupControl1.Controls.Add(this.txtReport);
             this.groupControl1.Controls.Add(this.lblreportNo);
-            this.groupControl1.Controls.Add(this.cboUnit);
-            this.groupControl1.Controls.Add(this.lblUnit);
             this.groupControl1.Location = new System.Drawing.Point(12, 10);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(428, 100);
+            this.groupControl1.Size = new System.Drawing.Size(428, 72);
             this.groupControl1.TabIndex = 24;
             this.groupControl1.Text = "Document Header";
             // 
@@ -418,32 +462,6 @@
             this.lblreportNo.TabIndex = 23;
             this.lblreportNo.Text = "Report No.";
             // 
-            // cboUnit
-            // 
-            this.cboUnit.Location = new System.Drawing.Point(101, 62);
-            this.cboUnit.Name = "cboUnit";
-            this.cboUnit.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.cboUnit.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboUnit.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cboUnit.Properties.Appearance.Options.UseFont = true;
-            this.cboUnit.Properties.Appearance.Options.UseForeColor = true;
-            this.cboUnit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboUnit.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
-            this.cboUnit.Size = new System.Drawing.Size(131, 24);
-            this.cboUnit.TabIndex = 0;
-            // 
-            // lblUnit
-            // 
-            this.lblUnit.AutoSize = true;
-            this.lblUnit.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUnit.ForeColor = System.Drawing.Color.Black;
-            this.lblUnit.Location = new System.Drawing.Point(14, 65);
-            this.lblUnit.Name = "lblUnit";
-            this.lblUnit.Size = new System.Drawing.Size(33, 17);
-            this.lblUnit.TabIndex = 1;
-            this.lblUnit.Text = "Unit";
-            // 
             // grcPacking
             // 
             this.grcPacking.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -456,6 +474,7 @@
             this.grcPacking.TabIndex = 2;
             this.grcPacking.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvPaking});
+            this.grcPacking.DataSourceChanged += new System.EventHandler(this.grcPacking_DataSourceChanged);
             // 
             // grvPaking
             // 
@@ -464,26 +483,35 @@
             this.grvPaking.OptionsBehavior.Editable = false;
             this.grvPaking.OptionsView.ShowAutoFilterRow = true;
             this.grvPaking.OptionsView.ShowFooter = true;
-            this.grvPaking.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.grvPaking_RowUpdated);
             // 
             // tsGrcPacking
             // 
             this.tsGrcPacking.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1});
+            this.btnDeleteItem,
+            this.btnEditItem});
             this.tsGrcPacking.Location = new System.Drawing.Point(0, 0);
             this.tsGrcPacking.Name = "tsGrcPacking";
             this.tsGrcPacking.Size = new System.Drawing.Size(968, 25);
             this.tsGrcPacking.TabIndex = 3;
             this.tsGrcPacking.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // btnDeleteItem
             // 
-            this.toolStripButton1.Image = global::Electrical.ElectricalResource.trash_32x32;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(60, 22);
-            this.toolStripButton1.Text = "Delete";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.btnDeleteItem.Image = global::Electrical.ElectricalResource.trash_32x32;
+            this.btnDeleteItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDeleteItem.Name = "btnDeleteItem";
+            this.btnDeleteItem.Size = new System.Drawing.Size(60, 22);
+            this.btnDeleteItem.Text = "Delete";
+            this.btnDeleteItem.Click += new System.EventHandler(this.btnDeleteItem_Click);
+            // 
+            // btnEditItem
+            // 
+            this.btnEditItem.Image = global::Electrical.ElectricalResource.edit_32x32;
+            this.btnEditItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEditItem.Name = "btnEditItem";
+            this.btnEditItem.Size = new System.Drawing.Size(47, 22);
+            this.btnEditItem.Text = "Edit";
+            this.btnEditItem.Click += new System.EventHandler(this.btnEditItem_Click);
             // 
             // spliteContainer
             // 
@@ -495,7 +523,7 @@
             // 
             // spliteContainer.Panel1
             // 
-            this.spliteContainer.Panel1.Controls.Add(this.groupControl2);
+            this.spliteContainer.Panel1.Controls.Add(this.grpItemData);
             this.spliteContainer.Panel1.Controls.Add(this.groupControl1);
             // 
             // spliteContainer.Panel2
@@ -521,9 +549,10 @@
             this.Controls.SetChildIndex(this.spliteContainer, 0);
             this.pnlHeader.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cmbCompany.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
-            this.groupControl2.ResumeLayout(false);
-            this.groupControl2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grpItemData)).EndInit();
+            this.grpItemData.ResumeLayout(false);
+            this.grpItemData.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cboUnit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTag.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboQtyUnit.Properties)).EndInit();
@@ -538,7 +567,6 @@
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtReport.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboUnit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grcPacking)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvPaking)).EndInit();
             this.tsGrcPacking.ResumeLayout(false);
@@ -576,14 +604,16 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label10;
         private DevExpress.XtraEditors.LookUpEdit cboItemCode;
-        private DevExpress.XtraEditors.GroupControl groupControl2;
+        private DevExpress.XtraEditors.GroupControl grpItemData;
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.TextEdit txtReport;
         private System.Windows.Forms.Label lblreportNo;
         private System.Windows.Forms.ToolStrip tsGrcPacking;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton btnDeleteItem;
         private DevExpress.XtraEditors.SimpleButton btnAddItem;
         private System.Windows.Forms.SplitContainer spliteContainer;
         private DevExpress.XtraEditors.MemoEdit txtDescription;
+        private System.Windows.Forms.ToolStripButton btnEditItem;
+        private DevExpress.XtraEditors.SimpleButton btnCancel;
     }
 }

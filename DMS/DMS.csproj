@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attachment.cs" />
+    <Compile Include="Enums\SignType.cs" />
     <Compile Include="Extentions\MapTvpAttachment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportNumber.cs" />

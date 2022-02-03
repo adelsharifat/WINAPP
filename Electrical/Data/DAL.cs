@@ -232,6 +232,21 @@ namespace Electrical.Data
         #endregion
 
         #region Packing
+        public DataTable GetPackingItemsByDocumentId(int? documentId)
+        {
+            try
+            {
+                var sqlParams = new SqlParameter[]
+                {
+                    new SqlParameter("DocumentId",documentId)
+                };
+                return DoQueryReader("EL.GetPackingItemsByDocumentId",sqlParams);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public DataTable GetPLQtyUnit()
         {
             try
@@ -243,7 +258,6 @@ namespace Electrical.Data
                 throw;
             }
         }
-
         public DataTable GetItemCodesCombo(int? categoryId = null)
         {
             try
@@ -259,27 +273,60 @@ namespace Electrical.Data
                 throw;
             }
         }
-
-        public int SavePacking(int projectId,int companyId, int? documentId, int unitId, int userId,string reportNo, DataTable packingItems)
+        public int SavePacking(int projectId,int companyId, int? documentId, int userId,string reportNo, DataTable packingItems)
         {
             var sqlParams = new SqlParameter[]
             {
                 new SqlParameter("ProjectId",projectId),
                 new SqlParameter("CompanyId",companyId),
                 new SqlParameter("DocumentId",documentId),
-                new SqlParameter("UnitId",unitId),
                 new SqlParameter("UserId",userId),
                 new SqlParameter("ReportNo",reportNo),
                 new SqlParameter("PackingItems",packingItems),
             };
             return DoMutation("EL.SavePacking", sqlParams);
         }
-                        
+        public int SignPLDocument(string signtype,int projectId, int userId, int objectId,string nextRole,string machineName,string activeDirectoryName,int companyId)
+        {
+            var sqlParams = new SqlParameter[]
+               {
+                new SqlParameter("SignRequestType",signtype),
+                new SqlParameter("ProjectId",projectId),
+                new SqlParameter("UserId",userId),
+                new SqlParameter("ObjectId",objectId),
+                new SqlParameter("NextRole",nextRole),
+                new SqlParameter("MachineName",machineName),
+                new SqlParameter("ActiveDirectoryName",activeDirectoryName),
+                new SqlParameter("CompanyId",companyId)
+               };
+            return DoMutation("EL.SignPLDocument", sqlParams);
+        }
+        
+        
+        
         #endregion
 
-
-
-
-
+        #region PackingList
+        public dynamic GetPackingDocuments(int projectId, int companyId, int? id = null)
+        {
+            try
+            {
+                dynamic data = null;
+                var sqlParams = new SqlParameter[]
+                {
+                    new SqlParameter("ProjectId",projectId),
+                    new SqlParameter("CompanyId",companyId),
+                    new SqlParameter("Id",id)
+                };
+                data = DoQueryReader("EL.GetPackingDocuments", sqlParams);
+                if (data.Rows.Count > 0 && id != null) return data.Rows[0] as DataRow;
+                return data;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
     }
 }

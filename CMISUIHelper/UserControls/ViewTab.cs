@@ -499,6 +499,7 @@ namespace CMISUIHelper.UserControls
 
         public bool IsHomePage()
         {
+            if (this.ViewTitle == null) return false;
             if (this.Name == this.OwnerForm.HomePage || this.ViewTitle == this.OwnerForm.HomePage ) return true;
             return false;
         }

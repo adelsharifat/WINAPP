@@ -96,6 +96,12 @@
     <Compile Include="View\Packing.Designer.cs">
       <DependentUpon>Packing.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\PackingList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\PackingList.Designer.cs">
+      <DependentUpon>PackingList.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="doc\Cable List.xlsx" />
@@ -124,6 +130,9 @@
     <EmbeddedResource Include="View\Packing.resx">
       <DependentUpon>Packing.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\PackingList.resx">
+      <DependentUpon>PackingList.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CMISControls\CMISControls.csproj">
@@ -149,6 +158,10 @@
     <ProjectReference Include="..\CommonClass\CommonClass.csproj">
       <Project>{6932a454-b641-4f87-a6cc-3265990786d5}</Project>
       <Name>CommonClass</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DMS\DMS.csproj">
+      <Project>{2E19A99B-74DD-499B-8916-AC1BD89BE69E}</Project>
+      <Name>DMS</Name>
     </ProjectReference>
     <ProjectReference Include="..\Security\Security.csproj">
       <Project>{68241D09-523B-4B77-9926-8B30F66DDB17}</Project>

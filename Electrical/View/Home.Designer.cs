@@ -31,12 +31,14 @@
             DevExpress.XtraEditors.TileItemElement tileItemElement1 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement2 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement3 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement4 = new DevExpress.XtraEditors.TileItemElement();
             this.tileControl1 = new DevExpress.XtraEditors.TileControl();
             this.tgBaseInfo = new DevExpress.XtraEditors.TileGroup();
             this.tileItemCode = new DevExpress.XtraEditors.TileItem();
             this.tileCategory = new DevExpress.XtraEditors.TileItem();
             this.tileGroup2 = new DevExpress.XtraEditors.TileGroup();
-            this.tileItem1 = new DevExpress.XtraEditors.TileItem();
+            this.tileNewPL = new DevExpress.XtraEditors.TileItem();
+            this.tilePakingList = new DevExpress.XtraEditors.TileItem();
             this.SuspendLayout();
             // 
             // tileControl1
@@ -47,7 +49,7 @@
             this.tileControl1.Groups.Add(this.tgBaseInfo);
             this.tileControl1.Groups.Add(this.tileGroup2);
             this.tileControl1.Location = new System.Drawing.Point(50, 50);
-            this.tileControl1.MaxId = 4;
+            this.tileControl1.MaxId = 5;
             this.tileControl1.Name = "tileControl1";
             this.tileControl1.ShowGroupText = true;
             this.tileControl1.ShowText = true;
@@ -103,26 +105,44 @@
             // 
             // tileGroup2
             // 
-            this.tileGroup2.Items.Add(this.tileItem1);
+            this.tileGroup2.Items.Add(this.tileNewPL);
+            this.tileGroup2.Items.Add(this.tilePakingList);
             this.tileGroup2.Name = "tileGroup2";
             this.tileGroup2.Text = "Packing";
             // 
-            // tileItem1
+            // tileNewPL
             // 
-            this.tileItem1.AppearanceItem.Normal.BackColor = System.Drawing.Color.YellowGreen;
-            this.tileItem1.AppearanceItem.Normal.BorderColor = System.Drawing.Color.OliveDrab;
-            this.tileItem1.AppearanceItem.Normal.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tileItem1.AppearanceItem.Normal.Options.UseBackColor = true;
-            this.tileItem1.AppearanceItem.Normal.Options.UseBorderColor = true;
-            this.tileItem1.AppearanceItem.Normal.Options.UseFont = true;
+            this.tileNewPL.AppearanceItem.Normal.BackColor = System.Drawing.Color.YellowGreen;
+            this.tileNewPL.AppearanceItem.Normal.BorderColor = System.Drawing.Color.OliveDrab;
+            this.tileNewPL.AppearanceItem.Normal.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tileNewPL.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.tileNewPL.AppearanceItem.Normal.Options.UseBorderColor = true;
+            this.tileNewPL.AppearanceItem.Normal.Options.UseFont = true;
             tileItemElement3.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            tileItemElement3.Text = "Packing List";
+            tileItemElement3.Text = "New P/L";
             tileItemElement3.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            this.tileItem1.Elements.Add(tileItemElement3);
-            this.tileItem1.Id = 3;
-            this.tileItem1.ItemSize = DevExpress.XtraEditors.TileItemSize.Medium;
-            this.tileItem1.Name = "tileItem1";
-            this.tileItem1.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.tileItem1_ItemClick);
+            this.tileNewPL.Elements.Add(tileItemElement3);
+            this.tileNewPL.Id = 3;
+            this.tileNewPL.ItemSize = DevExpress.XtraEditors.TileItemSize.Medium;
+            this.tileNewPL.Name = "tileNewPL";
+            this.tileNewPL.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.tileItem1_ItemClick);
+            // 
+            // tilePakingList
+            // 
+            this.tilePakingList.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.tilePakingList.AppearanceItem.Normal.BorderColor = System.Drawing.Color.Green;
+            this.tilePakingList.AppearanceItem.Normal.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tilePakingList.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.tilePakingList.AppearanceItem.Normal.Options.UseBorderColor = true;
+            this.tilePakingList.AppearanceItem.Normal.Options.UseFont = true;
+            tileItemElement4.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileItemElement4.Text = "PackingList";
+            tileItemElement4.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            this.tilePakingList.Elements.Add(tileItemElement4);
+            this.tilePakingList.Id = 4;
+            this.tilePakingList.ItemSize = DevExpress.XtraEditors.TileItemSize.Medium;
+            this.tilePakingList.Name = "tilePakingList";
+            this.tilePakingList.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.tilePakingList_ItemClick);
             // 
             // Home
             // 
@@ -143,6 +163,7 @@
         private DevExpress.XtraEditors.TileItem tileItemCode;
         private DevExpress.XtraEditors.TileItem tileCategory;
         private DevExpress.XtraEditors.TileGroup tileGroup2;
-        private DevExpress.XtraEditors.TileItem tileItem1;
+        private DevExpress.XtraEditors.TileItem tileNewPL;
+        private DevExpress.XtraEditors.TileItem tilePakingList;
     }
 }

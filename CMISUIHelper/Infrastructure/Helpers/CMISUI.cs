@@ -723,7 +723,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
         {
             public static T ViewInTab<T>(CMISRibbonForm mdiForm,object[] args = null, Image icon = null, RibbonPageCategory rpc = null) where T : ViewTab
             {
-                var childForm = (ViewTab)Activator.CreateInstance(typeof(T),args);
+                var childForm = (ViewTab)Activator.CreateInstance(typeof(T), args);
                 
                 childForm.OwnerForm = mdiForm;
                 var tabControl = mdiForm.Controls.OfType<TabControl>().First();
