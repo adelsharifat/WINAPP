@@ -32,7 +32,7 @@ namespace Electrical
         {
             InitAvatar();
             Ribbon.ApplicationButtonText = Bundle.APPNAME;
-            CloseItemLocation = CMISUIHelper.Infrastructure.Enums.CloseItemAlignment.End;
+            CloseItemLocation = CMISUIHelper.Infrastructure.Enums.CloseItemAlignment.Start;
         }
     }
 }

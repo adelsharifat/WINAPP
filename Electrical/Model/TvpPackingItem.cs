@@ -15,7 +15,6 @@ namespace Electrical.Model
         public int VendorId { get; set; }
         public string TagNo { get; set; }
         public int CategoryId { get; set; }
-        public int? SubCategoryId { get; set; }
         public string Description { get; set; }
         public string Size { get; set; }
         public string PackingNo { get; set; }

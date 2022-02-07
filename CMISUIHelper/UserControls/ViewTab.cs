@@ -48,21 +48,21 @@ namespace CMISUIHelper.UserControls
 
         public void OnRibbonPageAdded(RibbonPageEventArgs e)
         {
-            if (OwnerForm.CloseItemLocation == Infrastructure.Enums.CloseItemAlignment.Start)
-            {
-                e.RibbonPage.AddCloseItem(this);
-                if(e.View.Name != this.OwnerForm.HomePage || this.ShowRefreshItem)
-                    e.RibbonPage.AddRefreshItem(this);
-            }
+            //if (OwnerForm.CloseItemLocation == Infrastructure.Enums.CloseItemAlignment.Start)
+            //{
+            //    e.RibbonPage.AddCloseItem(this);
+            //    if(e.View.Name != this.OwnerForm.HomePage || this.ShowRefreshItem)
+            //        e.RibbonPage.AddRefreshItem(this);
+            //}
                 
             this.RibbonPageAdded?.Invoke(e.RibbonPage, e);
 
-            if (OwnerForm.CloseItemLocation == Infrastructure.Enums.CloseItemAlignment.End)
-            {
-                if (e.View.Name != this.OwnerForm.HomePage || this.ShowRefreshItem)
-                    e.RibbonPage.AddRefreshItem(this);
-                e.RibbonPage.AddCloseItem(this);
-            }
+            //if (OwnerForm.CloseItemLocation == Infrastructure.Enums.CloseItemAlignment.End)
+            //{
+            //    if (e.View.Name != this.OwnerForm.HomePage || this.ShowRefreshItem)
+            //        e.RibbonPage.AddRefreshItem(this);
+            //    e.RibbonPage.AddCloseItem(this);
+            //}
                 
         }
 

@@ -19,6 +19,7 @@ namespace SecurityManagement.Views
         {
             InitializeComponent();
             ViewTitle = "Home";
+            ShowRefreshItem = false;
         }
 
         private void tileUserPermision_ItemClick(object sender, DevExpress.XtraEditors.TileItemEventArgs e)

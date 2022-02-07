@@ -99,7 +99,6 @@ namespace SecurityManagement.Views
             try
             {
                 e.RibbonPage.AddGridTools(this);
-                e.RibbonPage.AddCloseItem(this);
                 e.RibbonPage.AddExportTools(this);
             }
             catch (Exception ex)

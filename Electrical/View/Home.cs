@@ -18,6 +18,7 @@ namespace Electrical.View
         {
             InitializeComponent();
             ViewTitle = AppConfig.Home_View_Title;
+            ShowRefreshItem = false;
         }
 
         private void tileItemCode_ItemClick(object sender, DevExpress.XtraEditors.TileItemEventArgs e)

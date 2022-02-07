@@ -709,7 +709,12 @@ namespace CMISUIHelper.Infrastructure.Helpers
             return rp;
         }
 
-
+        //BarItem Extention
+        public static RibbonPageGroup Group(this BarItem barItem)
+        {
+            RibbonPageGroupItemLinkCollection collection = barItem.Links[0].Links as RibbonPageGroupItemLinkCollection;
+            return collection.PageGroup;
+        }
 
 
         //Error Handler extention method
@@ -721,6 +726,88 @@ namespace CMISUIHelper.Infrastructure.Helpers
 
         public static class UIHandler
         {
+            //public static T ViewInTab<T>(CMISRibbonForm mdiForm, object[] args = null, Image icon = null, RibbonPageCategory rpc = null) where T : ViewTab
+            //{
+            //    var childForm = (ViewTab)Activator.CreateInstance(typeof(T), args);
+
+            //    childForm.OwnerForm = mdiForm;
+            //    var tabControl = mdiForm.Controls.OfType<TabControl>().First();
+            //    TabPage tabPage = new TabPage();
+            //    tabPage.BackColor = Color.FromArgb(240, 240, 240);
+            //    tabPage.UseVisualStyleBackColor = false;
+            //    tabControl.TabPages.Add(tabPage);
+            //    var ribbonPage = RibbonHandler.NewRP(childForm.ViewTitle, icon == null ? UIHelperResources.window_16x16 : icon);
+            //    ribbonPage.Text = String.IsNullOrEmpty(childForm.ViewTitle) ? childForm.Name : childForm.ViewTitle;
+            //    tabPage.Name = ribbonPage.Name = childForm.ViewIdentity;
+
+            //    mdiForm.OpenTabs.Add(ribbonPage.Name, tabPage);
+            //    if (rpc == null)
+            //    {
+            //        mdiForm.Ribbon.DefaultPageCategory.Pages.Add(ribbonPage);
+            //    }
+            //    else
+            //    {
+            //        var selectedRPC = mdiForm.Ribbon.PageCategories.GetCategoryByText(rpc.Text);
+            //        if (selectedRPC == null)
+            //            throw new Exception("CMIS ERROR,RibbonPageCategory not founded!");
+
+            //        selectedRPC.Pages.Add(ribbonPage);
+            //    }
+
+            //    childForm.TabControl = tabControl;
+            //    childForm.TabPage = tabPage;
+            //    childForm.RibbonPage = ribbonPage;
+
+            //    mdiForm.Ribbon.SelectPage(ribbonPage);
+            //    tabControl.SelectedTab = tabPage;
+
+
+
+
+            //    RibbonPageEventArgs rpea = new RibbonPageEventArgs();
+            //    rpea.RibbonControl = mdiForm.Ribbon;
+            //    rpea.View = childForm;
+            //    rpea.RibbonPageCategory = rpc == null ? mdiForm.Ribbon.DefaultPageCategory : rpc;
+            //    rpea.RibbonPage = ribbonPage;
+
+            //    if (mdiForm.ShowHomeMenuItems && mdiForm.HomePage == ribbonPage.Text && mdiForm.CloseItemLocation == CloseItemAlignment.End)
+            //        RibbonHandler.GenerateHomeMenus(childForm);
+
+            //    childForm.OnRibbonPageAdded(rpea);
+
+            //    if (mdiForm.ShowHomeMenuItems && mdiForm.HomePage == ribbonPage.Text && mdiForm.CloseItemLocation == CloseItemAlignment.Start)
+            //        RibbonHandler.GenerateHomeMenus(childForm);
+
+            //    tabPage.Controls.Add(childForm);
+            //    childForm.Dock = System.Windows.Forms.DockStyle.Fill;
+
+
+            //    if (mdiForm.ShowHomeMenuItems && mdiForm.HomePage == ribbonPage.Text && mdiForm.CloseItemLocation == CloseItemAlignment.Start)
+            //        RibbonHandler.GenerateHomeMenus(childForm);
+
+            //    System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            //    timer.Interval = 1;
+            //    int counter = 0;
+            //    timer.Tick += (o, ev) =>
+            //    {
+            //        counter++;
+            //        if (counter >= 10)
+            //        {
+            //            timer.Stop();
+            //            childForm.OnBeforeViewLoad(EventArgs.Empty);
+            //            childForm.OnViewLoaded(EventArgs.Empty);
+            //        }
+            //    };
+            //    timer.Start();
+
+
+
+
+            //    return (T)childForm;
+            //}
+
+
+
             public static T ViewInTab<T>(CMISRibbonForm mdiForm,object[] args = null, Image icon = null, RibbonPageCategory rpc = null) where T : ViewTab
             {
                 var childForm = (ViewTab)Activator.CreateInstance(typeof(T), args);
@@ -765,13 +852,27 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 rpea.RibbonPageCategory = rpc == null ? mdiForm.Ribbon.DefaultPageCategory : rpc;
                 rpea.RibbonPage = ribbonPage;
 
-                if (mdiForm.ShowHomeMenuItems && mdiForm.HomePage == ribbonPage.Text && mdiForm.CloseItemLocation == CloseItemAlignment.End)
-                    RibbonHandler.GenerateHomeMenus(childForm);
+                //if (mdiForm.ShowHomeMenuItems && mdiForm.HomePage == ribbonPage.Text && mdiForm.CloseItemLocation == CloseItemAlignment.End)
+                //    RibbonHandler.GenerateHomeMenus(childForm);
+                if (mdiForm.CloseItemLocation == Infrastructure.Enums.CloseItemAlignment.Start)
+                {
+                    ribbonPage.AddCloseItem(childForm);
+                    if (childForm.ShowRefreshItem)
+                        ribbonPage.AddRefreshItem(childForm);
+                }
+
 
                 childForm.OnRibbonPageAdded(rpea);
 
-                if (mdiForm.ShowHomeMenuItems && mdiForm.HomePage == ribbonPage.Text && mdiForm.CloseItemLocation == CloseItemAlignment.Start)
-                    RibbonHandler.GenerateHomeMenus(childForm);
+
+                if (mdiForm.CloseItemLocation == Infrastructure.Enums.CloseItemAlignment.End)
+                {
+                    if (childForm.ShowRefreshItem)
+                        ribbonPage.AddRefreshItem(childForm);
+                    ribbonPage.AddCloseItem(childForm);
+                }
+                //if (mdiForm.ShowHomeMenuItems && mdiForm.HomePage == ribbonPage.Text && mdiForm.CloseItemLocation == CloseItemAlignment.Start)
+                //    RibbonHandler.GenerateHomeMenus(childForm);
 
                 tabPage.Controls.Add(childForm);
                 childForm.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -780,23 +881,25 @@ namespace CMISUIHelper.Infrastructure.Helpers
                 if (mdiForm.ShowHomeMenuItems && mdiForm.HomePage == ribbonPage.Text && mdiForm.CloseItemLocation == CloseItemAlignment.Start)
                     RibbonHandler.GenerateHomeMenus(childForm);
 
-                System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
-                timer.Interval = 1;
-                int counter = 0;
-                timer.Tick +=(o, ev) =>
-                {
-                    counter++;
-                    if (counter >= 10)
-                    {
-                        timer.Stop();
-                        childForm.OnBeforeViewLoad(EventArgs.Empty);
-                        childForm.OnViewLoaded(EventArgs.Empty);
-                    }
-                };
-                timer.Start();
+                //System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+                //timer.Interval = 1;
+                //int counter = 0;
+                //timer.Tick +=(o, ev) =>
+                //{
+                //    counter++;
+                //    if (counter >= 10)
+                //    {
+                //        timer.Stop();
+                //        childForm.OnBeforeViewLoad(EventArgs.Empty);
+                //        childForm.OnViewLoaded(EventArgs.Empty);
+                //    }
+                //};
+                //timer.Start();
+                childForm.OnBeforeViewLoad(EventArgs.Empty);
+                childForm.OnViewLoaded(EventArgs.Empty);
 
 
-              
+
 
                 return (T)childForm;
             }

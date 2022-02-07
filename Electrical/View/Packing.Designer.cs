@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.grpItemData = new DevExpress.XtraEditors.GroupControl();
+            this.grpPL = new DevExpress.XtraEditors.GroupControl();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddItem = new DevExpress.XtraEditors.SimpleButton();
             this.cboUnit = new DevExpress.XtraEditors.LookUpEdit();
@@ -41,19 +41,17 @@
             this.cboQtyUnit = new DevExpress.XtraEditors.LookUpEdit();
             this.cboItemCode = new DevExpress.XtraEditors.LookUpEdit();
             this.label9 = new System.Windows.Forms.Label();
-            this.cboCategory = new DevExpress.XtraEditors.LookUpEdit();
             this.label2 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.txtPlQty = new DevExpress.XtraEditors.TextEdit();
             this.label7 = new System.Windows.Forms.Label();
             this.cboVendor = new DevExpress.XtraEditors.LookUpEdit();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cboSubCategory = new DevExpress.XtraEditors.LookUpEdit();
+            this.cboCategory = new DevExpress.XtraEditors.LookUpEdit();
             this.label4 = new System.Windows.Forms.Label();
             this.txtSize = new DevExpress.XtraEditors.TextEdit();
             this.txtPackingNo = new DevExpress.XtraEditors.TextEdit();
             this.label5 = new System.Windows.Forms.Label();
-            this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.grpPLHeader = new DevExpress.XtraEditors.GroupControl();
             this.txtReport = new DevExpress.XtraEditors.TextEdit();
             this.lblreportNo = new System.Windows.Forms.Label();
             this.grcPacking = new CMISControls.Grid.CMGridControl();
@@ -64,21 +62,20 @@
             this.spliteContainer = new System.Windows.Forms.SplitContainer();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbCompany.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grpItemData)).BeginInit();
-            this.grpItemData.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grpPL)).BeginInit();
+            this.grpPL.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cboUnit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTag.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboQtyUnit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboItemCode.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboCategory.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPlQty.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboVendor.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboSubCategory.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboCategory.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSize.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPackingNo.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
-            this.groupControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grpPLHeader)).BeginInit();
+            this.grpPLHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtReport.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grcPacking)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvPaking)).BeginInit();
@@ -106,48 +103,48 @@
             // 
             this.pnlHeaderContainer.Size = new System.Drawing.Size(1425, 51);
             // 
-            // grpItemData
+            // grpPL
             // 
-            this.grpItemData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.grpPL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.grpItemData.Controls.Add(this.btnCancel);
-            this.grpItemData.Controls.Add(this.btnAddItem);
-            this.grpItemData.Controls.Add(this.cboUnit);
-            this.grpItemData.Controls.Add(this.lblUnit);
-            this.grpItemData.Controls.Add(this.txtDescription);
-            this.grpItemData.Controls.Add(this.lblTag);
-            this.grpItemData.Controls.Add(this.label10);
-            this.grpItemData.Controls.Add(this.txtTag);
-            this.grpItemData.Controls.Add(this.label6);
-            this.grpItemData.Controls.Add(this.cboQtyUnit);
-            this.grpItemData.Controls.Add(this.cboItemCode);
-            this.grpItemData.Controls.Add(this.label9);
-            this.grpItemData.Controls.Add(this.cboCategory);
-            this.grpItemData.Controls.Add(this.label2);
-            this.grpItemData.Controls.Add(this.label8);
-            this.grpItemData.Controls.Add(this.txtPlQty);
-            this.grpItemData.Controls.Add(this.label7);
-            this.grpItemData.Controls.Add(this.cboVendor);
-            this.grpItemData.Controls.Add(this.label3);
-            this.grpItemData.Controls.Add(this.cboSubCategory);
-            this.grpItemData.Controls.Add(this.label4);
-            this.grpItemData.Controls.Add(this.txtSize);
-            this.grpItemData.Controls.Add(this.txtPackingNo);
-            this.grpItemData.Controls.Add(this.label5);
-            this.grpItemData.Location = new System.Drawing.Point(12, 88);
-            this.grpItemData.Name = "grpItemData";
-            this.grpItemData.Size = new System.Drawing.Size(428, 627);
-            this.grpItemData.TabIndex = 25;
-            this.grpItemData.Text = "Item Data";
+            this.grpPL.AppearanceCaption.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpPL.AppearanceCaption.Options.UseFont = true;
+            this.grpPL.Controls.Add(this.btnCancel);
+            this.grpPL.Controls.Add(this.btnAddItem);
+            this.grpPL.Controls.Add(this.cboUnit);
+            this.grpPL.Controls.Add(this.lblUnit);
+            this.grpPL.Controls.Add(this.txtDescription);
+            this.grpPL.Controls.Add(this.lblTag);
+            this.grpPL.Controls.Add(this.label10);
+            this.grpPL.Controls.Add(this.txtTag);
+            this.grpPL.Controls.Add(this.label6);
+            this.grpPL.Controls.Add(this.cboQtyUnit);
+            this.grpPL.Controls.Add(this.cboItemCode);
+            this.grpPL.Controls.Add(this.label9);
+            this.grpPL.Controls.Add(this.label2);
+            this.grpPL.Controls.Add(this.label8);
+            this.grpPL.Controls.Add(this.txtPlQty);
+            this.grpPL.Controls.Add(this.label7);
+            this.grpPL.Controls.Add(this.cboVendor);
+            this.grpPL.Controls.Add(this.cboCategory);
+            this.grpPL.Controls.Add(this.label4);
+            this.grpPL.Controls.Add(this.txtSize);
+            this.grpPL.Controls.Add(this.txtPackingNo);
+            this.grpPL.Controls.Add(this.label5);
+            this.grpPL.Location = new System.Drawing.Point(12, 88);
+            this.grpPL.Name = "grpPL";
+            this.grpPL.Size = new System.Drawing.Size(428, 627);
+            this.grpPL.TabIndex = 25;
+            this.grpPL.Text = "P/L";
             // 
             // btnCancel
             // 
             this.btnCancel.ImageOptions.Image = global::Electrical.ElectricalResource.Invalid;
             this.btnCancel.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnCancel.ImageOptions.ImageToTextIndent = 8;
-            this.btnCancel.Location = new System.Drawing.Point(250, 438);
+            this.btnCancel.Location = new System.Drawing.Point(246, 452);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(99, 31);
+            this.btnCancel.Size = new System.Drawing.Size(99, 50);
             this.btnCancel.TabIndex = 27;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -157,16 +154,16 @@
             this.btnAddItem.ImageOptions.Image = global::Electrical.ElectricalResource.Plus;
             this.btnAddItem.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnAddItem.ImageOptions.ImageToTextIndent = 8;
-            this.btnAddItem.Location = new System.Drawing.Point(101, 438);
+            this.btnAddItem.Location = new System.Drawing.Point(97, 452);
             this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(143, 31);
+            this.btnAddItem.Size = new System.Drawing.Size(143, 50);
             this.btnAddItem.TabIndex = 26;
             this.btnAddItem.Text = "Add/Update Item";
             this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
             // 
             // cboUnit
             // 
-            this.cboUnit.Location = new System.Drawing.Point(101, 30);
+            this.cboUnit.Location = new System.Drawing.Point(97, 44);
             this.cboUnit.Name = "cboUnit";
             this.cboUnit.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.cboUnit.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -184,7 +181,7 @@
             this.lblUnit.AutoSize = true;
             this.lblUnit.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUnit.ForeColor = System.Drawing.Color.Black;
-            this.lblUnit.Location = new System.Drawing.Point(14, 33);
+            this.lblUnit.Location = new System.Drawing.Point(11, 47);
             this.lblUnit.Name = "lblUnit";
             this.lblUnit.Size = new System.Drawing.Size(33, 17);
             this.lblUnit.TabIndex = 1;
@@ -192,9 +189,9 @@
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(101, 336);
+            this.txtDescription.Location = new System.Drawing.Point(97, 350);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(314, 96);
+            this.txtDescription.Size = new System.Drawing.Size(316, 96);
             this.txtDescription.TabIndex = 22;
             // 
             // lblTag
@@ -202,7 +199,7 @@
             this.lblTag.AutoSize = true;
             this.lblTag.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTag.ForeColor = System.Drawing.Color.Black;
-            this.lblTag.Location = new System.Drawing.Point(14, 169);
+            this.lblTag.Location = new System.Drawing.Point(11, 158);
             this.lblTag.Name = "lblTag";
             this.lblTag.Size = new System.Drawing.Size(71, 17);
             this.lblTag.TabIndex = 3;
@@ -213,7 +210,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(14, 135);
+            this.label10.Location = new System.Drawing.Point(11, 122);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(66, 17);
             this.label10.TabIndex = 21;
@@ -221,7 +218,7 @@
             // 
             // txtTag
             // 
-            this.txtTag.Location = new System.Drawing.Point(101, 166);
+            this.txtTag.Location = new System.Drawing.Point(97, 155);
             this.txtTag.Name = "txtTag";
             this.txtTag.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTag.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -235,7 +232,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(14, 300);
+            this.label6.Location = new System.Drawing.Point(11, 351);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(81, 17);
             this.label6.TabIndex = 13;
@@ -243,7 +240,7 @@
             // 
             // cboQtyUnit
             // 
-            this.cboQtyUnit.Location = new System.Drawing.Point(101, 302);
+            this.cboQtyUnit.Location = new System.Drawing.Point(97, 307);
             this.cboQtyUnit.Name = "cboQtyUnit";
             this.cboQtyUnit.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.cboQtyUnit.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -253,12 +250,12 @@
             this.cboQtyUnit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboQtyUnit.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
-            this.cboQtyUnit.Size = new System.Drawing.Size(139, 24);
+            this.cboQtyUnit.Size = new System.Drawing.Size(316, 24);
             this.cboQtyUnit.TabIndex = 10;
             // 
             // cboItemCode
             // 
-            this.cboItemCode.Location = new System.Drawing.Point(101, 132);
+            this.cboItemCode.Location = new System.Drawing.Point(97, 119);
             this.cboItemCode.Name = "cboItemCode";
             this.cboItemCode.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboItemCode.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -275,34 +272,18 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Black;
-            this.label9.Location = new System.Drawing.Point(14, 341);
+            this.label9.Location = new System.Drawing.Point(12, 310);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(67, 17);
             this.label9.TabIndex = 19;
             this.label9.Text = "QTY Unit";
-            // 
-            // cboCategory
-            // 
-            this.cboCategory.Location = new System.Drawing.Point(101, 64);
-            this.cboCategory.Name = "cboCategory";
-            this.cboCategory.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.cboCategory.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboCategory.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cboCategory.Properties.Appearance.Options.UseFont = true;
-            this.cboCategory.Properties.Appearance.Options.UseForeColor = true;
-            this.cboCategory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboCategory.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
-            this.cboCategory.Size = new System.Drawing.Size(316, 24);
-            this.cboCategory.TabIndex = 3;
-            this.cboCategory.EditValueChanged += new System.EventHandler(this.cboCategory_EditValueChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(14, 67);
+            this.label2.Location = new System.Drawing.Point(13, 85);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 17);
             this.label2.TabIndex = 5;
@@ -313,7 +294,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(234, 271);
+            this.label8.Location = new System.Drawing.Point(231, 272);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(64, 17);
             this.label8.TabIndex = 17;
@@ -321,7 +302,7 @@
             // 
             // txtPlQty
             // 
-            this.txtPlQty.Location = new System.Drawing.Point(304, 268);
+            this.txtPlQty.Location = new System.Drawing.Point(300, 269);
             this.txtPlQty.Name = "txtPlQty";
             this.txtPlQty.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPlQty.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -338,7 +319,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(14, 237);
+            this.label7.Location = new System.Drawing.Point(11, 233);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(50, 17);
             this.label7.TabIndex = 15;
@@ -346,7 +327,7 @@
             // 
             // cboVendor
             // 
-            this.cboVendor.Location = new System.Drawing.Point(101, 234);
+            this.cboVendor.Location = new System.Drawing.Point(97, 230);
             this.cboVendor.Name = "cboVendor";
             this.cboVendor.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.cboVendor.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -357,39 +338,28 @@
             this.cboVendor.Size = new System.Drawing.Size(316, 24);
             this.cboVendor.TabIndex = 8;
             // 
-            // label3
+            // cboCategory
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(14, 101);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 17);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "SubCategory";
-            // 
-            // cboSubCategory
-            // 
-            this.cboSubCategory.Location = new System.Drawing.Point(101, 98);
-            this.cboSubCategory.Name = "cboSubCategory";
-            this.cboSubCategory.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.cboSubCategory.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboSubCategory.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cboSubCategory.Properties.Appearance.Options.UseFont = true;
-            this.cboSubCategory.Properties.Appearance.Options.UseForeColor = true;
-            this.cboSubCategory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.cboCategory.Location = new System.Drawing.Point(97, 82);
+            this.cboCategory.Name = "cboCategory";
+            this.cboCategory.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.cboCategory.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboCategory.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cboCategory.Properties.Appearance.Options.UseFont = true;
+            this.cboCategory.Properties.Appearance.Options.UseForeColor = true;
+            this.cboCategory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboSubCategory.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
-            this.cboSubCategory.Size = new System.Drawing.Size(316, 24);
-            this.cboSubCategory.TabIndex = 4;
-            this.cboSubCategory.EditValueChanged += new System.EventHandler(this.cboSubCategory_EditValueChanged);
+            this.cboCategory.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
+            this.cboCategory.Size = new System.Drawing.Size(316, 24);
+            this.cboCategory.TabIndex = 4;
+            this.cboCategory.EditValueChanged += new System.EventHandler(this.cboCategory_EditValueChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(15, 271);
+            this.label4.Location = new System.Drawing.Point(12, 272);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(32, 17);
             this.label4.TabIndex = 9;
@@ -397,7 +367,7 @@
             // 
             // txtSize
             // 
-            this.txtSize.Location = new System.Drawing.Point(101, 268);
+            this.txtSize.Location = new System.Drawing.Point(97, 269);
             this.txtSize.Name = "txtSize";
             this.txtSize.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSize.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -408,7 +378,7 @@
             // 
             // txtPackingNo
             // 
-            this.txtPackingNo.Location = new System.Drawing.Point(101, 200);
+            this.txtPackingNo.Location = new System.Drawing.Point(97, 192);
             this.txtPackingNo.Name = "txtPackingNo";
             this.txtPackingNo.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPackingNo.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -422,25 +392,27 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(14, 203);
+            this.label5.Location = new System.Drawing.Point(11, 195);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(81, 17);
             this.label5.TabIndex = 11;
             this.label5.Text = "Packing No.";
             // 
-            // groupControl1
+            // grpPLHeader
             // 
-            this.groupControl1.Controls.Add(this.txtReport);
-            this.groupControl1.Controls.Add(this.lblreportNo);
-            this.groupControl1.Location = new System.Drawing.Point(12, 10);
-            this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(428, 72);
-            this.groupControl1.TabIndex = 24;
-            this.groupControl1.Text = "Document Header";
+            this.grpPLHeader.AppearanceCaption.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpPLHeader.AppearanceCaption.Options.UseFont = true;
+            this.grpPLHeader.Controls.Add(this.txtReport);
+            this.grpPLHeader.Controls.Add(this.lblreportNo);
+            this.grpPLHeader.Location = new System.Drawing.Point(12, 10);
+            this.grpPLHeader.Name = "grpPLHeader";
+            this.grpPLHeader.Size = new System.Drawing.Size(428, 72);
+            this.grpPLHeader.TabIndex = 24;
+            this.grpPLHeader.Text = "Document Header";
             // 
             // txtReport
             // 
-            this.txtReport.Location = new System.Drawing.Point(101, 32);
+            this.txtReport.Location = new System.Drawing.Point(101, 34);
             this.txtReport.Name = "txtReport";
             this.txtReport.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
             this.txtReport.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -456,7 +428,7 @@
             this.lblreportNo.AutoSize = true;
             this.lblreportNo.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblreportNo.ForeColor = System.Drawing.Color.Black;
-            this.lblreportNo.Location = new System.Drawing.Point(14, 35);
+            this.lblreportNo.Location = new System.Drawing.Point(11, 35);
             this.lblreportNo.Name = "lblreportNo";
             this.lblreportNo.Size = new System.Drawing.Size(74, 17);
             this.lblreportNo.TabIndex = 23;
@@ -523,8 +495,8 @@
             // 
             // spliteContainer.Panel1
             // 
-            this.spliteContainer.Panel1.Controls.Add(this.grpItemData);
-            this.spliteContainer.Panel1.Controls.Add(this.groupControl1);
+            this.spliteContainer.Panel1.Controls.Add(this.grpPL);
+            this.spliteContainer.Panel1.Controls.Add(this.grpPLHeader);
             // 
             // spliteContainer.Panel2
             // 
@@ -549,23 +521,22 @@
             this.Controls.SetChildIndex(this.spliteContainer, 0);
             this.pnlHeader.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cmbCompany.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.grpItemData)).EndInit();
-            this.grpItemData.ResumeLayout(false);
-            this.grpItemData.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grpPL)).EndInit();
+            this.grpPL.ResumeLayout(false);
+            this.grpPL.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cboUnit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTag.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboQtyUnit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboItemCode.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboCategory.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPlQty.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboVendor.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboSubCategory.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboCategory.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSize.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPackingNo.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
-            this.groupControl1.ResumeLayout(false);
-            this.groupControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grpPLHeader)).EndInit();
+            this.grpPLHeader.ResumeLayout(false);
+            this.grpPLHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtReport.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grcPacking)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvPaking)).EndInit();
@@ -591,10 +562,8 @@
         private DevExpress.XtraEditors.TextEdit txtPackingNo;
         private System.Windows.Forms.Label label4;
         private DevExpress.XtraEditors.TextEdit txtSize;
-        private System.Windows.Forms.Label label3;
-        private DevExpress.XtraEditors.LookUpEdit cboSubCategory;
-        private System.Windows.Forms.Label label2;
         private DevExpress.XtraEditors.LookUpEdit cboCategory;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label9;
         private DevExpress.XtraEditors.LookUpEdit cboQtyUnit;
         private System.Windows.Forms.Label label8;
@@ -604,8 +573,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label10;
         private DevExpress.XtraEditors.LookUpEdit cboItemCode;
-        private DevExpress.XtraEditors.GroupControl grpItemData;
-        private DevExpress.XtraEditors.GroupControl groupControl1;
+        private DevExpress.XtraEditors.GroupControl grpPL;
+        private DevExpress.XtraEditors.GroupControl grpPLHeader;
         private DevExpress.XtraEditors.TextEdit txtReport;
         private System.Windows.Forms.Label lblreportNo;
         private System.Windows.Forms.ToolStrip tsGrcPacking;
