@@ -90,6 +90,18 @@
     <Compile Include="View\ItemCode.Designer.cs">
       <DependentUpon>ItemCode.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\MIV.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\MIV.Designer.cs">
+      <DependentUpon>MIV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MTO.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\MTO.Designer.cs">
+      <DependentUpon>MTO.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Packing.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -126,6 +138,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\ItemCode.resx">
       <DependentUpon>ItemCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MIV.resx">
+      <DependentUpon>MIV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MTO.resx">
+      <DependentUpon>MTO.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Packing.resx">
       <DependentUpon>Packing.cs</DependentUpon>

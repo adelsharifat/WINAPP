@@ -40,5 +40,15 @@ namespace Electrical.View
         {
             CMISUI.UIHandler.ViewInTab<View.PackingList>(this.OwnerForm);
         }
+
+        private void tileMTO_ItemClick(object sender, DevExpress.XtraEditors.TileItemEventArgs e)
+        {
+            CMISUI.UIHandler.ViewInTab<View.MTO>(this.OwnerForm);
+        }
+
+        private void tileNewMiv_ItemClick(object sender, DevExpress.XtraEditors.TileItemEventArgs e)
+        {
+            CMISUI.UIHandler.ViewInTab<View.MIV>(this.OwnerForm);
+        }
     }
 }

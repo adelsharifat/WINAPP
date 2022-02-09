@@ -32,24 +32,34 @@
             DevExpress.XtraEditors.TileItemElement tileItemElement2 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement3 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement4 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement5 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement6 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement7 = new DevExpress.XtraEditors.TileItemElement();
             this.tileControl1 = new DevExpress.XtraEditors.TileControl();
             this.tgBaseInfo = new DevExpress.XtraEditors.TileGroup();
             this.tileItemCode = new DevExpress.XtraEditors.TileItem();
             this.tileCategory = new DevExpress.XtraEditors.TileItem();
+            this.tileMTO = new DevExpress.XtraEditors.TileItem();
             this.tileGroup2 = new DevExpress.XtraEditors.TileGroup();
             this.tileNewPL = new DevExpress.XtraEditors.TileItem();
             this.tilePakingList = new DevExpress.XtraEditors.TileItem();
+            this.tileGroupMIV = new DevExpress.XtraEditors.TileGroup();
+            this.tileNewMiv = new DevExpress.XtraEditors.TileItem();
+            this.tileItem2 = new DevExpress.XtraEditors.TileItem();
             this.SuspendLayout();
             // 
             // tileControl1
             // 
+            this.tileControl1.AppearanceGroupText.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tileControl1.AppearanceGroupText.Options.UseFont = true;
             this.tileControl1.AppearanceText.Font = new System.Drawing.Font("Times New Roman", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tileControl1.AppearanceText.Options.UseFont = true;
             this.tileControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tileControl1.Groups.Add(this.tgBaseInfo);
             this.tileControl1.Groups.Add(this.tileGroup2);
+            this.tileControl1.Groups.Add(this.tileGroupMIV);
             this.tileControl1.Location = new System.Drawing.Point(50, 50);
-            this.tileControl1.MaxId = 5;
+            this.tileControl1.MaxId = 8;
             this.tileControl1.Name = "tileControl1";
             this.tileControl1.ShowGroupText = true;
             this.tileControl1.ShowText = true;
@@ -61,13 +71,14 @@
             // 
             this.tgBaseInfo.Items.Add(this.tileItemCode);
             this.tgBaseInfo.Items.Add(this.tileCategory);
+            this.tgBaseInfo.Items.Add(this.tileMTO);
             this.tgBaseInfo.Name = "tgBaseInfo";
             this.tgBaseInfo.Text = "Base Info";
             // 
             // tileItemCode
             // 
-            this.tileItemCode.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.tileItemCode.AppearanceItem.Normal.BorderColor = System.Drawing.Color.Teal;
+            this.tileItemCode.AppearanceItem.Normal.BackColor = System.Drawing.Color.DodgerBlue;
+            this.tileItemCode.AppearanceItem.Normal.BorderColor = System.Drawing.Color.Blue;
             this.tileItemCode.AppearanceItem.Normal.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tileItemCode.AppearanceItem.Normal.Options.UseBackColor = true;
             this.tileItemCode.AppearanceItem.Normal.Options.UseBorderColor = true;
@@ -87,8 +98,8 @@
             // 
             // tileCategory
             // 
-            this.tileCategory.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.tileCategory.AppearanceItem.Normal.BorderColor = System.Drawing.Color.Teal;
+            this.tileCategory.AppearanceItem.Normal.BackColor = System.Drawing.Color.DodgerBlue;
+            this.tileCategory.AppearanceItem.Normal.BorderColor = System.Drawing.Color.Blue;
             this.tileCategory.AppearanceItem.Normal.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tileCategory.AppearanceItem.Normal.Options.UseBackColor = true;
             this.tileCategory.AppearanceItem.Normal.Options.UseBorderColor = true;
@@ -103,6 +114,23 @@
             this.tileCategory.TextShowMode = DevExpress.XtraEditors.TileItemContentShowMode.Always;
             this.tileCategory.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.tileCategory_ItemClick);
             // 
+            // tileMTO
+            // 
+            this.tileMTO.AppearanceItem.Normal.BackColor = System.Drawing.Color.DodgerBlue;
+            this.tileMTO.AppearanceItem.Normal.BorderColor = System.Drawing.Color.Blue;
+            this.tileMTO.AppearanceItem.Normal.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.tileMTO.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.tileMTO.AppearanceItem.Normal.Options.UseBorderColor = true;
+            this.tileMTO.AppearanceItem.Normal.Options.UseFont = true;
+            tileItemElement3.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileItemElement3.Text = "MTO";
+            tileItemElement3.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            this.tileMTO.Elements.Add(tileItemElement3);
+            this.tileMTO.Id = 5;
+            this.tileMTO.ItemSize = DevExpress.XtraEditors.TileItemSize.Medium;
+            this.tileMTO.Name = "tileMTO";
+            this.tileMTO.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.tileMTO_ItemClick);
+            // 
             // tileGroup2
             // 
             this.tileGroup2.Items.Add(this.tileNewPL);
@@ -112,18 +140,18 @@
             // 
             // tileNewPL
             // 
-            this.tileNewPL.AppearanceItem.Normal.BackColor = System.Drawing.Color.YellowGreen;
-            this.tileNewPL.AppearanceItem.Normal.BorderColor = System.Drawing.Color.OliveDrab;
+            this.tileNewPL.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.tileNewPL.AppearanceItem.Normal.BorderColor = System.Drawing.Color.Green;
             this.tileNewPL.AppearanceItem.Normal.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tileNewPL.AppearanceItem.Normal.Options.UseBackColor = true;
             this.tileNewPL.AppearanceItem.Normal.Options.UseBorderColor = true;
             this.tileNewPL.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement3.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            tileItemElement3.Text = "New P/L";
-            tileItemElement3.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            this.tileNewPL.Elements.Add(tileItemElement3);
+            tileItemElement4.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileItemElement4.Text = "New P/L";
+            tileItemElement4.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            this.tileNewPL.Elements.Add(tileItemElement4);
             this.tileNewPL.Id = 3;
-            this.tileNewPL.ItemSize = DevExpress.XtraEditors.TileItemSize.Medium;
+            this.tileNewPL.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.tileNewPL.Name = "tileNewPL";
             this.tileNewPL.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.tileItem1_ItemClick);
             // 
@@ -135,14 +163,54 @@
             this.tilePakingList.AppearanceItem.Normal.Options.UseBackColor = true;
             this.tilePakingList.AppearanceItem.Normal.Options.UseBorderColor = true;
             this.tilePakingList.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement4.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            tileItemElement4.Text = "PackingList";
-            tileItemElement4.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            this.tilePakingList.Elements.Add(tileItemElement4);
+            tileItemElement5.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileItemElement5.Text = "PackingList";
+            tileItemElement5.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            this.tilePakingList.Elements.Add(tileItemElement5);
             this.tilePakingList.Id = 4;
-            this.tilePakingList.ItemSize = DevExpress.XtraEditors.TileItemSize.Medium;
+            this.tilePakingList.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.tilePakingList.Name = "tilePakingList";
             this.tilePakingList.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.tilePakingList_ItemClick);
+            // 
+            // tileGroupMIV
+            // 
+            this.tileGroupMIV.Items.Add(this.tileNewMiv);
+            this.tileGroupMIV.Items.Add(this.tileItem2);
+            this.tileGroupMIV.Name = "tileGroupMIV";
+            this.tileGroupMIV.Text = "MIV / MRS";
+            // 
+            // tileNewMiv
+            // 
+            this.tileNewMiv.AppearanceItem.Normal.BackColor = System.Drawing.Color.Peru;
+            this.tileNewMiv.AppearanceItem.Normal.BorderColor = System.Drawing.Color.Chocolate;
+            this.tileNewMiv.AppearanceItem.Normal.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tileNewMiv.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.tileNewMiv.AppearanceItem.Normal.Options.UseBorderColor = true;
+            this.tileNewMiv.AppearanceItem.Normal.Options.UseFont = true;
+            tileItemElement6.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.BottomCenter;
+            tileItemElement6.Text = "New MIV";
+            tileItemElement6.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            this.tileNewMiv.Elements.Add(tileItemElement6);
+            this.tileNewMiv.Id = 6;
+            this.tileNewMiv.ItemSize = DevExpress.XtraEditors.TileItemSize.Medium;
+            this.tileNewMiv.Name = "tileNewMiv";
+            this.tileNewMiv.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.tileNewMiv_ItemClick);
+            // 
+            // tileItem2
+            // 
+            this.tileItem2.AppearanceItem.Normal.BackColor = System.Drawing.Color.Peru;
+            this.tileItem2.AppearanceItem.Normal.BorderColor = System.Drawing.Color.Chocolate;
+            this.tileItem2.AppearanceItem.Normal.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tileItem2.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.tileItem2.AppearanceItem.Normal.Options.UseBorderColor = true;
+            this.tileItem2.AppearanceItem.Normal.Options.UseFont = true;
+            tileItemElement7.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileItemElement7.Text = "MIV LIST";
+            tileItemElement7.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            this.tileItem2.Elements.Add(tileItemElement7);
+            this.tileItem2.Id = 7;
+            this.tileItem2.ItemSize = DevExpress.XtraEditors.TileItemSize.Medium;
+            this.tileItem2.Name = "tileItem2";
             // 
             // Home
             // 
@@ -165,5 +233,9 @@
         private DevExpress.XtraEditors.TileGroup tileGroup2;
         private DevExpress.XtraEditors.TileItem tileNewPL;
         private DevExpress.XtraEditors.TileItem tilePakingList;
+        private DevExpress.XtraEditors.TileItem tileMTO;
+        private DevExpress.XtraEditors.TileGroup tileGroupMIV;
+        private DevExpress.XtraEditors.TileItem tileNewMiv;
+        private DevExpress.XtraEditors.TileItem tileItem2;
     }
 }

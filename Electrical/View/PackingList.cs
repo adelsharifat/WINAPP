@@ -13,6 +13,8 @@ using Electrical.Data;
 using Security;
 using CMISDAL.Common;
 using CMISUtils;
+using CMISUIHelper.Infrastructure.Enums;
+using CMISUIHelper.Infrastructure.Contracts.CustomException;
 
 namespace Electrical.View
 {
@@ -21,6 +23,7 @@ namespace Electrical.View
         public PackingList()
         {
             InitializeComponent();
+            this.ShowRefreshItem = true;
         }
 
         private void PackingList_BeforeViewLoad(object sender, EventArgs e)
@@ -64,32 +67,66 @@ namespace Electrical.View
             try
             {
                 var btnViewItem = e.RibbonPage.AddViewFormActionTool(this);
+                var btnEditItem = e.RibbonPage.AddEditFormActionTool(this);
+                var btnDeleteItem = e.RibbonPage.AddDeleteFormActionTool(this);
 
                 e.RibbonPage.AddGridTools(this);
                 e.RibbonPage.AddExportTools(this);
 
                 btnViewItem.ItemClick += BtnViewItem_ItemClick;
+                btnEditItem.ItemClick += BtnEditItem_ItemClick;
+                btnDeleteItem.ItemClick += BtnDeleteItem_ItemClick;
             }
             catch (Exception ex)
             {
                 ex.ShowMessage();
             }
         }
-       
+
+        private void BtnDeleteItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            try
+            {
+                if (grvPackingList.GetFocusedDataRow() is DataRow dr)
+                {
+                    var documentId = Convert.ToInt32(dr["Id"]);
+                    var posted = Convert.ToBoolean(dr["Posted"]);
+                    if (posted) throw new CMISException("The document posted and can not delete it!");
+                    Msg.Show("The document deleted!");
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
+        }
+
+        private void BtnEditItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            try
+            {
+                if (grvPackingList.GetFocusedDataRow() is DataRow dr)
+                {
+                    var documentId = Convert.ToInt32(dr["Id"]);
+                    var posted = Convert.ToBoolean(dr["Posted"]);
+                    if (posted) throw new CMISException("The document posted and can not edit it!");
+                    CMISUI.UIHandler.ViewInTab<View.Packing>(this.OwnerForm, new object[] { documentId, dr, FormState.Edit });
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
+        }
+
         private void BtnViewItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if(grvPackingList.GetFocusedDataRow() is DataRow dr)
             {
                 var documentId = Convert.ToInt32(dr["Id"]);
-                CMISUI.UIHandler.ViewInTab<View.Packing>(this.OwnerForm, new object[]{ documentId,dr });
+                CMISUI.UIHandler.ViewInTab<View.Packing>(this.OwnerForm, new object[]{ documentId,dr,FormState.View });
             }            
         }
-
-        private void BtnEditItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
 
         #region Overrided
         public override void InitComboCompany()

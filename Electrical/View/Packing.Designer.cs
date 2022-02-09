@@ -60,6 +60,7 @@
             this.btnDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.btnEditItem = new System.Windows.Forms.ToolStripButton();
             this.spliteContainer = new System.Windows.Forms.SplitContainer();
+            this.lblFormState = new System.Windows.Forms.Label();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbCompany.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grpPL)).BeginInit();
@@ -109,6 +110,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grpPL.AppearanceCaption.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpPL.AppearanceCaption.Options.UseFont = true;
+            this.grpPL.Controls.Add(this.lblFormState);
             this.grpPL.Controls.Add(this.btnCancel);
             this.grpPL.Controls.Add(this.btnAddItem);
             this.grpPL.Controls.Add(this.cboUnit);
@@ -455,6 +457,7 @@
             this.grvPaking.OptionsBehavior.Editable = false;
             this.grvPaking.OptionsView.ShowAutoFilterRow = true;
             this.grvPaking.OptionsView.ShowFooter = true;
+            this.grvPaking.DoubleClick += new System.EventHandler(this.btnEditItem_Click);
             // 
             // tsGrcPacking
             // 
@@ -505,6 +508,17 @@
             this.spliteContainer.Size = new System.Drawing.Size(1425, 791);
             this.spliteContainer.SplitterDistance = 453;
             this.spliteContainer.TabIndex = 4;
+            // 
+            // lblFormState
+            // 
+            this.lblFormState.AutoSize = true;
+            this.lblFormState.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFormState.ForeColor = System.Drawing.Color.Black;
+            this.lblFormState.Location = new System.Drawing.Point(312, 47);
+            this.lblFormState.Name = "lblFormState";
+            this.lblFormState.Size = new System.Drawing.Size(33, 17);
+            this.lblFormState.TabIndex = 28;
+            this.lblFormState.Text = "Unit";
             // 
             // Packing
             // 
@@ -584,5 +598,6 @@
         private DevExpress.XtraEditors.MemoEdit txtDescription;
         private System.Windows.Forms.ToolStripButton btnEditItem;
         private DevExpress.XtraEditors.SimpleButton btnCancel;
+        private System.Windows.Forms.Label lblFormState;
     }
 }

@@ -28,7 +28,6 @@ namespace Electrical.View
         private Dictionary<string, Model.TvpPackingItem> tvpPackingItems = new Dictionary<string, Model.TvpPackingItem>();
         private int? documentId = null;
         private DataRow packingDataRow = null;
-        bool documentPosted = false;
 
         BarItem btnNewItem, btnSaveItem, btnPostItem;
 
@@ -36,18 +35,16 @@ namespace Electrical.View
         public Packing()
         {
             InitializeComponent();
-            BtnNewItem_ItemClick(null,null);
             ShowRefreshItem = false;
+
+            FormMode = FormState.Save;
         }
 
-        public Packing(int? documentId,DataRow dr)
+        public Packing(int? documentId,DataRow dr,FormState formState):this()
         {
-            InitializeComponent();
             this.documentId = documentId;
-            this.packingDataRow = dr;
-            this.documentPosted = Convert.ToBoolean(this.packingDataRow["Posted"]);
-
-            ShowRefreshItem = false;
+            this.packingDataRow = dr;       
+            FormMode = formState;            
         }
 
         private void Packing_BeforeViewLoad(object sender, EventArgs e)
@@ -55,7 +52,7 @@ namespace Electrical.View
             try
             {
                 InitialLoadData();
-                GoFormToCurrentState();
+                
             }
             catch (Exception ex)
             {
@@ -65,7 +62,14 @@ namespace Electrical.View
 
         private void Packing_ViewLoaded(object sender, EventArgs e)
         {
-            
+            try
+            {
+                GoFormToCurrentState();
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
         }
 
         private void Packing_ViewRefresh(object sender, EventArgs e)
@@ -94,7 +98,7 @@ namespace Electrical.View
                 //check user only document is open or in edit mode documentId is nt null
                 if (this.documentId == null) throw new CMISException("Document not found!");
                 if (Convert.ToBoolean(packingDataRow["Posted"])) throw new CMISException("Dear user,The packing document already posted!");
-
+                //if (Msg.Confirm("Are you sure to save packing list?") == DialogResult.No) return;
                 var signType = SignType.Post.ToString();
                 var projectId = LoginInfo.ProjectId;
                 var userId = LoginInfo.Id;
@@ -108,34 +112,6 @@ namespace Electrical.View
                 if (result <= 0) throw new CMISException("Operation sign \"PL\" faild!");
 
                 Msg.Show("Operationm sign \"PL\" succeded!");
-            }
-            catch (Exception ex)
-            {
-                ex.ShowMessage();
-            }
-        }
-
-
-
-        // Helper for reset form
-        private void ResetForm()
-        {
-            try
-            {
-                this.packingDataRow = null;
-                this.documentId = null;
-                cboUnit.SelectItem(0);
-                cboItemCode.SelectItem(0);
-                txtReport.Text = String.Empty;
-                txtTag.Text = String.Empty;
-                cboCategory.SelectItem(0);
-                txtSize.Text = String.Empty;
-                txtPackingNo.Text = String.Empty;
-                txtDescription.Text = String.Empty;
-                cboVendor.SelectItem(0);
-                txtPlQty.Text = String.Empty;
-                cboQtyUnit.SelectItem(0);
-                cmbCompany.SelectItem(0);
             }
             catch (Exception ex)
             {
@@ -163,12 +139,11 @@ namespace Electrical.View
             try
             {
                 FormMode = FormState.Save;
-                GoFormToCurrentState();
+                ResetForm();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw ex;
             }
         }
 
@@ -199,6 +174,7 @@ namespace Electrical.View
                 //Save data
                 var result = DAL.Do.SavePacking(projectId, companyId, documentId, userId, reportNo, packingItems);
                 if (result <= 0) throw new CMISException($"Operation {formOperationMode} faild!");
+                ResetForm();
                 Msg.Show($"Operation {formOperationMode} succeded!");
             }
             catch (Exception ex)
@@ -323,19 +299,48 @@ namespace Electrical.View
         }
 
 
-
+        // Helper for reset form
+        private void ResetForm()
+        {
+            try
+            {
+                FormMode = FormState.Save;
+                GoFormToCurrentState();
+                this.packingDataRow = null;
+                this.documentId = null;
+                cboUnit.SelectItem(0);
+                cboItemCode.SelectItem(0);
+                txtReport.Text = String.Empty;
+                txtTag.Text = String.Empty;
+                cboCategory.SelectItem(0);
+                txtSize.Text = String.Empty;
+                txtPackingNo.Text = String.Empty;
+                txtDescription.Text = String.Empty;
+                cboVendor.SelectItem(0);
+                txtPlQty.Text = String.Empty;
+                cboQtyUnit.SelectItem(0);
+                cmbCompany.SelectItem(0);
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
+        }
 
         #region InitialFormState
         private void GoFormToCurrentState()
         {
+            
             if (FormMode == FormState.View)
             {
+                var posted = Convert.ToBoolean(this.packingDataRow["Posted"]);
+                lblFormState.Text = FormMode.ToString();
                 grpPL.Enabled = false;
                 grpPLHeader.Enabled = false;
-                tsGrcPacking.Enabled = !documentPosted;
-
-                btnSaveItem.Enabled  = !documentPosted;
-                btnPostItem.Enabled  =  !documentPosted;
+                tsGrcPacking.Enabled = false;
+                btnSaveItem.Enabled = false;
+                btnSaveItem.Visibility = BarItemVisibility.Never;
+                btnPostItem.Enabled = btnPostItem.Group().Visible  = !posted;
 
                 //Load data
                 if (this.documentId != null && this.packingDataRow != null)
@@ -368,12 +373,45 @@ namespace Electrical.View
 
             if (FormMode == FormState.Edit)
             {
-                
+                cmbCompany.Enabled = true;
+                lblFormState.Text = FormMode.ToString();
+                grpPL.Enabled = true;
+                grpPLHeader.Enabled = true;
+                tsGrcPacking.Enabled = true;
+
+                btnSaveItem.Enabled = true;
+                btnPostItem.Enabled = true;
+
+                //Load data
+                if (this.documentId != null && this.packingDataRow != null)
+                {
+                    var projectId = Convert.ToInt32(this.packingDataRow["ProjectId"]);
+                    var companyId = Convert.ToInt32(this.packingDataRow["CompanyId"]);
+                    var packingDocument = DAL.Do.GetPackingDocuments(projectId, companyId, documentId) as DataRow;
+
+                    if (packingDocument == null) throw new CMISException("Document not found");
+                    txtReport.Text = packingDocument["ReportNo"].ToString();
+                    cmbCompany.EditValue = Convert.ToInt32(packingDocument["CompanyId"]);
+
+                    var packingItems = DAL.Do.GetPackingItemsByDocumentId(this.documentId);
+                    if (packingItems.Rows.Count <= 0) throw new CMISException("Empty packing items");
+
+
+                    foreach (var item in packingItems.ToList<Model.TvpPackingItem>())
+                    {
+                        tvpPackingItems.Add(item.ItemCode, item);
+                    }
+
+                    grcPacking.SetDataSource(() =>
+                    {
+                        return packingItems;
+                    });
+                }
             }
 
             if (FormMode == FormState.Save)
             {
-                ResetForm();
+                lblFormState.Text = FormMode.ToString();
                 grpPL.Enabled = true;
                 grpPLHeader.Enabled = true;
 
@@ -381,9 +419,6 @@ namespace Electrical.View
                 btnPostItem.Enabled = btnPostItem.Group().Visible = false;
 
                 tsGrcPacking.Enabled = true;
-
-                btnDeleteItem.Enabled = true;
-                btnEditItem.Enabled = true;
 
                 grcPacking.DataSource = null;
                 tvpPackingItems.Clear();
@@ -466,8 +501,7 @@ namespace Electrical.View
         private void btnDeleteItem_Click(object sender, EventArgs e)
         {
             try
-            {
-                if (documentPosted) throw new CMISException("Dear user, The packing document is posted and you can not delete any packing item!");
+            {               
                 if (Msg.Confirm("Are you sure to remove selected item") == DialogResult.No) return;
                 if(grvPaking.GetFocusedDataRow() is DataRow dr)
                 {
@@ -510,7 +544,6 @@ namespace Electrical.View
             {
                 if (grvPaking.GetFocusedDataRow() is DataRow dr)
                 {
-                    if (documentPosted) throw new CMISException("Dear user, The packing document is posted and can not edit it!");
                     if (Msg.Confirm("Are you sure to edit selected item") == DialogResult.No) return;
                     grpPL.Enabled = true;
                     cboUnit.EditValue = Convert.ToInt32(dr["UnitId"]);
