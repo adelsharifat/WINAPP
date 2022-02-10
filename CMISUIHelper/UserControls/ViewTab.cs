@@ -6,6 +6,7 @@ using CMISUIHelper.Infrastructure.Helpers;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,14 +22,8 @@ namespace CMISUIHelper.UserControls
 {
     public partial class ViewTab : UserControl
     {
-        public Timer ViewLoadTimer = null;
-        internal GridControl LastFocucedGrid = null;
-
         public Dictionary<string, BarItem> MenuItems = new Dictionary<string, BarItem>();
-
-
         public Dictionary<string,ControlModel> ViewObjects = new Dictionary<string, ControlModel>();
-        public Dictionary<string,ControlModel> PermisionViewObjects = new Dictionary<string, ControlModel>();
 
 
         public delegate void RibbonPageEventHandler(object sender,RibbonPageEventArgs e = null);
@@ -117,9 +112,7 @@ namespace CMISUIHelper.UserControls
                                 default:
                                     break;
                             }
-                        }
-                       
-                        PermisionViewObjects.Add(x.Value.Name, x.Value);
+                        }                       
                     }
                         
                 }
@@ -153,9 +146,6 @@ namespace CMISUIHelper.UserControls
                                     break;
                             }
                         }
-
-
-                        PermisionViewObjects.Add(x.Value.Name, x.Value);
                     }
                 }
 
@@ -191,7 +181,6 @@ namespace CMISUIHelper.UserControls
                                     break;
                             }
                         }
-                        PermisionViewObjects.Add(x.Value.Name, x.Value);
                     }
                 }
             });
@@ -255,11 +244,15 @@ namespace CMISUIHelper.UserControls
         public TabPage TabPage { get; set; }
         public TabControl TabControl { get; set; }
         public string ViewIdentity { get => Guid.NewGuid().ToString("N").Substring(10); }
-
+        public string AppSchema { get=>OwnerForm.Schema; }
         #region ExtraCMISCode
 
         #region Properties
         public bool Posted { get; set; } = false;
+        public GridControl Grid { get; set; }
+        public GridView GridDefaultView { get=>Grid.MainView as GridView; }
+
+        public Dictionary<string,PermisionValue> ACLS { get => OwnerForm.Permisions;  }
 
 
         private FormState formState = FormState.Save;

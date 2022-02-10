@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QCElectrical
+namespace Electrical
 {
     [Schema(Bundle.SCHEMA)]
     public class ACL : CMISPolicy
@@ -33,8 +33,10 @@ namespace QCElectrical
         [Permit("Allow access to show itemcode list")]
         public const string ShowItemCodeList = nameof(ShowItemCodeList);
 
+
+
         [Permit("Allow access to show category list")]
-        public const string ShowCategoiesList = nameof(ShowCategoiesList);
+        public const string ShowCategoriesList = nameof(ShowCategoriesList);
 
         [Permit("Allow access to Save caegory")]
         public const string ButtonSaveCategory = nameof(ButtonSaveCategory);
@@ -43,15 +45,49 @@ namespace QCElectrical
         public const string ButtonDeleteCategory = nameof(ButtonDeleteCategory);
 
 
+
+
+        #region Packing
+        [Permit("Allow access to View Packing")]
+        public const string ButtonViewPLDocument = nameof(ButtonViewPLDocument);
+
+        [Permit("Allow access to Edit Packing")]
+        public const string ButtonEditPLDocument = nameof(ButtonEditPLDocument);
+
+        [Permit("Allow access to Delete Packing")]
+        public const string ButtonDeletePLDocument = nameof(ButtonDeletePLDocument);
+
         [Permit("Allow access to Save Packing")]
-        public const string ButtonSavePacking = nameof(ButtonSavePacking);
+        public const string ButtonSavePLDocument = nameof(ButtonSavePLDocument);
 
         [Permit("Allow access to Post PL Document")]
         public const string ButtonPostPLDocument = nameof(ButtonPostPLDocument);
+        #endregion
 
+        #region MIV
+        [Permit("Allow access to View MIV")]
+        public const string ButtonViewMIVDocument = nameof(ButtonViewMIVDocument);
+
+        [Permit("Allow access to Save MIV")]
+        public const string ButtonSaveMIVDocument = nameof(ButtonSaveMIVDocument);
+
+        [Permit("Allow access to Edit MIV Document")]
+        public const string ButtonEditMIVDocument = nameof(ButtonEditMIVDocument);
+
+        [Permit("Allow access to Delete MIV Document")]
+        public const string ButtonDeleteMIVDocument = nameof(ButtonDeleteMIVDocument);
+
+        [Permit("Allow access to Post MIV Document")]
+        public const string ButtonPostMIVDocument = nameof(ButtonPostMIVDocument);
+        #endregion
+
+        #region Signs
         [Permit("Allow access to Sign Role PLCreator")]
         public const string PLCreator = nameof(PLCreator);
 
+        [Permit("Allow access to Sign Role MIVCre")]
+        public const string MIVCreator = nameof(MIVCreator);
+        #endregion
 
 
 

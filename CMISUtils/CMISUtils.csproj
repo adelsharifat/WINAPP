@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="DataTables.cs" />
     <Compile Include="Extentions\MapDataExtentions.cs" />
+    <Compile Include="Extentions\ObjectExtentions.cs" />
     <Compile Include="GlobaConfig.cs" />
     <Compile Include="Infrastructure\ViewModel\IdsViewModel.cs" />
     <Compile Include="Utilities.cs" />

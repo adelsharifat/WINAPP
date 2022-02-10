@@ -222,37 +222,11 @@ namespace CMISUIHelper.Infrastructure.Helpers
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
-
-           
-
             item.ItemClick += (o, e) =>
             {
-                GridControl grid = view.LastFocucedGrid;
-                var controls = from c in view.ViewObjects.Values
-                               let cc = c.Control as Control
-                               where c.Control is Control
-                               select cc;
-                var focusedControl = controls.FirstOrDefault(x => x.Focused);
-                var focucedGrid = focusedControl is GridControl;
-
-                if (focucedGrid)
-                {
-                    if (grid == null || grid?.Name != focusedControl.Name)
-                    {
-                        view.LastFocucedGrid = focusedControl as GridControl;
-                        grid = view.LastFocucedGrid;
-                    }
-                        
-                }
-                    
-
+                GridView grid = view.GridDefaultView;
                 if (grid != null)
-                {                                        
-                    GridView gv = grid.MainView as GridView;
-                    gv.OptionsFind.AlwaysVisible = !gv.OptionsFind.AlwaysVisible;
-                    grid.Focus();
-                }
-                
+                    grid.OptionsFind.AlwaysVisible = !grid.OptionsFind.AlwaysVisible;
             };
             return item;
         }
@@ -265,31 +239,9 @@ namespace CMISUIHelper.Infrastructure.Helpers
             rp.AddGroups(group);
             item.ItemClick += (o, e) =>
             {
-                GridControl grid = view.LastFocucedGrid;
-                var controls = from c in view.ViewObjects.Values
-                               let cc = c.Control as Control
-                               where c.Control is Control
-                               select cc;
-                var focusedControl = controls.FirstOrDefault(x => x.Focused);
-                var focucedGrid = focusedControl is GridControl;
-
-                if (focucedGrid)
-                {
-                    if (grid == null || grid?.Name != focusedControl.Name)
-                    {
-                        view.LastFocucedGrid = focusedControl as GridControl;
-                        grid = view.LastFocucedGrid;
-                    }
-                }
-
-
+                GridView grid = view.GridDefaultView;
                 if (grid != null)
-                {
-                    GridView gv = grid.MainView as GridView;
-                    gv.OptionsView.ColumnAutoWidth = !gv.OptionsView.ColumnAutoWidth;
-                    grid.Focus();
-                }
-
+                    grid.OptionsView.ColumnAutoWidth = !grid.OptionsView.ColumnAutoWidth;
             };
             return item;
         }
@@ -302,31 +254,9 @@ namespace CMISUIHelper.Infrastructure.Helpers
             rp.AddGroups(group);
             item.ItemClick += (o, e) =>
             {
-                GridControl grid = view.LastFocucedGrid;
-                var controls = from c in view.ViewObjects.Values
-                               let cc = c.Control as Control
-                               where c.Control is Control
-                               select cc;
-                var focusedControl = controls.FirstOrDefault(x => x.Focused);
-                var focucedGrid = focusedControl is GridControl;
-
-                if (focucedGrid)
-                {
-                    if (grid == null || grid?.Name != focusedControl.Name)
-                    {
-                        view.LastFocucedGrid = focusedControl as GridControl;
-                        grid = view.LastFocucedGrid;
-                    }
-                }
-
-
+                GridView grid = view.GridDefaultView;
                 if (grid != null)
-                {
-                    GridView gv = grid.MainView as GridView;
-                    gv.BestFitColumns();
-                    grid.Focus();
-                }
-
+                    grid.BestFitColumns();
             };
             return item;
         }
@@ -337,34 +267,11 @@ namespace CMISUIHelper.Infrastructure.Helpers
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
-
             item.ItemClick += (o, e) =>
             {
-                GridControl grid = view.LastFocucedGrid;
-                var controls = from c in view.ViewObjects.Values
-                               let cc = c.Control as Control
-                               where c.Control is Control
-                               select cc;
-                var focusedControl = controls.FirstOrDefault(x => x.Focused);
-                var focucedGrid = focusedControl is GridControl;
-
-                if (focucedGrid)
-                {
-                    if (grid == null || grid?.Name != focusedControl.Name)
-                    {
-                        view.LastFocucedGrid = focusedControl as GridControl;
-                        grid = view.LastFocucedGrid;
-                    }
-                }
-
-
+                GridView grid = view.GridDefaultView;
                 if (grid != null)
-                {
-                    GridView gv = grid.MainView as GridView;
-                    gv.BestFitColumns();
-                    grid.Focus();
-                }
-
+                    grid.BestFitColumns();
             };
             view.MenuItems.Add(item.Caption.ToLower(), item);
             return item;
@@ -386,12 +293,6 @@ namespace CMISUIHelper.Infrastructure.Helpers
             rp.AddToggleBestFitGridTool(view);
             return rp;
         }
-
-
-
-
-
-
 
 
         // Add Sign Acion Items
@@ -538,27 +439,9 @@ namespace CMISUIHelper.Infrastructure.Helpers
 
             item.ItemClick += (o, e) =>
             {
-                GridControl grid = view.LastFocucedGrid;
-                var controls = from c in view.ViewObjects.Values
-                               let cc = c.Control as Control
-                               where c.Control is Control
-                               select cc;
-                var focusedControl = controls.FirstOrDefault(x => x.Focused);
-                var focucedGrid = focusedControl is GridControl;
-
-                if (focucedGrid)
-                {
-                    if (grid == null || grid?.Name != focusedControl.Name)
-                    {
-                        view.LastFocucedGrid = focusedControl as GridControl;
-                        grid = view.LastFocucedGrid;
-                    }
-                }
-
-
+                GridView grid = view.GridDefaultView;
                 if (grid != null)
                 {
-                    GridView gv = grid.MainView as GridView;
                     try
                     {
                         SaveFileDialog sfd = new SaveFileDialog();
@@ -574,13 +457,13 @@ namespace CMISUIHelper.Infrastructure.Helpers
                             switch (format)
                             {
                                 case "xlsx":
-                                    gv.ExportToXlsx(path);
+                                    grid.ExportToXlsx(path);
                                     break;
                                 case "xls":
-                                    gv.ExportToXls(path);
+                                    grid.ExportToXls(path);
                                     break;
                                 default:
-                                    gv.ExportToXlsx(path);
+                                    grid.ExportToXlsx(path);
                                     break;
                             }                            
                         }                      
@@ -603,24 +486,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
 
             item.ItemClick += (o, e) =>
             {
-                GridControl grid = view.LastFocucedGrid;
-                var controls = from c in view.ViewObjects.Values
-                               let cc = c.Control as Control
-                               where c.Control is Control
-                               select cc;
-                var focusedControl = controls.FirstOrDefault(x => x.Focused);
-                var focucedGrid = focusedControl is GridControl;
-
-                if (focucedGrid)
-                {
-                    if (grid == null || grid?.Name != focusedControl.Name)
-                    {
-                        view.LastFocucedGrid = focusedControl as GridControl;
-                        grid = view.LastFocucedGrid;
-                    }
-                }
-
-
+                GridView grid = view.GridDefaultView;
                 if (grid != null)
                 {
                     try
@@ -631,11 +497,10 @@ namespace CMISUIHelper.Infrastructure.Helpers
                         sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                         var dialogResult = sfd.ShowDialog();
 
-                        GridView gv = grid.MainView as GridView;
                         if (dialogResult == DialogResult.OK)
                         {
                             string path = sfd.FileName;
-                            gv.ExportToCsv(path);
+                            grid.ExportToCsv(path);
                         }
                     }
                     catch (Exception ex)
@@ -657,27 +522,9 @@ namespace CMISUIHelper.Infrastructure.Helpers
 
             item.ItemClick += (o, e) =>
             {
-                GridControl grid = view.LastFocucedGrid;
-                var controls = from c in view.ViewObjects.Values
-                               let cc = c.Control as Control
-                               where c.Control is Control
-                               select cc;
-                var focusedControl = controls.FirstOrDefault(x => x.Focused);
-                var focucedGrid = focusedControl is GridControl;
-
-                if (focucedGrid)
-                {
-                    if (grid == null || grid?.Name != focusedControl.Name)
-                    {
-                        view.LastFocucedGrid = focusedControl as GridControl;
-                        grid = view.LastFocucedGrid;
-                    }
-                }
-
-
+                GridView grid = view.GridDefaultView;
                 if (grid != null)
                 {
-                    GridView gv = grid.MainView as GridView;
                     try
                     {
                         SaveFileDialog sfd = new SaveFileDialog();
@@ -689,7 +536,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
                         if (dialogResult == DialogResult.OK)
                         {
                             string path = sfd.FileName;
-                            gv.ExportToPdf(path);
+                            grid.ExportToPdf(path);
                         }
                     }
                     catch (Exception ex)

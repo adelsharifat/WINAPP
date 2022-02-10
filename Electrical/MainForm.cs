@@ -30,6 +30,7 @@ namespace Electrical
         //Initial main form
         private void InitMainForm()
         {
+            Schema = Bundle.SCHEMA;
             InitAvatar();
             Ribbon.ApplicationButtonText = Bundle.APPNAME;
             CloseItemLocation = CMISUIHelper.Infrastructure.Enums.CloseItemAlignment.Start;

@@ -301,10 +301,17 @@ namespace Electrical.Data
                };
             return DoMutation("EL.SignPLDocument", sqlParams);
         }
-        
-        
-        
+
+
+
         #endregion
+
+        #region MIV
+        public DataTable GetMIVItemCodesCombo()
+            => DoQueryReader("EL.GetMIVItemCodesCombo");
+
+        #endregion
+
 
         #region PackingList
         public dynamic GetPackingDocuments(int projectId, int companyId, int? id = null)
