@@ -103,8 +103,9 @@
             this.grvMIVItems.Name = "grvMIVItems";
             this.grvMIVItems.OptionsView.ShowAutoFilterRow = true;
             this.grvMIVItems.OptionsView.ShowFooter = true;
-            this.grvMIVItems.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.grvMIVItems_RowUpdated);
+            this.grvMIVItems.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvMIVItems_CellValueChanged);
             this.grvMIVItems.DoubleClick += new System.EventHandler(this.grvMIVItems_DoubleClick);
+            this.grvMIVItems.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.grvMIVItems_ValidatingEditor);
             // 
             // label7
             // 
@@ -158,6 +159,7 @@
             // 
             // txtQty
             // 
+            this.txtQty.EditValue = "0.00";
             this.txtQty.Location = new System.Drawing.Point(533, 147);
             this.txtQty.Name = "txtQty";
             this.txtQty.Properties.Appearance.BackColor = System.Drawing.Color.White;

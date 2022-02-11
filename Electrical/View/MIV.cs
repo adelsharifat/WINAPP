@@ -18,12 +18,13 @@ using CMISUIHelper.Infrastructure.Contracts.CustomException;
 using CMISSecurity;
 using Electrical.Model;
 using CMISUtils.Extentions;
+using DevExpress.XtraGrid.Views.Grid;
 
 namespace Electrical.View
 {
     public partial class MIV : ViewTabWithCompany
     {
-        Dictionary<int, MIVItem> mivItemsDictionary = new Dictionary<int, MIVItem>();
+        Dictionary<string, MIVItem> mivItemsDictionary = new Dictionary<string, MIVItem>();
 
         public MIV()
         {
@@ -37,6 +38,8 @@ namespace Electrical.View
                 InitComboCompany();
                 FillCompaniesCombo();
                 FillMIVItemCodeCombo();
+
+                this.Grid = grcMIVItems;
             }
             catch (Exception ex)
             {
@@ -63,6 +66,10 @@ namespace Electrical.View
             var remarkColumn = grvMIVItems.Columns["Remark"];
             qtyColumn.AppearanceHeader.BackColor = qtyColumn.AppearanceCell.BackColor = Color.LightYellow;
             remarkColumn.AppearanceHeader.BackColor = remarkColumn.AppearanceCell.BackColor = Color.LightYellow;
+
+            //set format value for specific columns
+            qtyColumn.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            qtyColumn.DisplayFormat.FormatString = "n2";
         }
 
         private void MIV_ViewRefresh(object sender, EventArgs e)
@@ -117,7 +124,28 @@ namespace Electrical.View
 
         private void BtnSave_ItemClick(object sender, ItemClickEventArgs e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                this.GridDefaultView.CloseEditor();
+                if (!this.GridDefaultView.PostEditor()) throw new CMISException("Grid on modify data");
+
+                var tvpMivItem = mivItemsDictionary.Select(x => x.Value).Select(x => new TvpMIV
+                {
+                    Id = x.InventoryBalanceId,
+                    ItemCodeId = x.ItemCodeId,
+                    Qty = x.Qty,
+                    Remark = x.Remark
+                }).ToDataTable();
+                
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
         }
 
         private void BtnEdit_ItemClick(object sender, ItemClickEventArgs e)
@@ -134,32 +162,40 @@ namespace Electrical.View
         {
             try
             {
-                var balance = Convert.ToInt32(cboItemCode.GetColumnValue("Balance"));
-                if (balance == 0f) throw new CMISException("Inventory item is zero!");
+                var balance = cboItemCode.GetColumnValue("Balance")?.ToDecimal();
+                if (balance == 0m) throw new CMISException("Inventory item is zero!");
                 if (Convert.ToDecimal(txtQty.Text) > balance) throw new CMISException("Item inventory is not enough for the requested amount");
 
                 //data
-                var inventoryBalanceId = cboItemCode.EditValue.ToInt();
+                var inventoryBalanceId = cboItemCode.EditValue?.ToInt();
+                var itemCodeId = cboItemCode.GetColumnValue("ItemCodeId").ToInt();
+                var unitId = cboItemCode.GetColumnValue("UnitId").ToInt();
+                var companyId = cboCompanies.EditValue.ToInt();
                 var itemCode = cboItemCode.GetColumnValue("ItemCode").ToString();
                 var unit = cboItemCode.GetColumnValue("Unit").ToString();
                 var company = cboCompanies.GetColumnValue("FullName").ToString();
-                var qty = txtQty.Text.ToDecimal();
+                var qty = txtQty.Text?.ToDecimal();
                 var remark = txtItemRemark.Text.Trim();
 
-                //Generate unique key for dictionary
-                var key = inventoryBalanceId;
-
-                if (mivItemsDictionary.ContainsKey(key)) throw new CMISException("ItmCode already added to list you can change Qty value from the grid cell value!");
-
+                           
                 var mivItemModel = new MIVItem
                 {
                     InventoryBalanceId = 0,
+                    ItemCodeId = itemCodeId,
+                    UnitId = unitId,
+                    CompanyId = companyId,
                     ItemCode = itemCode,
                     Unit = unit,
                     Company = company,
-                    Qty = qty,
+                    Qty = (decimal)qty,
+                    Balance = (decimal)balance,
                     Remark = remark
                 };
+
+                //Generate unique key for dictionary
+                var key = mivItemModel.KeyDictionary;
+
+                if (mivItemsDictionary.ContainsKey(key)) throw new CMISException("ItmCode already added to list you can change Qty value from the grid cell value!");
 
                 //Validate mivitem before add to grid
                 ValidateMivItem(mivItemModel);            
@@ -185,6 +221,9 @@ namespace Electrical.View
             try
             {
                 //validation data
+                if (miv.ItemCodeId<=0) throw new CMISException("ItemCodeId is not valid!");
+                if (miv.UnitId<=0) throw new CMISException("UnitId is not valid!");
+                if (miv.CompanyId<=0) throw new CMISException("CompanyId is not valid!");
                 if (miv.ItemCode.IsEmpty()) throw new CMISException("ItemCode is emtpy!");
                 if (miv.Unit.IsEmpty()) throw new CMISException("Unit is emtpy!");
                 if (miv.Qty <= 0) throw new CMISException("Qty is not valid!");
@@ -254,27 +293,6 @@ namespace Electrical.View
         }
         #endregion
 
-        private void grvMIVItems_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
-        {
-            try
-            {
-                if(e.Row is DataRow dr)
-                {
-                    var key = dr["InventoryBalanceId"].ToInt();
-                    var newQty = dr["Qty"].ToDecimal();
-                    var newRemark = dr["Remark"].ToString();
-                    mivItemsDictionary[key].Qty = newQty; 
-                    mivItemsDictionary[key].Remark = newRemark;
-                    //Refresh Grid
-                    FillMivItemGrid();
-                }
-            }
-            catch (Exception ex)
-            {
-                ex.ShowMessage();                
-            }
-        }
-
         private void grvMIVItems_DoubleClick(object sender, EventArgs e)
         {
             try
@@ -290,6 +308,50 @@ namespace Electrical.View
             catch (Exception ex)
             {
                 ex.ShowMessage();
+            }
+        }
+
+        private void grvMIVItems_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
+        {
+            try
+            {
+                GridView view = sender as GridView;
+                if (view.FocusedColumn.FieldName == "Qty")
+                {
+                    decimal qty = 0m;
+                    if (!Decimal.TryParse(e.Value as String, out qty))
+                    {
+                        e.Valid = false;
+                        e.ErrorText = "Only numeric values are accepted.";
+                    }
+
+                    var balance = view.GetCellValue("Balance")?.ToDecimal();
+
+                    if(qty > balance)
+                    {
+                        e.Valid = false;
+                        e.ErrorText = "Qty is greater than balance value.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
+        }
+
+        private void grvMIVItems_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            if (e.Column.FieldName == "Qty")
+            {
+                var dr = this.GridDefaultView.GetDataRow(e.RowHandle);
+                var key = dr["KeyDictionary"].ToString();
+                var newQty = dr["Qty"].ToDecimal();
+                var newRemark = dr["Remark"].ToString();
+                mivItemsDictionary[key].Qty = newQty.ToString("n2").ToDecimal();
+                mivItemsDictionary[key].Remark = newRemark;
+                //Refresh Grid
+                FillMivItemGrid();
             }
         }
     }
