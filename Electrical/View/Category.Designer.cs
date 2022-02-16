@@ -34,14 +34,21 @@
             this.txtSubCategory = new DevExpress.XtraEditors.TextEdit();
             this.lblSubCategory = new System.Windows.Forms.Label();
             this.treeCategory = new DevExpress.XtraTreeList.TreeList();
+            this.cboTreeCategory = new DevExpress.XtraEditors.TreeListLookUpEdit();
+            this.treeListLookUpEdit1TreeList = new DevExpress.XtraTreeList.TreeList();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cboCategory.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSubCategory.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeCategory)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboTreeCategory.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.treeListLookUpEdit1TreeList)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlTop
             // 
+            this.pnlTop.Controls.Add(this.label1);
+            this.pnlTop.Controls.Add(this.cboTreeCategory);
             this.pnlTop.Controls.Add(this.cboCategory);
             this.pnlTop.Controls.Add(this.lblCategory);
             this.pnlTop.Controls.Add(this.txtSubCategory);
@@ -58,7 +65,9 @@
             this.cboCategory.Name = "cboCategory";
             this.cboCategory.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.cboCategory.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboCategory.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.cboCategory.Properties.Appearance.Options.UseFont = true;
+            this.cboCategory.Properties.Appearance.Options.UseForeColor = true;
             this.cboCategory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboCategory.Properties.NullText = "Choose Category";
@@ -97,6 +106,7 @@
             // treeCategory
             // 
             this.treeCategory.ColumnPanelRowHeight = 25;
+            this.treeCategory.Cursor = System.Windows.Forms.Cursors.Default;
             this.treeCategory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeCategory.Location = new System.Drawing.Point(0, 100);
             this.treeCategory.Name = "treeCategory";
@@ -105,6 +115,38 @@
             this.treeCategory.OptionsView.ShowSummaryFooter = true;
             this.treeCategory.Size = new System.Drawing.Size(1257, 691);
             this.treeCategory.TabIndex = 1;
+            // 
+            // cboTreeCategory
+            // 
+            this.cboTreeCategory.Location = new System.Drawing.Point(849, 37);
+            this.cboTreeCategory.Name = "cboTreeCategory";
+            this.cboTreeCategory.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboTreeCategory.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cboTreeCategory.Properties.Appearance.Options.UseFont = true;
+            this.cboTreeCategory.Properties.Appearance.Options.UseForeColor = true;
+            this.cboTreeCategory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cboTreeCategory.Properties.TreeList = this.treeListLookUpEdit1TreeList;
+            this.cboTreeCategory.Size = new System.Drawing.Size(197, 26);
+            this.cboTreeCategory.TabIndex = 7;
+            // 
+            // treeListLookUpEdit1TreeList
+            // 
+            this.treeListLookUpEdit1TreeList.Location = new System.Drawing.Point(0, 0);
+            this.treeListLookUpEdit1TreeList.Name = "treeListLookUpEdit1TreeList";
+            this.treeListLookUpEdit1TreeList.OptionsView.ShowIndentAsRowStyle = true;
+            this.treeListLookUpEdit1TreeList.Size = new System.Drawing.Size(400, 200);
+            this.treeListLookUpEdit1TreeList.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(771, 40);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 17);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Category ::";
             // 
             // Category
             // 
@@ -123,6 +165,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.cboCategory.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSubCategory.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeCategory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboTreeCategory.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.treeListLookUpEdit1TreeList)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -135,5 +179,8 @@
         private System.Windows.Forms.Label lblSubCategory;
         private DevExpress.XtraEditors.LookUpEdit cboCategory;
         private DevExpress.XtraTreeList.TreeList treeCategory;
+        private System.Windows.Forms.Label label1;
+        private DevExpress.XtraEditors.TreeListLookUpEdit cboTreeCategory;
+        private DevExpress.XtraTreeList.TreeList treeListLookUpEdit1TreeList;
     }
 }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.grpPL = new DevExpress.XtraEditors.GroupControl();
+            this.lblFormState = new System.Windows.Forms.Label();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddItem = new DevExpress.XtraEditors.SimpleButton();
             this.cboUnit = new DevExpress.XtraEditors.LookUpEdit();
@@ -60,7 +61,6 @@
             this.btnDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.btnEditItem = new System.Windows.Forms.ToolStripButton();
             this.spliteContainer = new System.Windows.Forms.SplitContainer();
-            this.lblFormState = new System.Windows.Forms.Label();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbCompany.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grpPL)).BeginInit();
@@ -138,6 +138,17 @@
             this.grpPL.Size = new System.Drawing.Size(428, 627);
             this.grpPL.TabIndex = 25;
             this.grpPL.Text = "P/L";
+            // 
+            // lblFormState
+            // 
+            this.lblFormState.AutoSize = true;
+            this.lblFormState.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFormState.ForeColor = System.Drawing.Color.Black;
+            this.lblFormState.Location = new System.Drawing.Point(312, 47);
+            this.lblFormState.Name = "lblFormState";
+            this.lblFormState.Size = new System.Drawing.Size(33, 17);
+            this.lblFormState.TabIndex = 28;
+            this.lblFormState.Text = "Unit";
             // 
             // btnCancel
             // 
@@ -422,6 +433,7 @@
             this.txtReport.Properties.Appearance.Options.UseBackColor = true;
             this.txtReport.Properties.Appearance.Options.UseFont = true;
             this.txtReport.Properties.Appearance.Options.UseForeColor = true;
+            this.txtReport.Properties.ReadOnly = true;
             this.txtReport.Size = new System.Drawing.Size(316, 24);
             this.txtReport.TabIndex = 22;
             // 
@@ -508,17 +520,6 @@
             this.spliteContainer.Size = new System.Drawing.Size(1425, 791);
             this.spliteContainer.SplitterDistance = 453;
             this.spliteContainer.TabIndex = 4;
-            // 
-            // lblFormState
-            // 
-            this.lblFormState.AutoSize = true;
-            this.lblFormState.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFormState.ForeColor = System.Drawing.Color.Black;
-            this.lblFormState.Location = new System.Drawing.Point(312, 47);
-            this.lblFormState.Name = "lblFormState";
-            this.lblFormState.Size = new System.Drawing.Size(33, 17);
-            this.lblFormState.TabIndex = 28;
-            this.lblFormState.Text = "Unit";
             // 
             // Packing
             // 

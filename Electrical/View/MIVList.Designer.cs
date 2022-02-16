@@ -48,6 +48,7 @@
             // 
             this.cmbCompany.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCompany.Properties.Appearance.Options.UseFont = true;
+            this.cmbCompany.Properties.EditValueChanged += new System.EventHandler(this.cmbCompany_Properties_EditValueChanged);
             // 
             // label1
             // 
@@ -74,6 +75,7 @@
             // 
             this.grvMIV.GridControl = this.grcMIV;
             this.grvMIV.Name = "grvMIV";
+            this.grvMIV.OptionsBehavior.Editable = false;
             this.grvMIV.OptionsView.ShowAutoFilterRow = true;
             this.grvMIV.OptionsView.ShowFooter = true;
             // 

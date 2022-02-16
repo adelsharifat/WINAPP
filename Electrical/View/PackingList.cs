@@ -15,6 +15,7 @@ using CMISDAL.Common;
 using CMISUtils;
 using CMISUIHelper.Infrastructure.Enums;
 using CMISUIHelper.Infrastructure.Contracts.CustomException;
+using CMISSecurity;
 
 namespace Electrical.View
 {
@@ -71,7 +72,7 @@ namespace Electrical.View
                 var btnDeleteItem = e.RibbonPage.AddDeleteFormActionTool(this);
 
                 e.RibbonPage.AddGridTools(this);
-                e.RibbonPage.AddExportTools(this);
+                e.RibbonPage.AddExcelExportTool(this);
 
                 btnViewItem.ItemClick += BtnViewItem_ItemClick;
                 btnEditItem.ItemClick += BtnEditItem_ItemClick;
@@ -89,10 +90,16 @@ namespace Electrical.View
             {
                 if (grvPackingList.GetFocusedDataRow() is DataRow dr)
                 {
-                    var documentId = Convert.ToInt32(dr["Id"]);
-                    var posted = Convert.ToBoolean(dr["Posted"]);
+                    var documentId = dr.Id();
+                    var posted = dr.Posted();
+                    var deleted = dr.IsDelete();
+                    if (deleted) throw new CMISException("The document already deleted!");
                     if (posted) throw new CMISException("The document posted and can not delete it!");
-                    Msg.Show("The document deleted!");
+                    if (Msg.Confirm("Are you sure to delete the document?") == DialogResult.No) return;
+                    var result = DAL.Do.DeletePLDocument(LoginInfo.ProjectId, LoginInfo.Id, documentId);
+                    if (result <= 0) throw new CMISException("Operation delete pl document faild!");
+                    Msg.Show("The document successfully deleted!");
+                    FillGrid();
                 }
             }
             catch (Exception ex)
@@ -107,9 +114,11 @@ namespace Electrical.View
             {
                 if (grvPackingList.GetFocusedDataRow() is DataRow dr)
                 {
-                    var documentId = Convert.ToInt32(dr["Id"]);
-                    var posted = Convert.ToBoolean(dr["Posted"]);
-                    if (posted) throw new CMISException("The document posted and can not edit it!");
+                    var documentId = dr.Id();
+                    var posted = dr.Posted();
+                    var deleted = dr.IsDelete();
+                    if (deleted) throw new CMISException("Dear user, Can not edit deleted PL document!");
+                    if (posted) throw new CMISException("Dear user, Can not edit posted PL document!");
                     CMISUI.UIHandler.ViewInTab<View.Packing>(this.OwnerForm, new object[] { documentId, dr, FormState.Edit });
                 }
             }
@@ -121,11 +130,18 @@ namespace Electrical.View
 
         private void BtnViewItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if(grvPackingList.GetFocusedDataRow() is DataRow dr)
+            try
             {
-                var documentId = Convert.ToInt32(dr["Id"]);
-                CMISUI.UIHandler.ViewInTab<View.Packing>(this.OwnerForm, new object[]{ documentId,dr,FormState.View });
-            }            
+                if (grvPackingList.GetFocusedDataRow() is DataRow dr)
+                {
+                    var documentId = Convert.ToInt32(dr["Id"]);
+                    CMISUI.UIHandler.ViewInTab<View.Packing>(this.OwnerForm, new object[] { documentId, dr, FormState.View });
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }           
         }
 
         #region Overrided
@@ -150,7 +166,7 @@ namespace Electrical.View
         {
             try
             {
-                var data = DAL.Do.GetPackingDocuments(LoginInfo.ProjectId, Convert.ToInt32(cmbCompany.EditValue), null);
+                var data = DAL.Do.GetPackingDocuments(LoginInfo.ProjectId,LoginInfo.Id, Convert.ToInt32(cmbCompany.EditValue), null);
                 grcPackingList.SetDataSource(() =>
                 {
                     return data;

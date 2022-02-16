@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfig.cs" />
+    <Compile Include="BEL\ReportNumber.cs" />
     <Compile Include="Bundle.cs" />
     <Compile Include="Data\DAL.cs" />
     <Compile Include="ElectricalResource.Designer.cs">
@@ -71,6 +72,8 @@
     </Compile>
     <Compile Include="ACL.cs" />
     <Compile Include="Model\MIVItem.cs" />
+    <Compile Include="Model\MIVCrud.cs" />
+    <Compile Include="Model\PLCrud.cs" />
     <Compile Include="Model\TvpMIV.cs" />
     <Compile Include="Model\TvpPackingItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -103,6 +106,12 @@
     </Compile>
     <Compile Include="View\MIVList.Designer.cs">
       <DependentUpon>MIVList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Monitoring.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Monitoring.Designer.cs">
+      <DependentUpon>Monitoring.cs</DependentUpon>
     </Compile>
     <Compile Include="View\MTO.cs">
       <SubType>UserControl</SubType>
@@ -153,6 +162,9 @@
     <EmbeddedResource Include="View\MIVList.resx">
       <DependentUpon>MIVList.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\Monitoring.resx">
+      <DependentUpon>Monitoring.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\MTO.resx">
       <DependentUpon>MTO.cs</DependentUpon>
     </EmbeddedResource>
@@ -164,6 +176,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CMISBEL\CMISBEL.csproj">
+      <Project>{D9290EEF-8244-449D-A28B-E8035DB517A6}</Project>
+      <Name>CMISBEL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CMISControls\CMISControls.csproj">
       <Project>{478C02A1-B1AD-400F-B568-C97F2591AA52}</Project>
       <Name>CMISControls</Name>

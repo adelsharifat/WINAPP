@@ -24,6 +24,7 @@ namespace Electrical.View
         public Category()
         {
             InitializeComponent();
+            ViewTitle = "Category";
         }
 
         private void Category_BeforeViewLoad(object sender, EventArgs e)
@@ -48,11 +49,6 @@ namespace Electrical.View
             var btnEditItem = e.RibbonPage.AddEditFormActionTool(this);
             var btnDeleteItem = e.RibbonPage.AddDeleteFormActionTool(this);
             var btnSaveItem = e.RibbonPage.AddSaveFormActionTool(this);
-
-            //Added ribbon grid tools
-            e.RibbonPage.AddToggleSearchGridTool(this);
-            e.RibbonPage.AddToggleAutoWidthGridTool(this);
-            e.RibbonPage.AddToggleBestFitGridTool(this);
 
             //Handle event btnItems
             btnNewItem.ItemClick += BtnNewItem_ItemClick;
@@ -166,7 +162,11 @@ namespace Electrical.View
             try
             {
                 var data = DAL.Do.GetCategoriesCombo();
-                cboCategory.Fill(data, "Category", "Id").SelectItem(0);
+                cboTreeCategory.Properties.DataSource = data;
+                cboTreeCategory.Properties.DisplayMember = "Category";
+                cboTreeCategory.Properties.KeyMember = "Id";
+                cboTreeCategory.Properties.ValueMember = "Id";
+
             }
             catch (Exception)
             {

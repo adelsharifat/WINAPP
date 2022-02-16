@@ -210,6 +210,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
             var item = RibbonHandler.NewItem.ButtonItem(caption, null, bmp);
             group.AddItems(item);
             rp.AddGroups(group);
+            view.MenuItems.Add(item.Caption.ToLower(), item);
             return item;
         }
 

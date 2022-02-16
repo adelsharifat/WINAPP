@@ -35,6 +35,7 @@
             DevExpress.XtraEditors.TileItemElement tileItemElement5 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement6 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement7 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement8 = new DevExpress.XtraEditors.TileItemElement();
             this.tileControl1 = new DevExpress.XtraEditors.TileControl();
             this.tgBaseInfo = new DevExpress.XtraEditors.TileGroup();
             this.tileItemCode = new DevExpress.XtraEditors.TileItem();
@@ -46,6 +47,8 @@
             this.tileGroupMIV = new DevExpress.XtraEditors.TileGroup();
             this.tileNewMiv = new DevExpress.XtraEditors.TileItem();
             this.tileMIVList = new DevExpress.XtraEditors.TileItem();
+            this.tileGroup3 = new DevExpress.XtraEditors.TileGroup();
+            this.tileMonitoring = new DevExpress.XtraEditors.TileItem();
             this.SuspendLayout();
             // 
             // tileControl1
@@ -58,8 +61,9 @@
             this.tileControl1.Groups.Add(this.tgBaseInfo);
             this.tileControl1.Groups.Add(this.tileGroup2);
             this.tileControl1.Groups.Add(this.tileGroupMIV);
+            this.tileControl1.Groups.Add(this.tileGroup3);
             this.tileControl1.Location = new System.Drawing.Point(50, 50);
-            this.tileControl1.MaxId = 8;
+            this.tileControl1.MaxId = 9;
             this.tileControl1.Name = "tileControl1";
             this.tileControl1.ShowGroupText = true;
             this.tileControl1.ShowText = true;
@@ -213,6 +217,29 @@
             this.tileMIVList.Name = "tileMIVList";
             this.tileMIVList.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.tileMIVList_ItemClick);
             // 
+            // tileGroup3
+            // 
+            this.tileGroup3.Items.Add(this.tileMonitoring);
+            this.tileGroup3.Name = "tileGroup3";
+            this.tileGroup3.Text = "Report";
+            // 
+            // tileMonitoring
+            // 
+            this.tileMonitoring.AppearanceItem.Normal.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.tileMonitoring.AppearanceItem.Normal.BorderColor = System.Drawing.Color.DarkSlateBlue;
+            this.tileMonitoring.AppearanceItem.Normal.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.tileMonitoring.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.tileMonitoring.AppearanceItem.Normal.Options.UseBorderColor = true;
+            this.tileMonitoring.AppearanceItem.Normal.Options.UseFont = true;
+            tileItemElement8.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileItemElement8.Text = "Monitoring";
+            tileItemElement8.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            this.tileMonitoring.Elements.Add(tileItemElement8);
+            this.tileMonitoring.Id = 8;
+            this.tileMonitoring.ItemSize = DevExpress.XtraEditors.TileItemSize.Medium;
+            this.tileMonitoring.Name = "tileMonitoring";
+            this.tileMonitoring.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.tileMonitoring_ItemClick);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -238,5 +265,7 @@
         private DevExpress.XtraEditors.TileGroup tileGroupMIV;
         private DevExpress.XtraEditors.TileItem tileNewMiv;
         private DevExpress.XtraEditors.TileItem tileMIVList;
+        private DevExpress.XtraEditors.TileGroup tileGroup3;
+        private DevExpress.XtraEditors.TileItem tileMonitoring;
     }
 }

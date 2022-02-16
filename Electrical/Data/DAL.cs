@@ -1,4 +1,5 @@
 ﻿using CMISDAL.Base;
+using Electrical.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -53,6 +54,8 @@ namespace Electrical.Data
                 throw;
             }
         }
+        
+
         public dynamic GetItemCodes(int projectId, int userId, int? id = null)
         {
             try
@@ -109,6 +112,8 @@ namespace Electrical.Data
                 throw;
             }
         }
+
+
         public int? DeleteItemCode(int id,int projectId, int userId)
         {
             try
@@ -181,6 +186,8 @@ namespace Electrical.Data
                 throw;
             }
         }
+        
+
         public int? SaveCategory(int projectId,int userId,int? categoryId, int? parentCategoryId, string category)
         {
             try
@@ -273,31 +280,60 @@ namespace Electrical.Data
                 throw;
             }
         }
-        public int SavePacking(int projectId,int companyId, int? documentId, int userId,string reportNo, DataTable packingItems)
+
+        public int DeletePLDocument(int projectId, int userId,int documentId)
         {
             var sqlParams = new SqlParameter[]
             {
                 new SqlParameter("ProjectId",projectId),
-                new SqlParameter("CompanyId",companyId),
-                new SqlParameter("DocumentId",documentId),
                 new SqlParameter("UserId",userId),
-                new SqlParameter("ReportNo",reportNo),
-                new SqlParameter("PackingItems",packingItems),
+                new SqlParameter("DocumentId",documentId)
             };
-            return DoMutation("EL.SavePacking", sqlParams);
+            return DoMutation("EL.DeletePLDocument", sqlParams);
         }
-        public int SignPLDocument(string signtype,int projectId, int userId, int objectId,string nextRole,string machineName,string activeDirectoryName,int companyId)
+
+
+        public int SavePLDocument(SavePLDocument savePLDoc)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("ProjectId",savePLDoc.ProjectId),
+                new SqlParameter("CompanyId",savePLDoc.CompanyId),
+                new SqlParameter("DocumentId",savePLDoc.DocumentId),
+                new SqlParameter("UserId",savePLDoc.UserId),
+                new SqlParameter("PackingItems",savePLDoc.PackingItems),
+            };
+            return DoMutation("EL.SavePLDocument", sqlParams);
+        }
+        public int SignPLDocument(SignPLDocument signPLDoc)
         {
             var sqlParams = new SqlParameter[]
                {
-                new SqlParameter("SignRequestType",signtype),
-                new SqlParameter("ProjectId",projectId),
-                new SqlParameter("UserId",userId),
-                new SqlParameter("ObjectId",objectId),
-                new SqlParameter("NextRole",nextRole),
-                new SqlParameter("MachineName",machineName),
-                new SqlParameter("ActiveDirectoryName",activeDirectoryName),
-                new SqlParameter("CompanyId",companyId)
+                new SqlParameter("SignRequestType",signPLDoc.SignType.ToString()),
+                new SqlParameter("ProjectId",signPLDoc.ProjectId),
+                new SqlParameter("UserId",signPLDoc.UserId),
+                new SqlParameter("ObjectId",signPLDoc.ObjectId),
+                new SqlParameter("NextRole",signPLDoc.NextRole),
+                new SqlParameter("MachineName",signPLDoc.MachineName),
+                new SqlParameter("ActiveDirectoryName",signPLDoc.ActiveDirectoryName),
+                new SqlParameter("CompanyId",signPLDoc.CompanyId)
+               };
+            return DoMutation("EL.SignPLDocument", sqlParams);
+        }
+
+        public int SaveAndSignPLDocument(SavePLDocument savePLDoc,SignPLDocument signPLDoc)
+        {
+            var sqlParams = new SqlParameter[]
+               {
+                new SqlParameter("DocumentId",savePLDoc.DocumentId),
+                new SqlParameter("ProjectId",savePLDoc.ProjectId),
+                new SqlParameter("CompanyId",savePLDoc.CompanyId),
+                new SqlParameter("UserId",savePLDoc.UserId),
+                new SqlParameter("PackingItems",savePLDoc.PackingItems),
+                new SqlParameter("SignRequestType",signPLDoc.SignType.ToString()),
+                new SqlParameter("NextRole",signPLDoc.NextRole),
+                new SqlParameter("MachineName",signPLDoc.MachineName),
+                new SqlParameter("ActiveDirectoryName",signPLDoc.ActiveDirectoryName),
                };
             return DoMutation("EL.SignPLDocument", sqlParams);
         }
@@ -307,14 +343,102 @@ namespace Electrical.Data
         #endregion
 
         #region MIV
-        public DataTable GetMIVItemCodesCombo()
-            => DoQueryReader("EL.GetMIVItemCodesCombo");
+        public DataTable GetMIVItemCodesCombo(int projectId,int? warehouseCompanyId)
+            => DoQueryReader("EL.GetMIVItemCodesCombo", new[] { new SqlParameter("WarehouseCompanyId", warehouseCompanyId),new SqlParameter("ProjectId",projectId) });
+        public dynamic GetMIVDocuments(int? documentId,int userId,int contractId,int projectId)
+        {
+            try
+            {
+                dynamic data = null;
+                var sqlParams = new SqlParameter[]
+                {
+                    new SqlParameter("Id",documentId),
+                    new SqlParameter("UserId",userId),
+                    new SqlParameter("ContractId",contractId),
+                    new SqlParameter("ProjectId",projectId),
+                };
+                data = DoQueryReader("EL.GetMIVDocuments", sqlParams);
+                if (data.Rows.Count > 0 && documentId != null) return data.Rows[0] as DataRow;
+                return data;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
+        public int DeleteMIVDocument(int projectId, int userId, int documentId)
+        {
+            var sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("ProjectId",projectId),
+                new SqlParameter("UserId",userId),
+                new SqlParameter("DocumentId",documentId)
+            };
+            return DoMutation("EL.DeleteMIVDocument", sqlParams);
+        }
+        public int SaveMIVDocument(SaveMIV saveMIV)
+        {
+            try
+            {
+                var sqlParams = new SqlParameter[]
+                {
+                    new SqlParameter("DocumentId",saveMIV.DocumentId),
+                    new SqlParameter("ProjectId",saveMIV.ProjectId),
+                    new SqlParameter("UserId",saveMIV.UserId),
+                    new SqlParameter("ContractId",saveMIV.ContractId),
+                    new SqlParameter("CompanyId",saveMIV.CompanyId),
+                    new SqlParameter("ContractorId",saveMIV.ContractorId),
+                    new SqlParameter("Remark",saveMIV.Remark),
+                    new SqlParameter("MIVItems",saveMIV.MIVItems)
+                };
+                return DoMutation("EL.SaveMIVDocument", sqlParams);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public int SignMIVDocument(SignMIV signMIV)
+        {
+            var sqlParams = new SqlParameter[]
+               {
+                new SqlParameter("SignRequestType",signMIV.SignType.ToString()),
+                new SqlParameter("ProjectId",signMIV.ProjectId),
+                new SqlParameter("UserId",signMIV.UserId),
+                new SqlParameter("ObjectId",signMIV.ObjectId),
+                new SqlParameter("NextRole",signMIV.NextRole),
+                new SqlParameter("MachineName",signMIV.MachineName),
+                new SqlParameter("ActiveDirectoryName",signMIV.ActiveDirectoryName),
+                new SqlParameter("CompanyId",signMIV.CompanyId)
+               };
+            return DoMutation("EL.SignMIVDocument", sqlParams);
+        }
+
+        public int SaveAndSignMIVDocument(SaveMIV saveMIV, SignMIV signMIV)
+        {
+            var sqlParams = new SqlParameter[]
+               {
+                new SqlParameter("DocumentId",saveMIV.DocumentId),
+                new SqlParameter("ProjectId",saveMIV.ProjectId),
+                new SqlParameter("UserId",saveMIV.UserId),
+                new SqlParameter("ContractId",saveMIV.ContractId),
+                new SqlParameter("CompanyId",saveMIV.CompanyId),
+                new SqlParameter("ContractorId",saveMIV.ContractorId),
+                new SqlParameter("Remark",saveMIV.Remark),
+                new SqlParameter("MIVItems", saveMIV.MIVItems),
+                new SqlParameter("SignRequestType",signMIV.SignType.ToString()),
+                new SqlParameter("NextRole",signMIV.NextRole),
+                new SqlParameter("MachineName",signMIV.MachineName),
+                new SqlParameter("ActiveDirectoryName",signMIV.ActiveDirectoryName)
+               };
+            return DoMutation("EL.SaveAndSignMIVDocument", sqlParams);
+        }
         #endregion
 
-
         #region PackingList
-        public dynamic GetPackingDocuments(int projectId, int companyId, int? id = null)
+        public dynamic GetPackingDocuments(int projectId,int userId,int companyId, int? id = null)
         {
             try
             {
@@ -322,12 +446,111 @@ namespace Electrical.Data
                 var sqlParams = new SqlParameter[]
                 {
                     new SqlParameter("ProjectId",projectId),
+                    new SqlParameter("UserId",userId),
                     new SqlParameter("CompanyId",companyId),
                     new SqlParameter("Id",id)
                 };
                 data = DoQueryReader("EL.GetPackingDocuments", sqlParams);
                 if (data.Rows.Count > 0 && id != null) return data.Rows[0] as DataRow;
                 return data;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public DataTable GetMIVItemsByDocumentId(int? documentId)
+        {
+            try
+            {
+                var sqlParams = new SqlParameter[]
+                {
+                    new SqlParameter("DocumentId",documentId)
+                };
+                return DoQueryReader("EL.GetMIVItemsByDocumentId", sqlParams);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
+
+        #region MTO
+        public dynamic GetMtos(int? mtoId = null)
+        {
+            try
+            {
+                dynamic data = null;
+                var sqlParams = new SqlParameter[]
+                {
+                    new SqlParameter("Id",mtoId),
+                };
+                data = DoQueryReader("EL.GetMTOS", sqlParams);
+                if (data.Rows.Count > 0 && mtoId != null) return data.Rows[0] as DataRow;
+                return data;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+
+        public int SaveMTO(int? id,int projectId, int userId,int unitId,int itemCodeId, decimal mtoQty)
+        {
+            try
+            {
+                var sqlParams = new SqlParameter[]
+                {
+                    new SqlParameter("Id",id),
+                    new SqlParameter("ProjectId",projectId),
+                    new SqlParameter("UserId",userId),
+                    new SqlParameter("UnitId",unitId),
+                    new SqlParameter("ItemCodeId",itemCodeId),
+                    new SqlParameter("MtoQty",mtoQty)
+                };
+                return DoMutation("EL.SaveMTO", sqlParams);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public int DeleteMTO(int projectId, int userId,int mtoId)
+        {
+            try
+            {
+                var sqlParams = new SqlParameter[]
+                {
+                    new SqlParameter("Id",mtoId),
+                    new SqlParameter("ProjectId",projectId),
+                    new SqlParameter("UserId",userId),
+                };
+                return DoMutation("EL.DeleteMTO", sqlParams);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        #endregion
+
+        #region Monitoring
+        public DataTable GetMonitoring(int projectId, int userId, int companyId)
+        {
+            try
+            {
+                var sqlParams = new SqlParameter[]
+                {                    
+                    new SqlParameter("ProjectId",projectId),
+                    new SqlParameter("UserId",userId),
+                    new SqlParameter("CompanyId",companyId)
+                };
+                return DoQueryReader("EL.GetMonitoring", sqlParams);
             }
             catch (Exception)
             {

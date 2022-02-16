@@ -38,7 +38,7 @@ namespace CMISUIHelper.UserControls
         public ViewTab()
         {
             InitializeComponent();
-            FormMode = FormState.View;
+            FormMode = FormState.View;             
         }
 
         public void OnRibbonPageAdded(RibbonPageEventArgs e)

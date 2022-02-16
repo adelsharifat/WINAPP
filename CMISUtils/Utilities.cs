@@ -113,6 +113,11 @@ namespace CMISUtils
             return dr.ToString(columnName);
         }
 
+        public static string Remark(this DataRow dr, string columnName = "Remark")
+        {
+            return dr.ToString(columnName);
+        }
+
         public static string ObjectName(this DataRow dr, string columnName = "ObjectName")
         {
             return dr.ToString(columnName);
@@ -719,7 +724,7 @@ namespace CMISUtils
 
         public static void SetConditionRowFormat(this GridView gv, string columnName, string expression, DevExpress.Utils.AppearanceDefault appearance, bool enabled = true)
         {
-            if (enabled)
+            if (enabled && gv.RowCount > 0 )
             {
                 var column = gv.Columns.FirstOrDefault(c => c.Name == columnName || c.FieldName == columnName || c.Caption == columnName);
                 gv.FormatRules.AddExpressionRule(column, appearance, expression).ApplyToRow = true;

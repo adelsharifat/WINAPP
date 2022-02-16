@@ -122,13 +122,13 @@ namespace CMISControls.Grid
             }
         }
 
-        public GridControl SetDataSource(Func<object> actionData)
+        public void SetDataSource(Func<object> actionData)
         {
             ShowLoading = true;
             AnimationBW.RunWorkerAsync();
             object[] args = new object[] { actionData };
             DataThread.RunWorkerAsync(args);
-            return this;
+            
         }
 
 

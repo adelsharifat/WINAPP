@@ -20,6 +20,9 @@ using CMISUIHelper.Infrastructure.Contracts.CustomException;
 using DevExpress.XtraGrid.Views.Grid;
 using DMS.Enums;
 using DevExpress.XtraBars;
+using Electrical.Model;
+using CMISUtils.Extentions;
+using CMISSecurity;
 
 namespace Electrical.View
 {
@@ -29,7 +32,7 @@ namespace Electrical.View
         private int? documentId = null;
         private DataRow packingDataRow = null;
 
-        BarItem btnNewItem, btnSaveItem, btnPostItem;
+        BarItem btnNew,btnSave,btnSaveAndPost,btnPost;
 
         //Constructor fo view and editing packing mode
         public Packing()
@@ -79,15 +82,65 @@ namespace Electrical.View
 
         private void Packing_RibbonPageAdded(object sender, CMISUIHelper.Infrastructure.Contracts.CustomEventArgs.RibbonPageEventArgs e)
         {
-            btnNewItem = e.RibbonPage.AddNewFormActionTool(this);
-            btnSaveItem = e.RibbonPage.AddSaveFormActionTool(this);
+            btnNew = e.RibbonPage.AddNewFormActionTool(this);
+            btnSave = e.RibbonPage.AddSaveFormActionTool(this);
+            btnSaveAndPost = e.RibbonPage.AddItem(this,"SavePost","Form",ElectricalResource.export_32x32);
+            btnPost = e.RibbonPage.AddSignPostActionTool(this);
 
-            btnPostItem = e.RibbonPage.AddSignPostActionTool(this);
+            btnNew.ItemClick += BtnNewItem_ItemClick;
+            btnSave.ItemClick += BtnSaveItem_ItemClick;
+            btnSaveAndPost.ItemClick += BtnSaveAndPost_ItemClick;
+            btnPost.ItemClick += BtnPostItem_ItemClick;          
+        }
 
-            btnNewItem.ItemClick += BtnNewItem_ItemClick;
-            btnSaveItem.ItemClick += BtnSaveItem_ItemClick;
+        //Save and sign pl document
+        private void BtnSaveAndPost_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            try
+            {
+                // Check form mode
+                if (FormMode == FormState.View) return;
 
-            btnPostItem.ItemClick += BtnPostItem_ItemClick;          
+                //Check Grid in empty
+                if (grvPaking.RowCount <= 0) return;
+
+                if (Convert.ToBoolean(packingDataRow["Posted"])) throw new CMISException("Dear user,The packing document already posted!");
+                if (Msg.Confirm("Are you sure to post document?") == DialogResult.No) return;
+
+                var savePLDocument = new SavePLDocument
+                {
+                    DocumentId = this.documentId,
+                    ProjectId = LoginInfo.ProjectId,
+                    UserId = LoginInfo.Id,
+                    CompanyId = cmbCompany.EditValue.ToInt(),
+                    UnitId = cboUnit.EditValue.ToInt(),
+                    PackingItems = tvpPackingItems.ToDataTable()
+
+                };
+
+                var signPLDocument = new SignPLDocument
+                {
+                    ProjectId = LoginInfo.ProjectId,
+                    UserId = LoginInfo.Id,
+                    ObjectId = (int)this.documentId,
+                    NextRole = String.Empty,
+                    MachineName = SecurityHelper.MachineName,
+                    ActiveDirectoryName = SecurityHelper.ActiveDirecotryName,
+                    CompanyId = cmbCompany.EditValue.ToInt()
+                };
+
+                var result = DAL.Do.SaveAndSignPLDocument(savePLDocument,signPLDocument);
+
+                if (result <= 0) throw new CMISException("Operation save and sign \"PL\" document faild!");
+
+                Msg.Show("Operationm sign \"PL\" document succeded!");
+
+                ResetForm();
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
         }
 
         // Sign "PL" document action method
@@ -95,23 +148,27 @@ namespace Electrical.View
         {
             try
             {
-                //check user only document is open or in edit mode documentId is nt null
-                if (this.documentId == null) throw new CMISException("Document not found!");
                 if (Convert.ToBoolean(packingDataRow["Posted"])) throw new CMISException("Dear user,The packing document already posted!");
-                //if (Msg.Confirm("Are you sure to save packing list?") == DialogResult.No) return;
-                var signType = SignType.Post.ToString();
-                var projectId = LoginInfo.ProjectId;
-                var userId = LoginInfo.Id;
-                var objectId = this.documentId;
-                var nextRole = String.Empty;
-                var machineName = CMISUtils.SecurityHelper.MachineName;
-                var activeDirectoryName = CMISUtils.SecurityHelper.ActiveDirecotryName;
-                var companyId = Convert.ToInt32(cmbCompany.EditValue);
-                var result = DAL.Do.SignPLDocument(signType, projectId, userId, (int)objectId, nextRole, machineName, activeDirectoryName, companyId);
+                if (Msg.Confirm("Are you sure to post document?") == DialogResult.No) return;
+
+                var signPLDocument = new SignPLDocument
+                {
+                    ProjectId = LoginInfo.ProjectId,
+                    UserId = LoginInfo.Id,
+                    ObjectId = (int)this.documentId,
+                    NextRole = String.Empty,
+                    MachineName = SecurityHelper.MachineName,
+                    ActiveDirectoryName = SecurityHelper.ActiveDirecotryName,
+                    CompanyId = cmbCompany.EditValue.ToInt()
+                };
+
+                var result = DAL.Do.SignPLDocument(signPLDocument);
 
                 if (result <= 0) throw new CMISException("Operation sign \"PL\" faild!");
 
                 Msg.Show("Operationm sign \"PL\" succeded!");
+
+                ResetForm();
             }
             catch (Exception ex)
             {
@@ -140,6 +197,8 @@ namespace Electrical.View
             {
                 FormMode = FormState.Save;
                 ResetForm();
+                GoFormToCurrentState();
+                
             }
             catch (Exception ex)
             {
@@ -156,7 +215,7 @@ namespace Electrical.View
                 if (FormMode == FormState.View) return;
 
                 //Check Grid in empty
-                if (grvPaking.RowCount <= 0) throw new CMISException("The grid is empty!");
+                if (grvPaking.RowCount <= 0) return;
 
                 //Prompt for save or updating data
                 var formOperationMode = this.documentId == null ? "save" : "update";
@@ -164,15 +223,19 @@ namespace Electrical.View
 
                 //Mutation packing list
                 // get form data for mutation db
-                var projectId = LoginInfo.ProjectId;
-                var companyId = Convert.ToInt32(cmbCompany.EditValue);
-                var userId = LoginInfo.Id;
-                var unitId = Convert.ToInt32(cboUnit.EditValue);
-                var reportNo = txtReport.Text.Trim();
-                var packingItems = tvpPackingItems.ToDataTable<string, Model.TvpPackingItem>();
+                var savePLDocument = new SavePLDocument
+                {
+                    DocumentId = this.documentId,
+                    ProjectId = LoginInfo.ProjectId,
+                    UserId = LoginInfo.Id,
+                    CompanyId = cmbCompany.EditValue.ToInt(),
+                    UnitId = cboUnit.EditValue.ToInt(),
+                    PackingItems = tvpPackingItems.ToDataTable()
+
+                };
 
                 //Save data
-                var result = DAL.Do.SavePacking(projectId, companyId, documentId, userId, reportNo, packingItems);
+                var result = DAL.Do.SavePLDocument(savePLDocument);
                 if (result <= 0) throw new CMISException($"Operation {formOperationMode} faild!");
                 ResetForm();
                 Msg.Show($"Operation {formOperationMode} succeded!");
@@ -216,7 +279,7 @@ namespace Electrical.View
         {
             try
             {
-                var data = DAL.Do.GetCategoriesCombo(false);
+                var data = DAL.Do.GetCategoriesCombo();
                 cboCategory.Fill(data, "Category", "Id").SelectItem(0).HideColumns("ParentId");
             }
             catch (Exception)
@@ -330,106 +393,116 @@ namespace Electrical.View
         #region InitialFormState
         private void GoFormToCurrentState()
         {
-            
-            if (FormMode == FormState.View)
+            try
             {
-                var posted = Convert.ToBoolean(this.packingDataRow["Posted"]);
-                lblFormState.Text = FormMode.ToString();
-                grpPL.Enabled = false;
-                grpPLHeader.Enabled = false;
-                tsGrcPacking.Enabled = false;
-                btnSaveItem.Enabled = false;
-                btnSaveItem.Visibility = BarItemVisibility.Never;
-                btnPostItem.Enabled = btnPostItem.Group().Visible  = !posted;
+                //GetPermissions
+                var canViewPLDocument = ACL.ViewPLDocument.AllowAcl(this);
+                var canSavePLDocument = ACL.SavePLDocument.AllowAcl(this);
+                var canEditPLDocument = ACL.EditPLDocument.AllowAcl(this);
+                var canPostPLDocument = ACL.PostPLDocument.AllowAcl(this);
 
-                //Load data
-                if (this.documentId != null && this.packingDataRow != null)
+                if (FormMode == FormState.View)
                 {
-                    var projectId = Convert.ToInt32(this.packingDataRow["ProjectId"]);
-                    var companyId = Convert.ToInt32(this.packingDataRow["CompanyId"]);
-                    var packingDocument = DAL.Do.GetPackingDocuments(projectId, companyId, documentId) as DataRow;
+                    var posted = packingDataRow.Posted();
+                    var deleted = packingDataRow.IsDelete();
+                    grpPL.Enabled = false;
+                    grpPLHeader.Enabled = false;
+                    tsGrcPacking.Enabled = false;
+                    btnSave.Enabled = btnSaveAndPost.Enabled = false;
+                    btnSave.Visibility = btnSaveAndPost.Visibility = BarItemVisibility.Never;
+                    btnPost.Enabled = btnPost.Group().Visible = canPostPLDocument && !deleted && !posted;
 
-                    if (packingDocument == null) throw new CMISException("Document not found");
-                    txtReport.Text = packingDocument["ReportNo"].ToString();
-                    cmbCompany.EditValue = Convert.ToInt32(packingDocument["CompanyId"]);
-
-                    var packingItems = DAL.Do.GetPackingItemsByDocumentId(this.documentId);
-                    if (packingItems.Rows.Count <= 0) throw new CMISException("Empty packing items");
-
-
-                    foreach (var item in packingItems.ToList<Model.TvpPackingItem>())
+                    //Load data
+                    if (this.documentId != null && this.packingDataRow != null)
                     {
-                        tvpPackingItems.Add(item.ItemCode, item);
+                        var projectId = Convert.ToInt32(this.packingDataRow["ProjectId"]);
+                        var companyId = Convert.ToInt32(this.packingDataRow["CompanyId"]);
+                        var packingDocument = DAL.Do.GetPackingDocuments(projectId, LoginInfo.Id, companyId, documentId) as DataRow;
+
+                        if (packingDocument == null) throw new CMISException("Document not found");
+                        txtReport.Text = packingDocument["ReportNo"].ToString();
+                        cmbCompany.EditValue = Convert.ToInt32(packingDocument["CompanyId"]);
+
+                        var packingItems = DAL.Do.GetPackingItemsByDocumentId(this.documentId);
+                        if (packingItems.Rows.Count > 0)
+                        {
+                            foreach (var item in packingItems.ToList<Model.TvpPackingItem>())
+                            {
+                                var key = item.ItemCodeId.ToString() + "_" + item.UnitId.ToString();
+                                tvpPackingItems.Add(key, item);
+                            }
+
+                            grcPacking.SetDataSource(() =>
+                            {
+                                return packingItems;
+                            });
+                        }
                     }
-
-                    grcPacking.SetDataSource(() =>
-                    {
-                        return packingItems;
-                    });
                 }
 
-
-            }
-
-            if (FormMode == FormState.Edit)
-            {
-                cmbCompany.Enabled = true;
-                lblFormState.Text = FormMode.ToString();
-                grpPL.Enabled = true;
-                grpPLHeader.Enabled = true;
-                tsGrcPacking.Enabled = true;
-
-                btnSaveItem.Enabled = true;
-                btnPostItem.Enabled = true;
-
-                //Load data
-                if (this.documentId != null && this.packingDataRow != null)
+                if (FormMode == FormState.Edit)
                 {
-                    var projectId = Convert.ToInt32(this.packingDataRow["ProjectId"]);
-                    var companyId = Convert.ToInt32(this.packingDataRow["CompanyId"]);
-                    var packingDocument = DAL.Do.GetPackingDocuments(projectId, companyId, documentId) as DataRow;
 
-                    if (packingDocument == null) throw new CMISException("Document not found");
-                    txtReport.Text = packingDocument["ReportNo"].ToString();
-                    cmbCompany.EditValue = Convert.ToInt32(packingDocument["CompanyId"]);
+                    cmbCompany.Enabled = canEditPLDocument;
+                    grpPL.Enabled = canEditPLDocument;
+                    grpPLHeader.Enabled = canEditPLDocument;
+                    tsGrcPacking.Enabled = true;
 
-                    var packingItems = DAL.Do.GetPackingItemsByDocumentId(this.documentId);
-                    if (packingItems.Rows.Count <= 0) throw new CMISException("Empty packing items");
+                    btnSave.Enabled = canSavePLDocument;
+                    btnPost.Enabled = canPostPLDocument;
+                    btnSaveAndPost.Enabled = canSavePLDocument && canPostPLDocument;
 
-
-                    foreach (var item in packingItems.ToList<Model.TvpPackingItem>())
+                    //Load data
+                    if (this.documentId != null && this.packingDataRow != null)
                     {
-                        tvpPackingItems.Add(item.ItemCode, item);
+                        var projectId = Convert.ToInt32(this.packingDataRow["ProjectId"]);
+                        var companyId = Convert.ToInt32(this.packingDataRow["CompanyId"]);
+                        var packingDocument = DAL.Do.GetPackingDocuments(projectId, LoginInfo.Id, companyId, documentId) as DataRow;
+
+                        if (packingDocument == null) throw new CMISException("Document not found");
+                        txtReport.Text = packingDocument["ReportNo"].ToString();
+                        cmbCompany.EditValue = Convert.ToInt32(packingDocument["CompanyId"]);
+
+                        var packingItems = DAL.Do.GetPackingItemsByDocumentId(this.documentId);
+                        if (packingItems.Rows.Count > 0)
+                        {                            
+                            foreach (var item in packingItems.ToList<Model.TvpPackingItem>())
+                            {
+                                var key = item.ItemCodeId.ToString() + "_" + item.UnitId.ToString();
+                                tvpPackingItems.Add(key, item);
+                            }
+
+                            grcPacking.SetDataSource(() =>
+                            {
+                                return packingItems;
+                            });
+                        }                        
                     }
+                }
 
-                    grcPacking.SetDataSource(() =>
-                    {
-                        return packingItems;
-                    });
+                if (FormMode == FormState.Save)
+                {
+                    grpPL.Enabled = canSavePLDocument;
+                    grpPLHeader.Enabled = canSavePLDocument;
+                    txtReport.Text = BEL.ReportNumber.PLReportNumber(cmbCompany.EditValue.ToInt());
+                    btnNew.Enabled = btnSave.Enabled = btnSave.Group().Visible = canSavePLDocument;
+                    btnNew.Visibility = btnSave.Visibility = btnSaveAndPost.Visibility = canSavePLDocument ? BarItemVisibility.Always : BarItemVisibility.Never;
+                    btnSaveAndPost.Enabled = canSavePLDocument && canPostPLDocument;
+
+                    btnPost.Enabled = btnPost.Group().Visible = false;
+
+                    tsGrcPacking.Enabled = canSavePLDocument;
+
+                    grcPacking.DataSource = null;
+                    tvpPackingItems.Clear();
                 }
             }
-
-            if (FormMode == FormState.Save)
+            catch (Exception)
             {
-                lblFormState.Text = FormMode.ToString();
-                grpPL.Enabled = true;
-                grpPLHeader.Enabled = true;
-
-                btnSaveItem.Enabled = true;
-                btnPostItem.Enabled = btnPostItem.Group().Visible = false;
-
-                tsGrcPacking.Enabled = true;
-
-                grcPacking.DataSource = null;
-                tvpPackingItems.Clear();
+                throw;
             }
         }
         #endregion
-
-
-
-
-
 
         private void btnAddItem_Click(object sender, EventArgs e)
         {
@@ -441,12 +514,13 @@ namespace Electrical.View
                 // Create Model for making tvp
                 Model.TvpPackingItem tvpPackingItem;
 
-                var itemKey = cboItemCode.GetColumnValue("ItemCode").ToString();
+                var key = cboItemCode.EditValue.ToString()+"_"+cboUnit.EditValue.ToString();
+                //var itemKey = cboItemCode.GetColumnValue("ItemCode").ToString();
 
                 // Data will be update
-                if (tvpPackingItems.ContainsKey(itemKey))
+                if (tvpPackingItems.ContainsKey(key))
                 {
-                    var item = tvpPackingItems[itemKey];                    
+                    var item = tvpPackingItems[key];                    
                     item.ItemCodeId = Convert.ToInt32(cboItemCode.EditValue);
                     item.ItemCode = cboItemCode.Text;
                     item.UnitId = Convert.ToInt32(cboUnit.EditValue);
@@ -475,7 +549,7 @@ namespace Electrical.View
                         PLQty = Convert.ToDecimal(txtPlQty.Text.Trim()),
                         QtyUnitId = Convert.ToInt32(cboQtyUnit.EditValue)
                     };
-                    tvpPackingItems.Add(itemKey, tvpPackingItem);
+                    tvpPackingItems.Add(key, tvpPackingItem);
                 }
 
                 FillPackingListGrid();
@@ -542,6 +616,8 @@ namespace Electrical.View
         {
             try
             {
+                if (FormMode == FormState.View) return;
+                if (!ACL.EditPLDocument.AllowAcl(this)) throw new CMISException("Dear user, you don't have access to edit PL document!");
                 if (grvPaking.GetFocusedDataRow() is DataRow dr)
                 {
                     if (Msg.Confirm("Are you sure to edit selected item") == DialogResult.No) return;

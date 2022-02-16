@@ -25,10 +25,13 @@ namespace Electrical
         public const string Vendor = nameof(Vendor);
 
         [Permit("Allow access to Save itemcode")]
-        public const string ButtonSaveItemCode = nameof(ButtonSaveItemCode);
+        public const string SaveItemCode = nameof(SaveItemCode);
+
+        [Permit("Allow access to Edit itemcode")]
+        public const string EditItemCode = nameof(EditItemCode);
 
         [Permit("Allow access to delete itemcode")]
-        public const string ButtonDeleteItemCode = nameof(ButtonDeleteItemCode);
+        public const string DeleteItemCode = nameof(DeleteItemCode);
 
         [Permit("Allow access to show itemcode list")]
         public const string ShowItemCodeList = nameof(ShowItemCodeList);
@@ -39,46 +42,60 @@ namespace Electrical
         public const string ShowCategoriesList = nameof(ShowCategoriesList);
 
         [Permit("Allow access to Save caegory")]
-        public const string ButtonSaveCategory = nameof(ButtonSaveCategory);
+        public const string SaveCategory = nameof(SaveCategory);
+
+        [Permit("Allow access to Epdit caegory")]
+        public const string EditCategory = nameof(EditCategory);
 
         [Permit("Allow access to delete category")]
-        public const string ButtonDeleteCategory = nameof(ButtonDeleteCategory);
+        public const string DeleteCategory = nameof(DeleteCategory);
 
 
 
 
         #region Packing
         [Permit("Allow access to View Packing")]
-        public const string ButtonViewPLDocument = nameof(ButtonViewPLDocument);
+        public const string ViewPLDocument = nameof(ViewPLDocument);
 
         [Permit("Allow access to Edit Packing")]
-        public const string ButtonEditPLDocument = nameof(ButtonEditPLDocument);
+        public const string EditPLDocument = nameof(EditPLDocument);
 
         [Permit("Allow access to Delete Packing")]
-        public const string ButtonDeletePLDocument = nameof(ButtonDeletePLDocument);
+        public const string DeletePLDocument = nameof(DeletePLDocument);
 
         [Permit("Allow access to Save Packing")]
-        public const string ButtonSavePLDocument = nameof(ButtonSavePLDocument);
+        public const string SavePLDocument = nameof(SavePLDocument);
 
         [Permit("Allow access to Post PL Document")]
-        public const string ButtonPostPLDocument = nameof(ButtonPostPLDocument);
+        public const string PostPLDocument = nameof(PostPLDocument);
+
+        [Permit("Allow access to can show all pl document document for ex deleted or norlmal document")]
+        public const string ShowAllPLDocument = nameof(ShowAllPLDocument);
         #endregion
 
         #region MIV
         [Permit("Allow access to View MIV")]
-        public const string ButtonViewMIVDocument = nameof(ButtonViewMIVDocument);
+        public const string ViewMIVDocument = nameof(ViewMIVDocument);
 
         [Permit("Allow access to Save MIV")]
-        public const string ButtonSaveMIVDocument = nameof(ButtonSaveMIVDocument);
+        public const string SaveMIVDocument = nameof(SaveMIVDocument);
 
         [Permit("Allow access to Edit MIV Document")]
-        public const string ButtonEditMIVDocument = nameof(ButtonEditMIVDocument);
+        public const string EditMIVDocument = nameof(EditMIVDocument);
 
         [Permit("Allow access to Delete MIV Document")]
-        public const string ButtonDeleteMIVDocument = nameof(ButtonDeleteMIVDocument);
+        public const string DeleteMIVDocument = nameof(DeleteMIVDocument);
 
         [Permit("Allow access to Post MIV Document")]
-        public const string ButtonPostMIVDocument = nameof(ButtonPostMIVDocument);
+        public const string PostMIVDocument = nameof(PostMIVDocument);
+        #endregion
+
+
+        #region MTO
+        [Permit("Allow access to save MTO")]
+        public const string SaveMTO = nameof(SaveMTO);
+        [Permit("Allow access to save MTO")]
+        public const string DeleteMTO = nameof(DeleteMTO);
         #endregion
 
         #region Signs

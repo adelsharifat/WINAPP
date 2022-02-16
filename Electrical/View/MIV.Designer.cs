@@ -31,7 +31,7 @@
             this.grcMIVItems = new CMISControls.Grid.CMGridControl();
             this.grvMIVItems = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.label7 = new System.Windows.Forms.Label();
-            this.cboCompanies = new DevExpress.XtraEditors.LookUpEdit();
+            this.cboWhareHouseCompany = new DevExpress.XtraEditors.LookUpEdit();
             this.txtReport = new DevExpress.XtraEditors.TextEdit();
             this.lblreportNo = new System.Windows.Forms.Label();
             this.txtQty = new DevExpress.XtraEditors.TextEdit();
@@ -48,11 +48,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.tspGrid = new System.Windows.Forms.ToolStrip();
+            this.btnDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbCompany.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grcMIVItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvMIVItems)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboCompanies.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboWhareHouseCompany.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReport.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQty.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboItemCode.Properties)).BeginInit();
@@ -61,6 +63,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtItemRemark.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.separatorControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.separatorControl1)).BeginInit();
+            this.tspGrid.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlHeaderBottomSeperator
@@ -75,6 +78,8 @@
             // 
             this.cmbCompany.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCompany.Properties.Appearance.Options.UseFont = true;
+            this.cmbCompany.EditValueChanged += new System.EventHandler(this.cmbCompany_EditValueChanged);
+            this.cmbCompany.EditValueChanging += new DevExpress.XtraEditors.Controls.ChangingEventHandler(this.cmbCompany_EditValueChanging);
             // 
             // label1
             // 
@@ -89,10 +94,10 @@
             this.grcMIVItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grcMIVItems.LoadingColor = System.Drawing.Color.Black;
             this.grcMIVItems.LoadingStyle = CMISControls.Grid.LoadingStyle.Dashed;
-            this.grcMIVItems.Location = new System.Drawing.Point(0, 256);
+            this.grcMIVItems.Location = new System.Drawing.Point(0, 281);
             this.grcMIVItems.MainView = this.grvMIVItems;
             this.grcMIVItems.Name = "grcMIVItems";
-            this.grcMIVItems.Size = new System.Drawing.Size(1297, 553);
+            this.grcMIVItems.Size = new System.Drawing.Size(1297, 528);
             this.grcMIVItems.TabIndex = 2;
             this.grcMIVItems.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grvMIVItems});
@@ -103,6 +108,7 @@
             this.grvMIVItems.Name = "grvMIVItems";
             this.grvMIVItems.OptionsView.ShowAutoFilterRow = true;
             this.grvMIVItems.OptionsView.ShowFooter = true;
+            this.grvMIVItems.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.grvMIVItems_FocusedRowChanged);
             this.grvMIVItems.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.grvMIVItems_CellValueChanged);
             this.grvMIVItems.DoubleClick += new System.EventHandler(this.grvMIVItems_DoubleClick);
             this.grvMIVItems.ValidatingEditor += new DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventHandler(this.grvMIVItems_ValidatingEditor);
@@ -118,33 +124,34 @@
             this.label7.TabIndex = 25;
             this.label7.Text = "Company";
             // 
-            // cboCompanies
+            // cboWhareHouseCompany
             // 
-            this.cboCompanies.Location = new System.Drawing.Point(110, 95);
-            this.cboCompanies.Name = "cboCompanies";
-            this.cboCompanies.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.cboCompanies.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboCompanies.Properties.Appearance.Options.UseFont = true;
-            this.cboCompanies.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.cboWhareHouseCompany.Location = new System.Drawing.Point(110, 95);
+            this.cboWhareHouseCompany.Name = "cboWhareHouseCompany";
+            this.cboWhareHouseCompany.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.cboWhareHouseCompany.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboWhareHouseCompany.Properties.Appearance.Options.UseFont = true;
+            this.cboWhareHouseCompany.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboCompanies.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
-            this.cboCompanies.Size = new System.Drawing.Size(281, 24);
-            this.cboCompanies.TabIndex = 24;
-            this.cboCompanies.EditValueChanged += new System.EventHandler(this.cboVendor_EditValueChanged);
+            this.cboWhareHouseCompany.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
+            this.cboWhareHouseCompany.Size = new System.Drawing.Size(281, 24);
+            this.cboWhareHouseCompany.TabIndex = 24;
+            this.cboWhareHouseCompany.EditValueChanged += new System.EventHandler(this.cboWhareHouseCompany_EditValueChanged);
+            this.cboWhareHouseCompany.EditValueChanging += new DevExpress.XtraEditors.Controls.ChangingEventHandler(this.cboWhareHouseCompany_EditValueChanging);
             // 
             // txtReport
             // 
             this.txtReport.Location = new System.Drawing.Point(110, 61);
             this.txtReport.Name = "txtReport";
             this.txtReport.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
-            this.txtReport.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtReport.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtReport.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txtReport.Properties.Appearance.Options.UseBackColor = true;
             this.txtReport.Properties.Appearance.Options.UseFont = true;
             this.txtReport.Properties.Appearance.Options.UseForeColor = true;
+            this.txtReport.Properties.ReadOnly = true;
             this.txtReport.Size = new System.Drawing.Size(281, 24);
             this.txtReport.TabIndex = 22;
-            this.txtReport.EditValueChanged += new System.EventHandler(this.txtReport_EditValueChanged);
             // 
             // lblreportNo
             // 
@@ -171,7 +178,7 @@
             this.txtQty.Properties.Mask.EditMask = "n2";
             this.txtQty.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtQty.Properties.Mask.ShowPlaceHolders = false;
-            this.txtQty.Size = new System.Drawing.Size(153, 26);
+            this.txtQty.Size = new System.Drawing.Size(134, 26);
             this.txtQty.TabIndex = 31;
             // 
             // btnAddItem
@@ -181,9 +188,9 @@
             this.btnAddItem.ImageOptions.Image = global::Electrical.ElectricalResource.Plus;
             this.btnAddItem.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnAddItem.ImageOptions.ImageToTextIndent = 8;
-            this.btnAddItem.Location = new System.Drawing.Point(692, 146);
+            this.btnAddItem.Location = new System.Drawing.Point(673, 147);
             this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(145, 26);
+            this.btnAddItem.Size = new System.Drawing.Size(164, 26);
             this.btnAddItem.TabIndex = 30;
             this.btnAddItem.Text = "AddItem";
             this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
@@ -248,7 +255,7 @@
             this.pnlFields.Controls.Add(this.label2);
             this.pnlFields.Controls.Add(this.label7);
             this.pnlFields.Controls.Add(this.lblreportNo);
-            this.pnlFields.Controls.Add(this.cboCompanies);
+            this.pnlFields.Controls.Add(this.cboWhareHouseCompany);
             this.pnlFields.Controls.Add(this.lblItemRemark);
             this.pnlFields.Controls.Add(this.txtDocuemntRemark);
             this.pnlFields.Controls.Add(this.cboItemCode);
@@ -328,11 +335,31 @@
             this.label2.TabIndex = 30;
             this.label2.Text = "QTY";
             // 
+            // tspGrid
+            // 
+            this.tspGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnDeleteItem});
+            this.tspGrid.Location = new System.Drawing.Point(0, 256);
+            this.tspGrid.Name = "tspGrid";
+            this.tspGrid.Size = new System.Drawing.Size(1297, 25);
+            this.tspGrid.TabIndex = 28;
+            this.tspGrid.Text = "toolStrip1";
+            // 
+            // btnDeleteItem
+            // 
+            this.btnDeleteItem.Image = global::Electrical.ElectricalResource.trash_32x32;
+            this.btnDeleteItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDeleteItem.Name = "btnDeleteItem";
+            this.btnDeleteItem.Size = new System.Drawing.Size(87, 22);
+            this.btnDeleteItem.Text = "Delete Item";
+            this.btnDeleteItem.Click += new System.EventHandler(this.btnDeleteItem_Click);
+            // 
             // MIV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.grcMIVItems);
+            this.Controls.Add(this.tspGrid);
             this.Controls.Add(this.pnlFields);
             this.Name = "MIV";
             this.Size = new System.Drawing.Size(1297, 809);
@@ -342,12 +369,13 @@
             this.ViewRefresh += new System.EventHandler(this.MIV_ViewRefresh);
             this.Controls.SetChildIndex(this.pnlHeader, 0);
             this.Controls.SetChildIndex(this.pnlFields, 0);
+            this.Controls.SetChildIndex(this.tspGrid, 0);
             this.Controls.SetChildIndex(this.grcMIVItems, 0);
             this.pnlHeader.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cmbCompany.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grcMIVItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grvMIVItems)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboCompanies.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cboWhareHouseCompany.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReport.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQty.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboItemCode.Properties)).EndInit();
@@ -357,7 +385,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtItemRemark.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.separatorControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.separatorControl1)).EndInit();
+            this.tspGrid.ResumeLayout(false);
+            this.tspGrid.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -368,7 +399,7 @@
         private DevExpress.XtraEditors.TextEdit txtReport;
         private System.Windows.Forms.Label lblreportNo;
         private System.Windows.Forms.Label label7;
-        private DevExpress.XtraEditors.LookUpEdit cboCompanies;
+        private DevExpress.XtraEditors.LookUpEdit cboWhareHouseCompany;
         private DevExpress.XtraEditors.SimpleButton btnAddItem;
         private DevExpress.XtraEditors.LookUpEdit cboItemCode;
         private DevExpress.XtraEditors.MemoEdit txtDocuemntRemark;
@@ -383,5 +414,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label6;
         private DevExpress.XtraEditors.MemoEdit txtItemRemark;
+        private System.Windows.Forms.ToolStrip tspGrid;
+        private System.Windows.Forms.ToolStripButton btnDeleteItem;
     }
 }
