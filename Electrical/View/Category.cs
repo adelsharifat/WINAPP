@@ -79,7 +79,7 @@ namespace Electrical.View
                 Msg.ConfirmOperation("Are you sure to save category?").Invoke();
 
 
-                var result = DAL.Do.SaveCategory(LoginInfo.ProjectId, LoginInfo.Id, this.id ,Convert.ToInt32(cboCategory.EditValue),txtSubCategory.Text.Trim());
+                var result = DAL.Do.SaveCategory(LoginInfo.ProjectId, LoginInfo.Id, this.id ,Convert.ToInt32(cboTreeCategory.EditValue),txtSubCategory.Text.Trim());
 
                 if (result <= 0) throw new CMISException("Save category faild!");
 
@@ -99,7 +99,7 @@ namespace Electrical.View
             {
                 this.id = dr.Id();
                 txtSubCategory.Text = dr.ToString("Category");
-                cboCategory.EditValue = dr["ParentId"] == DBNull.Value?0:dr.ToInt("ParentId");
+                cboTreeCategory.EditValue = dr["ParentId"] == DBNull.Value?0:dr.ToInt("ParentId");
             }
         }
         private void BtnDeleteItem_ItemClick(object sender, ItemClickEventArgs e)
@@ -133,6 +133,7 @@ namespace Electrical.View
             {
                 FillCategoriesCombo();
                 FillTreeList();
+                ResetForm();
             }
             catch (Exception ex)
             {
@@ -166,6 +167,10 @@ namespace Electrical.View
                 cboTreeCategory.Properties.DisplayMember = "Category";
                 cboTreeCategory.Properties.KeyMember = "Id";
                 cboTreeCategory.Properties.ValueMember = "Id";
+                //cboTreeCategory.Properties.TreeList.PopulateColumns();
+                cboTreeCategory.Properties.TreeList.Columns["Id"].Visible = false;
+                cboTreeCategory.Properties.TreeList.Columns["ParentId"].Visible = false;
+                cboTreeCategory.EditValue = 0;
 
             }
             catch (Exception)
@@ -190,6 +195,7 @@ namespace Electrical.View
         private void ResetForm()
         {
             FormMode = FormState.Save;
+            this.id = null;
             txtSubCategory.Text = String.Empty;
         }
 

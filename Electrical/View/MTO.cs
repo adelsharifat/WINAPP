@@ -54,7 +54,7 @@ namespace Electrical.View
 
         private void MTO_ViewRefresh(object sender, EventArgs e)
         {
-
+            FillMtoGrid();
         }
 
         private void MTO_RibbonPageAdded(object sender, CMISUIHelper.Infrastructure.Contracts.CustomEventArgs.RibbonPageEventArgs e)
@@ -85,6 +85,7 @@ namespace Electrical.View
                 cboUnit.SelectItem(0);
                 cboItemCode.SelectItem(0);
                 txtMTOQty.Text = "0.00";
+                txtDescription.Text = String.Empty;
             }
             catch (Exception ex)
             {
@@ -129,7 +130,7 @@ namespace Electrical.View
                 //Validation Form
                 if (String.IsNullOrEmpty(txtMTOQty.Text) || txtMTOQty.Text.ToDecimal() == 0m) throw new CMISException("MtoQty field invalid!");
                 if (Msg.Confirm("Are you sure to save data?") == DialogResult.No) return;
-                var result = DAL.Do.SaveMTO(mtoId,LoginInfo.ProjectId, LoginInfo.Id,cboUnit.EditValue.ToInt(), cboItemCode.EditValue.ToInt(), txtMTOQty.Text.ToDecimal());
+                var result = DAL.Do.SaveMTO(mtoId,LoginInfo.ProjectId, LoginInfo.Id,cboUnit.EditValue.ToInt(), cboItemCode.EditValue.ToInt(), txtMTOQty.Text.ToDecimal(),txtDescription.Text.Trim());
                 if (result <= 0) throw new CMISException("Operation faild!");
                 Msg.Show("Operation succeded!");
                 ResetForm();
@@ -154,6 +155,7 @@ namespace Electrical.View
                 cboItemCode.EditValue = dbMtoRow["ItemCodeId"].ToInt();
                 cboUnit.EditValue = dbMtoRow["UnitId"].ToInt();
                 txtMTOQty.Text = dbMtoRow["MtoQty"].ToDecimal().ToString();
+                txtDescription.Text = dbMtoRow["Description"].ToString();
             }
         }
 
@@ -196,6 +198,19 @@ namespace Electrical.View
             }
         }
         delegate void SetDataCallback();
+
+        private void grcMTO_DataSourceChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                GridDefaultView.SetConditionRowFormat("IsDelete", "[IsDelete]=1", new DevExpress.Utils.AppearanceDefault { BackColor = System.Drawing.Color.FromArgb(255, 224, 234), Font = new System.Drawing.Font(Font, System.Drawing.FontStyle.Italic) });
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
+        }
+
         private void FillMtoGrid()
         {
             try
@@ -203,8 +218,6 @@ namespace Electrical.View
                 var data = DAL.Do.GetMtos();
 
                 grcMTO.SetDataSource(() => data);
-                GridDefaultView.SetConditionRowFormat("IsDelete", "[IsDelete]=1", new DevExpress.Utils.AppearanceDefault { BackColor = System.Drawing.Color.FromArgb(255, 224, 234), Font = new System.Drawing.Font(Font, System.Drawing.FontStyle.Italic) });
-
             }
             catch (Exception)
             {

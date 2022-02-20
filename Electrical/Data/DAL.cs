@@ -82,7 +82,7 @@ namespace Electrical.Data
             }
         }
 
-        public int? SaveItemCode(int? id,int categoryId,int warehouseItemCodeId,string itemCode,int projectId, int userId)
+        public int? SaveItemCode(int? id,int categoryId,int warehouseItemCodeId,string itemCode,string size,int qtyUnitId,string remark,int projectId, int userId)
         {
             try
             {
@@ -100,6 +100,9 @@ namespace Electrical.Data
                     new SqlParameter("CategoryId",categoryId),
                     new SqlParameter("WarehouseItemCodeId",warehouseItemCodeId),
                     new SqlParameter("ItemCode",itemCode),
+                    new SqlParameter("Size",size),
+                    new SqlParameter("QtyUnitId",qtyUnitId),
+                    new SqlParameter("Remark",remark),
                     new SqlParameter("ProjectId",projectId),
                     new SqlParameter("UserId",userId)
                 };
@@ -498,7 +501,7 @@ namespace Electrical.Data
 
 
 
-        public int SaveMTO(int? id,int projectId, int userId,int unitId,int itemCodeId, decimal mtoQty)
+        public int SaveMTO(int? id,int projectId, int userId,int unitId,int itemCodeId, decimal mtoQty,string description)
         {
             try
             {
@@ -509,7 +512,8 @@ namespace Electrical.Data
                     new SqlParameter("UserId",userId),
                     new SqlParameter("UnitId",unitId),
                     new SqlParameter("ItemCodeId",itemCodeId),
-                    new SqlParameter("MtoQty",mtoQty)
+                    new SqlParameter("MtoQty",mtoQty),
+                    new SqlParameter("Description",description),
                 };
                 return DoMutation("EL.SaveMTO", sqlParams);
             }

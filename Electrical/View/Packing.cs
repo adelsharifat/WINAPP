@@ -181,8 +181,7 @@ namespace Electrical.View
         {           
                 if (cboUnit.EditValue == null) throw new CMISException("Unit field is required!");
                 if (cboItemCode.EditValue == null) throw new CMISException("ItemCode field is required");
-                if (String.IsNullOrEmpty(txtTag.Text)) throw new CMISException("TagNo field is required");
-                if (cboCategory.EditValue == null) throw new CMISException("category field is required");
+                if (cboTreeCategory.EditValue == null) throw new CMISException("category field is required");
                 if (String.IsNullOrEmpty(txtSize.Text)) throw new CMISException("Size field is required");
                 if (String.IsNullOrEmpty(txtPackingNo.Text)) throw new CMISException("PackingNo field is required");
                 if (String.IsNullOrEmpty(txtDescription.Text)) throw new CMISException("Description field is required");
@@ -268,26 +267,33 @@ namespace Electrical.View
         {
             InitComboCompany();
             FillAreaUnitCombo();
-            FillCategoryCombo();
+            FillCategoriesCombo();
             FillVendorCombo();
             FillPLQtyUnit();
             FillItemCodeCombo();
         }
 
         //Fill category combo
-        private void FillCategoryCombo()
+        private void FillCategoriesCombo()
         {
             try
             {
                 var data = DAL.Do.GetCategoriesCombo();
-                cboCategory.Fill(data, "Category", "Id").SelectItem(0).HideColumns("ParentId");
+                cboTreeCategory.Properties.DataSource = data;
+                cboTreeCategory.Properties.DisplayMember = "Category";
+                cboTreeCategory.Properties.KeyMember = "Id";
+                cboTreeCategory.Properties.ValueMember = "Id";
+                //cboTreeCategory.Properties.TreeList.PopulateColumns();
+                cboTreeCategory.Properties.TreeList.Columns["Id"].Visible = false;
+                cboTreeCategory.Properties.TreeList.Columns["ParentId"].Visible = false;
+                cboTreeCategory.EditValue = 0;
+
             }
             catch (Exception)
             {
                 throw;
             }
         }
-
         //Fill packing list grid
         private void FillPackingListGrid()
         {
@@ -323,7 +329,7 @@ namespace Electrical.View
         {
             try
             {
-                var categoryId = Convert.ToInt32(cboCategory.EditValue);
+                var categoryId = Convert.ToInt32(cboTreeCategory.EditValue);
                 var data = DAL.Do.GetItemCodesCombo(categoryId);
                 cboItemCode.Fill(data, "ItemCode", "Id").SelectItem(0).HideColumns("WarehouseItemCodeId");
             }
@@ -375,7 +381,7 @@ namespace Electrical.View
                 cboItemCode.SelectItem(0);
                 txtReport.Text = String.Empty;
                 txtTag.Text = String.Empty;
-                cboCategory.SelectItem(0);
+                cboTreeCategory.EditValue = 0;
                 txtSize.Text = String.Empty;
                 txtPackingNo.Text = String.Empty;
                 txtDescription.Text = String.Empty;
@@ -526,7 +532,7 @@ namespace Electrical.View
                     item.UnitId = Convert.ToInt32(cboUnit.EditValue);
                     item.VendorId = Convert.ToInt32(cboVendor.EditValue);
                     item.TagNo = txtTag.Text.Trim();
-                    item.CategoryId = Convert.ToInt32(cboCategory.EditValue);
+                    item.CategoryId = Convert.ToInt32(cboTreeCategory.EditValue);
                     item.Description = txtDescription.Text.Trim();
                     item.Size = txtSize.Text.Trim();
                     item.PackingNo = txtPackingNo.Text.Trim();
@@ -542,7 +548,7 @@ namespace Electrical.View
                         UnitId = Convert.ToInt32(cboUnit.EditValue),
                         VendorId = Convert.ToInt32(cboVendor.EditValue),
                         TagNo = txtTag.Text.Trim(),
-                        CategoryId = Convert.ToInt32(cboCategory.EditValue),
+                        CategoryId = Convert.ToInt32(cboTreeCategory.EditValue),
                         Description = txtDescription.Text.Trim(),
                         Size = txtSize.Text.Trim(),
                         PackingNo = txtPackingNo.Text.Trim(),
@@ -579,9 +585,28 @@ namespace Electrical.View
                 if (Msg.Confirm("Are you sure to remove selected item") == DialogResult.No) return;
                 if(grvPaking.GetFocusedDataRow() is DataRow dr)
                 {
-                    tvpPackingItems.Remove(dr["ItemCode"].ToString());
+                    //tvpPackingItems.Remove(dr["keyDictionary"].ToString());
+                    var unitId = dr["UnitId"].ToInt();
+                    var itemCodeId = dr["ItemCodeId"].ToInt();
+                    var key = itemCodeId + "_" + unitId;
+                    tvpPackingItems.Remove(key);
+                    grvPaking.DeleteSelectedRows();
                     FillPackingListGrid();
                 }
+            }
+            catch (Exception ex)
+            {
+                ex.ShowMessage();
+            }
+        }
+
+        private void cboItemCode_EditValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                txtSize.Text = cboItemCode.GetColumnValue("Size").ToString();
+                txtDescription.Text = cboItemCode.GetColumnValue("Remark").ToString();
+                cboQtyUnit.EditValue = cboItemCode.GetColumnValue("QtyUnitId").ToInt();
             }
             catch (Exception ex)
             {
@@ -623,7 +648,7 @@ namespace Electrical.View
                     if (Msg.Confirm("Are you sure to edit selected item") == DialogResult.No) return;
                     grpPL.Enabled = true;
                     cboUnit.EditValue = Convert.ToInt32(dr["UnitId"]);
-                    cboCategory.EditValue = dr["CategoryId"] == DBNull.Value ? 0 : Convert.ToInt32(dr["CategoryId"]);
+                    cboTreeCategory.EditValue = dr["CategoryId"] == DBNull.Value ? 0 : Convert.ToInt32(dr["CategoryId"]);
                     cboItemCode.EditValue = Convert.ToInt32(dr["ItemCodeId"]);
                     txtTag.Text = dr["TagNo"].ToString();
                     txtPackingNo.Text = dr["PackingNo"].ToString();
@@ -644,7 +669,16 @@ namespace Electrical.View
         {
             try
             {
-                ResetForm();
+                cboUnit.SelectItem(0);
+                cboTreeCategory.EditValue = 0;
+                cboItemCode.SelectItem(0);
+                txtTag.Text = String.Empty;
+                txtPackingNo.Text = String.Empty;
+                cboVendor.SelectItem(0);
+                txtSize.Text = String.Empty;
+                txtPlQty.Text = "0.00";
+                cboQtyUnit.SelectItem(0);
+                txtDescription.Text = String.Empty;
                 grpPL.Enabled = true;
             }
             catch (Exception ex)
