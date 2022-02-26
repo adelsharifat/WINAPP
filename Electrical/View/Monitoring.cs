@@ -69,7 +69,8 @@ namespace Electrical.View
             try
             {
                 var data = DAL.Do.GetMonitoring(LoginInfo.ProjectId,LoginInfo.Id,cmbCompany.EditValue.ToInt());
-                grcMonitoring.SetDataSource(() => data);
+                grcMonitoring.DataSource = data;
+                //grcMonitoring.SetDataSource(() => data);
             }
             catch (Exception)
             {

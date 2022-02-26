@@ -77,6 +77,7 @@ namespace CMISControls.Grid
 
         private void PaintLoadingProgress()
         {
+            if (this.IsDisposed) return;
             using (Graphics graphic = CreateGraphics()) {
                 int cursorSize = 50;
                 int cursorX = (Width / 2) - (cursorSize / 2);
@@ -118,7 +119,6 @@ namespace CMISControls.Grid
                     StringFormat drawFormat = new StringFormat();
                     graphic.DrawString(drawString, drawFont, drawBrush, cursorX+6, cursorY+18, drawFormat);
                 }
-
             }
         }
 

@@ -268,13 +268,14 @@ namespace Electrical.Data
                 throw;
             }
         }
-        public DataTable GetItemCodesCombo(int? categoryId = null)
+        public DataTable GetItemCodesCombo(bool hasWarehouseItemCode = false,int ? categoryId = null)
         {
             try
             {
                 var sqlParams = new SqlParameter[]
                 {
-                    new SqlParameter("CategoryId",categoryId)
+                    new SqlParameter("CategoryId",categoryId),
+                    new SqlParameter("HasWarehouseItemCode",hasWarehouseItemCode),
                 };
                 return DoQueryReader("EL.GetItemCodesCombo", sqlParams);
             }

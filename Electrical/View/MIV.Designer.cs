@@ -126,7 +126,7 @@
             // 
             // cboWhareHouseCompany
             // 
-            this.cboWhareHouseCompany.Location = new System.Drawing.Point(110, 95);
+            this.cboWhareHouseCompany.Location = new System.Drawing.Point(122, 95);
             this.cboWhareHouseCompany.Name = "cboWhareHouseCompany";
             this.cboWhareHouseCompany.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.cboWhareHouseCompany.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -134,14 +134,14 @@
             this.cboWhareHouseCompany.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboWhareHouseCompany.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
-            this.cboWhareHouseCompany.Size = new System.Drawing.Size(281, 24);
+            this.cboWhareHouseCompany.Size = new System.Drawing.Size(269, 24);
             this.cboWhareHouseCompany.TabIndex = 24;
             this.cboWhareHouseCompany.EditValueChanged += new System.EventHandler(this.cboWhareHouseCompany_EditValueChanged);
             this.cboWhareHouseCompany.EditValueChanging += new DevExpress.XtraEditors.Controls.ChangingEventHandler(this.cboWhareHouseCompany_EditValueChanging);
             // 
             // txtReport
             // 
-            this.txtReport.Location = new System.Drawing.Point(110, 61);
+            this.txtReport.Location = new System.Drawing.Point(122, 61);
             this.txtReport.Name = "txtReport";
             this.txtReport.Properties.Appearance.BackColor = System.Drawing.Color.LightYellow;
             this.txtReport.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -150,7 +150,7 @@
             this.txtReport.Properties.Appearance.Options.UseFont = true;
             this.txtReport.Properties.Appearance.Options.UseForeColor = true;
             this.txtReport.Properties.ReadOnly = true;
-            this.txtReport.Size = new System.Drawing.Size(281, 24);
+            this.txtReport.Size = new System.Drawing.Size(269, 24);
             this.txtReport.TabIndex = 22;
             // 
             // lblreportNo
@@ -214,10 +214,10 @@
             // 
             // txtDocuemntRemark
             // 
-            this.txtDocuemntRemark.Location = new System.Drawing.Point(110, 129);
+            this.txtDocuemntRemark.Location = new System.Drawing.Point(122, 129);
             this.txtDocuemntRemark.Name = "txtDocuemntRemark";
             this.txtDocuemntRemark.Properties.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtDocuemntRemark.Size = new System.Drawing.Size(281, 44);
+            this.txtDocuemntRemark.Size = new System.Drawing.Size(269, 44);
             this.txtDocuemntRemark.TabIndex = 28;
             // 
             // lblItemRemark
@@ -227,9 +227,9 @@
             this.lblItemRemark.ForeColor = System.Drawing.Color.Black;
             this.lblItemRemark.Location = new System.Drawing.Point(41, 129);
             this.lblItemRemark.Name = "lblItemRemark";
-            this.lblItemRemark.Size = new System.Drawing.Size(55, 17);
+            this.lblItemRemark.Size = new System.Drawing.Size(75, 17);
             this.lblItemRemark.TabIndex = 27;
-            this.lblItemRemark.Text = "Remark";
+            this.lblItemRemark.Text = "Description";
             // 
             // label5
             // 

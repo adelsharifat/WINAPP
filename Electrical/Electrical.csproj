@@ -188,9 +188,9 @@
       <Project>{c1649b10-abb2-4f58-b9f4-a26dac7dd289}</Project>
       <Name>CMISDAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CMISSecurity\CMISSecurity.csproj">
-      <Project>{60FECBB9-5C03-41BD-BF13-72595B4139A0}</Project>
-      <Name>CMISSecurity</Name>
+    <ProjectReference Include="..\CMISNewSecurity\CMISNewSecurity.csproj">
+      <Project>{60fecbb9-5c03-41bd-bf13-72595b4139a0}</Project>
+      <Name>CMISNewSecurity</Name>
     </ProjectReference>
     <ProjectReference Include="..\CMISUIHelper\CMISUIHelper.csproj">
       <Project>{94285279-DFD9-4BA6-8FC2-B057B80D87E9}</Project>

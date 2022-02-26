@@ -1,7 +1,7 @@
 ﻿using CMISDAL.Common;
-using CMISSecurity;
-using CMISSecurity.Infrastructure.Enum;
-using CMISSecurity.Model;
+using CMISNewSecurity;
+using CMISNewSecurity.Infrastructure.Enum;
+using CMISNewSecurity.Model;
 using CMISUIHelper.Infrastructure.Contracts.CustomException;
 using CMISUIHelper.Infrastructure.Helpers;
 using CMISUIHelper.UserControls;

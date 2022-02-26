@@ -15,7 +15,7 @@ using Security;
 using CMISUtils;
 using Electrical.Data;
 using CMISUIHelper.Infrastructure.Contracts.CustomException;
-using CMISSecurity;
+using CMISNewSecurity;
 using Electrical.Model;
 using CMISUtils.Extentions;
 using DevExpress.XtraGrid.Views.Grid;
@@ -127,7 +127,7 @@ namespace Electrical.View
 
                 //Set permission
                 btnSave.Enabled = ACL.SaveMIVDocument.AllowAcl(this);
-                btnSaveAndPost.Enabled = ACL.SaveMIVDocument.AllowAcl(this) && ACL.PostMIVDocument.AllowAcl(this);
+                btnSaveAndPost.Enabled = ACL.SaveMIVDocument.AllowAcl(this) && ACL.PostMIVDocument.AllowAcl(this) && ACL.MIVCreator.AllowAcl(this);
                 btnPost.Enabled = ACL.PostMIVDocument.AllowAcl(this) && ACL.MIVCreator.AllowAcl(this);
             }
             catch (Exception ex)
@@ -142,6 +142,7 @@ namespace Electrical.View
         {
             try
             {
+                if (cboItemCode.EditValue == null) return;
                 var balance = cboItemCode.GetColumnValue("Balance")?.ToDecimal();
                 if (balance == 0m) throw new CMISException("Inventory item is zero!");
                 if (Convert.ToDecimal(txtQty.Text) > balance) throw new CMISException("Item inventory is not enough for the requested amount");
@@ -207,7 +208,7 @@ namespace Electrical.View
                 if (FormMode == FormState.View) return;
 
                 //Check Grid in empty
-                if (grvMIVItems.RowCount <= 0) throw new CMISException("The grid is empty!");
+                if (grvMIVItems.RowCount <= 0) return;
 
                 //Prompt for save or updating data
                 var formOperationMode = this.documentId == null ? "save" : "update";
@@ -699,7 +700,7 @@ namespace Electrical.View
                 if (cboWhareHouseCompany.EditValue != null)
                 {
                     FillMIVItemCodeCombo(LoginInfo.ProjectId, cboWhareHouseCompany.EditValue.ToInt());
-                    if(FormMode == FormState.View)
+                    if(FormMode == FormState.Save)
                         GenerateReportNumber();
                 }
                     

@@ -1,5 +1,5 @@
-﻿using CMISSecurity;
-using CMISSecurity.Infrastructre.CustomAttribute;
+﻿using CMISNewSecurity;
+using CMISNewSecurity.Infrastructre.CustomAttribute;
 using QCElectrical.Data;
 using System;
 using System.Collections.Generic;
@@ -14,19 +14,19 @@ namespace QCElectrical
     public class Permision : CMISPolicy
     {
 
-        [Permit("Allow access to specific companies", "Companies")]
+        [AclPolicy("Allow access to specific companies", "Companies")]
         public const string Company = nameof(Company);
 
-        [Permit("Allow access to specific contracts", "Contracts")]
+        [AclPolicy("Allow access to specific contracts", "Contracts")]
         public const string Contract = nameof(Contract);
 
-        [Permit("Allow access to Role SUBCONTRACTOR")]
+        [AclPolicy("Allow access to Role SUBCONTRACTOR")]
         public const string SubContractor = nameof(SubContractor);
 
-        [Permit("Allow access to Role CONSERTIUM")]
+        [AclPolicy("Allow access to Role CONSERTIUM")]
         public const string Consertium = nameof(Consertium);
 
-        [Permit("Allow access to Role NIOEC")]
+        [AclPolicy("Allow access to Role NIOEC")]
         public const string NIOEC = nameof(NIOEC);
 
 

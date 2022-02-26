@@ -15,6 +15,7 @@ using CMISUIHelper.Infrastructure.Enums;
 using Electrical.Data;
 using CMISUtils;
 using Security;
+using CMISNewSecurity;
 
 namespace Electrical.View
 {
@@ -25,6 +26,7 @@ namespace Electrical.View
         {
             InitializeComponent();
             ViewTitle = "Category";
+            ShowRefreshItem = true;
         }
 
         private void Category_BeforeViewLoad(object sender, EventArgs e)
@@ -55,6 +57,11 @@ namespace Electrical.View
             btnEditItem.ItemClick += BtnEditItem_ItemClick;
             btnDeleteItem.ItemClick += BtnDeleteItem_ItemClick;
             btnSaveItem.ItemClick += BtnSaveItem_ItemClick;
+
+            //SetPermission
+            btnEditItem.AccessibleName = this.SetAcl(ACL.EditCategory);
+            btnDeleteItem.AccessibleName = this.SetAcl(ACL.DeleteCategory);
+            btnSaveItem.AccessibleName = this.SetAcl(ACL.SaveCategory);
         }
 
         private void BtnNewItem_ItemClick(object sender, ItemClickEventArgs e)

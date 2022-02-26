@@ -301,6 +301,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
         {
             if (bmp == null) bmp = view.SignpostActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            item.Enabled = false;
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
@@ -311,6 +312,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
         {
             if (bmp == null) bmp = view.SignAcceptActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            item.Enabled = false;
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
@@ -321,6 +323,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
         {
             if (bmp == null) bmp = view.SignSendBackActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            item.Enabled = false;
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
@@ -331,6 +334,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
         {
             if (bmp == null) bmp = view.SignRejectActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            item.Enabled = false;
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
@@ -341,6 +345,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
         {
             if (bmp == null) bmp = view.SignUndoActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            item.Enabled = false;
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
@@ -351,6 +356,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
         {
             if (bmp == null) bmp = view.SignReopenActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            item.Enabled = false;
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
@@ -361,6 +367,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
         {
             if (bmp == null) bmp = UIHelperResources.SignHistory;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            item.Enabled = false;
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
@@ -371,6 +378,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
         {
             if (bmp == null) bmp = UIHelperResources.Attachment_Thin_32x32;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            item.Enabled = false;
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);            
@@ -392,6 +400,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
         {            
             if (bmp == null) bmp = view.SaveFormActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            item.Enabled = false;
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
@@ -402,6 +411,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
         {
             if (bmp == null) bmp = view.EditFormActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            item.Enabled = false;
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
@@ -412,6 +422,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
         {
             if (bmp == null) bmp = view.DeleteFormActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            item.Enabled = false;
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);
@@ -422,6 +433,7 @@ namespace CMISUIHelper.Infrastructure.Helpers
         {
             if (bmp == null) bmp = view.ViewFormActionIcon;
             var item = RibbonHandler.NewItem.ButtonItem(itemName, null, bmp);
+            item.Enabled = false;
             var group = rp.Groups.Any(x => x.Text == rpgText) == false ? RibbonHandler.NewRPG(rpgText) : rp.Groups.FirstOrDefault(x => x.Text == rpgText);
             group.AddItems(item);
             rp.AddGroups(group);

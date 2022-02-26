@@ -17,6 +17,7 @@ using CMISUtils.Extentions;
 using CMISUIHelper.Infrastructure.Contracts.CustomException;
 using DevExpress.XtraGrid.Views.Grid;
 using CMISUtils;
+using CMISNewSecurity;
 
 namespace Electrical.View
 {
@@ -72,6 +73,11 @@ namespace Electrical.View
             btnSave.ItemClick += BtnSave_ItemClick;
             btnEdit.ItemClick += BtnEdit_ItemClick;
             btnDelete.ItemClick += BtnDelete_ItemClick;
+
+            //SetPermission
+            btnEdit.AccessibleName = this.SetAcl(ACL.EditMTO);
+            btnDelete.AccessibleName = this.SetAcl(ACL.DeleteMTO);
+            btnSave.AccessibleName = this.SetAcl(ACL.SaveMTO);
 
 
         }
@@ -230,7 +236,7 @@ namespace Electrical.View
         {
             try
             {
-                var data = DAL.Do.GetItemCodesCombo();
+                var data = DAL.Do.GetItemCodesCombo(true);
                 cboItemCode.Fill(data, "ItemCode", "Id").SelectItem(0);
             }
             catch (Exception)

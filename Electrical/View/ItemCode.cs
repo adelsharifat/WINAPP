@@ -15,6 +15,7 @@ using Electrical.Data;
 using Security;
 using CMISUIHelper.Infrastructure.Contracts.CustomException;
 using CMISUtils.Extentions;
+using CMISNewSecurity;
 
 namespace Electrical.View
 {
@@ -24,7 +25,9 @@ namespace Electrical.View
 
         public ItemCode()
         {
-            InitializeComponent();            
+            InitializeComponent();
+            ShowRefreshItem = true;
+            Grid = grcItemCode;
         }
 
         private void ItemCode_BeforeViewLoad(object sender, EventArgs e)
@@ -67,6 +70,11 @@ namespace Electrical.View
             btnEditItem.ItemClick += BtnEditItem_ItemClick;
             btnDeleteItem.ItemClick += BtnDeleteItem_ItemClick;
             btnSaveItem.ItemClick += BtnSaveItem_ItemClick;
+
+            //SetPermission
+            btnEditItem.AccessibleName = this.SetAcl(ACL.EditItemCode);
+            btnDeleteItem.AccessibleName = this.SetAcl(ACL.DeleteItemCode);
+            btnSaveItem.AccessibleName = this.SetAcl(ACL.SaveItemCode);
         }
 
         private void BtnNewItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -123,7 +131,7 @@ namespace Electrical.View
         {
             try
             {
-                Msg.ConfirmOperation("Are you sure to delete item code?").Invoke();
+                if(Msg.Confirm("Are you sure to delete item code?")==DialogResult.No) return;
                 if (grvItemCode.GetFocusedDataRow() is DataRow dr)
                 {
                     var id = dr.Id();
@@ -132,7 +140,6 @@ namespace Electrical.View
                     LoadData();
                     ResetForm();
                     Msg.Show("Delete item code succeded!");
-
                 }
             }
             catch (Exception ex)
@@ -155,12 +162,14 @@ namespace Electrical.View
             try
             {
                 var data = DAL.Do.GetItemCodes(LoginInfo.ProjectId,LoginInfo.Id);
+                grcItemCode.DataSource = data;
                 if(data is DataTable dt)
                 {
-                    grcItemCode.SetDataSource(() =>
-                    {
-                        return dt;
-                    });
+                    //grcItemCode.SetDataSource(() =>
+                    //{
+                    //    return dt;
+                    //});
+                    grcItemCode.DataSource = data;
                 }
             }
             catch (Exception ex)

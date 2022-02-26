@@ -22,7 +22,7 @@ using DMS.Enums;
 using DevExpress.XtraBars;
 using Electrical.Model;
 using CMISUtils.Extentions;
-using CMISSecurity;
+using CMISNewSecurity;
 
 namespace Electrical.View
 {
@@ -90,7 +90,13 @@ namespace Electrical.View
             btnNew.ItemClick += BtnNewItem_ItemClick;
             btnSave.ItemClick += BtnSaveItem_ItemClick;
             btnSaveAndPost.ItemClick += BtnSaveAndPost_ItemClick;
-            btnPost.ItemClick += BtnPostItem_ItemClick;          
+            btnPost.ItemClick += BtnPostItem_ItemClick;
+
+
+            //SetPermission
+            btnSave.Enabled = ACL.SavePLDocument.AllowAcl(this);
+            btnSaveAndPost.Enabled = ACL.SavePLDocument.AllowAcl(this) && ACL.PostPLDocument.AllowAcl(this) && ACL.PLCreator.AllowAcl(this);
+            btnPost.Enabled = ACL.PostPLDocument.AllowAcl(this) && ACL.PLCreator.AllowAcl(this);
         }
 
         //Save and sign pl document
@@ -115,7 +121,6 @@ namespace Electrical.View
                     CompanyId = cmbCompany.EditValue.ToInt(),
                     UnitId = cboUnit.EditValue.ToInt(),
                     PackingItems = tvpPackingItems.ToDataTable()
-
                 };
 
                 var signPLDocument = new SignPLDocument
@@ -188,6 +193,7 @@ namespace Electrical.View
                 if (cboVendor.EditValue == null) throw new CMISException("Vendor field is required");
                 if (String.IsNullOrEmpty(txtPlQty.Text)) throw new CMISException("P/L QTY field is required");
                 if (cboQtyUnit.EditValue == null) throw new CMISException("QtyUnit field is required");
+                //if(cboItemCode.GetColumnValue("WarehouseItemCodeId")==DBNull.Value) throw new CMISException("Warehouse item code not defined for this item code!");
         }
         // Handle new for new and reset form item
         private void BtnNewItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -330,7 +336,7 @@ namespace Electrical.View
             try
             {
                 var categoryId = Convert.ToInt32(cboTreeCategory.EditValue);
-                var data = DAL.Do.GetItemCodesCombo(categoryId);
+                var data = DAL.Do.GetItemCodesCombo(true,categoryId);
                 cboItemCode.Fill(data, "ItemCode", "Id").SelectItem(0).HideColumns("WarehouseItemCodeId");
             }
             catch (Exception ex)
@@ -405,7 +411,7 @@ namespace Electrical.View
                 var canViewPLDocument = ACL.ViewPLDocument.AllowAcl(this);
                 var canSavePLDocument = ACL.SavePLDocument.AllowAcl(this);
                 var canEditPLDocument = ACL.EditPLDocument.AllowAcl(this);
-                var canPostPLDocument = ACL.PostPLDocument.AllowAcl(this);
+                var canPostPLDocument = ACL.PostPLDocument.AllowAcl(this) && ACL.PLCreator.AllowAcl(this);
 
                 if (FormMode == FormState.View)
                 {
@@ -610,6 +616,19 @@ namespace Electrical.View
             }
             catch (Exception ex)
             {
+                ex.ShowMessage();
+            }
+        }
+
+        private void cmbCompany_EditValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                txtReport.Text = BEL.ReportNumber.PLReportNumber(cmbCompany.EditValue.ToInt());
+            }
+            catch (Exception ex)
+            {
+                ResetForm();
                 ex.ShowMessage();
             }
         }

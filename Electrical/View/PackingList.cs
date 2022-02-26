@@ -15,7 +15,7 @@ using CMISDAL.Common;
 using CMISUtils;
 using CMISUIHelper.Infrastructure.Enums;
 using CMISUIHelper.Infrastructure.Contracts.CustomException;
-using CMISSecurity;
+using CMISNewSecurity;
 
 namespace Electrical.View
 {
@@ -25,6 +25,7 @@ namespace Electrical.View
         {
             InitializeComponent();
             this.ShowRefreshItem = true;
+            Grid = grcPackingList;
         }
 
         private void PackingList_BeforeViewLoad(object sender, EventArgs e)
@@ -77,6 +78,12 @@ namespace Electrical.View
                 btnViewItem.ItemClick += BtnViewItem_ItemClick;
                 btnEditItem.ItemClick += BtnEditItem_ItemClick;
                 btnDeleteItem.ItemClick += BtnDeleteItem_ItemClick;
+
+
+                //SetPermission
+                btnViewItem.AccessibleName = this.SetAcl(ACL.ViewPLDocument);
+                btnEditItem.AccessibleName = this.SetAcl(ACL.EditPLDocument);
+                btnDeleteItem.AccessibleName = this.SetAcl(ACL.DeletePLDocument);
             }
             catch (Exception ex)
             {
@@ -167,10 +174,11 @@ namespace Electrical.View
             try
             {
                 var data = DAL.Do.GetPackingDocuments(LoginInfo.ProjectId,LoginInfo.Id, Convert.ToInt32(cmbCompany.EditValue), null);
-                grcPackingList.SetDataSource(() =>
-                {
-                    return data;
-                });
+                grcPackingList.DataSource = data;
+                //grcPackingList.SetDataSource(() =>
+                //{
+                //    return data;
+                //});
             }
             catch (Exception ex)
             {

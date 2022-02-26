@@ -22,7 +22,7 @@ using DMS.Extentions;
 using QCElectrical.Model;
 using DevExpress.XtraGrid.Views.Grid;
 using CMISUIHelper.Infrastructure.Contracts.CustomException;
-using CMISSecurity;
+using CMISNewSecurity;
 using QCElectrical.Infrastructure;
 using DevExpress.XtraBars;
 

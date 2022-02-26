@@ -13,7 +13,7 @@ using CMISUIHelper.Infrastructure.Helpers;
 using Security;
 using CMISDAL.Common;
 using CMISUtils;
-using CMISSecurity;
+using CMISNewSecurity;
 using Electrical.Data;
 using CMISUtils.Extentions;
 using CMISUIHelper.Infrastructure.Contracts.CustomException;
@@ -94,10 +94,10 @@ namespace Electrical.View
             editMenu.ItemClick += EditMenu_ItemClick;
             deleteMenu.ItemClick += DeleteMenu_ItemClick;
 
-            //Set Permission
-            viewMenu.Enabled =  ACL.ViewMIVDocument.AllowAcl(this);
-            editMenu.Enabled =  ACL.EditMIVDocument.AllowAcl(this);
-            deleteMenu.Enabled =  ACL.DeleteMIVDocument.AllowAcl(this);
+            //SetPermission
+            viewMenu.AccessibleName = this.SetAcl(ACL.ViewMIVDocument);
+            editMenu.AccessibleName = this.SetAcl(ACL.EditMIVDocument);
+            deleteMenu.AccessibleName = this.SetAcl(ACL.DeleteMIVDocument);
         }
 
         #region Form Actions
@@ -181,10 +181,11 @@ namespace Electrical.View
                 var contractId = cmbCompany.EditValue?.ToInt();
                 if (contractId == null) return;
                 var data = DAL.Do.GetMIVDocuments(null,LoginInfo.Id, (int)contractId, LoginInfo.ProjectId);
-                grcMIV.SetDataSource(() =>
-                {
-                    return data;
-                });
+                grcMIV.DataSource = data;
+                //grcMIV.SetDataSource(() =>
+                //{
+                //    return data;
+                //});
             }
             catch (Exception ex)
             {

@@ -199,9 +199,9 @@
       <Project>{c1649b10-abb2-4f58-b9f4-a26dac7dd289}</Project>
       <Name>CMISDAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CMISSecurity\CMISSecurity.csproj">
+    <ProjectReference Include="..\CMISNewSecurity\CMISNewSecurity.csproj">
       <Project>{60fecbb9-5c03-41bd-bf13-72595b4139a0}</Project>
-      <Name>CMISSecurity</Name>
+      <Name>CMISNewSecurity</Name>
     </ProjectReference>
     <ProjectReference Include="..\CMISUIHelper\CMISUIHelper.csproj">
       <Project>{94285279-dfd9-4ba6-8fc2-b057b80d87e9}</Project>
