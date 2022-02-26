@@ -104,10 +104,6 @@
       <Project>{C1649B10-ABB2-4F58-B9F4-A26DAC7DD289}</Project>
       <Name>CMISDAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CMISSecurity\CMISSecurity.csproj">
-      <Project>{60FECBB9-5C03-41BD-BF13-72595B4139A0}</Project>
-      <Name>CMISSecurity</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CMISUIHelper\CMISUIHelper.csproj">
       <Project>{94285279-DFD9-4BA6-8FC2-B057B80D87E9}</Project>
       <Name>CMISUIHelper</Name>
