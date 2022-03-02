@@ -16,6 +16,7 @@ using Security;
 using CMISUIHelper.Infrastructure.Contracts.CustomException;
 using CMISUtils.Extentions;
 using CMISNewSecurity;
+using System.Threading;
 
 namespace Electrical.View
 {
@@ -118,6 +119,11 @@ namespace Electrical.View
             FormMode = FormState.Edit;
             if (grvItemCode.GetFocusedDataRow() is DataRow dr)
             {
+                if (dr.IsDelete())
+                {
+                    Msg.Error("Dear user, The slected document is deleted!");
+                    return;
+                }
                 this.id = dr.Id();
                 txtItemCode.Text = dr.ToString("ItemCode");
                 cboTreeCategory.EditValue =dr["CategoryId"] == DBNull.Value?0:dr.ToInt("CategoryId");
@@ -131,9 +137,15 @@ namespace Electrical.View
         {
             try
             {
-                if(Msg.Confirm("Are you sure to delete item code?")==DialogResult.No) return;
+                
                 if (grvItemCode.GetFocusedDataRow() is DataRow dr)
                 {
+                    if (dr.IsDelete())
+                    {
+                        Msg.Error("Dear user, The slected document is deleted!");
+                        return;
+                    }
+                    if (Msg.Confirm("Are you sure to delete item code?") == DialogResult.No) return;
                     var id = dr.Id();
                     var result = DAL.Do.DeleteItemCode(id, LoginInfo.ProjectId, LoginInfo.Id);
                     if (result <= 0) throw new CMISException("Delete item code faild!");
@@ -161,16 +173,9 @@ namespace Electrical.View
         {
             try
             {
-                var data = DAL.Do.GetItemCodes(LoginInfo.ProjectId,LoginInfo.Id);
+                var data = DAL.Do.GetItemCodes(LoginInfo.ProjectId,LoginInfo.Id);              
                 grcItemCode.DataSource = data;
-                if(data is DataTable dt)
-                {
-                    //grcItemCode.SetDataSource(() =>
-                    //{
-                    //    return dt;
-                    //});
-                    grcItemCode.DataSource = data;
-                }
+                grvItemCode.SetIsDeleteConditionFormat();
             }
             catch (Exception ex)
             {

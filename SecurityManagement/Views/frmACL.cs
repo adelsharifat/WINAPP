@@ -82,17 +82,17 @@ namespace SecurityManagement.Views
 
         private void SetACLOnGridACL()
         {
-            List<ACLModel> PermissionDictionary = new List<ACLModel>();
+            List<CMISACLModel> PermissionDictionary = new List<CMISACLModel>();
 
-            foreach (var item in new CMISPolicy().PermissionList)
+            foreach (var item in new GuardPolicy().PermissionList)
             {
                 PermissionDictionary.Add(item);
             }
 
 
-            BindingList<ACLViewModel> ACLViewModelBindingList = new BindingList<ACLViewModel>();
+            BindingList<CMISACLViewModel> ACLViewModelBindingList = new BindingList<CMISACLViewModel>();
 
-            var aclData = DAL.New.FetchAcls(this._id, Convert.ToInt32(this.cboProject.GetColumnValue("Id")), _isGroup).AsEnumerable().Select(x => new DBUserACLViewModel
+            var aclData = DAL.Do.FetchAcls(this._id, Convert.ToInt32(this.cboProject.GetColumnValue("Id")), _isGroup).AsEnumerable().Select(x => new CMISDBUserACLViewModel
             {
                 Id = x.ToInt("Id"),
                 Name = x.ToString("Name"),
@@ -105,12 +105,12 @@ namespace SecurityManagement.Views
             foreach (var item in PermissionDictionary)
             {
                 RepositoryItemCheckedComboBoxEdit repo = new RepositoryItemCheckedComboBoxEdit();
-                ACLViewModel aclvm = new ACLViewModel();
+                CMISACLViewModel aclvm = new CMISACLViewModel();
                 aclvm.Id = item.Id;
                 aclvm.Schema = item.Schema;
                 aclvm.Name = item.Name;
                 aclvm.Description = item.Description;
-                aclvm.Allow = AclCheckState.Inherit;
+                aclvm.Allow = AclType.Inherit;
                 aclvm.ItemsDataProvider = item.ItemsDataProvider != null ? item.ItemsDataProvider.AsEnumerable().Select(x =>
                     new CheckedListBoxItem
                     {
@@ -135,9 +135,9 @@ namespace SecurityManagement.Views
                 {
                     item.Id = row.Id;
 
-                    if (row.Allow == null) item.Allow = AclCheckState.Inherit;
-                    if (row.Allow == true) item.Allow = AclCheckState.Allow;
-                    if (row.Allow == false) item.Allow = AclCheckState.Deny;
+                    if (row.Allow == null) item.Allow = AclType.Inherit;
+                    if (row.Allow == true) item.Allow = AclType.Allow;
+                    if (row.Allow == false) item.Allow = AclType.Deny;
 
                     if (item.Repository != null)
                     {
@@ -157,7 +157,7 @@ namespace SecurityManagement.Views
         private void GVACL_ShowingEditor(object sender, CancelEventArgs e)
         {
             GridView view = sender as GridView;
-            var row = view.GetRow(view.FocusedRowHandle) as ACLViewModel;
+            var row = view.GetRow(view.FocusedRowHandle) as CMISACLViewModel;
             if (view.FocusedColumn.FieldName == "Value" && row.Repository == null)
                 e.Cancel = true;
         }
@@ -167,13 +167,13 @@ namespace SecurityManagement.Views
             try
             {
                 var gridData = grvACL.GetDataTable().AsEnumerable();
-                var aclData = gridData.Select(x => new AclDBTableType
+                var aclData = gridData.Select(x => new CMISAclDBTableType
                 {
                     Id = x.ToInt("Id"),
                     Name = $"{x.ToString("Schema")}.{x.ToString("Name")}",
                     Allow = CastAllow(x.ToInt("Allow")),
                     Value = x["Value"].ToString()
-                }).Where(x => x.Allow != null).ToList().ToDataTable<AclDBTableType>();
+                }).Where(x => x.Allow != null).ToList().ToDataTable<CMISAclDBTableType>();
 
                 var NotValidAcls = gridData.Select(x => CastAllow(x.ToInt("Allow")) == null && !String.IsNullOrEmpty(x.ToString("Value")) ? $"{x.ToString("Schema")}.{x.ToString("Name")}" : null).Where(x => x != null);
                 if (NotValidAcls.Any()) throw new CMISException($"Can not set value items for inheritance acls!\nInvalid Acls:\n[ {string.Join(" - ", NotValidAcls)} ]");
@@ -182,7 +182,7 @@ namespace SecurityManagement.Views
                 if (aclItemAllowWithNoItem.Any()) throw new CMISException($"Can not set acl items allow without any items!\nInvalid Acls:\n[ {string.Join(" - ", aclItemAllowWithNoItem)} ]");
 
                 var projectId = Convert.ToInt32(cboProject.EditValue);
-                var result = DAL.New.SaveChangeACL(projectId, _id, aclData, _isGroup);
+                var result = DAL.Do.SaveChangeACL(projectId, _id, aclData, _isGroup);
 
                 if (result > 0)
                 {
@@ -249,7 +249,7 @@ namespace SecurityManagement.Views
         private void grvACL_CustomRowCellEdit(object sender, CustomRowCellEditEventArgs e)
         {
             var view = sender as GridView;
-            var row = view.GetRow(e.RowHandle) as ACLViewModel;
+            var row = view.GetRow(e.RowHandle) as CMISACLViewModel;
 
             if (e.Column.Name == "colValue" && row?.Repository != null)
             {                
@@ -260,7 +260,7 @@ namespace SecurityManagement.Views
         private void grvACL_ShowingEditor(object sender, CancelEventArgs e)
         {
             GridView view = sender as GridView;
-            var row = view.GetRow(view.FocusedRowHandle) as ACLViewModel;
+            var row = view.GetRow(view.FocusedRowHandle) as CMISACLViewModel;
             if (view.FocusedColumn.Name == "colValue" && row.Repository == null)
                 e.Cancel = true;
         }

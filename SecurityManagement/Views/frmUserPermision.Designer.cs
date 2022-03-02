@@ -56,6 +56,8 @@ namespace SecurityManagement.Views
             this.grvUserPermision.GridControl = this.grcUserPermision;
             this.grvUserPermision.Name = "grvUserPermision";
             this.grvUserPermision.OptionsBehavior.Editable = false;
+            this.grvUserPermision.OptionsView.ShowAutoFilterRow = true;
+            this.grvUserPermision.OptionsView.ShowFooter = true;
             this.grvUserPermision.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.grvUserPermision_RowCellClick);
             this.grvUserPermision.MouseMove += new System.Windows.Forms.MouseEventHandler(this.grvUserPermision_MouseMove);
             // 

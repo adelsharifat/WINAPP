@@ -13,10 +13,25 @@ namespace CommonClass
             return String.Empty;
         }
 
-
         public virtual string GetName()
         {
             return String.Empty;
+        }
+
+        public virtual Version GetVersion()
+        {
+            return new System.Version();
+        }
+
+        public virtual bool IsDevelopment()
+        {
+            return false;
+        }
+
+        public virtual void Register()
+        {
+            // Register acl definition
+            //Security.Acl.DefinedPermissions.Add(Acl.Get());
         }
 
 

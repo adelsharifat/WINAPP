@@ -40,6 +40,23 @@ namespace Electrical.Data
                 throw;
             }
         }
+
+        public DataTable FetchDisciplineForAcls(int projectId, bool? isDiscipline = null)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                   {
+                        new SqlParameter("@ProjectId",projectId),
+                        new SqlParameter("@IsDiscipline", isDiscipline),
+                    };
+                return DoQueryReader("SecAcl.FetchDisciplineForAcls", parameters);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
 
         #region ItemCode
@@ -339,7 +356,7 @@ namespace Electrical.Data
                 new SqlParameter("MachineName",signPLDoc.MachineName),
                 new SqlParameter("ActiveDirectoryName",signPLDoc.ActiveDirectoryName),
                };
-            return DoMutation("EL.SignPLDocument", sqlParams);
+            return DoMutation("EL.SaveAndSignPLDocument", sqlParams);
         }
 
 

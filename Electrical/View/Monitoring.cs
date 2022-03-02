@@ -82,7 +82,7 @@ namespace Electrical.View
         {
             try
             {
-                var data = CommonDals.Do.Company.FetchCompaniesCombo(LoginInfo.ProjectId, LoginInfo.Id, $"{Bundle.SCHEMA}.Company");
+                var data = CommonDals.Do.Company.FetchCompaniesCombo(LoginInfo.Id, LoginInfo.ProjectId,  $"{Bundle.SCHEMA}.Company");
                 this.cmbCompany.Fill(data, "FullName", "Id").SelectItem(0).HideColumns("Symbol");
             }
             catch (Exception)

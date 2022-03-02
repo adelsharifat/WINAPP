@@ -44,6 +44,16 @@ namespace CMISUIHelper
             this.btnChangeAvatar = new DevExpress.XtraBars.BarButtonItem();
             this.btnChangePassword = new DevExpress.XtraBars.BarButtonItem();
             this.BBICloseApp = new DevExpress.XtraBars.BarButtonItem();
+            this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
+            this.sbFullName = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItem4 = new DevExpress.XtraBars.BarStaticItem();
+            this.sbjobTitle = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItem6 = new DevExpress.XtraBars.BarStaticItem();
+            this.sbLastLogin = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItem8 = new DevExpress.XtraBars.BarStaticItem();
+            this.sbProject = new DevExpress.XtraBars.BarStaticItem();
+            this.barStaticItem3 = new DevExpress.XtraBars.BarStaticItem();
+            this.sbVersion = new DevExpress.XtraBars.BarStaticItem();
             this.repositoryItemPictureEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.repositoryItemHypertextLabel1 = new DevExpress.XtraEditors.Repository.RepositoryItemHypertextLabel();
             this.MainStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
@@ -79,9 +89,19 @@ namespace CMISUIHelper
             this.btnChangeAvatar,
             this.btnChangePassword,
             this.btnHelp,
-            this.btnAbout});
+            this.btnAbout,
+            this.barStaticItem2,
+            this.sbFullName,
+            this.barStaticItem4,
+            this.sbjobTitle,
+            this.barStaticItem6,
+            this.sbLastLogin,
+            this.barStaticItem8,
+            this.sbProject,
+            this.barStaticItem3,
+            this.sbVersion});
             this.MainRibbon.Location = new System.Drawing.Point(0, 0);
-            this.MainRibbon.MaxItemId = 13;
+            this.MainRibbon.MaxItemId = 23;
             this.MainRibbon.Name = "MainRibbon";
             this.MainRibbon.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1,
@@ -198,6 +218,76 @@ namespace CMISUIHelper
             superToolTip1.Items.Add(toolTipItem1);
             this.BBICloseApp.SuperTip = superToolTip1;
             // 
+            // barStaticItem2
+            // 
+            this.barStaticItem2.Caption = "Full Name";
+            this.barStaticItem2.Id = 13;
+            this.barStaticItem2.Name = "barStaticItem2";
+            // 
+            // sbFullName
+            // 
+            this.sbFullName.Caption = "[FullName]";
+            this.sbFullName.Id = 14;
+            this.sbFullName.ItemAppearance.Normal.BackColor = System.Drawing.Color.LightBlue;
+            this.sbFullName.ItemAppearance.Normal.Options.UseBackColor = true;
+            this.sbFullName.Name = "sbFullName";
+            // 
+            // barStaticItem4
+            // 
+            this.barStaticItem4.Caption = "Job Title";
+            this.barStaticItem4.Id = 15;
+            this.barStaticItem4.Name = "barStaticItem4";
+            // 
+            // sbjobTitle
+            // 
+            this.sbjobTitle.Caption = "[JobTitle]";
+            this.sbjobTitle.Id = 16;
+            this.sbjobTitle.ItemAppearance.Normal.BackColor = System.Drawing.Color.Aquamarine;
+            this.sbjobTitle.ItemAppearance.Normal.Options.UseBackColor = true;
+            this.sbjobTitle.Name = "sbjobTitle";
+            // 
+            // barStaticItem6
+            // 
+            this.barStaticItem6.Caption = "Last Login";
+            this.barStaticItem6.Id = 17;
+            this.barStaticItem6.Name = "barStaticItem6";
+            // 
+            // sbLastLogin
+            // 
+            this.sbLastLogin.Caption = "[LastLogin]";
+            this.sbLastLogin.Id = 18;
+            this.sbLastLogin.ItemAppearance.Normal.BackColor = System.Drawing.Color.Pink;
+            this.sbLastLogin.ItemAppearance.Normal.Options.UseBackColor = true;
+            this.sbLastLogin.Name = "sbLastLogin";
+            // 
+            // barStaticItem8
+            // 
+            this.barStaticItem8.Caption = "Project";
+            this.barStaticItem8.Id = 19;
+            this.barStaticItem8.Name = "barStaticItem8";
+            // 
+            // sbProject
+            // 
+            this.sbProject.Caption = "[Project]";
+            this.sbProject.Id = 20;
+            this.sbProject.ItemAppearance.Normal.BackColor = System.Drawing.Color.Bisque;
+            this.sbProject.ItemAppearance.Normal.Options.UseBackColor = true;
+            this.sbProject.Name = "sbProject";
+            // 
+            // barStaticItem3
+            // 
+            this.barStaticItem3.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
+            this.barStaticItem3.Caption = "Vesion :";
+            this.barStaticItem3.Id = 21;
+            this.barStaticItem3.Name = "barStaticItem3";
+            // 
+            // sbVersion
+            // 
+            this.sbVersion.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
+            this.sbVersion.Caption = "[Version]";
+            this.sbVersion.Id = 22;
+            this.sbVersion.Name = "sbVersion";
+            // 
             // repositoryItemPictureEdit1
             // 
             this.repositoryItemPictureEdit1.Caption.Alignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -217,6 +307,16 @@ namespace CMISUIHelper
             // 
             // MainStatusBar
             // 
+            this.MainStatusBar.ItemLinks.Add(this.barStaticItem2);
+            this.MainStatusBar.ItemLinks.Add(this.sbFullName);
+            this.MainStatusBar.ItemLinks.Add(this.barStaticItem4);
+            this.MainStatusBar.ItemLinks.Add(this.sbjobTitle);
+            this.MainStatusBar.ItemLinks.Add(this.barStaticItem6);
+            this.MainStatusBar.ItemLinks.Add(this.sbLastLogin);
+            this.MainStatusBar.ItemLinks.Add(this.barStaticItem8);
+            this.MainStatusBar.ItemLinks.Add(this.sbProject);
+            this.MainStatusBar.ItemLinks.Add(this.barStaticItem3);
+            this.MainStatusBar.ItemLinks.Add(this.sbVersion);
             this.MainStatusBar.Location = new System.Drawing.Point(0, 727);
             this.MainStatusBar.Name = "MainStatusBar";
             this.MainStatusBar.Ribbon = this.MainRibbon;
@@ -257,6 +357,7 @@ namespace CMISUIHelper
             this.Ribbon = this.MainRibbon;
             this.StatusBar = this.MainStatusBar;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.CMISRibbonForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.MainRibbon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.HelpPopup)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AvatarPopup)).EndInit();
@@ -287,5 +388,15 @@ namespace CMISUIHelper
         public DevExpress.Utils.VisualEffects.AdornerUIManager BadgeManager;
         private DevExpress.XtraBars.BarButtonItem btnHelp;
         private DevExpress.XtraBars.BarButtonItem btnAbout;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem2;
+        private DevExpress.XtraBars.BarStaticItem sbFullName;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem4;
+        private DevExpress.XtraBars.BarStaticItem sbjobTitle;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem6;
+        private DevExpress.XtraBars.BarStaticItem sbLastLogin;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem8;
+        private DevExpress.XtraBars.BarStaticItem sbProject;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem3;
+        private DevExpress.XtraBars.BarStaticItem sbVersion;
     }
 }

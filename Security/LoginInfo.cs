@@ -8,11 +8,11 @@ namespace Security
 {
     public class LoginInfo
     {
-        public static int Id { get; set; } = 1;
+        public static int Id { get; set; } = 2348;
         public static string UserName { get; set; }
-        public static string FirstName { get; set; } = "سعید";
-        public static string LastName { get; set; } = "ژارعی";
-        public static string JobTitle { get; set; } = "سرپرست برنامه نویسی";
+        public static string FirstName { get; set; } = "حسینعلی";
+        public static string LastName { get; set; } = "خلیفه";
+        public static string JobTitle { get; set; } = "کارشناس  دفتر فنی برق";
         public static DateTime? LastLogin { get; set; } = DateTime.Now;
         public static string Company { get; set; }
         public static int CompanyId { get; set; }

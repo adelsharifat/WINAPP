@@ -57,12 +57,10 @@ namespace Electrical.View
                 this.Grid = grcMIVItems;
 
                 GoToCurrentFormState();
-
-
             }
             catch (Exception ex)
             {
-                throw ex;
+                ex.ShowMessage();
             }
         }
 
@@ -398,7 +396,7 @@ namespace Electrical.View
         {
             try
             {
-                var data = CommonDals.Do.Contract.FetchContractsCombo(LoginInfo.ProjectId, LoginInfo.Id, $"{Bundle.SCHEMA}.Contract");
+                var data = CommonDals.Do.Contract.FetchContractsCombo(LoginInfo.Id,LoginInfo.ProjectId, $"{Bundle.SCHEMA}.Contract");
                 this.cmbCompany.Fill(data, "Contract", "Id").SelectItem(0).HideColumns("EmployerId,ContractorId,Employer,Contractor,EmployerSymbol,ContractorSymbol");
             }
             catch (Exception)
@@ -411,7 +409,7 @@ namespace Electrical.View
         {
             try
             {
-                var data = CommonDals.Do.Company.FetchCompaniesCombo(LoginInfo.ProjectId, LoginInfo.Id, $"{Bundle.SCHEMA}.Company");
+                var data = CommonDals.Do.Company.FetchCompaniesCombo(LoginInfo.Id,LoginInfo.ProjectId, $"{Bundle.SCHEMA}.Company");
                 this.cboWhareHouseCompany.Fill(data, "FullName", "Id").SelectItem(0).HideColumns("Symbol");
             }
             catch (Exception ex)

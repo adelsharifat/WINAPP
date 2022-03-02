@@ -60,6 +60,9 @@ namespace SecurityManagement.Views
             this.grvPermisionGroup.GridControl = this.grcPermisionGroup;
             this.grvPermisionGroup.Name = "grvPermisionGroup";
             this.grvPermisionGroup.OptionsBehavior.Editable = false;
+            this.grvPermisionGroup.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways;
+            this.grvPermisionGroup.OptionsView.ShowAutoFilterRow = true;
+            this.grvPermisionGroup.OptionsView.ShowFooter = true;
             this.grvPermisionGroup.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.grvUserPermision_RowCellClick);
             // 
             // label1

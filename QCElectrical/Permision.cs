@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace QCElectrical
 {
     [Schema(Bundle.SCHEMA)]
-    public class Permision : CMISPolicy
+    public class Permision : GuardPolicy
     {
 
         [AclPolicy("Allow access to specific companies", "Companies")]

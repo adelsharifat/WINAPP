@@ -110,7 +110,11 @@ namespace Electrical.View
                 //Check Grid in empty
                 if (grvPaking.RowCount <= 0) return;
 
-                if (Convert.ToBoolean(packingDataRow["Posted"])) throw new CMISException("Dear user,The packing document already posted!");
+
+                if(FormMode==FormState.Edit)
+                    if (Convert.ToBoolean(packingDataRow.Posted())) throw new CMISException("Dear user,The packing document already posted!");
+
+
                 if (Msg.Confirm("Are you sure to post document?") == DialogResult.No) return;
 
                 var savePLDocument = new SavePLDocument
@@ -127,7 +131,7 @@ namespace Electrical.View
                 {
                     ProjectId = LoginInfo.ProjectId,
                     UserId = LoginInfo.Id,
-                    ObjectId = (int)this.documentId,
+                    ObjectId = this.documentId,
                     NextRole = String.Empty,
                     MachineName = SecurityHelper.MachineName,
                     ActiveDirectoryName = SecurityHelper.ActiveDirecotryName,
@@ -257,7 +261,7 @@ namespace Electrical.View
         {
             try
             {
-                var data = CommonDals.Do.Company.FetchCompaniesCombo(LoginInfo.ProjectId, LoginInfo.Id, $"{Bundle.SCHEMA}.Company");
+                var data = CommonDals.Do.Company.FetchCompaniesCombo(LoginInfo.Id,LoginInfo.ProjectId, $"{Bundle.SCHEMA}.Company");
                 this.cmbCompany.Fill(data, "FullName", "Id").SelectItem(0).HideColumns("Symbol");
             }
             catch (Exception)
@@ -350,7 +354,7 @@ namespace Electrical.View
         {
             try
             {
-                var data = CommonDals.Do.Company.FetchCompaniesCombo(LoginInfo.ProjectId, LoginInfo.Id, $"{Bundle.SCHEMA}.Vendor");
+                var data = CommonDals.Do.Company.FetchCompaniesCombo(LoginInfo.Id,LoginInfo.ProjectId, $"{Bundle.SCHEMA}.Vendor");
                 cboVendor.Fill(data, "FullName", "Id").SelectItem(0).HideColumns("Symbol");
             }
             catch (Exception ex)

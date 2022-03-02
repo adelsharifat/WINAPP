@@ -23,7 +23,7 @@ namespace Electrical.Model
         public SignType SignType { get; set; } = SignType.Post;
         public int ProjectId { get; set; }
         public int UserId { get; set; }
-        public int ObjectId { get; set; }
+        public int? ObjectId { get; set; }
         public string NextRole { get; set; }
         public string MachineName { get; set; }
         public string ActiveDirectoryName { get; set; }

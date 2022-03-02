@@ -11,7 +11,55 @@ namespace SecurityManagement.Data
 {
     public class DAL:APPDAL
     {
-        public static DAL New { get => new DAL(); }
+        public static DAL Do { get => new DAL(); }
+
+        #region Common
+        //Fetch compnies data for combo company
+        public DataTable FetchCompaniesData()
+        {
+            try
+            {
+                return DoQueryReader("SecAcl.FetchCompaniesData");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        //Fetch contract data for combo contract
+        public DataTable FetchContractsData()
+        {
+            try
+            {
+                return DoQueryReader("SecAcl.FetchContractsData");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        
+        public DataTable FetchDisciplineForAcls(int projectId, bool? isDiscipline = null)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                   {
+                        new SqlParameter("@ProjectId",projectId),
+                        new SqlParameter("@IsDiscipline", isDiscipline),
+                    };
+                return DoQueryReader("SecAcl.FetchDisciplineForAcls", parameters);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
+
+
+
 
         public DataTable GetUserList()
         {

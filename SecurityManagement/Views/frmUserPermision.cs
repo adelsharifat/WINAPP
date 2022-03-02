@@ -50,7 +50,7 @@ namespace SecurityManagement.Views
             {
                 grcUserPermision.SetDataSource(() =>
                 {
-                    return DAL.New.GetUserList();
+                    return DAL.Do.GetUserList();
                 });
             }
             catch (Exception ex)

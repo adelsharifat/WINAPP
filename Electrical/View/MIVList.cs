@@ -122,6 +122,11 @@ namespace Electrical.View
             {
                 if (grvMIV.GetFocusedDataRow() is DataRow dr)
                 {
+                    if (dr.IsDelete())
+                    {
+                        Msg.Error("Dear user, The slected document is deleted!");
+                        return;
+                    }
                     var documentId = Convert.ToInt32(dr["Id"]);
                     var posted = Convert.ToBoolean(dr["Posted"]);
                     if (posted) throw new CMISException("The document posted and can not edit it!");
@@ -140,6 +145,11 @@ namespace Electrical.View
             {
                 if (grvMIV.GetFocusedDataRow() is DataRow dr)
                 {
+                    if (dr.IsDelete())
+                    {
+                        Msg.Error("Dear user, The slected document is deleted!");
+                        return;
+                    }
                     var documentId = dr.Id();
                     var posted = dr.Posted();
                     var deleted = dr.IsDelete();
@@ -165,7 +175,7 @@ namespace Electrical.View
         {
             try
             {
-                var data = CommonDals.Do.Contract.FetchContractsCombo(LoginInfo.ProjectId, LoginInfo.Id, $"{Bundle.SCHEMA}.Contract");
+                var data = CommonDals.Do.Contract.FetchContractsCombo(LoginInfo.Id, LoginInfo.ProjectId, $"{Bundle.SCHEMA}.Contract");
                 this.cmbCompany.Fill(data, "Contract", "Id").SelectItem(0).HideColumns("EmployerId,ContractorId,Employer,Contractor,EmployerSymbol,ContractorSymbol");
             }
             catch (Exception ex)
@@ -182,6 +192,7 @@ namespace Electrical.View
                 if (contractId == null) return;
                 var data = DAL.Do.GetMIVDocuments(null,LoginInfo.Id, (int)contractId, LoginInfo.ProjectId);
                 grcMIV.DataSource = data;
+                grvMIV.SetIsDeleteConditionFormat();
                 //grcMIV.SetDataSource(() =>
                 //{
                 //    return data;

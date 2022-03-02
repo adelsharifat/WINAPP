@@ -54,7 +54,7 @@ namespace SecurityManagement.Views
             try
             {
                 grcPermisionGroup.SetDataSource(()=> { 
-                    return DAL.New.GetUserGroupList(Convert.ToInt32(cboProject.EditValue));
+                    return DAL.Do.GetUserGroupList(Convert.ToInt32(cboProject.EditValue));
                 }); 
                 
             }

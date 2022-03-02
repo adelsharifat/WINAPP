@@ -371,6 +371,10 @@
       <Project>{387e37b8-5f16-4288-a322-9e684731f357}</Project>
       <Name>CMISUtils</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CommonClass\CommonClass.csproj">
+      <Project>{6932A454-B641-4F87-A6CC-3265990786D5}</Project>
+      <Name>CommonClass</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Security\Security.csproj">
       <Project>{68241d09-523b-4b77-9926-8b30f66ddb17}</Project>
       <Name>Security</Name>

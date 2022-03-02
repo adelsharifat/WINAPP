@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Electrical
 {
     [Schema(Bundle.SCHEMA)]
-    public class ACL : CMISPolicy
+    public class ACL : GuardPolicy
     {
 
         [AclPolicy("Allow access to specific companies", "Companies")]
@@ -88,6 +88,9 @@ namespace Electrical
 
         [AclPolicy("Allow access to Post MIV Document")]
         public const string PostMIVDocument = nameof(PostMIVDocument);
+
+        [AclPolicy("Allow access to can show all miv document document for ex deleted or norlmal document")]
+        public const string ShowAllMIVDocument = nameof(ShowAllMIVDocument);
         #endregion
 
 

@@ -19,23 +19,17 @@ namespace Electrical
 
         public override string GetName()
         {
-            return "QC Electrical";
+            return APPNAME;
         }
 
-        //public override Version GetVersion()
-        //{
-        //    return new Version(VERSION);
-        //}
+        public override Version GetVersion()
+        {
+            return new Version(VERSION);
+        }
 
-        //public override bool IsDevelopment()
-        //{
-        //    return Config.IsDemo();
-        //}
-
-        //public override void Register()
-        //{
-        //    // Register acl definition
-        //    Security.Acl.DefinedPermissions.Add(Acl.Get());
-        //}
+        public override bool IsDevelopment()
+        {
+            return false;
+        }
     }
 }

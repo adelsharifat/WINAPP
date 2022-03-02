@@ -731,6 +731,11 @@ namespace CMISUtils
             }
         }
 
+        public static void SetIsDeleteConditionFormat(this GridView gv, bool enabled = true)
+        {
+            gv.SetConditionRowFormat("IsDelete", "[IsDelete] = 1", new DevExpress.Utils.AppearanceDefault { BackColor = System.Drawing.Color.FromArgb(255, 230, 230), ForeColor = Color.FromArgb(26, 0, 0), Font = new System.Drawing.Font(gv.GridControl.Font, System.Drawing.FontStyle.Italic) });
+        }
+
 
 
 

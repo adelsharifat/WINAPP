@@ -19,7 +19,7 @@ namespace Electrical
             InitializeComponent();
 
             //call inital main form method heree
-            InitMainForm();            
+            InitMainForm();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -31,6 +31,7 @@ namespace Electrical
         private void InitMainForm()
         {
             Schema = Bundle.SCHEMA;
+            Version = Bundle.VERSION;
             InitAvatar();
             Ribbon.ApplicationButtonText = Bundle.APPNAME;
             CloseItemLocation = CMISUIHelper.Infrastructure.Enums.CloseItemAlignment.Start;

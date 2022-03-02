@@ -3,6 +3,7 @@ using CMISUIHelper.Infrastructure.Contracts;
 using CMISUIHelper.Infrastructure.Enums;
 using CMISUIHelper.Infrastructure.Helpers;
 using CMISUtils;
+using CommonClass;
 using DevExpress.Utils;
 using DevExpress.XtraBars.Ribbon;
 using Security;
@@ -28,7 +29,7 @@ namespace CMISUIHelper
             InitializeComponent();
             ItemIcon = this.DefualtItemIcon;
             Icon = UIHelperResources._32x32;
-            GetUserPermissions(LoginInfo.ProjectId,LoginInfo.Id);
+            GetUserPermissions(LoginInfo.ProjectId,LoginInfo.Id);                      
         }
 
         private void MainTabControl_SelectedIndexChanged(object sender, EventArgs e)
@@ -42,6 +43,15 @@ namespace CMISUIHelper
             this.Ribbon.SelectedPage = this.Ribbon.Pages.FirstOrDefault(p => p.Name == currentTab.Name);
         }
         #region Properties
+        private string version;
+        public string Version
+        {
+            get { return version; }
+            set { version = value; }
+        }
+
+
+
         private string schema;
         public string Schema
         {
@@ -216,6 +226,17 @@ namespace CMISUIHelper
         private void btnHelp_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             OnHelp();
+        }
+
+        private void CMISRibbonForm_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode) {
+                sbFullName.Caption = LoginInfo.FullName;
+                sbjobTitle.Caption = LoginInfo.JobTitle;
+                sbLastLogin.Caption = LoginInfo.LastLogin.ToString();
+                sbProject.Caption = LoginInfo.ProjectName;
+                sbVersion.Caption = this.Version;
+            };
         }
     }
 }

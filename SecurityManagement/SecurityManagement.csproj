@@ -57,13 +57,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GatePassACL.cs" />
     <Compile Include="Bundle.cs" />
-    <Compile Include="Infrastructure\Model\AclGridDataModel.cs" />
-    <Compile Include="Infrastructure\Model\AclModel.cs" />
-    <Compile Include="Infrastructure\ViewModel\vm.cs" />
-    <Compile Include="Infrastructure\ViewModel\DBUserACLViewModel.cs" />
-    <Compile Include="Infrastructure\ViewModel\AclDBTableType.cs" />
-    <Compile Include="Infrastructure\ViewModel\AclDBValueTableType.cs" />
+    <Compile Include="Infrastructure\ViewModel\CMISAclDBTableType.cs" />
+    <Compile Include="Infrastructure\ViewModel\CMISDBUserACLViewModel.cs" />
+    <Compile Include="JobReportACL.cs" />
     <Compile Include="resSecurityManagement.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -173,6 +171,10 @@
     <ProjectReference Include="..\CommonClass\CommonClass.csproj">
       <Project>{6932a454-b641-4f87-a6cc-3265990786d5}</Project>
       <Name>CommonClass</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Security\Security.csproj">
+      <Project>{68241D09-523B-4B77-9926-8B30F66DDB17}</Project>
+      <Name>Security</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -300,6 +302,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infrastructure\Enum\" />
+    <Folder Include="Infrastructure\Model\" />
     <Folder Include="Logic\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

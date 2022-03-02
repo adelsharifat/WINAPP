@@ -97,6 +97,11 @@ namespace Electrical.View
             {
                 if (grvPackingList.GetFocusedDataRow() is DataRow dr)
                 {
+                    if (dr.IsDelete())
+                    {
+                        Msg.Error("Dear user, The slected document is deleted!");
+                        return;
+                    }
                     var documentId = dr.Id();
                     var posted = dr.Posted();
                     var deleted = dr.IsDelete();
@@ -121,6 +126,11 @@ namespace Electrical.View
             {
                 if (grvPackingList.GetFocusedDataRow() is DataRow dr)
                 {
+                    if (dr.IsDelete())
+                    {
+                        Msg.Error("Dear user, The slected document is deleted!");
+                        return;
+                    }
                     var documentId = dr.Id();
                     var posted = dr.Posted();
                     var deleted = dr.IsDelete();
@@ -156,7 +166,7 @@ namespace Electrical.View
         {
             try
             {
-                var data = CommonDals.Do.Company.FetchCompaniesCombo(LoginInfo.ProjectId, LoginInfo.Id, $"{Bundle.SCHEMA}.Company");
+                var data = CommonDals.Do.Company.FetchCompaniesCombo(LoginInfo.Id,LoginInfo.ProjectId, $"{Bundle.SCHEMA}.Company");
                 this.cmbCompany.Fill(data, "FullName", "Id").SelectItem(0).HideColumns("Symbol");
             }
             catch (Exception)
@@ -175,6 +185,7 @@ namespace Electrical.View
             {
                 var data = DAL.Do.GetPackingDocuments(LoginInfo.ProjectId,LoginInfo.Id, Convert.ToInt32(cmbCompany.EditValue), null);
                 grcPackingList.DataSource = data;
+                grvPackingList.SetIsDeleteConditionFormat();
                 //grcPackingList.SetDataSource(() =>
                 //{
                 //    return data;
